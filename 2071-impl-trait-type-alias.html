@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>2071-impl-trait-type-alias - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="0001-private-fields.html"><strong>1.</strong> 0001-private-fields</a></li><li><a href="0002-rfc-process.html"><strong>2.</strong> 0002-rfc-process</a></li><li><a href="0003-attribute-usage.html"><strong>3.</strong> 0003-attribute-usage</a></li><li><a href="0008-new-intrinsics.html"><strong>4.</strong> 0008-new-intrinsics</a></li><li><a href="0016-more-attributes.html"><strong>5.</strong> 0016-more-attributes</a></li><li><a href="0019-opt-in-builtin-traits.html"><strong>6.</strong> 0019-opt-in-builtin-traits</a></li><li><a href="0026-remove-priv.html"><strong>7.</strong> 0026-remove-priv</a></li><li><a href="0034-bounded-type-parameters.html"><strong>8.</strong> 0034-bounded-type-parameters</a></li><li><a href="0040-libstd-facade.html"><strong>9.</strong> 0040-libstd-facade</a></li><li><a href="0042-regexps.html"><strong>10.</strong> 0042-regexps</a></li><li><a href="0048-traits.html"><strong>11.</strong> 0048-traits</a></li><li><a href="0049-match-arm-attributes.html"><strong>12.</strong> 0049-match-arm-attributes</a></li><li><a href="0050-assert.html"><strong>13.</strong> 0050-assert</a></li><li><a href="0059-remove-tilde.html"><strong>14.</strong> 0059-remove-tilde</a></li><li><a href="0060-rename-strbuf.html"><strong>15.</strong> 0060-rename-strbuf</a></li><li><a href="0063-module-file-system-hierarchy.html"><strong>16.</strong> 0063-module-file-system-hierarchy</a></li><li><a href="0066-better-temporary-lifetimes.html"><strong>17.</strong> 0066-better-temporary-lifetimes</a></li><li><a href="0068-const-unsafe-pointers.html"><strong>18.</strong> 0068-const-unsafe-pointers</a></li><li><a href="0069-ascii-literals.html"><strong>19.</strong> 0069-ascii-literals</a></li><li><a href="0071-const-block-expr.html"><strong>20.</strong> 0071-const-block-expr</a></li><li><a href="0079-undefined-struct-layout.html"><strong>21.</strong> 0079-undefined-struct-layout</a></li><li><a href="0085-pattern-macros.html"><strong>22.</strong> 0085-pattern-macros</a></li><li><a href="0086-plugin-registrar.html"><strong>23.</strong> 0086-plugin-registrar</a></li><li><a href="0087-trait-bounds-with-plus.html"><strong>24.</strong> 0087-trait-bounds-with-plus</a></li><li><a href="0089-loadable-lints.html"><strong>25.</strong> 0089-loadable-lints</a></li><li><a href="0090-lexical-syntax-simplification.html"><strong>26.</strong> 0090-lexical-syntax-simplification</a></li><li><a href="0092-struct-grammar.html"><strong>27.</strong> 0092-struct-grammar</a></li><li><a href="0093-remove-format-intl.html"><strong>28.</strong> 0093-remove-format-intl</a></li><li><a href="0100-partial-cmp.html"><strong>29.</strong> 0100-partial-cmp</a></li><li><a href="0107-pattern-guards-with-bind-by-move.html"><strong>30.</strong> 0107-pattern-guards-with-bind-by-move</a></li><li><a href="0109-remove-crate-id.html"><strong>31.</strong> 0109-remove-crate-id</a></li><li><a href="0111-index-traits.html"><strong>32.</strong> 0111-index-traits</a></li><li><a href="0112-remove-cross-borrowing.html"><strong>33.</strong> 0112-remove-cross-borrowing</a></li><li><a href="0114-closures.html"><strong>34.</strong> 0114-closures</a></li><li><a href="0115-rm-integer-fallback.html"><strong>35.</strong> 0115-rm-integer-fallback</a></li><li><a href="0116-no-module-shadowing.html"><strong>36.</strong> 0116-no-module-shadowing</a></li><li><a href="0123-share-to-threadsafe.html"><strong>37.</strong> 0123-share-to-threadsafe</a></li><li><a href="0130-box-not-special.html"><strong>38.</strong> 0130-box-not-special</a></li><li><a href="0131-target-specification.html"><strong>39.</strong> 0131-target-specification</a></li><li><a href="0132-ufcs.html"><strong>40.</strong> 0132-ufcs</a></li><li><a href="0135-where.html"><strong>41.</strong> 0135-where</a></li><li><a href="0136-no-privates-in-public.html"><strong>42.</strong> 0136-no-privates-in-public</a></li><li><a href="0139-remove-cross-borrowing-entirely.html"><strong>43.</strong> 0139-remove-cross-borrowing-entirely</a></li><li><a href="0141-lifetime-elision.html"><strong>44.</strong> 0141-lifetime-elision</a></li><li><a href="0151-capture-by-value.html"><strong>45.</strong> 0151-capture-by-value</a></li><li><a href="0155-anonymous-impl-only-in-same-module.html"><strong>46.</strong> 0155-anonymous-impl-only-in-same-module</a></li><li><a href="0160-if-let.html"><strong>47.</strong> 0160-if-let</a></li><li><a href="0164-feature-gate-slice-pats.html"><strong>48.</strong> 0164-feature-gate-slice-pats</a></li><li><a href="0168-mod.html"><strong>49.</strong> 0168-mod</a></li><li><a href="0169-use-path-as-id.html"><strong>50.</strong> 0169-use-path-as-id</a></li><li><a href="0179-and-mut-patterns.html"><strong>51.</strong> 0179-and-mut-patterns</a></li><li><a href="0184-tuple-accessors.html"><strong>52.</strong> 0184-tuple-accessors</a></li><li><a href="0192-bounds-on-object-and-generic-types.html"><strong>53.</strong> 0192-bounds-on-object-and-generic-types</a></li><li><a href="0194-cfg-syntax.html"><strong>54.</strong> 0194-cfg-syntax</a></li><li><a href="0195-associated-items.html"><strong>55.</strong> 0195-associated-items</a></li><li><a href="0198-slice-notation.html"><strong>56.</strong> 0198-slice-notation</a></li><li><a href="0199-ownership-variants.html"><strong>57.</strong> 0199-ownership-variants</a></li><li><a href="0201-error-chaining.html"><strong>58.</strong> 0201-error-chaining</a></li><li><a href="0202-subslice-syntax-change.html"><strong>59.</strong> 0202-subslice-syntax-change</a></li><li><a href="0212-restore-int-fallback.html"><strong>60.</strong> 0212-restore-int-fallback</a></li><li><a href="0213-defaulted-type-params.html"><strong>61.</strong> 0213-defaulted-type-params</a></li><li><a href="0214-while-let.html"><strong>62.</strong> 0214-while-let</a></li><li><a href="0216-collection-views.html"><strong>63.</strong> 0216-collection-views</a></li><li><a href="0218-empty-struct-with-braces.html"><strong>64.</strong> 0218-empty-struct-with-braces</a></li><li><a href="0221-panic.html"><strong>65.</strong> 0221-panic</a></li><li><a href="0230-remove-runtime.html"><strong>66.</strong> 0230-remove-runtime</a></li><li><a href="0231-upvar-capture-inference.html"><strong>67.</strong> 0231-upvar-capture-inference</a></li><li><a href="0234-variants-namespace.html"><strong>68.</strong> 0234-variants-namespace</a></li><li><a href="0235-collections-conventions.html"><strong>69.</strong> 0235-collections-conventions</a></li><li><a href="0236-error-conventions.html"><strong>70.</strong> 0236-error-conventions</a></li><li><a href="0240-unsafe-api-location.html"><strong>71.</strong> 0240-unsafe-api-location</a></li><li><a href="0241-deref-conversions.html"><strong>72.</strong> 0241-deref-conversions</a></li><li><a href="0243-trait-based-exception-handling.html"><strong>73.</strong> 0243-trait-based-exception-handling</a></li><li><a href="0246-const-vs-static.html"><strong>74.</strong> 0246-const-vs-static</a></li><li><a href="0255-object-safety.html"><strong>75.</strong> 0255-object-safety</a></li><li><a href="0256-remove-refcounting-gc-of-t.html"><strong>76.</strong> 0256-remove-refcounting-gc-of-t</a></li><li><a href="0320-nonzeroing-dynamic-drop.html"><strong>77.</strong> 0320-nonzeroing-dynamic-drop</a></li><li><a href="0326-restrict-xXX-to-ascii.html"><strong>78.</strong> 0326-restrict-xXX-to-ascii</a></li><li><a href="0339-statically-sized-literals.html"><strong>79.</strong> 0339-statically-sized-literals</a></li><li><a href="0341-remove-virtual-structs.html"><strong>80.</strong> 0341-remove-virtual-structs</a></li><li><a href="0342-keywords.html"><strong>81.</strong> 0342-keywords</a></li><li><a href="0344-conventions-galore.html"><strong>82.</strong> 0344-conventions-galore</a></li><li><a href="0356-no-module-prefixes.html"><strong>83.</strong> 0356-no-module-prefixes</a></li><li><a href="0369-num-reform.html"><strong>84.</strong> 0369-num-reform</a></li><li><a href="0378-expr-macros.html"><strong>85.</strong> 0378-expr-macros</a></li><li><a href="0379-remove-reflection.html"><strong>86.</strong> 0379-remove-reflection</a></li><li><a href="0380-stabilize-std-fmt.html"><strong>87.</strong> 0380-stabilize-std-fmt</a></li><li><a href="0385-module-system-cleanup.html"><strong>88.</strong> 0385-module-system-cleanup</a></li><li><a href="0387-higher-ranked-trait-bounds.html"><strong>89.</strong> 0387-higher-ranked-trait-bounds</a></li><li><a href="0390-enum-namespacing.html"><strong>90.</strong> 0390-enum-namespacing</a></li><li><a href="0401-coercions.html"><strong>91.</strong> 0401-coercions</a></li><li><a href="0403-cargo-build-command.html"><strong>92.</strong> 0403-cargo-build-command</a></li><li><a href="0404-change-prefer-dynamic.html"><strong>93.</strong> 0404-change-prefer-dynamic</a></li><li><a href="0418-struct-variants.html"><strong>94.</strong> 0418-struct-variants</a></li><li><a href="0430-finalizing-naming-conventions.html"><strong>95.</strong> 0430-finalizing-naming-conventions</a></li><li><a href="0438-precedence-of-plus.html"><strong>96.</strong> 0438-precedence-of-plus</a></li><li><a href="0439-cmp-ops-reform.html"><strong>97.</strong> 0439-cmp-ops-reform</a></li><li><a href="0445-extension-trait-conventions.html"><strong>98.</strong> 0445-extension-trait-conventions</a></li><li><a href="0446-es6-unicode-escapes.html"><strong>99.</strong> 0446-es6-unicode-escapes</a></li><li><a href="0447-no-unused-impl-parameters.html"><strong>100.</strong> 0447-no-unused-impl-parameters</a></li><li><a href="0450-un-feature-gate-some-more-gates.html"><strong>101.</strong> 0450-un-feature-gate-some-more-gates</a></li><li><a href="0453-macro-reform.html"><strong>102.</strong> 0453-macro-reform</a></li><li><a href="0458-send-improvements.html"><strong>103.</strong> 0458-send-improvements</a></li><li><a href="0459-disallow-shadowing.html"><strong>104.</strong> 0459-disallow-shadowing</a></li><li><a href="0461-tls-overhaul.html"><strong>105.</strong> 0461-tls-overhaul</a></li><li><a href="0463-future-proof-literal-suffixes.html"><strong>106.</strong> 0463-future-proof-literal-suffixes</a></li><li><a href="0469-feature-gate-box-patterns.html"><strong>107.</strong> 0469-feature-gate-box-patterns</a></li><li><a href="0474-path-reform.html"><strong>108.</strong> 0474-path-reform</a></li><li><a href="0486-std-ascii-reform.html"><strong>109.</strong> 0486-std-ascii-reform</a></li><li><a href="0490-dst-syntax.html"><strong>110.</strong> 0490-dst-syntax</a></li><li><a href="0494-c_str-and-c_vec-stability.html"><strong>111.</strong> 0494-c_str-and-c_vec-stability</a></li><li><a href="0495-array-pattern-changes.html"><strong>112.</strong> 0495-array-pattern-changes</a></li><li><a href="0501-consistent_no_prelude_attributes.html"><strong>113.</strong> 0501-consistent_no_prelude_attributes</a></li><li><a href="0503-prelude-stabilization.html"><strong>114.</strong> 0503-prelude-stabilization</a></li><li><a href="0504-show-stabilization.html"><strong>115.</strong> 0504-show-stabilization</a></li><li><a href="0505-api-comment-conventions.html"><strong>116.</strong> 0505-api-comment-conventions</a></li><li><a href="0507-release-channels.html"><strong>117.</strong> 0507-release-channels</a></li><li><a href="0509-collections-reform-part-2.html"><strong>118.</strong> 0509-collections-reform-part-2</a></li><li><a href="0517-io-os-reform.html"><strong>119.</strong> 0517-io-os-reform</a></li><li><a href="0520-new-array-repeat-syntax.html"><strong>120.</strong> 0520-new-array-repeat-syntax</a></li><li><a href="0522-self-impl.html"><strong>121.</strong> 0522-self-impl</a></li><li><a href="0526-fmt-text-writer.html"><strong>122.</strong> 0526-fmt-text-writer</a></li><li><a href="0528-string-patterns.html"><strong>123.</strong> 0528-string-patterns</a></li><li><a href="0529-conversion-traits.html"><strong>124.</strong> 0529-conversion-traits</a></li><li><a href="0531-define-rfc-scope.html"><strong>125.</strong> 0531-define-rfc-scope</a></li><li><a href="0532-self-in-use.html"><strong>126.</strong> 0532-self-in-use</a></li><li><a href="0533-no-array-elem-moves.html"><strong>127.</strong> 0533-no-array-elem-moves</a></li><li><a href="0534-deriving2derive.html"><strong>128.</strong> 0534-deriving2derive</a></li><li><a href="0544-rename-int-uint.html"><strong>129.</strong> 0544-rename-int-uint</a></li><li><a href="0546-Self-not-sized-by-default.html"><strong>130.</strong> 0546-Self-not-sized-by-default</a></li><li><a href="0550-macro-future-proofing.html"><strong>131.</strong> 0550-macro-future-proofing</a></li><li><a href="0556-raw-lifetime.html"><strong>132.</strong> 0556-raw-lifetime</a></li><li><a href="0558-require-parentheses-for-chained-comparisons.html"><strong>133.</strong> 0558-require-parentheses-for-chained-comparisons</a></li><li><a href="0560-integer-overflow.html"><strong>134.</strong> 0560-integer-overflow</a></li><li><a href="0563-remove-ndebug.html"><strong>135.</strong> 0563-remove-ndebug</a></li><li><a href="0565-show-string-guidelines.html"><strong>136.</strong> 0565-show-string-guidelines</a></li><li><a href="0572-rustc-attribute.html"><strong>137.</strong> 0572-rustc-attribute</a></li><li><a href="0574-drain-range.html"><strong>138.</strong> 0574-drain-range</a></li><li><a href="0580-rename-collections.html"><strong>139.</strong> 0580-rename-collections</a></li><li><a href="0587-fn-return-should-be-an-associated-type.html"><strong>140.</strong> 0587-fn-return-should-be-an-associated-type</a></li><li><a href="0592-c-str-deref.html"><strong>141.</strong> 0592-c-str-deref</a></li><li><a href="0593-forbid-Self-definitions.html"><strong>142.</strong> 0593-forbid-Self-definitions</a></li><li><a href="0599-default-object-bound.html"><strong>143.</strong> 0599-default-object-bound</a></li><li><a href="0601-replace-be-with-become.html"><strong>144.</strong> 0601-replace-be-with-become</a></li><li><a href="0639-discriminant-intrinsic.html"><strong>145.</strong> 0639-discriminant-intrinsic</a></li><li><a href="0640-debug-improvements.html"><strong>146.</strong> 0640-debug-improvements</a></li><li><a href="0702-rangefull-expression.html"><strong>147.</strong> 0702-rangefull-expression</a></li><li><a href="0735-allow-inherent-impls-anywhere.html"><strong>148.</strong> 0735-allow-inherent-impls-anywhere</a></li><li><a href="0736-privacy-respecting-fru.html"><strong>149.</strong> 0736-privacy-respecting-fru</a></li><li><a href="0738-variance.html"><strong>150.</strong> 0738-variance</a></li><li><a href="0769-sound-generic-drop.html"><strong>151.</strong> 0769-sound-generic-drop</a></li><li><a href="0771-std-iter-once.html"><strong>152.</strong> 0771-std-iter-once</a></li><li><a href="0803-type-ascription.html"><strong>153.</strong> 0803-type-ascription</a></li><li><a href="0809-box-and-in-for-stdlib.html"><strong>154.</strong> 0809-box-and-in-for-stdlib</a></li><li><a href="0823-hash-simplification.html"><strong>155.</strong> 0823-hash-simplification</a></li><li><a href="0832-from-elem-with-love.html"><strong>156.</strong> 0832-from-elem-with-love</a></li><li><a href="0839-embrace-extend-extinguish.html"><strong>157.</strong> 0839-embrace-extend-extinguish</a></li><li><a href="0840-no-panic-in-c-string.html"><strong>158.</strong> 0840-no-panic-in-c-string</a></li><li><a href="0873-type-macros.html"><strong>159.</strong> 0873-type-macros</a></li><li><a href="0879-small-base-lexing.html"><strong>160.</strong> 0879-small-base-lexing</a></li><li><a href="0888-compiler-fence-intrinsics.html"><strong>161.</strong> 0888-compiler-fence-intrinsics</a></li><li><a href="0909-move-thread-local-to-std-thread.html"><strong>162.</strong> 0909-move-thread-local-to-std-thread</a></li><li><a href="0911-const-fn.html"><strong>163.</strong> 0911-const-fn</a></li><li><a href="0921-entry_v3.html"><strong>164.</strong> 0921-entry_v3</a></li><li><a href="0940-hyphens-considered-harmful.html"><strong>165.</strong> 0940-hyphens-considered-harmful</a></li><li><a href="0953-op-assign.html"><strong>166.</strong> 0953-op-assign</a></li><li><a href="0968-closure-return-type-syntax.html"><strong>167.</strong> 0968-closure-return-type-syntax</a></li><li><a href="0979-align-splitn-with-other-languages.html"><strong>168.</strong> 0979-align-splitn-with-other-languages</a></li><li><a href="0980-read-exact.html"><strong>169.</strong> 0980-read-exact</a></li><li><a href="0982-dst-coercion.html"><strong>170.</strong> 0982-dst-coercion</a></li><li><a href="1011-process.exit.html"><strong>171.</strong> 1011-process.exit</a></li><li><a href="1014-stdout-existential-crisis.html"><strong>172.</strong> 1014-stdout-existential-crisis</a></li><li><a href="1023-rebalancing-coherence.html"><strong>173.</strong> 1023-rebalancing-coherence</a></li><li><a href="1030-prelude-additions.html"><strong>174.</strong> 1030-prelude-additions</a></li><li><a href="1040-duration-reform.html"><strong>175.</strong> 1040-duration-reform</a></li><li><a href="1044-io-fs-2.1.html"><strong>176.</strong> 1044-io-fs-2.1</a></li><li><a href="1047-socket-timeouts.html"><strong>177.</strong> 1047-socket-timeouts</a></li><li><a href="1048-rename-soft-link-to-symlink.html"><strong>178.</strong> 1048-rename-soft-link-to-symlink</a></li><li><a href="1054-str-words.html"><strong>179.</strong> 1054-str-words</a></li><li><a href="1057-io-error-sync.html"><strong>180.</strong> 1057-io-error-sync</a></li><li><a href="1058-slice-tail-redesign.html"><strong>181.</strong> 1058-slice-tail-redesign</a></li><li><a href="1066-safe-mem-forget.html"><strong>182.</strong> 1066-safe-mem-forget</a></li><li><a href="1068-rust-governance.html"><strong>183.</strong> 1068-rust-governance</a></li><li><a href="1096-remove-static-assert.html"><strong>184.</strong> 1096-remove-static-assert</a></li><li><a href="1102-rename-connect-to-join.html"><strong>185.</strong> 1102-rename-connect-to-join</a></li><li><a href="1105-api-evolution.html"><strong>186.</strong> 1105-api-evolution</a></li><li><a href="1119-result-expect.html"><strong>187.</strong> 1119-result-expect</a></li><li><a href="1122-language-semver.html"><strong>188.</strong> 1122-language-semver</a></li><li><a href="1123-str-split-at.html"><strong>189.</strong> 1123-str-split-at</a></li><li><a href="1131-likely-intrinsic.html"><strong>190.</strong> 1131-likely-intrinsic</a></li><li><a href="1135-raw-pointer-comparisons.html"><strong>191.</strong> 1135-raw-pointer-comparisons</a></li><li><a href="1152-slice-string-symmetry.html"><strong>192.</strong> 1152-slice-string-symmetry</a></li><li><a href="1156-adjust-default-object-bounds.html"><strong>193.</strong> 1156-adjust-default-object-bounds</a></li><li><a href="1174-into-raw-fd-socket-handle-traits.html"><strong>194.</strong> 1174-into-raw-fd-socket-handle-traits</a></li><li><a href="1183-swap-out-jemalloc.html"><strong>195.</strong> 1183-swap-out-jemalloc</a></li><li><a href="1184-stabilize-no_std.html"><strong>196.</strong> 1184-stabilize-no_std</a></li><li><a href="1191-hir.html"><strong>197.</strong> 1191-hir</a></li><li><a href="1192-inclusive-ranges.html"><strong>198.</strong> 1192-inclusive-ranges</a></li><li><a href="1193-cap-lints.html"><strong>199.</strong> 1193-cap-lints</a></li><li><a href="1194-set-recovery.html"><strong>200.</strong> 1194-set-recovery</a></li><li><a href="1199-simd-infrastructure.html"><strong>201.</strong> 1199-simd-infrastructure</a></li><li><a href="1200-cargo-install.html"><strong>202.</strong> 1200-cargo-install</a></li><li><a href="1201-naked-fns.html"><strong>203.</strong> 1201-naked-fns</a></li><li><a href="1210-impl-specialization.html"><strong>204.</strong> 1210-impl-specialization</a></li><li><a href="1211-mir.html"><strong>205.</strong> 1211-mir</a></li><li><a href="1212-line-endings.html"><strong>206.</strong> 1212-line-endings</a></li><li><a href="1214-projections-lifetimes-and-wf.html"><strong>207.</strong> 1214-projections-lifetimes-and-wf</a></li><li><a href="1216-bang-type.html"><strong>208.</strong> 1216-bang-type</a></li><li><a href="1219-use-group-as.html"><strong>209.</strong> 1219-use-group-as</a></li><li><a href="1228-placement-left-arrow.html"><strong>210.</strong> 1228-placement-left-arrow</a></li><li><a href="1229-compile-time-asserts.html"><strong>211.</strong> 1229-compile-time-asserts</a></li><li><a href="1236-stabilize-catch-panic.html"><strong>212.</strong> 1236-stabilize-catch-panic</a></li><li><a href="1238-nonparametric-dropck.html"><strong>213.</strong> 1238-nonparametric-dropck</a></li><li><a href="1240-repr-packed-unsafe-ref.html"><strong>214.</strong> 1240-repr-packed-unsafe-ref</a></li><li><a href="1241-no-wildcard-deps.html"><strong>215.</strong> 1241-no-wildcard-deps</a></li><li><a href="1242-rust-lang-crates.html"><strong>216.</strong> 1242-rust-lang-crates</a></li><li><a href="1252-open-options.html"><strong>217.</strong> 1252-open-options</a></li><li><a href="1257-drain-range-2.html"><strong>218.</strong> 1257-drain-range-2</a></li><li><a href="1260-main-reexport.html"><strong>219.</strong> 1260-main-reexport</a></li><li><a href="1268-allow-overlapping-impls-on-marker-traits.html"><strong>220.</strong> 1268-allow-overlapping-impls-on-marker-traits</a></li><li><a href="1270-deprecation.html"><strong>221.</strong> 1270-deprecation</a></li><li><a href="1288-time-improvements.html"><strong>222.</strong> 1288-time-improvements</a></li><li><a href="1291-promote-libc.html"><strong>223.</strong> 1291-promote-libc</a></li><li><a href="1298-incremental-compilation.html"><strong>224.</strong> 1298-incremental-compilation</a></li><li><a href="1300-intrinsic-semantics.html"><strong>225.</strong> 1300-intrinsic-semantics</a></li><li><a href="1307-osstring-methods.html"><strong>226.</strong> 1307-osstring-methods</a></li><li><a href="1317-ide.html"><strong>227.</strong> 1317-ide</a></li><li><a href="1327-dropck-param-eyepatch.html"><strong>228.</strong> 1327-dropck-param-eyepatch</a></li><li><a href="1328-global-panic-handler.html"><strong>229.</strong> 1328-global-panic-handler</a></li><li><a href="1331-grammar-is-canonical.html"><strong>230.</strong> 1331-grammar-is-canonical</a></li><li><a href="1358-repr-align.html"><strong>231.</strong> 1358-repr-align</a></li><li><a href="1359-process-ext-unix.html"><strong>232.</strong> 1359-process-ext-unix</a></li><li><a href="1361-cargo-cfg-dependencies.html"><strong>233.</strong> 1361-cargo-cfg-dependencies</a></li><li><a href="1398-kinds-of-allocators.html"><strong>234.</strong> 1398-kinds-of-allocators</a></li><li><a href="1399-repr-pack.html"><strong>235.</strong> 1399-repr-pack</a></li><li><a href="1414-rvalue_static_promotion.html"><strong>236.</strong> 1414-rvalue_static_promotion</a></li><li><a href="1415-trim-std-os.html"><strong>237.</strong> 1415-trim-std-os</a></li><li><a href="1419-slice-copy.html"><strong>238.</strong> 1419-slice-copy</a></li><li><a href="1422-pub-restricted.html"><strong>239.</strong> 1422-pub-restricted</a></li><li><a href="1432-replace-slice.html"><strong>240.</strong> 1432-replace-slice</a></li><li><a href="1434-contains-method-for-ranges.html"><strong>241.</strong> 1434-contains-method-for-ranges</a></li><li><a href="1440-drop-types-in-const.html"><strong>242.</strong> 1440-drop-types-in-const</a></li><li><a href="1443-extended-compare-and-swap.html"><strong>243.</strong> 1443-extended-compare-and-swap</a></li><li><a href="1444-union.html"><strong>244.</strong> 1444-union</a></li><li><a href="1445-restrict-constants-in-patterns.html"><strong>245.</strong> 1445-restrict-constants-in-patterns</a></li><li><a href="1461-net2-mutators.html"><strong>246.</strong> 1461-net2-mutators</a></li><li><a href="1467-volatile.html"><strong>247.</strong> 1467-volatile</a></li><li><a href="1479-unix-socket.html"><strong>248.</strong> 1479-unix-socket</a></li><li><a href="1492-dotdot-in-patterns.html"><strong>249.</strong> 1492-dotdot-in-patterns</a></li><li><a href="1498-ipv6addr-octets.html"><strong>250.</strong> 1498-ipv6addr-octets</a></li><li><a href="1504-int128.html"><strong>251.</strong> 1504-int128</a></li><li><a href="1506-adt-kinds.html"><strong>252.</strong> 1506-adt-kinds</a></li><li><a href="1510-cdylib.html"><strong>253.</strong> 1510-cdylib</a></li><li><a href="1513-less-unwinding.html"><strong>254.</strong> 1513-less-unwinding</a></li><li><a href="1521-copy-clone-semantics.html"><strong>255.</strong> 1521-copy-clone-semantics</a></li><li><a href="1522-conservative-impl-trait.html"><strong>256.</strong> 1522-conservative-impl-trait</a></li><li><a href="1525-cargo-workspace.html"><strong>257.</strong> 1525-cargo-workspace</a></li><li><a href="1535-stable-overflow-checks.html"><strong>258.</strong> 1535-stable-overflow-checks</a></li><li><a href="1542-try-from.html"><strong>259.</strong> 1542-try-from</a></li><li><a href="1543-integer_atomics.html"><strong>260.</strong> 1543-integer_atomics</a></li><li><a href="1548-global-asm.html"><strong>261.</strong> 1548-global-asm</a></li><li><a href="1552-contains-method-for-various-collections.html"><strong>262.</strong> 1552-contains-method-for-various-collections</a></li><li><a href="1558-closure-to-fn-coercion.html"><strong>263.</strong> 1558-closure-to-fn-coercion</a></li><li><a href="1559-attributes-with-literals.html"><strong>264.</strong> 1559-attributes-with-literals</a></li><li><a href="1560-name-resolution.html"><strong>265.</strong> 1560-name-resolution</a></li><li><a href="1561-macro-naming.html"><strong>266.</strong> 1561-macro-naming</a></li><li><a href="1566-proc-macros.html"><strong>267.</strong> 1566-proc-macros</a></li><li><a href="1567-long-error-codes-explanation-normalization.html"><strong>268.</strong> 1567-long-error-codes-explanation-normalization</a></li><li><a href="1574-more-api-documentation-conventions.html"><strong>269.</strong> 1574-more-api-documentation-conventions</a></li><li><a href="1576-macros-literal-matcher.html"><strong>270.</strong> 1576-macros-literal-matcher</a></li><li><a href="1581-fused-iterator.html"><strong>271.</strong> 1581-fused-iterator</a></li><li><a href="1584-macros.html"><strong>272.</strong> 1584-macros</a></li><li><a href="1589-rustc-bug-fix-procedure.html"><strong>273.</strong> 1589-rustc-bug-fix-procedure</a></li><li><a href="1590-macro-lifetimes.html"><strong>274.</strong> 1590-macro-lifetimes</a></li><li><a href="1598-generic_associated_types.html"><strong>275.</strong> 1598-generic_associated_types</a></li><li><a href="1607-style-rfcs.html"><strong>276.</strong> 1607-style-rfcs</a></li><li><a href="1618-ergonomic-format-args.html"><strong>277.</strong> 1618-ergonomic-format-args</a></li><li><a href="1620-regex-1.0.html"><strong>278.</strong> 1620-regex-1.0</a></li><li><a href="1623-static.html"><strong>279.</strong> 1623-static</a></li><li><a href="1624-loop-break-value.html"><strong>280.</strong> 1624-loop-break-value</a></li><li><a href="1636-document_all_features.html"><strong>281.</strong> 1636-document_all_features</a></li><li><a href="1640-duration-checked-sub.html"><strong>282.</strong> 1640-duration-checked-sub</a></li><li><a href="1643-memory-model-strike-team.html"><strong>283.</strong> 1643-memory-model-strike-team</a></li><li><a href="1644-default-and-expanded-rustc-errors.html"><strong>284.</strong> 1644-default-and-expanded-rustc-errors</a></li><li><a href="1647-allow-self-in-where-clauses.html"><strong>285.</strong> 1647-allow-self-in-where-clauses</a></li><li><a href="1649-atomic-access.html"><strong>286.</strong> 1649-atomic-access</a></li><li><a href="1651-movecell.html"><strong>287.</strong> 1651-movecell</a></li><li><a href="1653-assert_ne.html"><strong>288.</strong> 1653-assert_ne</a></li><li><a href="1660-try-borrow.html"><strong>289.</strong> 1660-try-borrow</a></li><li><a href="1665-windows-subsystem.html"><strong>290.</strong> 1665-windows-subsystem</a></li><li><a href="1679-panic-safe-slicing.html"><strong>291.</strong> 1679-panic-safe-slicing</a></li><li><a href="1681-macros-1.1.html"><strong>292.</strong> 1681-macros-1.1</a></li><li><a href="1682-field-init-shorthand.html"><strong>293.</strong> 1682-field-init-shorthand</a></li><li><a href="1683-docs-team.html"><strong>294.</strong> 1683-docs-team</a></li><li><a href="1685-deprecate-anonymous-parameters.html"><strong>295.</strong> 1685-deprecate-anonymous-parameters</a></li><li><a href="1695-add-error-macro.html"><strong>296.</strong> 1695-add-error-macro</a></li><li><a href="1696-discriminant.html"><strong>297.</strong> 1696-discriminant</a></li><li><a href="1717-dllimport.html"><strong>298.</strong> 1717-dllimport</a></li><li><a href="1721-crt-static.html"><strong>299.</strong> 1721-crt-static</a></li><li><a href="1725-unaligned-access.html"><strong>300.</strong> 1725-unaligned-access</a></li><li><a href="1728-north-star.html"><strong>301.</strong> 1728-north-star</a></li><li><a href="1733-trait-alias.html"><strong>302.</strong> 1733-trait-alias</a></li><li><a href="1758-repr-transparent.html"><strong>303.</strong> 1758-repr-transparent</a></li><li><a href="1774-roadmap-2017.html"><strong>304.</strong> 1774-roadmap-2017</a></li><li><a href="1789-as-cell.html"><strong>305.</strong> 1789-as-cell</a></li><li><a href="1824-crates.io-default-ranking.html"><strong>306.</strong> 1824-crates.io-default-ranking</a></li><li><a href="1826-change-doc-default-urls.html"><strong>307.</strong> 1826-change-doc-default-urls</a></li><li><a href="1828-rust-bookshelf.html"><strong>308.</strong> 1828-rust-bookshelf</a></li><li><a href="1845-shared-from-slice.html"><strong>309.</strong> 1845-shared-from-slice</a></li><li><a href="1849-non-static-type-id.html"><strong>310.</strong> 1849-non-static-type-id</a></li><li><a href="1857-stabilize-drop-order.html"><strong>311.</strong> 1857-stabilize-drop-order</a></li><li><a href="1859-try-trait.html"><strong>312.</strong> 1859-try-trait</a></li><li><a href="1860-manually-drop.html"><strong>313.</strong> 1860-manually-drop</a></li><li><a href="1861-extern-types.html"><strong>314.</strong> 1861-extern-types</a></li><li><a href="1866-more-readable-assert-eq.html"><strong>315.</strong> 1866-more-readable-assert-eq</a></li><li><a href="1868-portability-lint.html"><strong>316.</strong> 1868-portability-lint</a></li><li><a href="1869-eprintln.html"><strong>317.</strong> 1869-eprintln</a></li><li><a href="1884-unstable-sort.html"><strong>318.</strong> 1884-unstable-sort</a></li><li><a href="1925-optional-match-vert.html"><strong>319.</strong> 1925-optional-match-vert</a></li><li><a href="1937-ques-in-main.html"><strong>320.</strong> 1937-ques-in-main</a></li><li><a href="1940-must-use-functions.html"><strong>321.</strong> 1940-must-use-functions</a></li><li><a href="1946-intra-rustdoc-links.html"><strong>322.</strong> 1946-intra-rustdoc-links</a></li><li><a href="1951-expand-impl-trait.html"><strong>323.</strong> 1951-expand-impl-trait</a></li><li><a href="1961-clamp.html"><strong>324.</strong> 1961-clamp</a></li><li><a href="1966-unsafe-pointer-reform.html"><strong>325.</strong> 1966-unsafe-pointer-reform</a></li><li><a href="1969-cargo-prepublish.html"><strong>326.</strong> 1969-cargo-prepublish</a></li><li><a href="1974-global-allocators.html"><strong>327.</strong> 1974-global-allocators</a></li><li><a href="1977-public-private-dependencies.html"><strong>328.</strong> 1977-public-private-dependencies</a></li><li><a href="1983-nursery-deprecation.html"><strong>329.</strong> 1983-nursery-deprecation</a></li><li><a href="1985-tiered-browser-support.html"><strong>330.</strong> 1985-tiered-browser-support</a></li><li><a href="1990-external-doc-attribute.html"><strong>331.</strong> 1990-external-doc-attribute</a></li><li><a href="2000-const-generics.html"><strong>332.</strong> 2000-const-generics</a></li><li><a href="2005-match-ergonomics.html"><strong>333.</strong> 2005-match-ergonomics</a></li><li><a href="2008-non-exhaustive.html"><strong>334.</strong> 2008-non-exhaustive</a></li><li><a href="2011-generic-assert.html"><strong>335.</strong> 2011-generic-assert</a></li><li><a href="2025-nested-method-calls.html"><strong>336.</strong> 2025-nested-method-calls</a></li><li><a href="2027-object_safe_for_dispatch.html"><strong>337.</strong> 2027-object_safe_for_dispatch</a></li><li><a href="2033-experimental-coroutines.html"><strong>338.</strong> 2033-experimental-coroutines</a></li><li><a href="2043-is-aligned-intrinsic.html"><strong>339.</strong> 2043-is-aligned-intrinsic</a></li><li><a href="2044-license-rfcs.html"><strong>340.</strong> 2044-license-rfcs</a></li><li><a href="2045-target-feature.html"><strong>341.</strong> 2045-target-feature</a></li><li><a href="2052-epochs.html"><strong>342.</strong> 2052-epochs</a></li><li><a href="2057-refcell-replace.html"><strong>343.</strong> 2057-refcell-replace</a></li><li><a href="2070-panic-implementation.html"><strong>344.</strong> 2070-panic-implementation</a></li><li><a href="2071-impl-trait-type-alias.html" class="active"><strong>345.</strong> 2071-impl-trait-type-alias</a></li><li><a href="2086-allow-if-let-irrefutables.html"><strong>346.</strong> 2086-allow-if-let-irrefutables</a></li><li><a href="2089-implied-bounds.html"><strong>347.</strong> 2089-implied-bounds</a></li><li><a href="2093-infer-outlives.html"><strong>348.</strong> 2093-infer-outlives</a></li><li><a href="2094-nll.html"><strong>349.</strong> 2094-nll</a></li><li><a href="2103-tool-attributes.html"><strong>350.</strong> 2103-tool-attributes</a></li><li><a href="2113-dyn-trait-syntax.html"><strong>351.</strong> 2113-dyn-trait-syntax</a></li><li><a href="2115-argument-lifetimes.html"><strong>352.</strong> 2115-argument-lifetimes</a></li><li><a href="2126-path-clarity.html"><strong>353.</strong> 2126-path-clarity</a></li><li><a href="2128-use-nested-groups.html"><strong>354.</strong> 2128-use-nested-groups</a></li><li><a href="2132-copy-closures.html"><strong>355.</strong> 2132-copy-closures</a></li><li><a href="2133-all-the-clones.html"><strong>356.</strong> 2133-all-the-clones</a></li><li><a href="2137-variadic.html"><strong>357.</strong> 2137-variadic</a></li><li><a href="2141-alternative-registries.html"><strong>358.</strong> 2141-alternative-registries</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars" title="Toggle sidebar"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush" title="Change theme"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <ul>
+<li>Feature Name: impl-trait-existential-types</li>
+<li>Start Date: 2017-07-20</li>
+<li>RFC PR: https://github.com/rust-lang/rfcs/pull/2071</li>
+<li>Rust Issue: https://github.com/rust-lang/rust/issues/44685 (existential types)</li>
+<li>Rust Issue: https://github.com/rust-lang/rust/issues/44686 (impl Trait in const/static/let)</li>
+</ul>
+<a class="header" href="2071-impl-trait-type-alias.html#summary" id="summary"><h1>Summary</h1></a>
+<p>Add the ability to create named existential types and
+support <code>impl Trait</code> in <code>let</code>, <code>const</code>, and <code>static</code> declarations.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// existential types
+existential type Adder: Fn(usize) -&gt; usize;
+fn adder(a: usize) -&gt; Adder {
+    |b| a + b
+}
+
+// existential type in associated type position:
+struct MyType;
+impl Iterator for MyType {
+    existential type Item: Debug;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+        Some(&quot;Another item!&quot;)
+    }
+}
+
+// `impl Trait` in `let`, `const`, and `static`:
+
+const ADD_ONE: impl Fn(usize) -&gt; usize = |x| x + 1;
+static MAYBE_PRINT: Option&lt;impl Fn(usize)&gt; = Some(|x| println!(&quot;{}&quot;, x));
+fn my_func() {
+    let iter: impl Iterator&lt;Item = i32&gt; = (0..5).map(|x| x * 5);
+    ...
+}
+#}</code></pre></pre>
+<a class="header" href="2071-impl-trait-type-alias.html#motivation" id="motivation"><h1>Motivation</h1></a>
+<p>This RFC proposes two expansions to Rust's <code>impl Trait</code> feature.
+<code>impl Trait</code>, first introduced in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1522-conservative-impl-trait.md">RFC 1522</a>, allows functions to return
+types which implement a given trait, but whose concrete type remains anonymous.
+<code>impl Trait</code> was expanded upon in <a href="https://github.com/rust-lang/rfcs/blob/master/text/1951-expand-impl-trait.md">RFC 1951</a>, which added <code>impl Trait</code> to
+argument position and resolved questions around syntax and parameter scoping.
+In its current form, the feature makes it possible for functions to return
+unnameable or complex types such as closures and iterator combinators.
+<code>impl Trait</code> also allows library authors to hide the concrete type returned by
+a function, making it possible to change the return type later on.</p>
+<p>However, the current feature has some severe limitations.
+Right now, it isn't possible to return an <code>impl Trait</code> type from a trait
+implementation. This is a huge restriction which this RFC fixes by making
+it possible to create a named existential type:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// `impl Trait` in traits:
+struct MyStruct;
+impl Iterator for MyStruct {
+
+    // Here we can declare an associated type whose concrete type is hidden
+    // to other modules.
+    //
+    // External users only know that `Item` implements the `Debug` trait.
+    existential type Item: Debug;
+
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+        Some(&quot;hello&quot;)
+    }
+}
+#}</code></pre></pre>
+<p>This syntax allows us to declare multiple items which refer to
+the same existential type:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// Type `Foo` refers to a type that implements the `Debug` trait.
+// The concrete type to which `Foo` refers is inferred from this module,
+// and this concrete type is hidden from outer modules (but not submodules).
+pub existential type Foo: Debug;
+
+const FOO: Foo = 5;
+
+// This function can be used by outer modules to manufacture an instance of
+// `Foo`. Other modules don't know the concrete type of `Foo`,
+// so they can't make their own `Foo`s.
+pub fn get_foo() -&gt; Foo {
+    5
+}
+
+// We know that the argument and return value of `get_larger_foo` must be the
+// same type as is returned from `get_foo`.
+pub fn get_larger_foo(x: Foo) -&gt; Foo {
+    let x: i32 = x;
+    x + 10
+}
+
+// Since we know that all `Foo`s have the same (hidden) concrete type, we can
+// write a function which returns `Foo`s acquired from different places.
+fn one_of_the_foos(which: usize) -&gt; Foo {
+    match which {
+        0 =&gt; FOO,
+        1 =&gt; foo1(),
+        2 =&gt; foo2(),
+        3 =&gt; opt_foo().unwrap(),
+
+        // It also allows us to make recursive calls to functions with an
+        // `impl Trait` return type:
+        x =&gt; one_of_the_foos(x - 4),
+    }
+}
+#}</code></pre></pre>
+<p>Separately, this RFC adds the ability to store an <code>impl Trait</code> type in a
+<code>let</code>, <code>const</code> or <code>static</code>.
+This makes <code>const</code> and <code>static</code> declarations more concise,
+and makes it possible to store types such as closures or iterator combinators
+in <code>const</code>s and <code>static</code>s.</p>
+<p>In a future world where <code>const fn</code> has been expanded to trait functions,
+one could imagine iterator constants such as this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+const THREES: impl Iterator&lt;Item = i32&gt; = (0..).map(|x| x * 3);
+#}</code></pre></pre>
+<p>Since the type of <code>THREES</code> contains a closure, it is impossible to write down.
+The <a href="https://github.com/rust-lang/rfcs/pull/2010"><code>const</code>/<code>static</code> type annotation elison RFC</a> has suggested one
+possible solution.
+That RFC proposes to let users omit the types of <code>const</code>s and <code>statics</code>s.
+However, in some cases, completely omitting the types of <code>const</code> and <code>static</code>
+items could make it harder to tell what sort of value is being stored in a
+<code>const</code> or <code>static</code>.
+Allowing <code>impl Trait</code> in <code>const</code>s and <code>static</code>s would resolve the unnameable
+type issue while still allowing users to provide some information about the
+type.</p>
+<a class="header" href="2071-impl-trait-type-alias.html#guide-level-explanation" id="guide-level-explanation"><h1>Guide-Level Explanation</h1></a>
+<a class="header" href="2071-impl-trait-type-alias.html#guide-impl-trait-in-let-const-and-static" id="guide-impl-trait-in-let-const-and-static"><h2>Guide: <code>impl Trait</code> in <code>let</code>, <code>const</code> and <code>static</code>:</h2></a>
+<p><code>impl Trait</code> can be used in <code>let</code>, <code>const</code>, and <code>static</code> declarations,
+like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt::Display;
+
+let displayable: impl Display = &quot;Hello, world!&quot;;
+println!(&quot;{}&quot;, displayable);
+#}</code></pre></pre>
+<p>Declaring a variable of type <code>impl Trait</code> will hide its concrete type.
+This is useful for declaring a value which implements a trait,
+but whose concrete type might change later on.
+In our example above, this means that, while we can &quot;display&quot; the
+value of <code>displayable</code>, the concrete type <code>&amp;str</code> is hidden:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt::Display;
+
+// Without `impl Trait`:
+const DISPLAYABLE: &amp;str = &quot;Hello, world!&quot;;
+fn display() {
+    println!(&quot;{}&quot;, DISPLAYABLE);
+    assert_eq!(DISPLAYABLE.len(), 5);
+}
+
+// With `impl Trait`:
+const DISPLAYABLE: impl Display = &quot;Hello, world!&quot;;
+
+fn display() {
+    // We know `DISPLAYABLE` implements `Display`.
+    println!(&quot;{}&quot;, DISPLAYABLE);
+
+    // ERROR: no method `len` on `impl Display`
+    // We don't know the concrete type of `DISPLAYABLE`,
+    // so we don't know that it has a `len` method.
+    assert_eq!(DISPLAYABLE.len(), 5);
+}
+#}</code></pre></pre>
+<p><code>impl Trait</code> declarations are also useful when declaring constants or
+static with types that are impossible to name, like closures:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// Without `impl Trait`, we can't declare this constant because we can't
+// write down the type of the closure.
+const MY_CLOSURE: ??? = |x| x + 1;
+
+// With `impl Trait`:
+const MY_CLOSURE: impl Fn(i32) -&gt; i32 = |x| x + 1;
+#}</code></pre></pre>
+<p>Finally, note that <code>impl Trait</code> <code>let</code> declarations hide the concrete
+types of local variables:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let displayable: impl Display = &quot;Hello, world!&quot;;
+
+// We know `displayable` implements `Display`.
+println!(&quot;{}&quot;, displayable);
+
+// ERROR: no method `len` on `impl Display`
+// We don't know the concrete type of `displayable`,
+// so we don't know that it has a `len` method.
+assert_eq!(displayable.len(), 5);
+#}</code></pre></pre>
+<p>At first glance, this behavior doesn't seem particularly useful.
+Indeed, <code>impl Trait</code> in <code>let</code> bindings exists mostly for consistency with
+<code>const</code>s and <code>static</code>s. However, it can be useful for documenting the
+specific ways in which a variable is used. It can also be used to provide
+better error messages for complex, nested types:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// Without `impl Trait`:
+let x = (0..100).map(|x| x * 3).filter(|x| x % 5 == 0);
+
+// ERROR: no method named `bogus_missing_method` found for type
+// `std::iter::Filter&lt;std::iter::Map&lt;std::ops::Range&lt;{integer}&gt;, [closure@src/main.rs:2:26: 2:35]&gt;, [closure@src/main.rs:2:44: 2:58]&gt;` in the current scope
+x.bogus_missing_method();
+
+// With `impl Trait`:
+let x: impl Iterator&lt;Item = i32&gt; = (0..100).map(|x| x * 3).filter(|x| x % 5);
+
+// ERROR: no method named `bogus_missing_method` found for type
+// `impl std::iter::Iterator` in the current scope
+x.bogus_missing_method();
+#}</code></pre></pre>
+<a class="header" href="2071-impl-trait-type-alias.html#guide-existential-types" id="guide-existential-types"><h2>Guide: Existential types</h2></a>
+<p>Rust allows users to declare <code>existential type</code>s.
+An existential type allows you to give a name to a type without revealing
+exactly what type is being used.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt::Debug;
+
+existential type Foo: Debug;
+
+fn foo() -&gt; Foo {
+    5i32
+}
+#}</code></pre></pre>
+<p>In the example above, <code>Foo</code> refers to <code>i32</code>, similar to a type alias.
+However, unlike a normal type alias, the concrete type of <code>Foo</code> is
+hidden outside of the module. Outside the module, the only think that
+is known about <code>Foo</code> is that it implements the traits that appear in
+its declaration (e.g. <code>Debug</code> in <code>existential type Foo: Debug;</code>).
+If a user outside the module tries to use a <code>Foo</code> as an <code>i32</code>, they
+will see an error:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::fmt::Debug;
+
+mod my_mod {
+  pub existential type Foo: Debug;
+
+  pub fn foo() -&gt; Foo {
+      5i32
+  }
+
+  pub fn use_foo_inside_mod() -&gt; Foo {
+      // Creates a variable `x` of type `i32`, which is equal to type `Foo`
+      let x: i32 = foo();
+      x + 5
+  }
+}
+
+fn use_foo_outside_mod() {
+    // Creates a variable `x` of type `Foo`, which is only known to implement `Debug`
+    let x = my_mod::foo();
+
+    // Because we're outside `my_mod`, the user cannot determine the type of `Foo`.
+    let y: i32 = my_mod::foo(); // ERROR: expected type `i32`, found existential type `Foo`
+
+    // However, the user can use its `Debug` impl:
+    println!(&quot;{:?}&quot;, x);
+}
+#}</code></pre></pre>
+<p>This makes it possible to write modules that hide their concrete types from the
+outside world, allowing them to change implementation details without affecting
+consumers of their API.</p>
+<p>Note that it is sometimes necessary to manually specify the concrete type of an
+existential type, like in <code>let x: i32 = foo();</code> above. This aids the function's
+ability to locally infer the concrete type of <code>Foo</code>.</p>
+<p>One particularly noteworthy use of existential types is in trait
+implementations.
+With this feature, we can declare associated types as follows:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct MyType;
+impl Iterator for MyType {
+    existential type Item: Debug;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+        Some(&quot;Another item!&quot;)
+    }
+}
+#}</code></pre></pre>
+<p>In this trait implementation, we've declared that the item returned by our
+iterator implements <code>Debug</code>, but we've kept its concrete type (<code>&amp;'static str</code>)
+hidden from the outside world.</p>
+<p>We can even use this feature to specify unnameable associated types, such as
+closures:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct MyType;
+impl Iterator for MyType {
+    existential type Item: Fn(i32) -&gt; i32;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+        Some(|x| x + 5)
+    }
+}
+#}</code></pre></pre>
+<p>Existential types can also be used to reference unnameable types in a struct
+definition:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+existential type Foo: Debug;
+fn foo() -&gt; Foo { 5i32 }
+
+struct ContainsFoo {
+    some_foo: Foo
+}
+#}</code></pre></pre>
+<p>It's also possible to write generic existential types:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Debug)]
+struct MyStruct&lt;T: Debug&gt; {
+    inner: T
+};
+
+existential type Foo&lt;T&gt;: Debug;
+
+fn get_foo&lt;T: Debug&gt;(x: T) -&gt; Foo&lt;T&gt; {
+    MyStruct {
+        inner: x
+    }
+}
+#}</code></pre></pre>
+<p>Similarly to <code>impl Trait</code> under
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/1951-expand-impl-trait.md">RFC 1951</a>,
+<code>existential type</code> implicitly captures all generic type parameters in scope. In
+practice, this means that existential associated types may contain generic
+parameters from their impl:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct MyStruct;
+trait Foo&lt;T&gt; {
+    type Bar;
+    fn bar() -&gt; Bar;
+}
+
+impl&lt;T&gt; Foo&lt;T&gt; for MyStruct {
+    existentail type Bar: Trait;
+    fn bar() -&gt; Self::Bar {
+        ...
+        // Returns some type MyBar&lt;T&gt;
+    }
+}
+#}</code></pre></pre>
+<p>However, as in 1951, lifetime parameters must be explicitly annotated.</p>
+<a class="header" href="2071-impl-trait-type-alias.html#reference-level-explanation" id="reference-level-explanation"><h1>Reference-Level Explanation</h1></a>
+<a class="header" href="2071-impl-trait-type-alias.html#reference-impl-trait-in-let-const-and-static" id="reference-impl-trait-in-let-const-and-static"><h2>Reference: <code>impl Trait</code> in <code>let</code>, <code>const</code> and <code>static</code>:</h2></a>
+<p>The rules for <code>impl Trait</code> values in <code>let</code>, <code>const</code>, and <code>static</code> declarations
+work mostly the same as <code>impl Trait</code> return values as specified in
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/1951-expand-impl-trait.md">RFC 1951</a>.</p>
+<p>These values hide their concrete type and can only be used as a value which
+is known to implement the specified traits. They inherit any type parameters
+in scope. One difference from <code>impl Trait</code> return types is that they also
+inherit any lifetime parameters in scope. This is necessary in order for
+<code>let</code> bindings to use <code>impl Trait</code>. <code>let</code> bindings often contain references
+which last for anonymous scope-based lifetimes, and annotating these lifetimes
+manually would be impossible.</p>
+<a class="header" href="2071-impl-trait-type-alias.html#reference-existential-types" id="reference-existential-types"><h2>Reference: Existential Types</h2></a>
+<p>Existential types are similar to normal type aliases, except that their
+concrete type is determined from the scope in which they are defined
+(usually a module or a trait impl).
+For example, the following code has to examine the body of <code>foo</code> in order to
+determine that the concrete type of <code>Foo</code> is <code>i32</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+existential type Foo = impl Debug;
+
+fn foo() -&gt; Foo {
+    5i32
+}
+#}</code></pre></pre>
+<p><code>Foo</code> can be used as <code>i32</code> in multiple places throughout the module.
+However, each function that uses <code>Foo</code> as <code>i32</code> must independently place
+constraints upon <code>Foo</code> such that it <em>must</em> be <code>i32</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn add_to_foo_1(x: Foo) {
+    x + 1 // ERROR: binary operation `+` cannot be applied to existential type `Foo`
+//  ^ `x` here is type `Foo`.
+//    Type annotations needed to resolve the concrete type of `x`.
+//    (^ This particular error should only appear within the module in which
+//      `Foo` is defined)
+}
+
+fn add_to_foo_2(x: Foo) {
+    let x: i32 = x;
+    x + 1
+}
+
+fn return_foo(x: Foo) -&gt; Foo {
+    // This is allowed.
+    // We don't need to know the concrete type of `Foo` for this function to
+    // typecheck.
+    x
+}
+#}</code></pre></pre>
+<p>Each existential type declaration must be constrained by at least
+one function body or const/static initializer.
+A body or initializer must either fully constrain or place no constraints upon
+a given existential type.</p>
+<p>Outside of the module, existential types behave the same way as
+<code>impl Trait</code> types: their concrete type is hidden from the module.
+However, it can be assumed that two values of the same existential type
+are actually values of the same type:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+mod my_mod {
+    pub existential type Foo: Debug;
+    pub fn foo() -&gt; Foo {
+        5i32
+    }
+    pub fn bar() -&gt; Foo {
+        10i32
+    }
+    pub fn baz(x: Foo) -&gt; Foo {
+        let x: i32 = x;
+        x + 5
+    }
+}
+
+fn outside_mod() -&gt; Foo {
+    if true {
+        my_mod::foo()
+    } else {
+        my_mod::baz(my_mod::bar())
+    }
+}
+#}</code></pre></pre>
+<p>One last difference between existential type aliases and normal type aliases is
+that existential type aliases cannot be used in <code>impl</code> blocks:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+existential type Foo: Debug;
+impl Foo { // ERROR: `impl` cannot be used on existential type aliases
+    ...
+}
+impl MyTrait for Foo { // ERROR ^
+    ...
+}
+#}</code></pre></pre>
+<p>While this feature may be added at some point in the future, it's unclear
+exactly what behavior it should have-- should it result in implementations
+of functions and traits on the underlying type? It seems like the answer
+should be &quot;no&quot; since doing so would give away the underlying type being
+hidden beneath the impl. Still, some version of this feature could be
+used eventually to implement traits or functions for closures, or
+to express conditional bounds in existential type signatures
+(e.g. <code>existentail type Foo&lt;T&gt; = impl Debug; impl&lt;T: Clone&gt; Clone for Foo&lt;T&gt; { ... }</code>).
+This is a complicated design space which has not yet been explored fully
+enough. In the future, such a feature could be added backwards-compatibly.</p>
+<a class="header" href="2071-impl-trait-type-alias.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
+<p>This RFC proposes the addition of a complicated feature that will take time
+for Rust developers to learn and understand.
+There are potentially simpler ways to achieve some of the goals of this RFC,
+such as making <code>impl Trait</code> usable in traits.
+This RFC instead introduces a more complicated solution in order to
+allow for increased expressiveness and clarity.</p>
+<p>This RFC makes <code>impl Trait</code> feel even more like a type by allowing it in more
+locations where formerly only concrete types were allowed.
+However, there are other places such a type can appear where <code>impl Trait</code>
+cannot, such as <code>impl</code> blocks and <code>struct</code> definitions
+(i.e. <code>struct Foo { x: impl Trait }</code>).
+This inconsistency may be surprising to users.</p>
+<a class="header" href="2071-impl-trait-type-alias.html#alternatives" id="alternatives"><h1>Alternatives</h1></a>
+<p>We could instead expand <code>impl Trait</code> in a more focused but limited way,
+such as specifically extending <code>impl Trait</code> to work in traits without
+allowing full existential type aliases.
+A draft RFC for such a proposal can be seen
+<a href="https://github.com/cramertj/impl-trait-goals/blob/impl-trait-in-traits/0000-impl-trait-in-traits.md">here</a>.
+Any such feature could, in the future, be added as essentially syntax sugar on
+top of this RFC, which is strictly more expressive.
+The current RFC will also help us to gain experience with how people use
+existential type aliases in practice, allowing us to resolve some remaining questions
+in the linked draft, specifically around how <code>impl Trait</code> associated types
+are used.</p>
+<p>Throughout the process we have considered a number of alternative syntaxes for
+existential types. The syntax <code>existential type Foo: Trait;</code> is intended to be
+a placeholder for a more concise and accessible syntax, such as
+<code>abstract type Foo: Trait;</code>. A variety of variations on this theme have been
+considered:</p>
+<ul>
+<li>Instead of <code>abstract type</code>, it could be some single keyword like <code>abstype</code>.</li>
+<li>We could use a different keyword from <code>abstract</code>, like <code>opaque</code> or <code>exists</code>.</li>
+<li>We could omit a keyword altogether and use <code>type Foo: Trait;</code> syntax
+(outside of trait definitions).</li>
+</ul>
+<p>A more divergent alternative is not to have an &quot;existentail type&quot; feature at all,
+but instead just have <code>impl Trait</code> be allowed in type alias position.
+Everything written <code>existential type $NAME: $BOUND;</code> in this RFC would instead be
+written <code>type $NAME = impl $BOUND;</code>.</p>
+<p>This RFC opted to avoid the <code>type Foo = impl Trait;</code> syntax because of its
+potential teaching difficulties.
+As a result of <a href="https://github.com/rust-lang/rfcs/blob/master/text/1951-expand-impl-trait.md">RFC 1951</a>, <code>impl Trait</code> is sometimes
+universal quantiifcation and sometimes existential quantification. By providing
+a separate syntax for &quot;explicit&quot; existential quantification, <code>impl Trait</code> can
+be taught as a syntactic sugar for generics and existential types. By &quot;just using
+<code>impl Trait</code>&quot; for named existential type declarations,
+there would be no desugaring-based explanation for all forms of <code>impl Trait</code>.</p>
+<p>This choice has some disadvantages in comparison impl Trait in type aliases:</p>
+<ul>
+<li>We introduce another new syntax on top of <code>impl Trait</code>, which inherently has
+some costs.</li>
+<li>Users can't use it in a nested fashion without creating an addiitonal
+existential type.</li>
+</ul>
+<p>Because of these downsides, we are open to reconsidering this question with
+more practical experience, and the final syntax is left as an unresolved
+question for the RFC.</p>
+<a class="header" href="2071-impl-trait-type-alias.html#unresolved-questions" id="unresolved-questions"><h1>Unresolved questions</h1></a>
+<p>As discussed in the <a href="2071-impl-trait-type-alias.html#alternatives">alternatives</a> section above, we will need to
+reconsider the optimal syntax before stabilizing this feature.</p>
+<p>Additionally, the following extensions should be considered in the future:</p>
+<ul>
+<li>Conditional bounds. Even with this proposal, there's no way to specify
+the <code>impl Trait</code> bounds necessary to implement traits like <code>Iterator</code>, which
+have functions whose return types implement traits conditional on the input,
+e.g. <code>fn foo&lt;T&gt;(x: T) -&gt; impl Clone if T: Clone</code>.</li>
+<li>Associated-type-less <code>impl Trait</code> in trait declarations and implementations,
+such as the proposal mentioned in the alternatives section.
+As mentioned above, this feature would be strictly less expressive than this
+RFC. The more general feature proposed in this RFC would help us to define a
+better version of this alternative which could be added in the future.</li>
+<li>A more general form of inference for <code>impl Trait</code> type aliases. This RFC
+forces each function to either fully constrain or place no constraints upon
+an <code>impl Trait</code> type. It's possible to allow some partial constraints through
+a process like the one described in
+<a href="https://github.com/rust-lang/rfcs/pull/2071#issuecomment-320458113">this comment</a>.
+However, these partial bounds present implementation concerns, so they have
+been removed from this RFC. If it turns out that partial bounds would be
+greatly useful in practice, they can be added backwards-compatibly in a future
+RFC.</li>
+</ul>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="2070-panic-implementation.html" class="mobile-nav-chapters previous" title="Previous chapter">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2086-allow-if-let-irrefutables.html" class="mobile-nav-chapters next" title="Next chapter">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="2070-panic-implementation.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="2086-allow-if-let-irrefutables.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </body>
+</html>
