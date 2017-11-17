@@ -1,0 +1,661 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>0529-conversion-traits - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="0001-private-fields.html"><strong>1.</strong> 0001-private-fields</a></li><li><a href="0002-rfc-process.html"><strong>2.</strong> 0002-rfc-process</a></li><li><a href="0003-attribute-usage.html"><strong>3.</strong> 0003-attribute-usage</a></li><li><a href="0008-new-intrinsics.html"><strong>4.</strong> 0008-new-intrinsics</a></li><li><a href="0016-more-attributes.html"><strong>5.</strong> 0016-more-attributes</a></li><li><a href="0019-opt-in-builtin-traits.html"><strong>6.</strong> 0019-opt-in-builtin-traits</a></li><li><a href="0026-remove-priv.html"><strong>7.</strong> 0026-remove-priv</a></li><li><a href="0034-bounded-type-parameters.html"><strong>8.</strong> 0034-bounded-type-parameters</a></li><li><a href="0040-libstd-facade.html"><strong>9.</strong> 0040-libstd-facade</a></li><li><a href="0042-regexps.html"><strong>10.</strong> 0042-regexps</a></li><li><a href="0048-traits.html"><strong>11.</strong> 0048-traits</a></li><li><a href="0049-match-arm-attributes.html"><strong>12.</strong> 0049-match-arm-attributes</a></li><li><a href="0050-assert.html"><strong>13.</strong> 0050-assert</a></li><li><a href="0059-remove-tilde.html"><strong>14.</strong> 0059-remove-tilde</a></li><li><a href="0060-rename-strbuf.html"><strong>15.</strong> 0060-rename-strbuf</a></li><li><a href="0063-module-file-system-hierarchy.html"><strong>16.</strong> 0063-module-file-system-hierarchy</a></li><li><a href="0066-better-temporary-lifetimes.html"><strong>17.</strong> 0066-better-temporary-lifetimes</a></li><li><a href="0068-const-unsafe-pointers.html"><strong>18.</strong> 0068-const-unsafe-pointers</a></li><li><a href="0069-ascii-literals.html"><strong>19.</strong> 0069-ascii-literals</a></li><li><a href="0071-const-block-expr.html"><strong>20.</strong> 0071-const-block-expr</a></li><li><a href="0079-undefined-struct-layout.html"><strong>21.</strong> 0079-undefined-struct-layout</a></li><li><a href="0085-pattern-macros.html"><strong>22.</strong> 0085-pattern-macros</a></li><li><a href="0086-plugin-registrar.html"><strong>23.</strong> 0086-plugin-registrar</a></li><li><a href="0087-trait-bounds-with-plus.html"><strong>24.</strong> 0087-trait-bounds-with-plus</a></li><li><a href="0089-loadable-lints.html"><strong>25.</strong> 0089-loadable-lints</a></li><li><a href="0090-lexical-syntax-simplification.html"><strong>26.</strong> 0090-lexical-syntax-simplification</a></li><li><a href="0092-struct-grammar.html"><strong>27.</strong> 0092-struct-grammar</a></li><li><a href="0093-remove-format-intl.html"><strong>28.</strong> 0093-remove-format-intl</a></li><li><a href="0100-partial-cmp.html"><strong>29.</strong> 0100-partial-cmp</a></li><li><a href="0107-pattern-guards-with-bind-by-move.html"><strong>30.</strong> 0107-pattern-guards-with-bind-by-move</a></li><li><a href="0109-remove-crate-id.html"><strong>31.</strong> 0109-remove-crate-id</a></li><li><a href="0111-index-traits.html"><strong>32.</strong> 0111-index-traits</a></li><li><a href="0112-remove-cross-borrowing.html"><strong>33.</strong> 0112-remove-cross-borrowing</a></li><li><a href="0114-closures.html"><strong>34.</strong> 0114-closures</a></li><li><a href="0115-rm-integer-fallback.html"><strong>35.</strong> 0115-rm-integer-fallback</a></li><li><a href="0116-no-module-shadowing.html"><strong>36.</strong> 0116-no-module-shadowing</a></li><li><a href="0123-share-to-threadsafe.html"><strong>37.</strong> 0123-share-to-threadsafe</a></li><li><a href="0130-box-not-special.html"><strong>38.</strong> 0130-box-not-special</a></li><li><a href="0131-target-specification.html"><strong>39.</strong> 0131-target-specification</a></li><li><a href="0132-ufcs.html"><strong>40.</strong> 0132-ufcs</a></li><li><a href="0135-where.html"><strong>41.</strong> 0135-where</a></li><li><a href="0136-no-privates-in-public.html"><strong>42.</strong> 0136-no-privates-in-public</a></li><li><a href="0139-remove-cross-borrowing-entirely.html"><strong>43.</strong> 0139-remove-cross-borrowing-entirely</a></li><li><a href="0141-lifetime-elision.html"><strong>44.</strong> 0141-lifetime-elision</a></li><li><a href="0151-capture-by-value.html"><strong>45.</strong> 0151-capture-by-value</a></li><li><a href="0155-anonymous-impl-only-in-same-module.html"><strong>46.</strong> 0155-anonymous-impl-only-in-same-module</a></li><li><a href="0160-if-let.html"><strong>47.</strong> 0160-if-let</a></li><li><a href="0164-feature-gate-slice-pats.html"><strong>48.</strong> 0164-feature-gate-slice-pats</a></li><li><a href="0168-mod.html"><strong>49.</strong> 0168-mod</a></li><li><a href="0169-use-path-as-id.html"><strong>50.</strong> 0169-use-path-as-id</a></li><li><a href="0179-and-mut-patterns.html"><strong>51.</strong> 0179-and-mut-patterns</a></li><li><a href="0184-tuple-accessors.html"><strong>52.</strong> 0184-tuple-accessors</a></li><li><a href="0192-bounds-on-object-and-generic-types.html"><strong>53.</strong> 0192-bounds-on-object-and-generic-types</a></li><li><a href="0194-cfg-syntax.html"><strong>54.</strong> 0194-cfg-syntax</a></li><li><a href="0195-associated-items.html"><strong>55.</strong> 0195-associated-items</a></li><li><a href="0198-slice-notation.html"><strong>56.</strong> 0198-slice-notation</a></li><li><a href="0199-ownership-variants.html"><strong>57.</strong> 0199-ownership-variants</a></li><li><a href="0201-error-chaining.html"><strong>58.</strong> 0201-error-chaining</a></li><li><a href="0202-subslice-syntax-change.html"><strong>59.</strong> 0202-subslice-syntax-change</a></li><li><a href="0212-restore-int-fallback.html"><strong>60.</strong> 0212-restore-int-fallback</a></li><li><a href="0213-defaulted-type-params.html"><strong>61.</strong> 0213-defaulted-type-params</a></li><li><a href="0214-while-let.html"><strong>62.</strong> 0214-while-let</a></li><li><a href="0216-collection-views.html"><strong>63.</strong> 0216-collection-views</a></li><li><a href="0218-empty-struct-with-braces.html"><strong>64.</strong> 0218-empty-struct-with-braces</a></li><li><a href="0221-panic.html"><strong>65.</strong> 0221-panic</a></li><li><a href="0230-remove-runtime.html"><strong>66.</strong> 0230-remove-runtime</a></li><li><a href="0231-upvar-capture-inference.html"><strong>67.</strong> 0231-upvar-capture-inference</a></li><li><a href="0234-variants-namespace.html"><strong>68.</strong> 0234-variants-namespace</a></li><li><a href="0235-collections-conventions.html"><strong>69.</strong> 0235-collections-conventions</a></li><li><a href="0236-error-conventions.html"><strong>70.</strong> 0236-error-conventions</a></li><li><a href="0240-unsafe-api-location.html"><strong>71.</strong> 0240-unsafe-api-location</a></li><li><a href="0241-deref-conversions.html"><strong>72.</strong> 0241-deref-conversions</a></li><li><a href="0243-trait-based-exception-handling.html"><strong>73.</strong> 0243-trait-based-exception-handling</a></li><li><a href="0246-const-vs-static.html"><strong>74.</strong> 0246-const-vs-static</a></li><li><a href="0255-object-safety.html"><strong>75.</strong> 0255-object-safety</a></li><li><a href="0256-remove-refcounting-gc-of-t.html"><strong>76.</strong> 0256-remove-refcounting-gc-of-t</a></li><li><a href="0320-nonzeroing-dynamic-drop.html"><strong>77.</strong> 0320-nonzeroing-dynamic-drop</a></li><li><a href="0326-restrict-xXX-to-ascii.html"><strong>78.</strong> 0326-restrict-xXX-to-ascii</a></li><li><a href="0339-statically-sized-literals.html"><strong>79.</strong> 0339-statically-sized-literals</a></li><li><a href="0341-remove-virtual-structs.html"><strong>80.</strong> 0341-remove-virtual-structs</a></li><li><a href="0342-keywords.html"><strong>81.</strong> 0342-keywords</a></li><li><a href="0344-conventions-galore.html"><strong>82.</strong> 0344-conventions-galore</a></li><li><a href="0356-no-module-prefixes.html"><strong>83.</strong> 0356-no-module-prefixes</a></li><li><a href="0369-num-reform.html"><strong>84.</strong> 0369-num-reform</a></li><li><a href="0378-expr-macros.html"><strong>85.</strong> 0378-expr-macros</a></li><li><a href="0379-remove-reflection.html"><strong>86.</strong> 0379-remove-reflection</a></li><li><a href="0380-stabilize-std-fmt.html"><strong>87.</strong> 0380-stabilize-std-fmt</a></li><li><a href="0385-module-system-cleanup.html"><strong>88.</strong> 0385-module-system-cleanup</a></li><li><a href="0387-higher-ranked-trait-bounds.html"><strong>89.</strong> 0387-higher-ranked-trait-bounds</a></li><li><a href="0390-enum-namespacing.html"><strong>90.</strong> 0390-enum-namespacing</a></li><li><a href="0401-coercions.html"><strong>91.</strong> 0401-coercions</a></li><li><a href="0403-cargo-build-command.html"><strong>92.</strong> 0403-cargo-build-command</a></li><li><a href="0404-change-prefer-dynamic.html"><strong>93.</strong> 0404-change-prefer-dynamic</a></li><li><a href="0418-struct-variants.html"><strong>94.</strong> 0418-struct-variants</a></li><li><a href="0430-finalizing-naming-conventions.html"><strong>95.</strong> 0430-finalizing-naming-conventions</a></li><li><a href="0438-precedence-of-plus.html"><strong>96.</strong> 0438-precedence-of-plus</a></li><li><a href="0439-cmp-ops-reform.html"><strong>97.</strong> 0439-cmp-ops-reform</a></li><li><a href="0445-extension-trait-conventions.html"><strong>98.</strong> 0445-extension-trait-conventions</a></li><li><a href="0446-es6-unicode-escapes.html"><strong>99.</strong> 0446-es6-unicode-escapes</a></li><li><a href="0447-no-unused-impl-parameters.html"><strong>100.</strong> 0447-no-unused-impl-parameters</a></li><li><a href="0450-un-feature-gate-some-more-gates.html"><strong>101.</strong> 0450-un-feature-gate-some-more-gates</a></li><li><a href="0453-macro-reform.html"><strong>102.</strong> 0453-macro-reform</a></li><li><a href="0458-send-improvements.html"><strong>103.</strong> 0458-send-improvements</a></li><li><a href="0459-disallow-shadowing.html"><strong>104.</strong> 0459-disallow-shadowing</a></li><li><a href="0461-tls-overhaul.html"><strong>105.</strong> 0461-tls-overhaul</a></li><li><a href="0463-future-proof-literal-suffixes.html"><strong>106.</strong> 0463-future-proof-literal-suffixes</a></li><li><a href="0469-feature-gate-box-patterns.html"><strong>107.</strong> 0469-feature-gate-box-patterns</a></li><li><a href="0474-path-reform.html"><strong>108.</strong> 0474-path-reform</a></li><li><a href="0486-std-ascii-reform.html"><strong>109.</strong> 0486-std-ascii-reform</a></li><li><a href="0490-dst-syntax.html"><strong>110.</strong> 0490-dst-syntax</a></li><li><a href="0494-c_str-and-c_vec-stability.html"><strong>111.</strong> 0494-c_str-and-c_vec-stability</a></li><li><a href="0495-array-pattern-changes.html"><strong>112.</strong> 0495-array-pattern-changes</a></li><li><a href="0501-consistent_no_prelude_attributes.html"><strong>113.</strong> 0501-consistent_no_prelude_attributes</a></li><li><a href="0503-prelude-stabilization.html"><strong>114.</strong> 0503-prelude-stabilization</a></li><li><a href="0504-show-stabilization.html"><strong>115.</strong> 0504-show-stabilization</a></li><li><a href="0505-api-comment-conventions.html"><strong>116.</strong> 0505-api-comment-conventions</a></li><li><a href="0507-release-channels.html"><strong>117.</strong> 0507-release-channels</a></li><li><a href="0509-collections-reform-part-2.html"><strong>118.</strong> 0509-collections-reform-part-2</a></li><li><a href="0517-io-os-reform.html"><strong>119.</strong> 0517-io-os-reform</a></li><li><a href="0520-new-array-repeat-syntax.html"><strong>120.</strong> 0520-new-array-repeat-syntax</a></li><li><a href="0522-self-impl.html"><strong>121.</strong> 0522-self-impl</a></li><li><a href="0526-fmt-text-writer.html"><strong>122.</strong> 0526-fmt-text-writer</a></li><li><a href="0528-string-patterns.html"><strong>123.</strong> 0528-string-patterns</a></li><li><a href="0529-conversion-traits.html" class="active"><strong>124.</strong> 0529-conversion-traits</a></li><li><a href="0531-define-rfc-scope.html"><strong>125.</strong> 0531-define-rfc-scope</a></li><li><a href="0532-self-in-use.html"><strong>126.</strong> 0532-self-in-use</a></li><li><a href="0533-no-array-elem-moves.html"><strong>127.</strong> 0533-no-array-elem-moves</a></li><li><a href="0534-deriving2derive.html"><strong>128.</strong> 0534-deriving2derive</a></li><li><a href="0544-rename-int-uint.html"><strong>129.</strong> 0544-rename-int-uint</a></li><li><a href="0546-Self-not-sized-by-default.html"><strong>130.</strong> 0546-Self-not-sized-by-default</a></li><li><a href="0550-macro-future-proofing.html"><strong>131.</strong> 0550-macro-future-proofing</a></li><li><a href="0556-raw-lifetime.html"><strong>132.</strong> 0556-raw-lifetime</a></li><li><a href="0558-require-parentheses-for-chained-comparisons.html"><strong>133.</strong> 0558-require-parentheses-for-chained-comparisons</a></li><li><a href="0560-integer-overflow.html"><strong>134.</strong> 0560-integer-overflow</a></li><li><a href="0563-remove-ndebug.html"><strong>135.</strong> 0563-remove-ndebug</a></li><li><a href="0565-show-string-guidelines.html"><strong>136.</strong> 0565-show-string-guidelines</a></li><li><a href="0572-rustc-attribute.html"><strong>137.</strong> 0572-rustc-attribute</a></li><li><a href="0574-drain-range.html"><strong>138.</strong> 0574-drain-range</a></li><li><a href="0580-rename-collections.html"><strong>139.</strong> 0580-rename-collections</a></li><li><a href="0587-fn-return-should-be-an-associated-type.html"><strong>140.</strong> 0587-fn-return-should-be-an-associated-type</a></li><li><a href="0592-c-str-deref.html"><strong>141.</strong> 0592-c-str-deref</a></li><li><a href="0593-forbid-Self-definitions.html"><strong>142.</strong> 0593-forbid-Self-definitions</a></li><li><a href="0599-default-object-bound.html"><strong>143.</strong> 0599-default-object-bound</a></li><li><a href="0601-replace-be-with-become.html"><strong>144.</strong> 0601-replace-be-with-become</a></li><li><a href="0639-discriminant-intrinsic.html"><strong>145.</strong> 0639-discriminant-intrinsic</a></li><li><a href="0640-debug-improvements.html"><strong>146.</strong> 0640-debug-improvements</a></li><li><a href="0702-rangefull-expression.html"><strong>147.</strong> 0702-rangefull-expression</a></li><li><a href="0735-allow-inherent-impls-anywhere.html"><strong>148.</strong> 0735-allow-inherent-impls-anywhere</a></li><li><a href="0736-privacy-respecting-fru.html"><strong>149.</strong> 0736-privacy-respecting-fru</a></li><li><a href="0738-variance.html"><strong>150.</strong> 0738-variance</a></li><li><a href="0769-sound-generic-drop.html"><strong>151.</strong> 0769-sound-generic-drop</a></li><li><a href="0771-std-iter-once.html"><strong>152.</strong> 0771-std-iter-once</a></li><li><a href="0803-type-ascription.html"><strong>153.</strong> 0803-type-ascription</a></li><li><a href="0809-box-and-in-for-stdlib.html"><strong>154.</strong> 0809-box-and-in-for-stdlib</a></li><li><a href="0823-hash-simplification.html"><strong>155.</strong> 0823-hash-simplification</a></li><li><a href="0832-from-elem-with-love.html"><strong>156.</strong> 0832-from-elem-with-love</a></li><li><a href="0839-embrace-extend-extinguish.html"><strong>157.</strong> 0839-embrace-extend-extinguish</a></li><li><a href="0840-no-panic-in-c-string.html"><strong>158.</strong> 0840-no-panic-in-c-string</a></li><li><a href="0873-type-macros.html"><strong>159.</strong> 0873-type-macros</a></li><li><a href="0879-small-base-lexing.html"><strong>160.</strong> 0879-small-base-lexing</a></li><li><a href="0888-compiler-fence-intrinsics.html"><strong>161.</strong> 0888-compiler-fence-intrinsics</a></li><li><a href="0909-move-thread-local-to-std-thread.html"><strong>162.</strong> 0909-move-thread-local-to-std-thread</a></li><li><a href="0911-const-fn.html"><strong>163.</strong> 0911-const-fn</a></li><li><a href="0921-entry_v3.html"><strong>164.</strong> 0921-entry_v3</a></li><li><a href="0940-hyphens-considered-harmful.html"><strong>165.</strong> 0940-hyphens-considered-harmful</a></li><li><a href="0953-op-assign.html"><strong>166.</strong> 0953-op-assign</a></li><li><a href="0968-closure-return-type-syntax.html"><strong>167.</strong> 0968-closure-return-type-syntax</a></li><li><a href="0979-align-splitn-with-other-languages.html"><strong>168.</strong> 0979-align-splitn-with-other-languages</a></li><li><a href="0980-read-exact.html"><strong>169.</strong> 0980-read-exact</a></li><li><a href="0982-dst-coercion.html"><strong>170.</strong> 0982-dst-coercion</a></li><li><a href="1011-process.exit.html"><strong>171.</strong> 1011-process.exit</a></li><li><a href="1014-stdout-existential-crisis.html"><strong>172.</strong> 1014-stdout-existential-crisis</a></li><li><a href="1023-rebalancing-coherence.html"><strong>173.</strong> 1023-rebalancing-coherence</a></li><li><a href="1030-prelude-additions.html"><strong>174.</strong> 1030-prelude-additions</a></li><li><a href="1040-duration-reform.html"><strong>175.</strong> 1040-duration-reform</a></li><li><a href="1044-io-fs-2.1.html"><strong>176.</strong> 1044-io-fs-2.1</a></li><li><a href="1047-socket-timeouts.html"><strong>177.</strong> 1047-socket-timeouts</a></li><li><a href="1048-rename-soft-link-to-symlink.html"><strong>178.</strong> 1048-rename-soft-link-to-symlink</a></li><li><a href="1054-str-words.html"><strong>179.</strong> 1054-str-words</a></li><li><a href="1057-io-error-sync.html"><strong>180.</strong> 1057-io-error-sync</a></li><li><a href="1058-slice-tail-redesign.html"><strong>181.</strong> 1058-slice-tail-redesign</a></li><li><a href="1066-safe-mem-forget.html"><strong>182.</strong> 1066-safe-mem-forget</a></li><li><a href="1068-rust-governance.html"><strong>183.</strong> 1068-rust-governance</a></li><li><a href="1096-remove-static-assert.html"><strong>184.</strong> 1096-remove-static-assert</a></li><li><a href="1102-rename-connect-to-join.html"><strong>185.</strong> 1102-rename-connect-to-join</a></li><li><a href="1105-api-evolution.html"><strong>186.</strong> 1105-api-evolution</a></li><li><a href="1119-result-expect.html"><strong>187.</strong> 1119-result-expect</a></li><li><a href="1122-language-semver.html"><strong>188.</strong> 1122-language-semver</a></li><li><a href="1123-str-split-at.html"><strong>189.</strong> 1123-str-split-at</a></li><li><a href="1131-likely-intrinsic.html"><strong>190.</strong> 1131-likely-intrinsic</a></li><li><a href="1135-raw-pointer-comparisons.html"><strong>191.</strong> 1135-raw-pointer-comparisons</a></li><li><a href="1152-slice-string-symmetry.html"><strong>192.</strong> 1152-slice-string-symmetry</a></li><li><a href="1156-adjust-default-object-bounds.html"><strong>193.</strong> 1156-adjust-default-object-bounds</a></li><li><a href="1174-into-raw-fd-socket-handle-traits.html"><strong>194.</strong> 1174-into-raw-fd-socket-handle-traits</a></li><li><a href="1183-swap-out-jemalloc.html"><strong>195.</strong> 1183-swap-out-jemalloc</a></li><li><a href="1184-stabilize-no_std.html"><strong>196.</strong> 1184-stabilize-no_std</a></li><li><a href="1191-hir.html"><strong>197.</strong> 1191-hir</a></li><li><a href="1192-inclusive-ranges.html"><strong>198.</strong> 1192-inclusive-ranges</a></li><li><a href="1193-cap-lints.html"><strong>199.</strong> 1193-cap-lints</a></li><li><a href="1194-set-recovery.html"><strong>200.</strong> 1194-set-recovery</a></li><li><a href="1199-simd-infrastructure.html"><strong>201.</strong> 1199-simd-infrastructure</a></li><li><a href="1200-cargo-install.html"><strong>202.</strong> 1200-cargo-install</a></li><li><a href="1201-naked-fns.html"><strong>203.</strong> 1201-naked-fns</a></li><li><a href="1210-impl-specialization.html"><strong>204.</strong> 1210-impl-specialization</a></li><li><a href="1211-mir.html"><strong>205.</strong> 1211-mir</a></li><li><a href="1212-line-endings.html"><strong>206.</strong> 1212-line-endings</a></li><li><a href="1214-projections-lifetimes-and-wf.html"><strong>207.</strong> 1214-projections-lifetimes-and-wf</a></li><li><a href="1216-bang-type.html"><strong>208.</strong> 1216-bang-type</a></li><li><a href="1219-use-group-as.html"><strong>209.</strong> 1219-use-group-as</a></li><li><a href="1228-placement-left-arrow.html"><strong>210.</strong> 1228-placement-left-arrow</a></li><li><a href="1229-compile-time-asserts.html"><strong>211.</strong> 1229-compile-time-asserts</a></li><li><a href="1236-stabilize-catch-panic.html"><strong>212.</strong> 1236-stabilize-catch-panic</a></li><li><a href="1238-nonparametric-dropck.html"><strong>213.</strong> 1238-nonparametric-dropck</a></li><li><a href="1240-repr-packed-unsafe-ref.html"><strong>214.</strong> 1240-repr-packed-unsafe-ref</a></li><li><a href="1241-no-wildcard-deps.html"><strong>215.</strong> 1241-no-wildcard-deps</a></li><li><a href="1242-rust-lang-crates.html"><strong>216.</strong> 1242-rust-lang-crates</a></li><li><a href="1252-open-options.html"><strong>217.</strong> 1252-open-options</a></li><li><a href="1257-drain-range-2.html"><strong>218.</strong> 1257-drain-range-2</a></li><li><a href="1260-main-reexport.html"><strong>219.</strong> 1260-main-reexport</a></li><li><a href="1268-allow-overlapping-impls-on-marker-traits.html"><strong>220.</strong> 1268-allow-overlapping-impls-on-marker-traits</a></li><li><a href="1270-deprecation.html"><strong>221.</strong> 1270-deprecation</a></li><li><a href="1288-time-improvements.html"><strong>222.</strong> 1288-time-improvements</a></li><li><a href="1291-promote-libc.html"><strong>223.</strong> 1291-promote-libc</a></li><li><a href="1298-incremental-compilation.html"><strong>224.</strong> 1298-incremental-compilation</a></li><li><a href="1300-intrinsic-semantics.html"><strong>225.</strong> 1300-intrinsic-semantics</a></li><li><a href="1307-osstring-methods.html"><strong>226.</strong> 1307-osstring-methods</a></li><li><a href="1317-ide.html"><strong>227.</strong> 1317-ide</a></li><li><a href="1327-dropck-param-eyepatch.html"><strong>228.</strong> 1327-dropck-param-eyepatch</a></li><li><a href="1328-global-panic-handler.html"><strong>229.</strong> 1328-global-panic-handler</a></li><li><a href="1331-grammar-is-canonical.html"><strong>230.</strong> 1331-grammar-is-canonical</a></li><li><a href="1358-repr-align.html"><strong>231.</strong> 1358-repr-align</a></li><li><a href="1359-process-ext-unix.html"><strong>232.</strong> 1359-process-ext-unix</a></li><li><a href="1361-cargo-cfg-dependencies.html"><strong>233.</strong> 1361-cargo-cfg-dependencies</a></li><li><a href="1398-kinds-of-allocators.html"><strong>234.</strong> 1398-kinds-of-allocators</a></li><li><a href="1399-repr-pack.html"><strong>235.</strong> 1399-repr-pack</a></li><li><a href="1414-rvalue_static_promotion.html"><strong>236.</strong> 1414-rvalue_static_promotion</a></li><li><a href="1415-trim-std-os.html"><strong>237.</strong> 1415-trim-std-os</a></li><li><a href="1419-slice-copy.html"><strong>238.</strong> 1419-slice-copy</a></li><li><a href="1422-pub-restricted.html"><strong>239.</strong> 1422-pub-restricted</a></li><li><a href="1432-replace-slice.html"><strong>240.</strong> 1432-replace-slice</a></li><li><a href="1434-contains-method-for-ranges.html"><strong>241.</strong> 1434-contains-method-for-ranges</a></li><li><a href="1440-drop-types-in-const.html"><strong>242.</strong> 1440-drop-types-in-const</a></li><li><a href="1443-extended-compare-and-swap.html"><strong>243.</strong> 1443-extended-compare-and-swap</a></li><li><a href="1444-union.html"><strong>244.</strong> 1444-union</a></li><li><a href="1445-restrict-constants-in-patterns.html"><strong>245.</strong> 1445-restrict-constants-in-patterns</a></li><li><a href="1461-net2-mutators.html"><strong>246.</strong> 1461-net2-mutators</a></li><li><a href="1467-volatile.html"><strong>247.</strong> 1467-volatile</a></li><li><a href="1479-unix-socket.html"><strong>248.</strong> 1479-unix-socket</a></li><li><a href="1492-dotdot-in-patterns.html"><strong>249.</strong> 1492-dotdot-in-patterns</a></li><li><a href="1498-ipv6addr-octets.html"><strong>250.</strong> 1498-ipv6addr-octets</a></li><li><a href="1504-int128.html"><strong>251.</strong> 1504-int128</a></li><li><a href="1506-adt-kinds.html"><strong>252.</strong> 1506-adt-kinds</a></li><li><a href="1510-cdylib.html"><strong>253.</strong> 1510-cdylib</a></li><li><a href="1513-less-unwinding.html"><strong>254.</strong> 1513-less-unwinding</a></li><li><a href="1521-copy-clone-semantics.html"><strong>255.</strong> 1521-copy-clone-semantics</a></li><li><a href="1522-conservative-impl-trait.html"><strong>256.</strong> 1522-conservative-impl-trait</a></li><li><a href="1525-cargo-workspace.html"><strong>257.</strong> 1525-cargo-workspace</a></li><li><a href="1535-stable-overflow-checks.html"><strong>258.</strong> 1535-stable-overflow-checks</a></li><li><a href="1542-try-from.html"><strong>259.</strong> 1542-try-from</a></li><li><a href="1543-integer_atomics.html"><strong>260.</strong> 1543-integer_atomics</a></li><li><a href="1548-global-asm.html"><strong>261.</strong> 1548-global-asm</a></li><li><a href="1552-contains-method-for-various-collections.html"><strong>262.</strong> 1552-contains-method-for-various-collections</a></li><li><a href="1558-closure-to-fn-coercion.html"><strong>263.</strong> 1558-closure-to-fn-coercion</a></li><li><a href="1559-attributes-with-literals.html"><strong>264.</strong> 1559-attributes-with-literals</a></li><li><a href="1560-name-resolution.html"><strong>265.</strong> 1560-name-resolution</a></li><li><a href="1561-macro-naming.html"><strong>266.</strong> 1561-macro-naming</a></li><li><a href="1566-proc-macros.html"><strong>267.</strong> 1566-proc-macros</a></li><li><a href="1567-long-error-codes-explanation-normalization.html"><strong>268.</strong> 1567-long-error-codes-explanation-normalization</a></li><li><a href="1574-more-api-documentation-conventions.html"><strong>269.</strong> 1574-more-api-documentation-conventions</a></li><li><a href="1576-macros-literal-matcher.html"><strong>270.</strong> 1576-macros-literal-matcher</a></li><li><a href="1581-fused-iterator.html"><strong>271.</strong> 1581-fused-iterator</a></li><li><a href="1584-macros.html"><strong>272.</strong> 1584-macros</a></li><li><a href="1589-rustc-bug-fix-procedure.html"><strong>273.</strong> 1589-rustc-bug-fix-procedure</a></li><li><a href="1590-macro-lifetimes.html"><strong>274.</strong> 1590-macro-lifetimes</a></li><li><a href="1598-generic_associated_types.html"><strong>275.</strong> 1598-generic_associated_types</a></li><li><a href="1607-style-rfcs.html"><strong>276.</strong> 1607-style-rfcs</a></li><li><a href="1618-ergonomic-format-args.html"><strong>277.</strong> 1618-ergonomic-format-args</a></li><li><a href="1620-regex-1.0.html"><strong>278.</strong> 1620-regex-1.0</a></li><li><a href="1623-static.html"><strong>279.</strong> 1623-static</a></li><li><a href="1624-loop-break-value.html"><strong>280.</strong> 1624-loop-break-value</a></li><li><a href="1636-document_all_features.html"><strong>281.</strong> 1636-document_all_features</a></li><li><a href="1640-duration-checked-sub.html"><strong>282.</strong> 1640-duration-checked-sub</a></li><li><a href="1643-memory-model-strike-team.html"><strong>283.</strong> 1643-memory-model-strike-team</a></li><li><a href="1644-default-and-expanded-rustc-errors.html"><strong>284.</strong> 1644-default-and-expanded-rustc-errors</a></li><li><a href="1647-allow-self-in-where-clauses.html"><strong>285.</strong> 1647-allow-self-in-where-clauses</a></li><li><a href="1649-atomic-access.html"><strong>286.</strong> 1649-atomic-access</a></li><li><a href="1651-movecell.html"><strong>287.</strong> 1651-movecell</a></li><li><a href="1653-assert_ne.html"><strong>288.</strong> 1653-assert_ne</a></li><li><a href="1660-try-borrow.html"><strong>289.</strong> 1660-try-borrow</a></li><li><a href="1665-windows-subsystem.html"><strong>290.</strong> 1665-windows-subsystem</a></li><li><a href="1679-panic-safe-slicing.html"><strong>291.</strong> 1679-panic-safe-slicing</a></li><li><a href="1681-macros-1.1.html"><strong>292.</strong> 1681-macros-1.1</a></li><li><a href="1682-field-init-shorthand.html"><strong>293.</strong> 1682-field-init-shorthand</a></li><li><a href="1683-docs-team.html"><strong>294.</strong> 1683-docs-team</a></li><li><a href="1685-deprecate-anonymous-parameters.html"><strong>295.</strong> 1685-deprecate-anonymous-parameters</a></li><li><a href="1695-add-error-macro.html"><strong>296.</strong> 1695-add-error-macro</a></li><li><a href="1696-discriminant.html"><strong>297.</strong> 1696-discriminant</a></li><li><a href="1717-dllimport.html"><strong>298.</strong> 1717-dllimport</a></li><li><a href="1721-crt-static.html"><strong>299.</strong> 1721-crt-static</a></li><li><a href="1725-unaligned-access.html"><strong>300.</strong> 1725-unaligned-access</a></li><li><a href="1728-north-star.html"><strong>301.</strong> 1728-north-star</a></li><li><a href="1733-trait-alias.html"><strong>302.</strong> 1733-trait-alias</a></li><li><a href="1758-repr-transparent.html"><strong>303.</strong> 1758-repr-transparent</a></li><li><a href="1774-roadmap-2017.html"><strong>304.</strong> 1774-roadmap-2017</a></li><li><a href="1789-as-cell.html"><strong>305.</strong> 1789-as-cell</a></li><li><a href="1824-crates.io-default-ranking.html"><strong>306.</strong> 1824-crates.io-default-ranking</a></li><li><a href="1826-change-doc-default-urls.html"><strong>307.</strong> 1826-change-doc-default-urls</a></li><li><a href="1828-rust-bookshelf.html"><strong>308.</strong> 1828-rust-bookshelf</a></li><li><a href="1845-shared-from-slice.html"><strong>309.</strong> 1845-shared-from-slice</a></li><li><a href="1849-non-static-type-id.html"><strong>310.</strong> 1849-non-static-type-id</a></li><li><a href="1857-stabilize-drop-order.html"><strong>311.</strong> 1857-stabilize-drop-order</a></li><li><a href="1859-try-trait.html"><strong>312.</strong> 1859-try-trait</a></li><li><a href="1860-manually-drop.html"><strong>313.</strong> 1860-manually-drop</a></li><li><a href="1861-extern-types.html"><strong>314.</strong> 1861-extern-types</a></li><li><a href="1866-more-readable-assert-eq.html"><strong>315.</strong> 1866-more-readable-assert-eq</a></li><li><a href="1868-portability-lint.html"><strong>316.</strong> 1868-portability-lint</a></li><li><a href="1869-eprintln.html"><strong>317.</strong> 1869-eprintln</a></li><li><a href="1884-unstable-sort.html"><strong>318.</strong> 1884-unstable-sort</a></li><li><a href="1925-optional-match-vert.html"><strong>319.</strong> 1925-optional-match-vert</a></li><li><a href="1937-ques-in-main.html"><strong>320.</strong> 1937-ques-in-main</a></li><li><a href="1940-must-use-functions.html"><strong>321.</strong> 1940-must-use-functions</a></li><li><a href="1946-intra-rustdoc-links.html"><strong>322.</strong> 1946-intra-rustdoc-links</a></li><li><a href="1951-expand-impl-trait.html"><strong>323.</strong> 1951-expand-impl-trait</a></li><li><a href="1961-clamp.html"><strong>324.</strong> 1961-clamp</a></li><li><a href="1966-unsafe-pointer-reform.html"><strong>325.</strong> 1966-unsafe-pointer-reform</a></li><li><a href="1969-cargo-prepublish.html"><strong>326.</strong> 1969-cargo-prepublish</a></li><li><a href="1974-global-allocators.html"><strong>327.</strong> 1974-global-allocators</a></li><li><a href="1977-public-private-dependencies.html"><strong>328.</strong> 1977-public-private-dependencies</a></li><li><a href="1983-nursery-deprecation.html"><strong>329.</strong> 1983-nursery-deprecation</a></li><li><a href="1985-tiered-browser-support.html"><strong>330.</strong> 1985-tiered-browser-support</a></li><li><a href="1990-external-doc-attribute.html"><strong>331.</strong> 1990-external-doc-attribute</a></li><li><a href="2000-const-generics.html"><strong>332.</strong> 2000-const-generics</a></li><li><a href="2005-match-ergonomics.html"><strong>333.</strong> 2005-match-ergonomics</a></li><li><a href="2008-non-exhaustive.html"><strong>334.</strong> 2008-non-exhaustive</a></li><li><a href="2011-generic-assert.html"><strong>335.</strong> 2011-generic-assert</a></li><li><a href="2025-nested-method-calls.html"><strong>336.</strong> 2025-nested-method-calls</a></li><li><a href="2027-object_safe_for_dispatch.html"><strong>337.</strong> 2027-object_safe_for_dispatch</a></li><li><a href="2033-experimental-coroutines.html"><strong>338.</strong> 2033-experimental-coroutines</a></li><li><a href="2043-is-aligned-intrinsic.html"><strong>339.</strong> 2043-is-aligned-intrinsic</a></li><li><a href="2044-license-rfcs.html"><strong>340.</strong> 2044-license-rfcs</a></li><li><a href="2045-target-feature.html"><strong>341.</strong> 2045-target-feature</a></li><li><a href="2052-epochs.html"><strong>342.</strong> 2052-epochs</a></li><li><a href="2057-refcell-replace.html"><strong>343.</strong> 2057-refcell-replace</a></li><li><a href="2070-panic-implementation.html"><strong>344.</strong> 2070-panic-implementation</a></li><li><a href="2071-impl-trait-type-alias.html"><strong>345.</strong> 2071-impl-trait-type-alias</a></li><li><a href="2086-allow-if-let-irrefutables.html"><strong>346.</strong> 2086-allow-if-let-irrefutables</a></li><li><a href="2089-implied-bounds.html"><strong>347.</strong> 2089-implied-bounds</a></li><li><a href="2093-infer-outlives.html"><strong>348.</strong> 2093-infer-outlives</a></li><li><a href="2094-nll.html"><strong>349.</strong> 2094-nll</a></li><li><a href="2103-tool-attributes.html"><strong>350.</strong> 2103-tool-attributes</a></li><li><a href="2113-dyn-trait-syntax.html"><strong>351.</strong> 2113-dyn-trait-syntax</a></li><li><a href="2115-argument-lifetimes.html"><strong>352.</strong> 2115-argument-lifetimes</a></li><li><a href="2124-option-filter.html"><strong>353.</strong> 2124-option-filter</a></li><li><a href="2126-path-clarity.html"><strong>354.</strong> 2126-path-clarity</a></li><li><a href="2128-use-nested-groups.html"><strong>355.</strong> 2128-use-nested-groups</a></li><li><a href="2132-copy-closures.html"><strong>356.</strong> 2132-copy-closures</a></li><li><a href="2133-all-the-clones.html"><strong>357.</strong> 2133-all-the-clones</a></li><li><a href="2137-variadic.html"><strong>358.</strong> 2137-variadic</a></li><li><a href="2141-alternative-registries.html"><strong>359.</strong> 2141-alternative-registries</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <ul>
+<li>Feature Name: convert</li>
+<li>Start Date: 2014-11-21</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/529">rust-lang/rfcs#529</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/23567">rust-lang/rust#23567</a></li>
+</ul>
+<a class="header" href="0529-conversion-traits.html#summary" id="summary"><h1>Summary</h1></a>
+<p>This RFC proposes several new <em>generic conversion</em> traits. The
+motivation is to remove the need for ad hoc conversion traits (like
+<code>FromStr</code>, <code>AsSlice</code>, <code>ToSocketAddr</code>, <code>FromError</code>) whose <em>sole role</em>
+is for generics bounds. Aside from cutting down on trait
+proliferation, centralizing these traits also helps the ecosystem
+avoid incompatible ad hoc conversion traits defined downstream from
+the types they convert to or from. It also future-proofs against
+eventual language features for ergonomic conversion-based overloading.</p>
+<a class="header" href="0529-conversion-traits.html#motivation" id="motivation"><h1>Motivation</h1></a>
+<p>The idea of generic conversion traits has come up from
+<a href="https://github.com/rust-lang/rust/issues/7080">time</a>
+<a href="http://discuss.rust-lang.org/t/pre-rfc-add-a-coerce-trait-to-get-rid-of-the-as-slice-calls/415">to</a>
+<a href="http://discuss.rust-lang.org/t/pre-rfc-remove-fromerror-trait-add-from-trait/783/3">time</a>,
+and now that multidispatch is available they can be made to work
+reasonably well. They are worth considering due to the problems they
+solve (given below), and considering <em>now</em> because they would obsolete
+several ad hoc conversion traits (and several more that are in the
+pipeline) for <code>std</code>.</p>
+<a class="header" href="0529-conversion-traits.html#problem-1-overloading-over-conversions" id="problem-1-overloading-over-conversions"><h2>Problem 1: overloading over conversions</h2></a>
+<p>Rust does not currently support arbitrary, implicit conversions -- and
+for some good reasons. However, it is sometimes important
+ergonomically to allow a single function to be <em>explicitly</em> overloaded
+based on conversions.</p>
+<p>For example, the
+<a href="https://github.com/rust-lang/rfcs/pull/474">recently proposed path APIs</a>
+introduce an <code>AsPath</code> trait to make various path operations ergonomic:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub trait AsPath {
+    fn as_path(&amp;self) -&gt; &amp;Path;
+}
+
+impl Path {
+    ...
+
+    pub fn join&lt;P: AsPath&gt;(&amp;self, path: &amp;P) -&gt; PathBuf { ... }
+}
+#}</code></pre></pre>
+<p>The idea in particular is that, given a path, you can join using a
+string literal directly. That is:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// write this:
+let new_path = my_path.join(&quot;fixed_subdir_name&quot;);
+
+// not this:
+let new_path = my_path.join(Path::new(&quot;fixed_subdir_name&quot;));
+#}</code></pre></pre>
+<p>It's a shame to have to introduce new ad hoc traits every time such an
+overloading is desired. And because the traits are ad hoc, it's also
+not possible to program generically over conversions themselves.</p>
+<a class="header" href="0529-conversion-traits.html#problem-2-duplicate-incompatible-conversion-traits" id="problem-2-duplicate-incompatible-conversion-traits"><h2>Problem 2: duplicate, incompatible conversion traits</h2></a>
+<p>There's a somewhat more subtle problem compounding the above: if the
+author of the path API neglects to include traits like <code>AsPath</code> for
+its core types, but downstream crates want to overload on those
+conversions, those downstream crates may each introduce their own
+conversion traits, which will not be compatible with one another.</p>
+<p>Having standard, generic conversion traits cuts down on the total
+number of traits, and also ensures that all Rust libraries have an
+agreed-upon way to talk about conversions.</p>
+<a class="header" href="0529-conversion-traits.html#non-goals" id="non-goals"><h2>Non-goals</h2></a>
+<p>When considering the design of generic conversion traits, it's
+tempting to try to do away will <em>all</em> ad hoc conversion methods.  That
+is, to replace methods like <code>to_string</code> and <code>to_vec</code> with a single
+method <code>to::&lt;String&gt;</code> and <code>to::&lt;Vec&lt;u8&gt;&gt;</code>.</p>
+<p>Unfortunately, this approach carries several ergonomic downsides:</p>
+<ul>
+<li>
+<p>The required <code>::&lt; _ &gt;</code> syntax is pretty unfriendly. Something like
+<code>to&lt;String&gt;</code> would be much better, but is unlikely to happen given
+the current grammar.</p>
+</li>
+<li>
+<p>Designing the traits to allow this usage is surprisingly subtle --
+it effectively requires <em>two traits</em> per type of generic conversion,
+with blanket <code>impl</code>s mapping one to the other. Having such
+complexity for <em>all conversions</em> in Rust seems like a non-starter.</p>
+</li>
+<li>
+<p>Discoverability suffers somewhat. Looking through a method list and
+seeing <code>to_string</code> is easier to comprehend (for newcomers
+especially) than having to crawl through the <code>impl</code>s for a trait on
+the side -- especially given the trait complexity mentioned above.</p>
+</li>
+</ul>
+<p>Nevertheless, this is a serious alternative that will be laid out in
+more detail below, and merits community discussion.</p>
+<a class="header" href="0529-conversion-traits.html#detailed-design" id="detailed-design"><h1>Detailed design</h1></a>
+<a class="header" href="0529-conversion-traits.html#basic-design" id="basic-design"><h2>Basic design</h2></a>
+<p>The design is fairly simple, although perhaps not as simple as one
+might expect: we introduce a total of <em>four</em> traits:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait AsRef&lt;T: ?Sized&gt; {
+    fn as_ref(&amp;self) -&gt; &amp;T;
+}
+
+trait AsMut&lt;T: ?Sized&gt; {
+    fn as_mut(&amp;mut self) -&gt; &amp;mut T;
+}
+
+trait Into&lt;T&gt; {
+    fn into(self) -&gt; T;
+}
+
+trait From&lt;T&gt; {
+    fn from(T) -&gt; Self;
+}
+#}</code></pre></pre>
+<p>The first three traits mirror our <code>as</code>/<code>into</code> conventions, but
+add a bit more structure to them: <code>as</code>-style conversions are from
+references to references and <code>into</code>-style conversions are between
+arbitrary types (consuming their argument).</p>
+<p>A <code>To</code> trait, following our <code>to</code> conventions and converting from
+references to arbitrary types, is possible but is deferred for now.</p>
+<p>The final trait, <code>From</code>, mimics the <code>from</code> constructors. This trait is
+expected to outright replace most custom <code>from</code> constructors. See below.</p>
+<p><strong>Why the reference restrictions?</strong></p>
+<p>If all of the conversion traits were between arbitrary types, you
+would have to use generalized where clauses and explicit lifetimes even for simple cases:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// Possible alternative:
+trait As&lt;T&gt; {
+    fn convert_as(self) -&gt; T;
+}
+
+// But then you get this:
+fn take_as&lt;'a, T&gt;(t: &amp;'a T) where &amp;'a T: As&lt;&amp;'a MyType&gt;;
+
+// Instead of this:
+fn take_as&lt;T&gt;(t: &amp;T) where T: As&lt;MyType&gt;;
+#}</code></pre></pre>
+<p>If you need a conversion that works over any lifetime, you need to use
+higher-ranked trait bounds:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+... where for&lt;'a&gt; &amp;'a T: As&lt;&amp;'a MyType&gt;
+#}</code></pre></pre>
+<p>This case is particularly important when you cannot name a lifetime in
+advance, because it will be created on the stack within the
+function. It might be possible to add sugar so that <code>where &amp;T: As&lt;&amp;MyType&gt;</code> expands to the above automatically, but such an elision
+might have other problems, and in any case it would preclude writing
+direct bounds like <code>fn foo&lt;P: AsPath&gt;</code>.</p>
+<p>The proposed trait definition essentially <em>bakes in</em> the needed
+lifetime connection, capturing the most common mode of use for
+<code>as</code>/<code>to</code>/<code>into</code> conversions. In the future, an HKT-based version of
+these traits could likely generalize further.</p>
+<p><strong>Why have multiple traits at all</strong>?</p>
+<p>The biggest reason to have multiple traits is to take advantage of the
+lifetime linking explained above. In addition, however, it is a basic
+principle of Rust's libraries that conversions are distinguished by
+cost and consumption, and having multiple traits makes it possible to
+(by convention) restrict attention to e.g. &quot;free&quot; <code>as</code>-style conversions
+by bounding only by <code>AsRef</code>.</p>
+<p>Why have both <code>Into</code> and <code>From</code>? There are a few reasons:</p>
+<ul>
+<li>
+<p>Coherence issues: the order of the types is significant, so <code>From</code>
+allows extensibility in some cases that <code>Into</code> does not.</p>
+</li>
+<li>
+<p>To match with existing conventions around conversions and
+constructors (in particular, replacing many <code>from</code> constructors).</p>
+</li>
+</ul>
+<a class="header" href="0529-conversion-traits.html#blanket-impls" id="blanket-impls"><h2>Blanket <code>impl</code>s</h2></a>
+<p>Given the above trait design, there are a few straightforward blanket
+<code>impl</code>s as one would expect:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// AsMut implies Into
+impl&lt;'a, T, U&gt; Into&lt;&amp;'a mut U&gt; for &amp;'a mut T where T: AsMut&lt;U&gt; {
+    fn into(self) -&gt; &amp;'a mut U {
+        self.as_mut()
+    }
+}
+
+// Into implies From
+impl&lt;T, U&gt; From&lt;T&gt; for U where T: Into&lt;U&gt; {
+    fn from(t: T) -&gt; U { t.into() }
+}
+#}</code></pre></pre>
+<a class="header" href="0529-conversion-traits.html#an-example" id="an-example"><h2>An example</h2></a>
+<p>Using all of the above, here are some example <code>impl</code>s and their use:</p>
+<pre><pre class="playpen"><code class="language-rust">impl AsRef&lt;str&gt; for String {
+    fn as_ref(&amp;self) -&gt; &amp;str {
+        self.as_slice()
+    }
+}
+impl AsRef&lt;[u8]&gt; for String {
+    fn as_ref(&amp;self) -&gt; &amp;[u8] {
+        self.as_bytes()
+    }
+}
+
+impl Into&lt;Vec&lt;u8&gt;&gt; for String {
+    fn into(self) -&gt; Vec&lt;u8&gt; {
+        self.into_bytes()
+    }
+}
+
+fn main() {
+    let a = format!(&quot;hello&quot;);
+    let b: &amp;[u8] = a.as_ref();
+    let c: &amp;str = a.as_ref();
+    let d: Vec&lt;u8&gt; = a.into();
+}
+</code></pre></pre>
+<p>This use of generic conversions within a function body is expected to
+be rare, however; usually the traits are used for generic functions:</p>
+<pre><code>impl Path {
+    fn join_path_inner(&amp;self, p: &amp;Path) -&gt; PathBuf { ... }
+
+    pub fn join_path&lt;P: AsRef&lt;Path&gt;&gt;(&amp;self, p: &amp;P) -&gt; PathBuf {
+        self.join_path_inner(p.as_ref())
+    }
+}
+</code></pre>
+<p>In this very typical pattern, you introduce an &quot;inner&quot; function that
+takes the converted value, and the public API is a thin wrapper around
+that. The main reason to do so is to avoid code bloat: given that the
+generic bound is used only for a conversion that can be done up front,
+there is no reason to monomorphize the entire function body for each
+input type.</p>
+<a class="header" href="0529-conversion-traits.html#an-aside-codifying-the-generics-pattern-in-the-language" id="an-aside-codifying-the-generics-pattern-in-the-language"><h3>An aside: codifying the generics pattern in the language</h3></a>
+<p>This pattern is so common that we probably want to consider sugar for
+it, e.g. something like:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl Path {
+    pub fn join_path(&amp;self, p: ~Path) -&gt; PathBuf {
+        ...
+    }
+}
+#}</code></pre></pre>
+<p>that would desugar into exactly the above (assuming that the <code>~</code> sigil
+was restricted to <code>AsRef</code> conversions). Such a feature is out of scope
+for this RFC, but it's a natural and highly ergonomic extension of the
+traits being proposed here.</p>
+<a class="header" href="0529-conversion-traits.html#preliminary-conventions" id="preliminary-conventions"><h2>Preliminary conventions</h2></a>
+<p>Would <em>all</em> conversion traits be replaced by the proposed ones?
+Probably not, due to the combination of two factors (using the example
+of <code>To</code>, despite its being deferred for now):</p>
+<ul>
+<li>You still want blanket <code>impl</code>s like <code>ToString</code> for <code>Show</code>, but:</li>
+<li>This RFC proposes that specific conversion <em>methods</em> like
+<code>to_string</code> stay in common use.</li>
+</ul>
+<p>On the other hand, you'd expect a blanket <code>impl</code> of <code>To&lt;String&gt;</code> for
+any <code>T: ToString</code>, and one should prefer bounding over <code>To&lt;String&gt;</code>
+rather than <code>ToString</code> for consistency. Basically, the role of
+<code>ToString</code> is just to provide the ad hoc method name <code>to_string</code> in a
+blanket fashion.</p>
+<p>So a rough, preliminary convention would be the following:</p>
+<ul>
+<li>
+<p>An <em>ad hoc conversion method</em> is one following the normal convention
+of <code>as_foo</code>, <code>to_foo</code>, <code>into_foo</code> or <code>from_foo</code>. A &quot;generic&quot;
+conversion method is one going through the generic traits proposed
+in this RFC. An <em>ad hoc conversion trait</em> is a trait providing an ad
+hoc conversion method.</p>
+</li>
+<li>
+<p>Use ad hoc conversion methods for &quot;natural&quot;, <em>outgoing</em> conversions
+that should have easy method names and good discoverability. A
+conversion is &quot;natural&quot; if you'd call it directly on the type in
+normal code; &quot;unnatural&quot; conversions usually come from generic
+programming.</p>
+<p>For example, <code>to_string</code> is a natural conversion for <code>str</code>, while
+<code>into_string</code> is not; but the latter is sometimes useful in a
+generic context -- and that's what the generic conversion traits can
+help with.</p>
+</li>
+<li>
+<p>On the other hand, favor <code>From</code> for all conversion constructors.</p>
+</li>
+<li>
+<p>Introduce ad hoc conversion <em>traits</em> if you need to provide a
+blanket <code>impl</code> of an ad hoc conversion method, or need special
+functionality. For example, <code>to_string</code> needs a trait so that every
+<code>Show</code> type automatically provides it.</p>
+</li>
+<li>
+<p>For any ad hoc conversion method, <em>also</em> provide an <code>impl</code> of the
+corresponding generic version; for traits, this should be done via a
+blanket <code>impl</code>.</p>
+</li>
+<li>
+<p>When using generics bounded over a conversion, always prefer to use
+the generic conversion traits. For example, bound <code>S: To&lt;String&gt;</code>
+not <code>S: ToString</code>. This encourages consistency, and also allows
+clients to take advantage of the various blanket generic conversion
+<code>impl</code>s.</p>
+</li>
+<li>
+<p>Use the &quot;inner function&quot; pattern mentioned above to avoid code
+bloat.</p>
+</li>
+</ul>
+<a class="header" href="0529-conversion-traits.html#prelude-changes" id="prelude-changes"><h2>Prelude changes</h2></a>
+<p><em>All</em> of the conversion traits are added to the prelude. There are two
+reasons for doing so:</p>
+<ul>
+<li>
+<p>For <code>AsRef</code>/<code>AsMut</code>/<code>Into</code>, the reasoning is similar to the
+inclusion of <code>PartialEq</code> and friends: they are expected to appear
+ubiquitously as bounds.</p>
+</li>
+<li>
+<p>For <code>From</code>, bounds are somewhat less common but the use of the
+<code>from</code> constructor is expected to be rather widespread.</p>
+</li>
+</ul>
+<a class="header" href="0529-conversion-traits.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
+<p>There are a few drawbacks to the design as proposed:</p>
+<ul>
+<li>
+<p>Since it does not replace all conversion traits, there's the
+unfortunate case of having both a <code>ToString</code> trait and a
+<code>To&lt;String&gt;</code> trait bound. The proposed conventions go some distance
+toward at least keeping APIs consistent, but the redundancy is
+unfortunate. See Alternatives for a more radical proposal.</p>
+</li>
+<li>
+<p>It may encourage more overloading over coercions, and also more
+generics code bloat (assuming that the &quot;inner function&quot; pattern
+isn't followed). Coercion overloading is not necessarily a bad
+thing, however, since it is still explicit in the signature rather
+than wholly implicit. If we do go in this direction, we can consider
+language extensions that make it ergonomic <em>and</em> avoid code bloat.</p>
+</li>
+</ul>
+<a class="header" href="0529-conversion-traits.html#alternatives" id="alternatives"><h1>Alternatives</h1></a>
+<p>The original form of this RFC used the names <code>As.convert_as</code>,
+<code>AsMut.convert_as_mut</code>, <code>To.convert_to</code> and <code>Into.convert_into</code> (though
+still <code>From.from</code>). After discussion <code>As</code> was changed to <code>AsRef</code>,
+removing the keyword collision of a method named <code>as</code>, and the
+<code>convert_</code> prefixes were removed.</p>
+<hr />
+<p>The main alternative is one that attempts to provide methods that
+<em>completely replace</em> ad hoc conversion methods. To make this work, a
+form of double dispatch is used, so that the methods are added to
+<em>every type</em> but bounded by a separate set of conversion traits.</p>
+<p>In this strawman proposal, the name &quot;view shift&quot; is used for <code>as</code>
+conversions, &quot;conversion&quot; for <code>to</code> conversions, and &quot;transformation&quot;
+for <code>into</code> conversions. These names are not too important, but needed
+to distinguish the various generic methods.</p>
+<p>The punchline is that, in the end, we can write</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let s = format!(&quot;hello&quot;);
+let b = s.shift_view::&lt;[u8]&gt;();
+#}</code></pre></pre>
+<p>or, put differently, replace <code>as_bytes</code> with <code>shift_view::&lt;[u8]&gt;</code> --
+for better or worse.</p>
+<p>In addition to the rather large jump in complexity, this alternative
+design also suffers from poor error messages. For example, if you
+accidentally typed <code>shift_view::&lt;u8&gt;</code> instead, you receive:</p>
+<pre><code>error: the trait `ShiftViewFrom&lt;collections::string::String&gt;` is not implemented for the type `u8`
+</code></pre>
+<p>which takes a bit of thought and familiarity with the traits to fully
+digest.  Taken together, the complexity, error messages, and poor
+ergonomics of things like <code>convert::&lt;u8&gt;</code> rather than <code>as_bytes</code> led
+the author to discard this alternative design.</p>
+<pre><pre class="playpen"><code class="language-rust">// VIEW SHIFTS
+
+// &quot;Views&quot; here are always lightweight, non-lossy, always
+// successful view shifts between reference types
+
+// Immutable views
+
+trait ShiftViewFrom&lt;T: ?Sized&gt; {
+    fn shift_view_from(&amp;T) -&gt; &amp;Self;
+}
+
+trait ShiftView {
+    fn shift_view&lt;T: ?Sized&gt;(&amp;self) -&gt; &amp;T where T: ShiftViewFrom&lt;Self&gt;;
+}
+
+impl&lt;T: ?Sized&gt; ShiftView for T {
+    fn shift_view&lt;U: ?Sized + ShiftViewFrom&lt;T&gt;&gt;(&amp;self) -&gt; &amp;U {
+        ShiftViewFrom::shift_view_from(self)
+    }
+}
+
+// Mutable coercions
+
+trait ShiftViewFromMut&lt;T: ?Sized&gt; {
+    fn shift_view_from_mut(&amp;mut T) -&gt; &amp;mut Self;
+}
+
+trait ShiftViewMut {
+    fn shift_view_mut&lt;T: ?Sized&gt;(&amp;mut self) -&gt; &amp;mut T where T: ShiftViewFromMut&lt;Self&gt;;
+}
+
+impl&lt;T: ?Sized&gt; ShiftViewMut for T {
+    fn shift_view_mut&lt;U: ?Sized + ShiftViewFromMut&lt;T&gt;&gt;(&amp;mut self) -&gt; &amp;mut U {
+        ShiftViewFromMut::shift_view_from_mut(self)
+    }
+}
+
+// CONVERSIONS
+
+trait ConvertFrom&lt;T: ?Sized&gt; {
+    fn convert_from(&amp;T) -&gt; Self;
+}
+
+trait Convert {
+    fn convert&lt;T&gt;(&amp;self) -&gt; T where T: ConvertFrom&lt;Self&gt;;
+}
+
+impl&lt;T: ?Sized&gt; Convert for T {
+    fn convert&lt;U&gt;(&amp;self) -&gt; U where U: ConvertFrom&lt;T&gt; {
+        ConvertFrom::convert_from(self)
+    }
+}
+
+impl ConvertFrom&lt;str&gt; for Vec&lt;u8&gt; {
+    fn convert_from(s: &amp;str) -&gt; Vec&lt;u8&gt; {
+        s.to_string().into_bytes()
+    }
+}
+
+// TRANSFORMATION
+
+trait TransformFrom&lt;T&gt; {
+    fn transform_from(T) -&gt; Self;
+}
+
+trait Transform {
+    fn transform&lt;T&gt;(self) -&gt; T where T: TransformFrom&lt;Self&gt;;
+}
+
+impl&lt;T&gt; Transform for T {
+    fn transform&lt;U&gt;(self) -&gt; U where U: TransformFrom&lt;T&gt; {
+        TransformFrom::transform_from(self)
+    }
+}
+
+impl TransformFrom&lt;String&gt; for Vec&lt;u8&gt; {
+    fn transform_from(s: String) -&gt; Vec&lt;u8&gt; {
+        s.into_bytes()
+    }
+}
+
+impl&lt;'a, T, U&gt; TransformFrom&lt;&amp;'a T&gt; for U where U: ConvertFrom&lt;T&gt; {
+    fn transform_from(x: &amp;'a T) -&gt; U {
+        x.convert()
+    }
+}
+
+impl&lt;'a, T, U&gt; TransformFrom&lt;&amp;'a mut T&gt; for &amp;'a mut U where U: ShiftViewFromMut&lt;T&gt; {
+    fn transform_from(x: &amp;'a mut T) -&gt; &amp;'a mut U {
+        ShiftViewFromMut::shift_view_from_mut(x)
+    }
+}
+
+// Example
+
+impl ShiftViewFrom&lt;String&gt; for str {
+    fn shift_view_from(s: &amp;String) -&gt; &amp;str {
+        s.as_slice()
+    }
+}
+impl ShiftViewFrom&lt;String&gt; for [u8] {
+    fn shift_view_from(s: &amp;String) -&gt; &amp;[u8] {
+        s.as_bytes()
+    }
+}
+
+fn main() {
+    let s = format!(&quot;hello&quot;);
+    let b = s.shift_view::&lt;[u8]&gt;();
+}
+</code></pre></pre>
+<a class="header" href="0529-conversion-traits.html#possible-further-work" id="possible-further-work"><h2>Possible further work</h2></a>
+<p>We could add a <code>To</code> trait.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait To&lt;T&gt; {
+    fn to(&amp;self) -&gt; T;
+}
+#}</code></pre></pre>
+<p>As far as blanket <code>impl</code>s are concerned, there are a few simple ones:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// AsRef implies To
+impl&lt;'a, T: ?Sized, U: ?Sized&gt; To&lt;&amp;'a U&gt; for &amp;'a T where T: AsRef&lt;U&gt; {
+    fn to(&amp;self) -&gt; &amp;'a U {
+        self.as_ref()
+    }
+}
+
+// To implies Into
+impl&lt;'a, T, U&gt; Into&lt;U&gt; for &amp;'a T where T: To&lt;U&gt; {
+    fn into(self) -&gt; U {
+        self.to()
+    }
+}
+#}</code></pre></pre>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="0528-string-patterns.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="0531-define-rfc-scope.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="0528-string-patterns.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="0531-define-rfc-scope.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

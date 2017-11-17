@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>1445-restrict-constants-in-patterns - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="0001-private-fields.html"><strong>1.</strong> 0001-private-fields</a></li><li><a href="0002-rfc-process.html"><strong>2.</strong> 0002-rfc-process</a></li><li><a href="0003-attribute-usage.html"><strong>3.</strong> 0003-attribute-usage</a></li><li><a href="0008-new-intrinsics.html"><strong>4.</strong> 0008-new-intrinsics</a></li><li><a href="0016-more-attributes.html"><strong>5.</strong> 0016-more-attributes</a></li><li><a href="0019-opt-in-builtin-traits.html"><strong>6.</strong> 0019-opt-in-builtin-traits</a></li><li><a href="0026-remove-priv.html"><strong>7.</strong> 0026-remove-priv</a></li><li><a href="0034-bounded-type-parameters.html"><strong>8.</strong> 0034-bounded-type-parameters</a></li><li><a href="0040-libstd-facade.html"><strong>9.</strong> 0040-libstd-facade</a></li><li><a href="0042-regexps.html"><strong>10.</strong> 0042-regexps</a></li><li><a href="0048-traits.html"><strong>11.</strong> 0048-traits</a></li><li><a href="0049-match-arm-attributes.html"><strong>12.</strong> 0049-match-arm-attributes</a></li><li><a href="0050-assert.html"><strong>13.</strong> 0050-assert</a></li><li><a href="0059-remove-tilde.html"><strong>14.</strong> 0059-remove-tilde</a></li><li><a href="0060-rename-strbuf.html"><strong>15.</strong> 0060-rename-strbuf</a></li><li><a href="0063-module-file-system-hierarchy.html"><strong>16.</strong> 0063-module-file-system-hierarchy</a></li><li><a href="0066-better-temporary-lifetimes.html"><strong>17.</strong> 0066-better-temporary-lifetimes</a></li><li><a href="0068-const-unsafe-pointers.html"><strong>18.</strong> 0068-const-unsafe-pointers</a></li><li><a href="0069-ascii-literals.html"><strong>19.</strong> 0069-ascii-literals</a></li><li><a href="0071-const-block-expr.html"><strong>20.</strong> 0071-const-block-expr</a></li><li><a href="0079-undefined-struct-layout.html"><strong>21.</strong> 0079-undefined-struct-layout</a></li><li><a href="0085-pattern-macros.html"><strong>22.</strong> 0085-pattern-macros</a></li><li><a href="0086-plugin-registrar.html"><strong>23.</strong> 0086-plugin-registrar</a></li><li><a href="0087-trait-bounds-with-plus.html"><strong>24.</strong> 0087-trait-bounds-with-plus</a></li><li><a href="0089-loadable-lints.html"><strong>25.</strong> 0089-loadable-lints</a></li><li><a href="0090-lexical-syntax-simplification.html"><strong>26.</strong> 0090-lexical-syntax-simplification</a></li><li><a href="0092-struct-grammar.html"><strong>27.</strong> 0092-struct-grammar</a></li><li><a href="0093-remove-format-intl.html"><strong>28.</strong> 0093-remove-format-intl</a></li><li><a href="0100-partial-cmp.html"><strong>29.</strong> 0100-partial-cmp</a></li><li><a href="0107-pattern-guards-with-bind-by-move.html"><strong>30.</strong> 0107-pattern-guards-with-bind-by-move</a></li><li><a href="0109-remove-crate-id.html"><strong>31.</strong> 0109-remove-crate-id</a></li><li><a href="0111-index-traits.html"><strong>32.</strong> 0111-index-traits</a></li><li><a href="0112-remove-cross-borrowing.html"><strong>33.</strong> 0112-remove-cross-borrowing</a></li><li><a href="0114-closures.html"><strong>34.</strong> 0114-closures</a></li><li><a href="0115-rm-integer-fallback.html"><strong>35.</strong> 0115-rm-integer-fallback</a></li><li><a href="0116-no-module-shadowing.html"><strong>36.</strong> 0116-no-module-shadowing</a></li><li><a href="0123-share-to-threadsafe.html"><strong>37.</strong> 0123-share-to-threadsafe</a></li><li><a href="0130-box-not-special.html"><strong>38.</strong> 0130-box-not-special</a></li><li><a href="0131-target-specification.html"><strong>39.</strong> 0131-target-specification</a></li><li><a href="0132-ufcs.html"><strong>40.</strong> 0132-ufcs</a></li><li><a href="0135-where.html"><strong>41.</strong> 0135-where</a></li><li><a href="0136-no-privates-in-public.html"><strong>42.</strong> 0136-no-privates-in-public</a></li><li><a href="0139-remove-cross-borrowing-entirely.html"><strong>43.</strong> 0139-remove-cross-borrowing-entirely</a></li><li><a href="0141-lifetime-elision.html"><strong>44.</strong> 0141-lifetime-elision</a></li><li><a href="0151-capture-by-value.html"><strong>45.</strong> 0151-capture-by-value</a></li><li><a href="0155-anonymous-impl-only-in-same-module.html"><strong>46.</strong> 0155-anonymous-impl-only-in-same-module</a></li><li><a href="0160-if-let.html"><strong>47.</strong> 0160-if-let</a></li><li><a href="0164-feature-gate-slice-pats.html"><strong>48.</strong> 0164-feature-gate-slice-pats</a></li><li><a href="0168-mod.html"><strong>49.</strong> 0168-mod</a></li><li><a href="0169-use-path-as-id.html"><strong>50.</strong> 0169-use-path-as-id</a></li><li><a href="0179-and-mut-patterns.html"><strong>51.</strong> 0179-and-mut-patterns</a></li><li><a href="0184-tuple-accessors.html"><strong>52.</strong> 0184-tuple-accessors</a></li><li><a href="0192-bounds-on-object-and-generic-types.html"><strong>53.</strong> 0192-bounds-on-object-and-generic-types</a></li><li><a href="0194-cfg-syntax.html"><strong>54.</strong> 0194-cfg-syntax</a></li><li><a href="0195-associated-items.html"><strong>55.</strong> 0195-associated-items</a></li><li><a href="0198-slice-notation.html"><strong>56.</strong> 0198-slice-notation</a></li><li><a href="0199-ownership-variants.html"><strong>57.</strong> 0199-ownership-variants</a></li><li><a href="0201-error-chaining.html"><strong>58.</strong> 0201-error-chaining</a></li><li><a href="0202-subslice-syntax-change.html"><strong>59.</strong> 0202-subslice-syntax-change</a></li><li><a href="0212-restore-int-fallback.html"><strong>60.</strong> 0212-restore-int-fallback</a></li><li><a href="0213-defaulted-type-params.html"><strong>61.</strong> 0213-defaulted-type-params</a></li><li><a href="0214-while-let.html"><strong>62.</strong> 0214-while-let</a></li><li><a href="0216-collection-views.html"><strong>63.</strong> 0216-collection-views</a></li><li><a href="0218-empty-struct-with-braces.html"><strong>64.</strong> 0218-empty-struct-with-braces</a></li><li><a href="0221-panic.html"><strong>65.</strong> 0221-panic</a></li><li><a href="0230-remove-runtime.html"><strong>66.</strong> 0230-remove-runtime</a></li><li><a href="0231-upvar-capture-inference.html"><strong>67.</strong> 0231-upvar-capture-inference</a></li><li><a href="0234-variants-namespace.html"><strong>68.</strong> 0234-variants-namespace</a></li><li><a href="0235-collections-conventions.html"><strong>69.</strong> 0235-collections-conventions</a></li><li><a href="0236-error-conventions.html"><strong>70.</strong> 0236-error-conventions</a></li><li><a href="0240-unsafe-api-location.html"><strong>71.</strong> 0240-unsafe-api-location</a></li><li><a href="0241-deref-conversions.html"><strong>72.</strong> 0241-deref-conversions</a></li><li><a href="0243-trait-based-exception-handling.html"><strong>73.</strong> 0243-trait-based-exception-handling</a></li><li><a href="0246-const-vs-static.html"><strong>74.</strong> 0246-const-vs-static</a></li><li><a href="0255-object-safety.html"><strong>75.</strong> 0255-object-safety</a></li><li><a href="0256-remove-refcounting-gc-of-t.html"><strong>76.</strong> 0256-remove-refcounting-gc-of-t</a></li><li><a href="0320-nonzeroing-dynamic-drop.html"><strong>77.</strong> 0320-nonzeroing-dynamic-drop</a></li><li><a href="0326-restrict-xXX-to-ascii.html"><strong>78.</strong> 0326-restrict-xXX-to-ascii</a></li><li><a href="0339-statically-sized-literals.html"><strong>79.</strong> 0339-statically-sized-literals</a></li><li><a href="0341-remove-virtual-structs.html"><strong>80.</strong> 0341-remove-virtual-structs</a></li><li><a href="0342-keywords.html"><strong>81.</strong> 0342-keywords</a></li><li><a href="0344-conventions-galore.html"><strong>82.</strong> 0344-conventions-galore</a></li><li><a href="0356-no-module-prefixes.html"><strong>83.</strong> 0356-no-module-prefixes</a></li><li><a href="0369-num-reform.html"><strong>84.</strong> 0369-num-reform</a></li><li><a href="0378-expr-macros.html"><strong>85.</strong> 0378-expr-macros</a></li><li><a href="0379-remove-reflection.html"><strong>86.</strong> 0379-remove-reflection</a></li><li><a href="0380-stabilize-std-fmt.html"><strong>87.</strong> 0380-stabilize-std-fmt</a></li><li><a href="0385-module-system-cleanup.html"><strong>88.</strong> 0385-module-system-cleanup</a></li><li><a href="0387-higher-ranked-trait-bounds.html"><strong>89.</strong> 0387-higher-ranked-trait-bounds</a></li><li><a href="0390-enum-namespacing.html"><strong>90.</strong> 0390-enum-namespacing</a></li><li><a href="0401-coercions.html"><strong>91.</strong> 0401-coercions</a></li><li><a href="0403-cargo-build-command.html"><strong>92.</strong> 0403-cargo-build-command</a></li><li><a href="0404-change-prefer-dynamic.html"><strong>93.</strong> 0404-change-prefer-dynamic</a></li><li><a href="0418-struct-variants.html"><strong>94.</strong> 0418-struct-variants</a></li><li><a href="0430-finalizing-naming-conventions.html"><strong>95.</strong> 0430-finalizing-naming-conventions</a></li><li><a href="0438-precedence-of-plus.html"><strong>96.</strong> 0438-precedence-of-plus</a></li><li><a href="0439-cmp-ops-reform.html"><strong>97.</strong> 0439-cmp-ops-reform</a></li><li><a href="0445-extension-trait-conventions.html"><strong>98.</strong> 0445-extension-trait-conventions</a></li><li><a href="0446-es6-unicode-escapes.html"><strong>99.</strong> 0446-es6-unicode-escapes</a></li><li><a href="0447-no-unused-impl-parameters.html"><strong>100.</strong> 0447-no-unused-impl-parameters</a></li><li><a href="0450-un-feature-gate-some-more-gates.html"><strong>101.</strong> 0450-un-feature-gate-some-more-gates</a></li><li><a href="0453-macro-reform.html"><strong>102.</strong> 0453-macro-reform</a></li><li><a href="0458-send-improvements.html"><strong>103.</strong> 0458-send-improvements</a></li><li><a href="0459-disallow-shadowing.html"><strong>104.</strong> 0459-disallow-shadowing</a></li><li><a href="0461-tls-overhaul.html"><strong>105.</strong> 0461-tls-overhaul</a></li><li><a href="0463-future-proof-literal-suffixes.html"><strong>106.</strong> 0463-future-proof-literal-suffixes</a></li><li><a href="0469-feature-gate-box-patterns.html"><strong>107.</strong> 0469-feature-gate-box-patterns</a></li><li><a href="0474-path-reform.html"><strong>108.</strong> 0474-path-reform</a></li><li><a href="0486-std-ascii-reform.html"><strong>109.</strong> 0486-std-ascii-reform</a></li><li><a href="0490-dst-syntax.html"><strong>110.</strong> 0490-dst-syntax</a></li><li><a href="0494-c_str-and-c_vec-stability.html"><strong>111.</strong> 0494-c_str-and-c_vec-stability</a></li><li><a href="0495-array-pattern-changes.html"><strong>112.</strong> 0495-array-pattern-changes</a></li><li><a href="0501-consistent_no_prelude_attributes.html"><strong>113.</strong> 0501-consistent_no_prelude_attributes</a></li><li><a href="0503-prelude-stabilization.html"><strong>114.</strong> 0503-prelude-stabilization</a></li><li><a href="0504-show-stabilization.html"><strong>115.</strong> 0504-show-stabilization</a></li><li><a href="0505-api-comment-conventions.html"><strong>116.</strong> 0505-api-comment-conventions</a></li><li><a href="0507-release-channels.html"><strong>117.</strong> 0507-release-channels</a></li><li><a href="0509-collections-reform-part-2.html"><strong>118.</strong> 0509-collections-reform-part-2</a></li><li><a href="0517-io-os-reform.html"><strong>119.</strong> 0517-io-os-reform</a></li><li><a href="0520-new-array-repeat-syntax.html"><strong>120.</strong> 0520-new-array-repeat-syntax</a></li><li><a href="0522-self-impl.html"><strong>121.</strong> 0522-self-impl</a></li><li><a href="0526-fmt-text-writer.html"><strong>122.</strong> 0526-fmt-text-writer</a></li><li><a href="0528-string-patterns.html"><strong>123.</strong> 0528-string-patterns</a></li><li><a href="0529-conversion-traits.html"><strong>124.</strong> 0529-conversion-traits</a></li><li><a href="0531-define-rfc-scope.html"><strong>125.</strong> 0531-define-rfc-scope</a></li><li><a href="0532-self-in-use.html"><strong>126.</strong> 0532-self-in-use</a></li><li><a href="0533-no-array-elem-moves.html"><strong>127.</strong> 0533-no-array-elem-moves</a></li><li><a href="0534-deriving2derive.html"><strong>128.</strong> 0534-deriving2derive</a></li><li><a href="0544-rename-int-uint.html"><strong>129.</strong> 0544-rename-int-uint</a></li><li><a href="0546-Self-not-sized-by-default.html"><strong>130.</strong> 0546-Self-not-sized-by-default</a></li><li><a href="0550-macro-future-proofing.html"><strong>131.</strong> 0550-macro-future-proofing</a></li><li><a href="0556-raw-lifetime.html"><strong>132.</strong> 0556-raw-lifetime</a></li><li><a href="0558-require-parentheses-for-chained-comparisons.html"><strong>133.</strong> 0558-require-parentheses-for-chained-comparisons</a></li><li><a href="0560-integer-overflow.html"><strong>134.</strong> 0560-integer-overflow</a></li><li><a href="0563-remove-ndebug.html"><strong>135.</strong> 0563-remove-ndebug</a></li><li><a href="0565-show-string-guidelines.html"><strong>136.</strong> 0565-show-string-guidelines</a></li><li><a href="0572-rustc-attribute.html"><strong>137.</strong> 0572-rustc-attribute</a></li><li><a href="0574-drain-range.html"><strong>138.</strong> 0574-drain-range</a></li><li><a href="0580-rename-collections.html"><strong>139.</strong> 0580-rename-collections</a></li><li><a href="0587-fn-return-should-be-an-associated-type.html"><strong>140.</strong> 0587-fn-return-should-be-an-associated-type</a></li><li><a href="0592-c-str-deref.html"><strong>141.</strong> 0592-c-str-deref</a></li><li><a href="0593-forbid-Self-definitions.html"><strong>142.</strong> 0593-forbid-Self-definitions</a></li><li><a href="0599-default-object-bound.html"><strong>143.</strong> 0599-default-object-bound</a></li><li><a href="0601-replace-be-with-become.html"><strong>144.</strong> 0601-replace-be-with-become</a></li><li><a href="0639-discriminant-intrinsic.html"><strong>145.</strong> 0639-discriminant-intrinsic</a></li><li><a href="0640-debug-improvements.html"><strong>146.</strong> 0640-debug-improvements</a></li><li><a href="0702-rangefull-expression.html"><strong>147.</strong> 0702-rangefull-expression</a></li><li><a href="0735-allow-inherent-impls-anywhere.html"><strong>148.</strong> 0735-allow-inherent-impls-anywhere</a></li><li><a href="0736-privacy-respecting-fru.html"><strong>149.</strong> 0736-privacy-respecting-fru</a></li><li><a href="0738-variance.html"><strong>150.</strong> 0738-variance</a></li><li><a href="0769-sound-generic-drop.html"><strong>151.</strong> 0769-sound-generic-drop</a></li><li><a href="0771-std-iter-once.html"><strong>152.</strong> 0771-std-iter-once</a></li><li><a href="0803-type-ascription.html"><strong>153.</strong> 0803-type-ascription</a></li><li><a href="0809-box-and-in-for-stdlib.html"><strong>154.</strong> 0809-box-and-in-for-stdlib</a></li><li><a href="0823-hash-simplification.html"><strong>155.</strong> 0823-hash-simplification</a></li><li><a href="0832-from-elem-with-love.html"><strong>156.</strong> 0832-from-elem-with-love</a></li><li><a href="0839-embrace-extend-extinguish.html"><strong>157.</strong> 0839-embrace-extend-extinguish</a></li><li><a href="0840-no-panic-in-c-string.html"><strong>158.</strong> 0840-no-panic-in-c-string</a></li><li><a href="0873-type-macros.html"><strong>159.</strong> 0873-type-macros</a></li><li><a href="0879-small-base-lexing.html"><strong>160.</strong> 0879-small-base-lexing</a></li><li><a href="0888-compiler-fence-intrinsics.html"><strong>161.</strong> 0888-compiler-fence-intrinsics</a></li><li><a href="0909-move-thread-local-to-std-thread.html"><strong>162.</strong> 0909-move-thread-local-to-std-thread</a></li><li><a href="0911-const-fn.html"><strong>163.</strong> 0911-const-fn</a></li><li><a href="0921-entry_v3.html"><strong>164.</strong> 0921-entry_v3</a></li><li><a href="0940-hyphens-considered-harmful.html"><strong>165.</strong> 0940-hyphens-considered-harmful</a></li><li><a href="0953-op-assign.html"><strong>166.</strong> 0953-op-assign</a></li><li><a href="0968-closure-return-type-syntax.html"><strong>167.</strong> 0968-closure-return-type-syntax</a></li><li><a href="0979-align-splitn-with-other-languages.html"><strong>168.</strong> 0979-align-splitn-with-other-languages</a></li><li><a href="0980-read-exact.html"><strong>169.</strong> 0980-read-exact</a></li><li><a href="0982-dst-coercion.html"><strong>170.</strong> 0982-dst-coercion</a></li><li><a href="1011-process.exit.html"><strong>171.</strong> 1011-process.exit</a></li><li><a href="1014-stdout-existential-crisis.html"><strong>172.</strong> 1014-stdout-existential-crisis</a></li><li><a href="1023-rebalancing-coherence.html"><strong>173.</strong> 1023-rebalancing-coherence</a></li><li><a href="1030-prelude-additions.html"><strong>174.</strong> 1030-prelude-additions</a></li><li><a href="1040-duration-reform.html"><strong>175.</strong> 1040-duration-reform</a></li><li><a href="1044-io-fs-2.1.html"><strong>176.</strong> 1044-io-fs-2.1</a></li><li><a href="1047-socket-timeouts.html"><strong>177.</strong> 1047-socket-timeouts</a></li><li><a href="1048-rename-soft-link-to-symlink.html"><strong>178.</strong> 1048-rename-soft-link-to-symlink</a></li><li><a href="1054-str-words.html"><strong>179.</strong> 1054-str-words</a></li><li><a href="1057-io-error-sync.html"><strong>180.</strong> 1057-io-error-sync</a></li><li><a href="1058-slice-tail-redesign.html"><strong>181.</strong> 1058-slice-tail-redesign</a></li><li><a href="1066-safe-mem-forget.html"><strong>182.</strong> 1066-safe-mem-forget</a></li><li><a href="1068-rust-governance.html"><strong>183.</strong> 1068-rust-governance</a></li><li><a href="1096-remove-static-assert.html"><strong>184.</strong> 1096-remove-static-assert</a></li><li><a href="1102-rename-connect-to-join.html"><strong>185.</strong> 1102-rename-connect-to-join</a></li><li><a href="1105-api-evolution.html"><strong>186.</strong> 1105-api-evolution</a></li><li><a href="1119-result-expect.html"><strong>187.</strong> 1119-result-expect</a></li><li><a href="1122-language-semver.html"><strong>188.</strong> 1122-language-semver</a></li><li><a href="1123-str-split-at.html"><strong>189.</strong> 1123-str-split-at</a></li><li><a href="1131-likely-intrinsic.html"><strong>190.</strong> 1131-likely-intrinsic</a></li><li><a href="1135-raw-pointer-comparisons.html"><strong>191.</strong> 1135-raw-pointer-comparisons</a></li><li><a href="1152-slice-string-symmetry.html"><strong>192.</strong> 1152-slice-string-symmetry</a></li><li><a href="1156-adjust-default-object-bounds.html"><strong>193.</strong> 1156-adjust-default-object-bounds</a></li><li><a href="1174-into-raw-fd-socket-handle-traits.html"><strong>194.</strong> 1174-into-raw-fd-socket-handle-traits</a></li><li><a href="1183-swap-out-jemalloc.html"><strong>195.</strong> 1183-swap-out-jemalloc</a></li><li><a href="1184-stabilize-no_std.html"><strong>196.</strong> 1184-stabilize-no_std</a></li><li><a href="1191-hir.html"><strong>197.</strong> 1191-hir</a></li><li><a href="1192-inclusive-ranges.html"><strong>198.</strong> 1192-inclusive-ranges</a></li><li><a href="1193-cap-lints.html"><strong>199.</strong> 1193-cap-lints</a></li><li><a href="1194-set-recovery.html"><strong>200.</strong> 1194-set-recovery</a></li><li><a href="1199-simd-infrastructure.html"><strong>201.</strong> 1199-simd-infrastructure</a></li><li><a href="1200-cargo-install.html"><strong>202.</strong> 1200-cargo-install</a></li><li><a href="1201-naked-fns.html"><strong>203.</strong> 1201-naked-fns</a></li><li><a href="1210-impl-specialization.html"><strong>204.</strong> 1210-impl-specialization</a></li><li><a href="1211-mir.html"><strong>205.</strong> 1211-mir</a></li><li><a href="1212-line-endings.html"><strong>206.</strong> 1212-line-endings</a></li><li><a href="1214-projections-lifetimes-and-wf.html"><strong>207.</strong> 1214-projections-lifetimes-and-wf</a></li><li><a href="1216-bang-type.html"><strong>208.</strong> 1216-bang-type</a></li><li><a href="1219-use-group-as.html"><strong>209.</strong> 1219-use-group-as</a></li><li><a href="1228-placement-left-arrow.html"><strong>210.</strong> 1228-placement-left-arrow</a></li><li><a href="1229-compile-time-asserts.html"><strong>211.</strong> 1229-compile-time-asserts</a></li><li><a href="1236-stabilize-catch-panic.html"><strong>212.</strong> 1236-stabilize-catch-panic</a></li><li><a href="1238-nonparametric-dropck.html"><strong>213.</strong> 1238-nonparametric-dropck</a></li><li><a href="1240-repr-packed-unsafe-ref.html"><strong>214.</strong> 1240-repr-packed-unsafe-ref</a></li><li><a href="1241-no-wildcard-deps.html"><strong>215.</strong> 1241-no-wildcard-deps</a></li><li><a href="1242-rust-lang-crates.html"><strong>216.</strong> 1242-rust-lang-crates</a></li><li><a href="1252-open-options.html"><strong>217.</strong> 1252-open-options</a></li><li><a href="1257-drain-range-2.html"><strong>218.</strong> 1257-drain-range-2</a></li><li><a href="1260-main-reexport.html"><strong>219.</strong> 1260-main-reexport</a></li><li><a href="1268-allow-overlapping-impls-on-marker-traits.html"><strong>220.</strong> 1268-allow-overlapping-impls-on-marker-traits</a></li><li><a href="1270-deprecation.html"><strong>221.</strong> 1270-deprecation</a></li><li><a href="1288-time-improvements.html"><strong>222.</strong> 1288-time-improvements</a></li><li><a href="1291-promote-libc.html"><strong>223.</strong> 1291-promote-libc</a></li><li><a href="1298-incremental-compilation.html"><strong>224.</strong> 1298-incremental-compilation</a></li><li><a href="1300-intrinsic-semantics.html"><strong>225.</strong> 1300-intrinsic-semantics</a></li><li><a href="1307-osstring-methods.html"><strong>226.</strong> 1307-osstring-methods</a></li><li><a href="1317-ide.html"><strong>227.</strong> 1317-ide</a></li><li><a href="1327-dropck-param-eyepatch.html"><strong>228.</strong> 1327-dropck-param-eyepatch</a></li><li><a href="1328-global-panic-handler.html"><strong>229.</strong> 1328-global-panic-handler</a></li><li><a href="1331-grammar-is-canonical.html"><strong>230.</strong> 1331-grammar-is-canonical</a></li><li><a href="1358-repr-align.html"><strong>231.</strong> 1358-repr-align</a></li><li><a href="1359-process-ext-unix.html"><strong>232.</strong> 1359-process-ext-unix</a></li><li><a href="1361-cargo-cfg-dependencies.html"><strong>233.</strong> 1361-cargo-cfg-dependencies</a></li><li><a href="1398-kinds-of-allocators.html"><strong>234.</strong> 1398-kinds-of-allocators</a></li><li><a href="1399-repr-pack.html"><strong>235.</strong> 1399-repr-pack</a></li><li><a href="1414-rvalue_static_promotion.html"><strong>236.</strong> 1414-rvalue_static_promotion</a></li><li><a href="1415-trim-std-os.html"><strong>237.</strong> 1415-trim-std-os</a></li><li><a href="1419-slice-copy.html"><strong>238.</strong> 1419-slice-copy</a></li><li><a href="1422-pub-restricted.html"><strong>239.</strong> 1422-pub-restricted</a></li><li><a href="1432-replace-slice.html"><strong>240.</strong> 1432-replace-slice</a></li><li><a href="1434-contains-method-for-ranges.html"><strong>241.</strong> 1434-contains-method-for-ranges</a></li><li><a href="1440-drop-types-in-const.html"><strong>242.</strong> 1440-drop-types-in-const</a></li><li><a href="1443-extended-compare-and-swap.html"><strong>243.</strong> 1443-extended-compare-and-swap</a></li><li><a href="1444-union.html"><strong>244.</strong> 1444-union</a></li><li><a href="1445-restrict-constants-in-patterns.html" class="active"><strong>245.</strong> 1445-restrict-constants-in-patterns</a></li><li><a href="1461-net2-mutators.html"><strong>246.</strong> 1461-net2-mutators</a></li><li><a href="1467-volatile.html"><strong>247.</strong> 1467-volatile</a></li><li><a href="1479-unix-socket.html"><strong>248.</strong> 1479-unix-socket</a></li><li><a href="1492-dotdot-in-patterns.html"><strong>249.</strong> 1492-dotdot-in-patterns</a></li><li><a href="1498-ipv6addr-octets.html"><strong>250.</strong> 1498-ipv6addr-octets</a></li><li><a href="1504-int128.html"><strong>251.</strong> 1504-int128</a></li><li><a href="1506-adt-kinds.html"><strong>252.</strong> 1506-adt-kinds</a></li><li><a href="1510-cdylib.html"><strong>253.</strong> 1510-cdylib</a></li><li><a href="1513-less-unwinding.html"><strong>254.</strong> 1513-less-unwinding</a></li><li><a href="1521-copy-clone-semantics.html"><strong>255.</strong> 1521-copy-clone-semantics</a></li><li><a href="1522-conservative-impl-trait.html"><strong>256.</strong> 1522-conservative-impl-trait</a></li><li><a href="1525-cargo-workspace.html"><strong>257.</strong> 1525-cargo-workspace</a></li><li><a href="1535-stable-overflow-checks.html"><strong>258.</strong> 1535-stable-overflow-checks</a></li><li><a href="1542-try-from.html"><strong>259.</strong> 1542-try-from</a></li><li><a href="1543-integer_atomics.html"><strong>260.</strong> 1543-integer_atomics</a></li><li><a href="1548-global-asm.html"><strong>261.</strong> 1548-global-asm</a></li><li><a href="1552-contains-method-for-various-collections.html"><strong>262.</strong> 1552-contains-method-for-various-collections</a></li><li><a href="1558-closure-to-fn-coercion.html"><strong>263.</strong> 1558-closure-to-fn-coercion</a></li><li><a href="1559-attributes-with-literals.html"><strong>264.</strong> 1559-attributes-with-literals</a></li><li><a href="1560-name-resolution.html"><strong>265.</strong> 1560-name-resolution</a></li><li><a href="1561-macro-naming.html"><strong>266.</strong> 1561-macro-naming</a></li><li><a href="1566-proc-macros.html"><strong>267.</strong> 1566-proc-macros</a></li><li><a href="1567-long-error-codes-explanation-normalization.html"><strong>268.</strong> 1567-long-error-codes-explanation-normalization</a></li><li><a href="1574-more-api-documentation-conventions.html"><strong>269.</strong> 1574-more-api-documentation-conventions</a></li><li><a href="1576-macros-literal-matcher.html"><strong>270.</strong> 1576-macros-literal-matcher</a></li><li><a href="1581-fused-iterator.html"><strong>271.</strong> 1581-fused-iterator</a></li><li><a href="1584-macros.html"><strong>272.</strong> 1584-macros</a></li><li><a href="1589-rustc-bug-fix-procedure.html"><strong>273.</strong> 1589-rustc-bug-fix-procedure</a></li><li><a href="1590-macro-lifetimes.html"><strong>274.</strong> 1590-macro-lifetimes</a></li><li><a href="1598-generic_associated_types.html"><strong>275.</strong> 1598-generic_associated_types</a></li><li><a href="1607-style-rfcs.html"><strong>276.</strong> 1607-style-rfcs</a></li><li><a href="1618-ergonomic-format-args.html"><strong>277.</strong> 1618-ergonomic-format-args</a></li><li><a href="1620-regex-1.0.html"><strong>278.</strong> 1620-regex-1.0</a></li><li><a href="1623-static.html"><strong>279.</strong> 1623-static</a></li><li><a href="1624-loop-break-value.html"><strong>280.</strong> 1624-loop-break-value</a></li><li><a href="1636-document_all_features.html"><strong>281.</strong> 1636-document_all_features</a></li><li><a href="1640-duration-checked-sub.html"><strong>282.</strong> 1640-duration-checked-sub</a></li><li><a href="1643-memory-model-strike-team.html"><strong>283.</strong> 1643-memory-model-strike-team</a></li><li><a href="1644-default-and-expanded-rustc-errors.html"><strong>284.</strong> 1644-default-and-expanded-rustc-errors</a></li><li><a href="1647-allow-self-in-where-clauses.html"><strong>285.</strong> 1647-allow-self-in-where-clauses</a></li><li><a href="1649-atomic-access.html"><strong>286.</strong> 1649-atomic-access</a></li><li><a href="1651-movecell.html"><strong>287.</strong> 1651-movecell</a></li><li><a href="1653-assert_ne.html"><strong>288.</strong> 1653-assert_ne</a></li><li><a href="1660-try-borrow.html"><strong>289.</strong> 1660-try-borrow</a></li><li><a href="1665-windows-subsystem.html"><strong>290.</strong> 1665-windows-subsystem</a></li><li><a href="1679-panic-safe-slicing.html"><strong>291.</strong> 1679-panic-safe-slicing</a></li><li><a href="1681-macros-1.1.html"><strong>292.</strong> 1681-macros-1.1</a></li><li><a href="1682-field-init-shorthand.html"><strong>293.</strong> 1682-field-init-shorthand</a></li><li><a href="1683-docs-team.html"><strong>294.</strong> 1683-docs-team</a></li><li><a href="1685-deprecate-anonymous-parameters.html"><strong>295.</strong> 1685-deprecate-anonymous-parameters</a></li><li><a href="1695-add-error-macro.html"><strong>296.</strong> 1695-add-error-macro</a></li><li><a href="1696-discriminant.html"><strong>297.</strong> 1696-discriminant</a></li><li><a href="1717-dllimport.html"><strong>298.</strong> 1717-dllimport</a></li><li><a href="1721-crt-static.html"><strong>299.</strong> 1721-crt-static</a></li><li><a href="1725-unaligned-access.html"><strong>300.</strong> 1725-unaligned-access</a></li><li><a href="1728-north-star.html"><strong>301.</strong> 1728-north-star</a></li><li><a href="1733-trait-alias.html"><strong>302.</strong> 1733-trait-alias</a></li><li><a href="1758-repr-transparent.html"><strong>303.</strong> 1758-repr-transparent</a></li><li><a href="1774-roadmap-2017.html"><strong>304.</strong> 1774-roadmap-2017</a></li><li><a href="1789-as-cell.html"><strong>305.</strong> 1789-as-cell</a></li><li><a href="1824-crates.io-default-ranking.html"><strong>306.</strong> 1824-crates.io-default-ranking</a></li><li><a href="1826-change-doc-default-urls.html"><strong>307.</strong> 1826-change-doc-default-urls</a></li><li><a href="1828-rust-bookshelf.html"><strong>308.</strong> 1828-rust-bookshelf</a></li><li><a href="1845-shared-from-slice.html"><strong>309.</strong> 1845-shared-from-slice</a></li><li><a href="1849-non-static-type-id.html"><strong>310.</strong> 1849-non-static-type-id</a></li><li><a href="1857-stabilize-drop-order.html"><strong>311.</strong> 1857-stabilize-drop-order</a></li><li><a href="1859-try-trait.html"><strong>312.</strong> 1859-try-trait</a></li><li><a href="1860-manually-drop.html"><strong>313.</strong> 1860-manually-drop</a></li><li><a href="1861-extern-types.html"><strong>314.</strong> 1861-extern-types</a></li><li><a href="1866-more-readable-assert-eq.html"><strong>315.</strong> 1866-more-readable-assert-eq</a></li><li><a href="1868-portability-lint.html"><strong>316.</strong> 1868-portability-lint</a></li><li><a href="1869-eprintln.html"><strong>317.</strong> 1869-eprintln</a></li><li><a href="1884-unstable-sort.html"><strong>318.</strong> 1884-unstable-sort</a></li><li><a href="1925-optional-match-vert.html"><strong>319.</strong> 1925-optional-match-vert</a></li><li><a href="1937-ques-in-main.html"><strong>320.</strong> 1937-ques-in-main</a></li><li><a href="1940-must-use-functions.html"><strong>321.</strong> 1940-must-use-functions</a></li><li><a href="1946-intra-rustdoc-links.html"><strong>322.</strong> 1946-intra-rustdoc-links</a></li><li><a href="1951-expand-impl-trait.html"><strong>323.</strong> 1951-expand-impl-trait</a></li><li><a href="1961-clamp.html"><strong>324.</strong> 1961-clamp</a></li><li><a href="1966-unsafe-pointer-reform.html"><strong>325.</strong> 1966-unsafe-pointer-reform</a></li><li><a href="1969-cargo-prepublish.html"><strong>326.</strong> 1969-cargo-prepublish</a></li><li><a href="1974-global-allocators.html"><strong>327.</strong> 1974-global-allocators</a></li><li><a href="1977-public-private-dependencies.html"><strong>328.</strong> 1977-public-private-dependencies</a></li><li><a href="1983-nursery-deprecation.html"><strong>329.</strong> 1983-nursery-deprecation</a></li><li><a href="1985-tiered-browser-support.html"><strong>330.</strong> 1985-tiered-browser-support</a></li><li><a href="1990-external-doc-attribute.html"><strong>331.</strong> 1990-external-doc-attribute</a></li><li><a href="2000-const-generics.html"><strong>332.</strong> 2000-const-generics</a></li><li><a href="2005-match-ergonomics.html"><strong>333.</strong> 2005-match-ergonomics</a></li><li><a href="2008-non-exhaustive.html"><strong>334.</strong> 2008-non-exhaustive</a></li><li><a href="2011-generic-assert.html"><strong>335.</strong> 2011-generic-assert</a></li><li><a href="2025-nested-method-calls.html"><strong>336.</strong> 2025-nested-method-calls</a></li><li><a href="2027-object_safe_for_dispatch.html"><strong>337.</strong> 2027-object_safe_for_dispatch</a></li><li><a href="2033-experimental-coroutines.html"><strong>338.</strong> 2033-experimental-coroutines</a></li><li><a href="2043-is-aligned-intrinsic.html"><strong>339.</strong> 2043-is-aligned-intrinsic</a></li><li><a href="2044-license-rfcs.html"><strong>340.</strong> 2044-license-rfcs</a></li><li><a href="2045-target-feature.html"><strong>341.</strong> 2045-target-feature</a></li><li><a href="2052-epochs.html"><strong>342.</strong> 2052-epochs</a></li><li><a href="2057-refcell-replace.html"><strong>343.</strong> 2057-refcell-replace</a></li><li><a href="2070-panic-implementation.html"><strong>344.</strong> 2070-panic-implementation</a></li><li><a href="2071-impl-trait-type-alias.html"><strong>345.</strong> 2071-impl-trait-type-alias</a></li><li><a href="2086-allow-if-let-irrefutables.html"><strong>346.</strong> 2086-allow-if-let-irrefutables</a></li><li><a href="2089-implied-bounds.html"><strong>347.</strong> 2089-implied-bounds</a></li><li><a href="2093-infer-outlives.html"><strong>348.</strong> 2093-infer-outlives</a></li><li><a href="2094-nll.html"><strong>349.</strong> 2094-nll</a></li><li><a href="2103-tool-attributes.html"><strong>350.</strong> 2103-tool-attributes</a></li><li><a href="2113-dyn-trait-syntax.html"><strong>351.</strong> 2113-dyn-trait-syntax</a></li><li><a href="2115-argument-lifetimes.html"><strong>352.</strong> 2115-argument-lifetimes</a></li><li><a href="2124-option-filter.html"><strong>353.</strong> 2124-option-filter</a></li><li><a href="2126-path-clarity.html"><strong>354.</strong> 2126-path-clarity</a></li><li><a href="2128-use-nested-groups.html"><strong>355.</strong> 2128-use-nested-groups</a></li><li><a href="2132-copy-closures.html"><strong>356.</strong> 2132-copy-closures</a></li><li><a href="2133-all-the-clones.html"><strong>357.</strong> 2133-all-the-clones</a></li><li><a href="2137-variadic.html"><strong>358.</strong> 2137-variadic</a></li><li><a href="2141-alternative-registries.html"><strong>359.</strong> 2141-alternative-registries</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <ul>
+<li>Feature Name: <code>structural_match</code></li>
+<li>Start Date: 2015-02-06</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/1445">rust-lang/rfcs#1445</a></li>
+<li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/31434">rust-lang/rust#31434</a></li>
+</ul>
+<a class="header" href="1445-restrict-constants-in-patterns.html#summary" id="summary"><h1>Summary</h1></a>
+<p>The current compiler implements a more expansive semantics for pattern
+matching than was originally intended. This RFC introduces several
+mechanisms to reign in these semantics without actually breaking
+(much, if any) extant code:</p>
+<ul>
+<li>Introduce a feature-gated attribute <code>#[structural_match]</code> which can
+be applied to a struct or enum <code>T</code> to indicate that constants of
+type <code>T</code> can be used within patterns.</li>
+<li>Have <code>#[derive(Eq)]</code> automatically apply this attribute to
+the struct or enum that it decorates. <strong>Automatically inserted attributes
+do not require use of feature-gate.</strong></li>
+<li>When expanding constants of struct or enum type into equivalent
+patterns, require that the struct or enum type is decorated with
+<code>#[structural_match]</code>. Constants of builtin types are always
+expanded.</li>
+</ul>
+<p>The practical effect of these changes will be to prevent the use of
+constants in patterns unless the type of those constants is either a
+built-in type (like <code>i32</code> or <code>&amp;str</code>) or a user-defined constant for
+which <code>Eq</code> is <strong>derived</strong> (not merely <em>implemented</em>).</p>
+<p>To be clear, this <code>#[structural_match]</code> attribute is <strong>never intended
+to be stabilized</strong>. Rather, the intention of this change is to
+restrict constant patterns to those cases that everyone can agree on
+for now. We can then have further discussion to settle the best
+semantics in the long term.</p>
+<p>Because the compiler currently accepts arbitrary constant patterns,
+this is technically a backwards incompatible change. However, the
+design of the RFC means that existing code that uses constant patterns
+will generally &quot;just work&quot;. The justification for this change is that
+it is clarifying
+<a href="https://github.com/rust-lang/rfcs/blob/master/text/1122-language-semver.md#underspecified-language-semantics">&quot;underspecified language semantics&quot; clause, as described in RFC 1122</a>.
+A <a href="https://gist.github.com/nikomatsakis/e714e4a824527e0ce5c9">recent crater run</a> with a prototype implementation found 6
+regressions.</p>
+<p><strong>Note:</strong> this was also discussed on an [internals thread]. Major
+points from that thread are summarized either inline or in
+alternatives.</p>
+<p>[internals thread]: https://internals.rust-lang.org/t/how-to-handle-pattern-matching-on-constants/2846)</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#motivation" id="motivation"><h1>Motivation</h1></a>
+<p>The compiler currently permits any kind of constant to be used within
+a pattern. However, the <em>meaning</em> of such a pattern is somewhat
+controversial: the current semantics implemented by the compiler were
+<a href="https://github.com/rust-lang/rust/pull/15650">adopted in July of 2014</a>
+and were never widely discussed nor did they go through the RFC
+process. Moreover, the discussion at the time was focused primarily on
+implementation concerns, and overlooked the potential semantic
+hazards.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#semantic-vs-structural-equality" id="semantic-vs-structural-equality"><h3>Semantic vs structural equality</h3></a>
+<p>Consider a program like this one, which references a constant value
+from within a pattern:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct SomeType {
+    a: u32,
+    b: u32,
+}
+
+const SOME_CONSTANT: SomeType = SomeType { a: 22+22, b: 44+44 };
+
+fn test(v: SomeType) {
+    match v {
+        SOME_CONSTANT =&gt; println!(&quot;Yes&quot;),
+        _ =&gt; println!(&quot;No&quot;),
+    }
+}
+#}</code></pre></pre>
+<p>The question at hand is what do we expect this match to do, precisely?
+There are two main possibilities: semantic and structural equality.</p>
+<p><strong>Semantic equality.</strong> Semantic equality states that a pattern
+<code>SOME_CONSTANT</code> matches a value <code>v</code> if <code>v == SOME_CONSTANT</code>. In other
+words, the <code>match</code> statement above would be exactly equivalent to an
+<code>if</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+if v == SOME_CONSTANT {
+    println!(&quot;Yes&quot;)
+} else {
+    println!(&quot;No&quot;);
+}
+#}</code></pre></pre>
+<p>Under semantic equality, the program above would not compile, because
+<code>SomeType</code> does not implement the <code>PartialEq</code> trait.</p>
+<p><strong>Structural equality.</strong> Under structural equality, <code>v</code> matches the
+pattern <code>SOME_CONSTANT</code> if all of its fields are (structurally) equal.
+Primitive types like <code>u32</code> are structurally equal if they represent
+the same value (but see below for discussion about floating point
+types like <code>f32</code> and <code>f64</code>). This means that the <code>match</code> statement
+above would be roughly equivalent to the following <code>if</code> (modulo
+privacy):</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+if v.a == SOME_CONSTANT.a &amp;&amp; v.b == SOME_CONSTANT.b {
+    println!(&quot;Yes&quot;)
+} else {
+    println!(&quot;No&quot;);
+}
+#}</code></pre></pre>
+<p>Structural equality basically says &quot;two things are structurally equal
+if their fields are structurally equal&quot;. It is sort of equality you
+would get if everyone used <code>#[derive(PartialEq)]</code> on all types. Note
+that the equality defined by structural equality is completely
+distinct from the <code>==</code> operator, which is tied to the <code>PartialEq</code>
+traits. That is, two values that are <em>semantically unequal</em> could be
+<em>structurally equal</em> (an example where this might occur is the
+floating point value <code>NaN</code>).</p>
+<p><strong>Current semantics.</strong> The compiler's current semantics are basically
+structural equality, though in the case of floating point numbers they
+are arguably closer to semantic equality (details below). In
+particular, when a constant appears in a pattern, the compiler first
+evaluates that constant to a specific value. So we would reduce the
+expression:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+const SOME_CONSTANT: SomeType = SomeType { a: 22+22, b: 44+44 };
+#}</code></pre></pre>
+<p>to the value <code>SomeType { a: 44, b: 88 }</code>. We then expand the pattern
+<code>SOME_CONSTANT</code> as though you had typed this value in place (well,
+almost as though, read on for some complications around privacy).
+Thus the match statement above is equivalent to:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+match v {
+    SomeType { a: 44, b: 88 } =&gt; println!(Yes),
+    _ =&gt; println!(&quot;No&quot;),
+}
+#}</code></pre></pre>
+<a class="header" href="1445-restrict-constants-in-patterns.html#disadvantages-of-the-current-approach" id="disadvantages-of-the-current-approach"><h3>Disadvantages of the current approach</h3></a>
+<p>Given that the compiler already has a defined semantics, it is
+reasonable to ask why we might want to change it. There
+are two main disadvantages:</p>
+<ol>
+<li><strong>No abstraction boundary.</strong> The current approach does not permit
+types to define what equality means for themselves (at least not if
+they can be constructed in a constant).</li>
+<li><strong>Scaling to associated constants.</strong> The current approach does not
+permit associated constants or generic integers to be used in a
+match statement.</li>
+</ol>
+<a class="header" href="1445-restrict-constants-in-patterns.html#disadvantage-weakened-abstraction-bounary" id="disadvantage-weakened-abstraction-bounary"><h4>Disadvantage: Weakened abstraction bounary</h4></a>
+<p>The single biggest concern with structural equality is that it
+introduces two distinct notions of equality: the <code>==</code> operator, based
+on the <code>PartialEq</code> trait, and pattern matching, based on a builtin
+structural recursion. This will cause problems for user-defined types
+that rely on <code>PartialEq</code> to define equality. Put another way, <strong>it is
+no longer possible for user-defined types to completely define what
+equality means for themselves</strong> (at least not if they can be
+constructed in a constant). Furthermore, because the builtin
+structural recursion does not consider privacy, <code>match</code> statements can
+now be used to <strong>observe private fields</strong>.</p>
+<p><strong>Example: Normalized durations.</strong> Consider a simple duration type:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Copy, Clone)]
+pub struct Duration {
+    pub seconds: u32,
+    pub minutes: u32,
+}
+#}</code></pre></pre>
+<p>Let's say that this <code>Duration</code> type wishes to represent a span of
+time, but it also wishes to preserve whether that time was expressed
+in seconds or minutes.  In other words, 60 seconds and 1 minute are
+equal values, but we don't want to normalize 60 seconds into 1 minute;
+perhaps because it comes from user input and we wish to keep things
+just as the user chose to express it.</p>
+<p>We might implement <code>PartialEq</code> like so (actually the <code>PartialEq</code> trait
+is slightly different, but you get the idea):</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl PartialEq for Duration {
+    fn eq(&amp;self, other: &amp;Duration) -&gt; bool {
+        let s1 = (self.seconds as u64) + (self.minutes as u64 * 60);
+        let s2 = (other.seconds as u64) + (other.minutes as u64 * 60);
+        s1 == s2
+    }
+}
+#}</code></pre></pre>
+<p>Now imagine I have some constants:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+const TWENTY_TWO_SECONDS: Duration = Duration { seconds: 22, minutes: 0 };
+const ONE_MINUTE: Duration = Duration { seconds: 0, minutes: 1 };
+#}</code></pre></pre>
+<p>And I write a match statement using those constants:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn detect_some_case_or_other(d: Duration) {
+    match d {
+        TWENTY_TWO_SECONDS =&gt; /* do something */,
+        ONE_MINUTE =&gt; /* do something else */,
+        _ =&gt; /* do something else again */,
+    }
+}
+#}</code></pre></pre>
+<p>Now this code is, in all probability, buggy. Probably I meant to use
+the notion of equality that <code>Duration</code> defined, where seconds and
+minutes are normalized. But that is not the behavior I will see --
+instead I will use a pure structural match. What's worse, this means
+the code will probably work in my local tests, since I like to say
+&quot;one minute&quot;, but it will break when I demo it for my customer, since
+she prefers to write &quot;60 seconds&quot;.</p>
+<p><strong>Example: Floating point numbers.</strong> Another example is floating point
+numbers. Consider the case of <code>0.0</code> and <code>-0.0</code>: these two values are
+distinct, but they typically behave the same; so much so that they
+compare equal (that is, <code>0.0 == -0.0</code> is <code>true</code>).  So it is likely
+that code such as:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+match some_computation() {
+    0.0 =&gt; ...,
+    x =&gt; ...,
+}
+#}</code></pre></pre>
+<p>did not intend to discriminate between zero and negative zero.  In
+fact, in the compiler today, match <em>will</em> compare 0.0 and -0.0 as
+equal. We simply do not extend that courtesy to user-defined types.</p>
+<p><strong>Example: observing private fields.</strong> The current constant expansion
+code does not consider privacy. In other words, constants are expanded
+into equivalent patterns, but those patterns may not have been
+something the user could have typed because of privacy rules. Consider
+a module like:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+mod foo {
+    pub struct Foo { b: bool }
+    pub const V1: Foo = Foo { b: true };
+    pub const V2: Foo = Foo { b: false };
+}
+#}</code></pre></pre>
+<p>Note that there is an abstraction boundary here: b is a private
+field. But now if I wrote code from another module that matches on a
+value of type Foo, that abstraction boundary is pierced:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn bar(f: x::Foo) {
+    // rustc knows this is exhaustive because if expanded `V1` into
+    // equivalent patterns; patterns you could not write by hand!
+    match f {
+        x::V1 =&gt; { /* moreover, now we know that f.b is true */ }
+        x::V2 =&gt; { /* and here we know it is false */ }
+    }
+}
+#}</code></pre></pre>
+<p>Note that, because <code>Foo</code> does not implement <code>PartialEq</code>, just having
+access to <code>V1</code> would not otherwise allow us to observe the value of
+<code>f.b</code>. (And even if <code>Foo</code> <em>did</em> implement <code>PartialEq</code>, that
+implementation might not read <code>f.b</code>, so we still would not be able to
+observe its value.)</p>
+<p><strong>More examples.</strong> There are numerous possible examples here. For
+example, strings that compare using case-insensitive comparisons, but
+retain the original case for reference, such as those used in
+file-systems. Views that extract a subportion of a larger value (and
+hence which should only compare that subportion). And so forth.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#disadvantage-scaling-to-associated-constants-and-generic-integers" id="disadvantage-scaling-to-associated-constants-and-generic-integers"><h4>Disadvantage: Scaling to associated constants and generic integers</h4></a>
+<p>Rewriting constants into patterns requires that we can <strong>fully
+evaluate</strong> the constant at the time of exhaustiveness checking. For
+associated constants and type-level integers, that is not possible --
+we have to wait until monomorphization time. Consider:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait SomeTrait {
+    const A: bool;
+    const B: bool;
+}
+
+fn foo&lt;T:SomeTrait&gt;(x: bool) {
+    match x {
+        T::A =&gt; println!(&quot;A&quot;),
+        T::B =&gt; println!(&quot;B&quot;),
+    }
+}
+
+impl SomeTrait for i32 {
+    const A: bool = true;
+    const B: bool = true;
+}
+
+impl SomeTrait for u32 {
+    const A: bool = true;
+    const B: bool = false;
+}
+#}</code></pre></pre>
+<p>Is this match exhaustive? Does it contain dead code? The answer will
+depend on whether <code>T=i32</code> or <code>T=u32</code>, of course.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#advantages-of-the-current-approach" id="advantages-of-the-current-approach"><h3>Advantages of the current approach</h3></a>
+<p>However, structural equality also has a number of advantages:</p>
+<p><strong>Better optimization.</strong> One of the biggest &quot;pros&quot; is that it can
+potentially enable nice optimization. For example, given constants like the following:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Value { x: u32 }
+const V1: Value = Value { x: 0 };
+const V2: Value = Value { x: 1 };
+const V3: Value = Value { x: 2 };
+const V4: Value = Value { x: 3 };
+const V5: Value = Value { x: 4 };
+#}</code></pre></pre>
+<p>and a match pattern like the following:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+match v {
+    V1 =&gt; ...,
+    ...,
+    V5 =&gt; ...,
+}
+#}</code></pre></pre>
+<p>then, because pattern matching is always a process of structurally
+extracting values, we can compile this to code that reads the field
+<code>x</code> (which is a <code>u32</code>) and does an appropriate switch on that
+value. Semantic equality would potentially force a more conservative
+compilation strategy.</p>
+<p><strong>Better exhautiveness and dead-code checking.</strong> Similarly, we can do
+more thorough exhaustiveness and dead-code checking. So for example if
+I have a struct like:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Value { field: bool }
+const TRUE: Value { field: true };
+const FALSE: Value { field: false };
+#}</code></pre></pre>
+<p>and a match pattern like:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+match v { TRUE =&gt; .., FALSE =&gt; .. }
+#}</code></pre></pre>
+<p>then we can prove that this match is exhaustive. Similarly, we can prove
+that the following match contains dead-code:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+const A: Value { field: true };
+match v {
+    TRUE =&gt; ...,
+    A =&gt; ...,
+}
+#}</code></pre></pre>
+<p>Again, some of the alternatives might not allow this. (But note the
+cons, which also raise the question of exhaustiveness checking.)</p>
+<p><strong>Nullary variants and constants are (more) equivalent.</strong> Currently,
+there is a sort of equivalence between enum variants and constants, at
+least with respect to pattern matching. Consider a C-like enum:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+enum Modes {
+    Happy = 22,
+    Shiny = 44,
+    People = 66,
+    Holding = 88,
+    Hands = 110,
+}
+
+const C: Modes = Modes::Happy;
+#}</code></pre></pre>
+<p>Now if I match against <code>Modes::Happy</code>, that is matching against an
+enum variant, and under <em>all</em> the proposals I will discuss below, it
+will check the actual variant of the value being matched (regardless
+of whether <code>Modes</code> implements <code>PartialEq</code>, which it does not here). On
+the other hand, if matching against <code>C</code> were to require a <code>PartialEq</code>
+impl, then it would be illegal. Therefore matching against an <em>enum
+variant</em> is distinct from matching against a <em>constant</em>.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#detailed-design" id="detailed-design"><h1>Detailed design</h1></a>
+<p>The goal of this RFC is not to decide between semantic and structural
+equality. Rather, the goal is to restrict pattern matching to that subset
+of types where the two variants behave roughly the same.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#the-structural-match-attribute" id="the-structural-match-attribute"><h3>The structural match attribute</h3></a>
+<p>We will introduce an attribute <code>#[structural_match]</code> which can be
+applied to struct and enum types. Explicit use of this attribute will
+(naturally) be feature-gated. When converting a constant value into a
+pattern, if the constant is of struct or enum type, we will check
+whether this attribute is present on the struct -- if so, we will
+convert the value as we do today. If not, we will report an error that
+the struct/enum value cannot be used in a pattern.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#behavior-of-deriveeq" id="behavior-of-deriveeq"><h3>Behavior of <code>#[derive(Eq)]</code></h3></a>
+<p>When deriving the <code>Eq</code> trait, we will add the <code>#[structural_match]</code> to
+the type in question. Attributes added in this way will be <strong>exempt from
+the feature gate</strong>.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#exhaustiveness-and-dead-code-checking" id="exhaustiveness-and-dead-code-checking"><h2>Exhaustiveness and dead-code checking</h2></a>
+<p>We will treat user-defined structs &quot;opaquely&quot; for the purpose of
+exhaustiveness and dead-code checking. This is required to allow for
+semantic equality semantics in the future, since in that case we
+cannot rely on <code>Eq</code> to be correctly implemented (e.g., it could always
+return <code>false</code>, no matter values are supplied to it, even though it's
+not supposed to). The impact of this change has not been evaluated but
+is expected to be <strong>very</strong> small, since in practice it is rather
+challenging to successfully make an exhaustive match using
+user-defined constants, unless they are something trivial like
+newtype'd booleans (and, in that case, you can update the code to use
+a more extended pattern).</p>
+<p>Similarly, dead code detection should treat constants in a
+conservative fashion. that is, we can recognize that if there are two
+arms using the same constant, the second one is dead code, even though
+it may be that neither will matches (e.g., <code>match foo { C =&gt; _, C =&gt; _ }</code>). We will make no assumptions about two distinct constants, even if
+we can concretely evaluate them to the same value.</p>
+<p>One <strong>unresolved question</strong> (described below) is what behavior to
+adopt for constants that involve no user-defined types. There, the
+definition of <code>Eq</code> is purely under our control, and we know that it
+matches structural equality, so we can retain our current aggressive
+analysis if desired.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#phasing" id="phasing"><h3>Phasing</h3></a>
+<p>We will not make this change instantaneously. Rather, for at least one
+release cycle, users who are pattern matching on struct types that
+lack <code>#[structural_match]</code> will be warned about imminent breakage.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
+<p>This is a breaking change, which means some people might have to
+change their code. However, that is considered extremely unlikely,
+because such users would have to be pattern matching on constants that
+are not comparable for equality (this is likely a bug in any case).</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#alternatives" id="alternatives"><h1>Alternatives</h1></a>
+<p><strong>Limit matching to builtin types.</strong> An earlier version of this RFC
+limited matching to builtin types like integers (and tuples of
+integers). This RFC is a generalization of that which also
+accommodates struct types that derive <code>Eq</code>.</p>
+<p><strong>Embrace current semantics (structural equality).</strong> Naturally we
+could opt to keep the semantics as they are. The advantages and
+disadvantages are discussed above.</p>
+<p><strong>Embrace semantic equality.</strong> We could opt to just go straight
+towards &quot;semantic equality&quot;. However, it seems better to reset the
+semantics to a base point that everyone can agree on, and then extend
+from that base point. Moreover, adopting semantic equality straight
+out would be a riskier breaking change, as it could silently change
+the semantics of existing programs (whereas the current proposal only
+causes compilation to fail, never changes what an existing program
+will do).</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#discussion-thread-summary" id="discussion-thread-summary"><h1>Discussion thread summary</h1></a>
+<p>This section summarizes various points that were raised in the
+[internals thread] which are related to patterns but didn't seem to
+fit elsewhere.</p>
+<p><strong>Overloaded patterns.</strong> Some languages, notably Scala, permit
+overloading of patterns. This is related to &quot;semantic equality&quot; in
+that it involves executing custom, user-provided code at compilation
+time.</p>
+<p><strong>Pattern synonyms.</strong> Haskell offers a feature called &quot;pattern
+synonyms&quot; and
+<a href="https://internals.rust-lang.org/t/how-to-handle-pattern-matching-on-constants/2846/39?u=nikomatsakis">it was argued</a>
+that the current treatment of patterns can be viewed as a similar
+feature. This may be true, but constants-in-patterns are lacking a
+number of important features from pattern synonyms, such as bindings,
+as
+<a href="https://internals.rust-lang.org/t/how-to-handle-pattern-matching-on-constants/2846/48?u=nikomatsakis">discussed in this response</a>.
+The author feels that pattern synonyms might be a useful feature, but
+it would be better to design them as a first-class feature, not adapt
+constants for that purpose.</p>
+<a class="header" href="1445-restrict-constants-in-patterns.html#unresolved-questions" id="unresolved-questions"><h1>Unresolved questions</h1></a>
+<p><strong>What about exhaustiveness etc on builtin types?</strong> Even if we ignore
+user-defined types, there are complications around exhaustiveness
+checking for constants of any kind related to associated constants and
+other possible future extensions.  For example, the following code
+<a href="http://is.gd/PJjNKl">fails to compile</a> because it contains dead-code:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+const X: u64 = 0;
+const Y: u64 = 0;
+fn bar(foo: u64) {
+    match foo {
+        X =&gt; { }
+        Y =&gt; { }
+        _ =&gt; { }
+    }
+}
+#}</code></pre></pre>
+<p>However, we would be unable to perform such an analysis in a more
+generic context, such as with an associated constant:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Trait {
+    const X: u64;
+    const Y: u64;
+}
+
+fn bar&lt;T:Trait&gt;(foo: u64) {
+    match foo {
+        T::X =&gt; { }
+        T::Y =&gt; { }
+        _ =&gt; { }
+    }
+}
+#}</code></pre></pre>
+<p>Here, although it may well be that <code>T::X == T::Y</code>, we can't know for
+sure. So, for consistency, we may wish to treat all constants opaquely
+regardless of whether we are in a generic context or not. (However, it
+also seems reasonable to make a &quot;best effort&quot; attempt at
+exhaustiveness and dead pattern checking, erring on the conservative
+side in those cases where constants cannot be fully evaluated.)</p>
+<p>A different argument in favor of treating all constants opaquely is
+that the current behavior can leak details that perhaps were intended
+to be hidden. For example, imagine that I define a fn <code>hash</code> that,
+given a previous hash and a value, produces a new hash.  Because I am
+lazy and prototyping my system, I decide for now to just ignore the
+new value and pass the old hash through:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+const fn add_to_hash(prev_hash: u64, _value: u64) -&gt; u64 {
+    prev_hash
+}
+#}</code></pre></pre>
+<p>Now I have some consumers of my library and they define a few constants:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+const HASH_OF_ZERO: add_to_hash(0, 0);
+const HASH_OF_ONE: add_to_hash(0, 1);
+#}</code></pre></pre>
+<p>And at some point they write a match statement:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn process_hash(h: u64) {
+    match h {
+        HASH_OF_ZERO =&gt; /* do something */,
+        HASH_OF_ONE =&gt; /* do something else */,
+        _ =&gt; /* do something else again */,
+}
+#}</code></pre></pre>
+<p>As before, what you get when you <a href="http://is.gd/u5WtCo">compile this</a>
+is a dead-code error, because the compiler can see that <code>HASH_OF_ZERO</code>
+and <code>HASH_OF_ONE</code> are the same value.</p>
+<p>Part of the solution here might be making &quot;unreachable patterns&quot; a
+warning and not an error. The author feels this would be a good idea
+regardless (though not necessarily as part of this RFC). However,
+that's not a complete solution, since -- at least for <code>bool</code> constants
+-- the same issues arise if you consider exhaustiveness checking.</p>
+<p>On the other hand, it feels very silly for the compiler not to
+understand that <code>match some_bool { true =&gt; ..., false =&gt; ... }</code> is
+exhaustive. Furthermore, there are other ways for the values of
+constants to &quot;leak out&quot;, such as when part of a type like
+<code>[u8; SOME_CONSTANT]</code> (a point made by both <a href="https://internals.rust-lang.org/t/how-to-handle-pattern-matching-on-constants/2846/9?u=nikomatsakis">arielb1</a> and
+<a href="https://internals.rust-lang.org/t/how-to-handle-pattern-matching-on-constants/2846/32?u=nikomatsakis">glaebhoerl</a> on the [internals thread]). Therefore, the proper
+way to address this question is perhaps to consider an explicit form
+of &quot;abstract constant&quot;.</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="1444-union.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="1461-net2-mutators.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="1444-union.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="1461-net2-mutators.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

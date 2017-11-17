@@ -1,0 +1,679 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>1560-name-resolution - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="0001-private-fields.html"><strong>1.</strong> 0001-private-fields</a></li><li><a href="0002-rfc-process.html"><strong>2.</strong> 0002-rfc-process</a></li><li><a href="0003-attribute-usage.html"><strong>3.</strong> 0003-attribute-usage</a></li><li><a href="0008-new-intrinsics.html"><strong>4.</strong> 0008-new-intrinsics</a></li><li><a href="0016-more-attributes.html"><strong>5.</strong> 0016-more-attributes</a></li><li><a href="0019-opt-in-builtin-traits.html"><strong>6.</strong> 0019-opt-in-builtin-traits</a></li><li><a href="0026-remove-priv.html"><strong>7.</strong> 0026-remove-priv</a></li><li><a href="0034-bounded-type-parameters.html"><strong>8.</strong> 0034-bounded-type-parameters</a></li><li><a href="0040-libstd-facade.html"><strong>9.</strong> 0040-libstd-facade</a></li><li><a href="0042-regexps.html"><strong>10.</strong> 0042-regexps</a></li><li><a href="0048-traits.html"><strong>11.</strong> 0048-traits</a></li><li><a href="0049-match-arm-attributes.html"><strong>12.</strong> 0049-match-arm-attributes</a></li><li><a href="0050-assert.html"><strong>13.</strong> 0050-assert</a></li><li><a href="0059-remove-tilde.html"><strong>14.</strong> 0059-remove-tilde</a></li><li><a href="0060-rename-strbuf.html"><strong>15.</strong> 0060-rename-strbuf</a></li><li><a href="0063-module-file-system-hierarchy.html"><strong>16.</strong> 0063-module-file-system-hierarchy</a></li><li><a href="0066-better-temporary-lifetimes.html"><strong>17.</strong> 0066-better-temporary-lifetimes</a></li><li><a href="0068-const-unsafe-pointers.html"><strong>18.</strong> 0068-const-unsafe-pointers</a></li><li><a href="0069-ascii-literals.html"><strong>19.</strong> 0069-ascii-literals</a></li><li><a href="0071-const-block-expr.html"><strong>20.</strong> 0071-const-block-expr</a></li><li><a href="0079-undefined-struct-layout.html"><strong>21.</strong> 0079-undefined-struct-layout</a></li><li><a href="0085-pattern-macros.html"><strong>22.</strong> 0085-pattern-macros</a></li><li><a href="0086-plugin-registrar.html"><strong>23.</strong> 0086-plugin-registrar</a></li><li><a href="0087-trait-bounds-with-plus.html"><strong>24.</strong> 0087-trait-bounds-with-plus</a></li><li><a href="0089-loadable-lints.html"><strong>25.</strong> 0089-loadable-lints</a></li><li><a href="0090-lexical-syntax-simplification.html"><strong>26.</strong> 0090-lexical-syntax-simplification</a></li><li><a href="0092-struct-grammar.html"><strong>27.</strong> 0092-struct-grammar</a></li><li><a href="0093-remove-format-intl.html"><strong>28.</strong> 0093-remove-format-intl</a></li><li><a href="0100-partial-cmp.html"><strong>29.</strong> 0100-partial-cmp</a></li><li><a href="0107-pattern-guards-with-bind-by-move.html"><strong>30.</strong> 0107-pattern-guards-with-bind-by-move</a></li><li><a href="0109-remove-crate-id.html"><strong>31.</strong> 0109-remove-crate-id</a></li><li><a href="0111-index-traits.html"><strong>32.</strong> 0111-index-traits</a></li><li><a href="0112-remove-cross-borrowing.html"><strong>33.</strong> 0112-remove-cross-borrowing</a></li><li><a href="0114-closures.html"><strong>34.</strong> 0114-closures</a></li><li><a href="0115-rm-integer-fallback.html"><strong>35.</strong> 0115-rm-integer-fallback</a></li><li><a href="0116-no-module-shadowing.html"><strong>36.</strong> 0116-no-module-shadowing</a></li><li><a href="0123-share-to-threadsafe.html"><strong>37.</strong> 0123-share-to-threadsafe</a></li><li><a href="0130-box-not-special.html"><strong>38.</strong> 0130-box-not-special</a></li><li><a href="0131-target-specification.html"><strong>39.</strong> 0131-target-specification</a></li><li><a href="0132-ufcs.html"><strong>40.</strong> 0132-ufcs</a></li><li><a href="0135-where.html"><strong>41.</strong> 0135-where</a></li><li><a href="0136-no-privates-in-public.html"><strong>42.</strong> 0136-no-privates-in-public</a></li><li><a href="0139-remove-cross-borrowing-entirely.html"><strong>43.</strong> 0139-remove-cross-borrowing-entirely</a></li><li><a href="0141-lifetime-elision.html"><strong>44.</strong> 0141-lifetime-elision</a></li><li><a href="0151-capture-by-value.html"><strong>45.</strong> 0151-capture-by-value</a></li><li><a href="0155-anonymous-impl-only-in-same-module.html"><strong>46.</strong> 0155-anonymous-impl-only-in-same-module</a></li><li><a href="0160-if-let.html"><strong>47.</strong> 0160-if-let</a></li><li><a href="0164-feature-gate-slice-pats.html"><strong>48.</strong> 0164-feature-gate-slice-pats</a></li><li><a href="0168-mod.html"><strong>49.</strong> 0168-mod</a></li><li><a href="0169-use-path-as-id.html"><strong>50.</strong> 0169-use-path-as-id</a></li><li><a href="0179-and-mut-patterns.html"><strong>51.</strong> 0179-and-mut-patterns</a></li><li><a href="0184-tuple-accessors.html"><strong>52.</strong> 0184-tuple-accessors</a></li><li><a href="0192-bounds-on-object-and-generic-types.html"><strong>53.</strong> 0192-bounds-on-object-and-generic-types</a></li><li><a href="0194-cfg-syntax.html"><strong>54.</strong> 0194-cfg-syntax</a></li><li><a href="0195-associated-items.html"><strong>55.</strong> 0195-associated-items</a></li><li><a href="0198-slice-notation.html"><strong>56.</strong> 0198-slice-notation</a></li><li><a href="0199-ownership-variants.html"><strong>57.</strong> 0199-ownership-variants</a></li><li><a href="0201-error-chaining.html"><strong>58.</strong> 0201-error-chaining</a></li><li><a href="0202-subslice-syntax-change.html"><strong>59.</strong> 0202-subslice-syntax-change</a></li><li><a href="0212-restore-int-fallback.html"><strong>60.</strong> 0212-restore-int-fallback</a></li><li><a href="0213-defaulted-type-params.html"><strong>61.</strong> 0213-defaulted-type-params</a></li><li><a href="0214-while-let.html"><strong>62.</strong> 0214-while-let</a></li><li><a href="0216-collection-views.html"><strong>63.</strong> 0216-collection-views</a></li><li><a href="0218-empty-struct-with-braces.html"><strong>64.</strong> 0218-empty-struct-with-braces</a></li><li><a href="0221-panic.html"><strong>65.</strong> 0221-panic</a></li><li><a href="0230-remove-runtime.html"><strong>66.</strong> 0230-remove-runtime</a></li><li><a href="0231-upvar-capture-inference.html"><strong>67.</strong> 0231-upvar-capture-inference</a></li><li><a href="0234-variants-namespace.html"><strong>68.</strong> 0234-variants-namespace</a></li><li><a href="0235-collections-conventions.html"><strong>69.</strong> 0235-collections-conventions</a></li><li><a href="0236-error-conventions.html"><strong>70.</strong> 0236-error-conventions</a></li><li><a href="0240-unsafe-api-location.html"><strong>71.</strong> 0240-unsafe-api-location</a></li><li><a href="0241-deref-conversions.html"><strong>72.</strong> 0241-deref-conversions</a></li><li><a href="0243-trait-based-exception-handling.html"><strong>73.</strong> 0243-trait-based-exception-handling</a></li><li><a href="0246-const-vs-static.html"><strong>74.</strong> 0246-const-vs-static</a></li><li><a href="0255-object-safety.html"><strong>75.</strong> 0255-object-safety</a></li><li><a href="0256-remove-refcounting-gc-of-t.html"><strong>76.</strong> 0256-remove-refcounting-gc-of-t</a></li><li><a href="0320-nonzeroing-dynamic-drop.html"><strong>77.</strong> 0320-nonzeroing-dynamic-drop</a></li><li><a href="0326-restrict-xXX-to-ascii.html"><strong>78.</strong> 0326-restrict-xXX-to-ascii</a></li><li><a href="0339-statically-sized-literals.html"><strong>79.</strong> 0339-statically-sized-literals</a></li><li><a href="0341-remove-virtual-structs.html"><strong>80.</strong> 0341-remove-virtual-structs</a></li><li><a href="0342-keywords.html"><strong>81.</strong> 0342-keywords</a></li><li><a href="0344-conventions-galore.html"><strong>82.</strong> 0344-conventions-galore</a></li><li><a href="0356-no-module-prefixes.html"><strong>83.</strong> 0356-no-module-prefixes</a></li><li><a href="0369-num-reform.html"><strong>84.</strong> 0369-num-reform</a></li><li><a href="0378-expr-macros.html"><strong>85.</strong> 0378-expr-macros</a></li><li><a href="0379-remove-reflection.html"><strong>86.</strong> 0379-remove-reflection</a></li><li><a href="0380-stabilize-std-fmt.html"><strong>87.</strong> 0380-stabilize-std-fmt</a></li><li><a href="0385-module-system-cleanup.html"><strong>88.</strong> 0385-module-system-cleanup</a></li><li><a href="0387-higher-ranked-trait-bounds.html"><strong>89.</strong> 0387-higher-ranked-trait-bounds</a></li><li><a href="0390-enum-namespacing.html"><strong>90.</strong> 0390-enum-namespacing</a></li><li><a href="0401-coercions.html"><strong>91.</strong> 0401-coercions</a></li><li><a href="0403-cargo-build-command.html"><strong>92.</strong> 0403-cargo-build-command</a></li><li><a href="0404-change-prefer-dynamic.html"><strong>93.</strong> 0404-change-prefer-dynamic</a></li><li><a href="0418-struct-variants.html"><strong>94.</strong> 0418-struct-variants</a></li><li><a href="0430-finalizing-naming-conventions.html"><strong>95.</strong> 0430-finalizing-naming-conventions</a></li><li><a href="0438-precedence-of-plus.html"><strong>96.</strong> 0438-precedence-of-plus</a></li><li><a href="0439-cmp-ops-reform.html"><strong>97.</strong> 0439-cmp-ops-reform</a></li><li><a href="0445-extension-trait-conventions.html"><strong>98.</strong> 0445-extension-trait-conventions</a></li><li><a href="0446-es6-unicode-escapes.html"><strong>99.</strong> 0446-es6-unicode-escapes</a></li><li><a href="0447-no-unused-impl-parameters.html"><strong>100.</strong> 0447-no-unused-impl-parameters</a></li><li><a href="0450-un-feature-gate-some-more-gates.html"><strong>101.</strong> 0450-un-feature-gate-some-more-gates</a></li><li><a href="0453-macro-reform.html"><strong>102.</strong> 0453-macro-reform</a></li><li><a href="0458-send-improvements.html"><strong>103.</strong> 0458-send-improvements</a></li><li><a href="0459-disallow-shadowing.html"><strong>104.</strong> 0459-disallow-shadowing</a></li><li><a href="0461-tls-overhaul.html"><strong>105.</strong> 0461-tls-overhaul</a></li><li><a href="0463-future-proof-literal-suffixes.html"><strong>106.</strong> 0463-future-proof-literal-suffixes</a></li><li><a href="0469-feature-gate-box-patterns.html"><strong>107.</strong> 0469-feature-gate-box-patterns</a></li><li><a href="0474-path-reform.html"><strong>108.</strong> 0474-path-reform</a></li><li><a href="0486-std-ascii-reform.html"><strong>109.</strong> 0486-std-ascii-reform</a></li><li><a href="0490-dst-syntax.html"><strong>110.</strong> 0490-dst-syntax</a></li><li><a href="0494-c_str-and-c_vec-stability.html"><strong>111.</strong> 0494-c_str-and-c_vec-stability</a></li><li><a href="0495-array-pattern-changes.html"><strong>112.</strong> 0495-array-pattern-changes</a></li><li><a href="0501-consistent_no_prelude_attributes.html"><strong>113.</strong> 0501-consistent_no_prelude_attributes</a></li><li><a href="0503-prelude-stabilization.html"><strong>114.</strong> 0503-prelude-stabilization</a></li><li><a href="0504-show-stabilization.html"><strong>115.</strong> 0504-show-stabilization</a></li><li><a href="0505-api-comment-conventions.html"><strong>116.</strong> 0505-api-comment-conventions</a></li><li><a href="0507-release-channels.html"><strong>117.</strong> 0507-release-channels</a></li><li><a href="0509-collections-reform-part-2.html"><strong>118.</strong> 0509-collections-reform-part-2</a></li><li><a href="0517-io-os-reform.html"><strong>119.</strong> 0517-io-os-reform</a></li><li><a href="0520-new-array-repeat-syntax.html"><strong>120.</strong> 0520-new-array-repeat-syntax</a></li><li><a href="0522-self-impl.html"><strong>121.</strong> 0522-self-impl</a></li><li><a href="0526-fmt-text-writer.html"><strong>122.</strong> 0526-fmt-text-writer</a></li><li><a href="0528-string-patterns.html"><strong>123.</strong> 0528-string-patterns</a></li><li><a href="0529-conversion-traits.html"><strong>124.</strong> 0529-conversion-traits</a></li><li><a href="0531-define-rfc-scope.html"><strong>125.</strong> 0531-define-rfc-scope</a></li><li><a href="0532-self-in-use.html"><strong>126.</strong> 0532-self-in-use</a></li><li><a href="0533-no-array-elem-moves.html"><strong>127.</strong> 0533-no-array-elem-moves</a></li><li><a href="0534-deriving2derive.html"><strong>128.</strong> 0534-deriving2derive</a></li><li><a href="0544-rename-int-uint.html"><strong>129.</strong> 0544-rename-int-uint</a></li><li><a href="0546-Self-not-sized-by-default.html"><strong>130.</strong> 0546-Self-not-sized-by-default</a></li><li><a href="0550-macro-future-proofing.html"><strong>131.</strong> 0550-macro-future-proofing</a></li><li><a href="0556-raw-lifetime.html"><strong>132.</strong> 0556-raw-lifetime</a></li><li><a href="0558-require-parentheses-for-chained-comparisons.html"><strong>133.</strong> 0558-require-parentheses-for-chained-comparisons</a></li><li><a href="0560-integer-overflow.html"><strong>134.</strong> 0560-integer-overflow</a></li><li><a href="0563-remove-ndebug.html"><strong>135.</strong> 0563-remove-ndebug</a></li><li><a href="0565-show-string-guidelines.html"><strong>136.</strong> 0565-show-string-guidelines</a></li><li><a href="0572-rustc-attribute.html"><strong>137.</strong> 0572-rustc-attribute</a></li><li><a href="0574-drain-range.html"><strong>138.</strong> 0574-drain-range</a></li><li><a href="0580-rename-collections.html"><strong>139.</strong> 0580-rename-collections</a></li><li><a href="0587-fn-return-should-be-an-associated-type.html"><strong>140.</strong> 0587-fn-return-should-be-an-associated-type</a></li><li><a href="0592-c-str-deref.html"><strong>141.</strong> 0592-c-str-deref</a></li><li><a href="0593-forbid-Self-definitions.html"><strong>142.</strong> 0593-forbid-Self-definitions</a></li><li><a href="0599-default-object-bound.html"><strong>143.</strong> 0599-default-object-bound</a></li><li><a href="0601-replace-be-with-become.html"><strong>144.</strong> 0601-replace-be-with-become</a></li><li><a href="0639-discriminant-intrinsic.html"><strong>145.</strong> 0639-discriminant-intrinsic</a></li><li><a href="0640-debug-improvements.html"><strong>146.</strong> 0640-debug-improvements</a></li><li><a href="0702-rangefull-expression.html"><strong>147.</strong> 0702-rangefull-expression</a></li><li><a href="0735-allow-inherent-impls-anywhere.html"><strong>148.</strong> 0735-allow-inherent-impls-anywhere</a></li><li><a href="0736-privacy-respecting-fru.html"><strong>149.</strong> 0736-privacy-respecting-fru</a></li><li><a href="0738-variance.html"><strong>150.</strong> 0738-variance</a></li><li><a href="0769-sound-generic-drop.html"><strong>151.</strong> 0769-sound-generic-drop</a></li><li><a href="0771-std-iter-once.html"><strong>152.</strong> 0771-std-iter-once</a></li><li><a href="0803-type-ascription.html"><strong>153.</strong> 0803-type-ascription</a></li><li><a href="0809-box-and-in-for-stdlib.html"><strong>154.</strong> 0809-box-and-in-for-stdlib</a></li><li><a href="0823-hash-simplification.html"><strong>155.</strong> 0823-hash-simplification</a></li><li><a href="0832-from-elem-with-love.html"><strong>156.</strong> 0832-from-elem-with-love</a></li><li><a href="0839-embrace-extend-extinguish.html"><strong>157.</strong> 0839-embrace-extend-extinguish</a></li><li><a href="0840-no-panic-in-c-string.html"><strong>158.</strong> 0840-no-panic-in-c-string</a></li><li><a href="0873-type-macros.html"><strong>159.</strong> 0873-type-macros</a></li><li><a href="0879-small-base-lexing.html"><strong>160.</strong> 0879-small-base-lexing</a></li><li><a href="0888-compiler-fence-intrinsics.html"><strong>161.</strong> 0888-compiler-fence-intrinsics</a></li><li><a href="0909-move-thread-local-to-std-thread.html"><strong>162.</strong> 0909-move-thread-local-to-std-thread</a></li><li><a href="0911-const-fn.html"><strong>163.</strong> 0911-const-fn</a></li><li><a href="0921-entry_v3.html"><strong>164.</strong> 0921-entry_v3</a></li><li><a href="0940-hyphens-considered-harmful.html"><strong>165.</strong> 0940-hyphens-considered-harmful</a></li><li><a href="0953-op-assign.html"><strong>166.</strong> 0953-op-assign</a></li><li><a href="0968-closure-return-type-syntax.html"><strong>167.</strong> 0968-closure-return-type-syntax</a></li><li><a href="0979-align-splitn-with-other-languages.html"><strong>168.</strong> 0979-align-splitn-with-other-languages</a></li><li><a href="0980-read-exact.html"><strong>169.</strong> 0980-read-exact</a></li><li><a href="0982-dst-coercion.html"><strong>170.</strong> 0982-dst-coercion</a></li><li><a href="1011-process.exit.html"><strong>171.</strong> 1011-process.exit</a></li><li><a href="1014-stdout-existential-crisis.html"><strong>172.</strong> 1014-stdout-existential-crisis</a></li><li><a href="1023-rebalancing-coherence.html"><strong>173.</strong> 1023-rebalancing-coherence</a></li><li><a href="1030-prelude-additions.html"><strong>174.</strong> 1030-prelude-additions</a></li><li><a href="1040-duration-reform.html"><strong>175.</strong> 1040-duration-reform</a></li><li><a href="1044-io-fs-2.1.html"><strong>176.</strong> 1044-io-fs-2.1</a></li><li><a href="1047-socket-timeouts.html"><strong>177.</strong> 1047-socket-timeouts</a></li><li><a href="1048-rename-soft-link-to-symlink.html"><strong>178.</strong> 1048-rename-soft-link-to-symlink</a></li><li><a href="1054-str-words.html"><strong>179.</strong> 1054-str-words</a></li><li><a href="1057-io-error-sync.html"><strong>180.</strong> 1057-io-error-sync</a></li><li><a href="1058-slice-tail-redesign.html"><strong>181.</strong> 1058-slice-tail-redesign</a></li><li><a href="1066-safe-mem-forget.html"><strong>182.</strong> 1066-safe-mem-forget</a></li><li><a href="1068-rust-governance.html"><strong>183.</strong> 1068-rust-governance</a></li><li><a href="1096-remove-static-assert.html"><strong>184.</strong> 1096-remove-static-assert</a></li><li><a href="1102-rename-connect-to-join.html"><strong>185.</strong> 1102-rename-connect-to-join</a></li><li><a href="1105-api-evolution.html"><strong>186.</strong> 1105-api-evolution</a></li><li><a href="1119-result-expect.html"><strong>187.</strong> 1119-result-expect</a></li><li><a href="1122-language-semver.html"><strong>188.</strong> 1122-language-semver</a></li><li><a href="1123-str-split-at.html"><strong>189.</strong> 1123-str-split-at</a></li><li><a href="1131-likely-intrinsic.html"><strong>190.</strong> 1131-likely-intrinsic</a></li><li><a href="1135-raw-pointer-comparisons.html"><strong>191.</strong> 1135-raw-pointer-comparisons</a></li><li><a href="1152-slice-string-symmetry.html"><strong>192.</strong> 1152-slice-string-symmetry</a></li><li><a href="1156-adjust-default-object-bounds.html"><strong>193.</strong> 1156-adjust-default-object-bounds</a></li><li><a href="1174-into-raw-fd-socket-handle-traits.html"><strong>194.</strong> 1174-into-raw-fd-socket-handle-traits</a></li><li><a href="1183-swap-out-jemalloc.html"><strong>195.</strong> 1183-swap-out-jemalloc</a></li><li><a href="1184-stabilize-no_std.html"><strong>196.</strong> 1184-stabilize-no_std</a></li><li><a href="1191-hir.html"><strong>197.</strong> 1191-hir</a></li><li><a href="1192-inclusive-ranges.html"><strong>198.</strong> 1192-inclusive-ranges</a></li><li><a href="1193-cap-lints.html"><strong>199.</strong> 1193-cap-lints</a></li><li><a href="1194-set-recovery.html"><strong>200.</strong> 1194-set-recovery</a></li><li><a href="1199-simd-infrastructure.html"><strong>201.</strong> 1199-simd-infrastructure</a></li><li><a href="1200-cargo-install.html"><strong>202.</strong> 1200-cargo-install</a></li><li><a href="1201-naked-fns.html"><strong>203.</strong> 1201-naked-fns</a></li><li><a href="1210-impl-specialization.html"><strong>204.</strong> 1210-impl-specialization</a></li><li><a href="1211-mir.html"><strong>205.</strong> 1211-mir</a></li><li><a href="1212-line-endings.html"><strong>206.</strong> 1212-line-endings</a></li><li><a href="1214-projections-lifetimes-and-wf.html"><strong>207.</strong> 1214-projections-lifetimes-and-wf</a></li><li><a href="1216-bang-type.html"><strong>208.</strong> 1216-bang-type</a></li><li><a href="1219-use-group-as.html"><strong>209.</strong> 1219-use-group-as</a></li><li><a href="1228-placement-left-arrow.html"><strong>210.</strong> 1228-placement-left-arrow</a></li><li><a href="1229-compile-time-asserts.html"><strong>211.</strong> 1229-compile-time-asserts</a></li><li><a href="1236-stabilize-catch-panic.html"><strong>212.</strong> 1236-stabilize-catch-panic</a></li><li><a href="1238-nonparametric-dropck.html"><strong>213.</strong> 1238-nonparametric-dropck</a></li><li><a href="1240-repr-packed-unsafe-ref.html"><strong>214.</strong> 1240-repr-packed-unsafe-ref</a></li><li><a href="1241-no-wildcard-deps.html"><strong>215.</strong> 1241-no-wildcard-deps</a></li><li><a href="1242-rust-lang-crates.html"><strong>216.</strong> 1242-rust-lang-crates</a></li><li><a href="1252-open-options.html"><strong>217.</strong> 1252-open-options</a></li><li><a href="1257-drain-range-2.html"><strong>218.</strong> 1257-drain-range-2</a></li><li><a href="1260-main-reexport.html"><strong>219.</strong> 1260-main-reexport</a></li><li><a href="1268-allow-overlapping-impls-on-marker-traits.html"><strong>220.</strong> 1268-allow-overlapping-impls-on-marker-traits</a></li><li><a href="1270-deprecation.html"><strong>221.</strong> 1270-deprecation</a></li><li><a href="1288-time-improvements.html"><strong>222.</strong> 1288-time-improvements</a></li><li><a href="1291-promote-libc.html"><strong>223.</strong> 1291-promote-libc</a></li><li><a href="1298-incremental-compilation.html"><strong>224.</strong> 1298-incremental-compilation</a></li><li><a href="1300-intrinsic-semantics.html"><strong>225.</strong> 1300-intrinsic-semantics</a></li><li><a href="1307-osstring-methods.html"><strong>226.</strong> 1307-osstring-methods</a></li><li><a href="1317-ide.html"><strong>227.</strong> 1317-ide</a></li><li><a href="1327-dropck-param-eyepatch.html"><strong>228.</strong> 1327-dropck-param-eyepatch</a></li><li><a href="1328-global-panic-handler.html"><strong>229.</strong> 1328-global-panic-handler</a></li><li><a href="1331-grammar-is-canonical.html"><strong>230.</strong> 1331-grammar-is-canonical</a></li><li><a href="1358-repr-align.html"><strong>231.</strong> 1358-repr-align</a></li><li><a href="1359-process-ext-unix.html"><strong>232.</strong> 1359-process-ext-unix</a></li><li><a href="1361-cargo-cfg-dependencies.html"><strong>233.</strong> 1361-cargo-cfg-dependencies</a></li><li><a href="1398-kinds-of-allocators.html"><strong>234.</strong> 1398-kinds-of-allocators</a></li><li><a href="1399-repr-pack.html"><strong>235.</strong> 1399-repr-pack</a></li><li><a href="1414-rvalue_static_promotion.html"><strong>236.</strong> 1414-rvalue_static_promotion</a></li><li><a href="1415-trim-std-os.html"><strong>237.</strong> 1415-trim-std-os</a></li><li><a href="1419-slice-copy.html"><strong>238.</strong> 1419-slice-copy</a></li><li><a href="1422-pub-restricted.html"><strong>239.</strong> 1422-pub-restricted</a></li><li><a href="1432-replace-slice.html"><strong>240.</strong> 1432-replace-slice</a></li><li><a href="1434-contains-method-for-ranges.html"><strong>241.</strong> 1434-contains-method-for-ranges</a></li><li><a href="1440-drop-types-in-const.html"><strong>242.</strong> 1440-drop-types-in-const</a></li><li><a href="1443-extended-compare-and-swap.html"><strong>243.</strong> 1443-extended-compare-and-swap</a></li><li><a href="1444-union.html"><strong>244.</strong> 1444-union</a></li><li><a href="1445-restrict-constants-in-patterns.html"><strong>245.</strong> 1445-restrict-constants-in-patterns</a></li><li><a href="1461-net2-mutators.html"><strong>246.</strong> 1461-net2-mutators</a></li><li><a href="1467-volatile.html"><strong>247.</strong> 1467-volatile</a></li><li><a href="1479-unix-socket.html"><strong>248.</strong> 1479-unix-socket</a></li><li><a href="1492-dotdot-in-patterns.html"><strong>249.</strong> 1492-dotdot-in-patterns</a></li><li><a href="1498-ipv6addr-octets.html"><strong>250.</strong> 1498-ipv6addr-octets</a></li><li><a href="1504-int128.html"><strong>251.</strong> 1504-int128</a></li><li><a href="1506-adt-kinds.html"><strong>252.</strong> 1506-adt-kinds</a></li><li><a href="1510-cdylib.html"><strong>253.</strong> 1510-cdylib</a></li><li><a href="1513-less-unwinding.html"><strong>254.</strong> 1513-less-unwinding</a></li><li><a href="1521-copy-clone-semantics.html"><strong>255.</strong> 1521-copy-clone-semantics</a></li><li><a href="1522-conservative-impl-trait.html"><strong>256.</strong> 1522-conservative-impl-trait</a></li><li><a href="1525-cargo-workspace.html"><strong>257.</strong> 1525-cargo-workspace</a></li><li><a href="1535-stable-overflow-checks.html"><strong>258.</strong> 1535-stable-overflow-checks</a></li><li><a href="1542-try-from.html"><strong>259.</strong> 1542-try-from</a></li><li><a href="1543-integer_atomics.html"><strong>260.</strong> 1543-integer_atomics</a></li><li><a href="1548-global-asm.html"><strong>261.</strong> 1548-global-asm</a></li><li><a href="1552-contains-method-for-various-collections.html"><strong>262.</strong> 1552-contains-method-for-various-collections</a></li><li><a href="1558-closure-to-fn-coercion.html"><strong>263.</strong> 1558-closure-to-fn-coercion</a></li><li><a href="1559-attributes-with-literals.html"><strong>264.</strong> 1559-attributes-with-literals</a></li><li><a href="1560-name-resolution.html" class="active"><strong>265.</strong> 1560-name-resolution</a></li><li><a href="1561-macro-naming.html"><strong>266.</strong> 1561-macro-naming</a></li><li><a href="1566-proc-macros.html"><strong>267.</strong> 1566-proc-macros</a></li><li><a href="1567-long-error-codes-explanation-normalization.html"><strong>268.</strong> 1567-long-error-codes-explanation-normalization</a></li><li><a href="1574-more-api-documentation-conventions.html"><strong>269.</strong> 1574-more-api-documentation-conventions</a></li><li><a href="1576-macros-literal-matcher.html"><strong>270.</strong> 1576-macros-literal-matcher</a></li><li><a href="1581-fused-iterator.html"><strong>271.</strong> 1581-fused-iterator</a></li><li><a href="1584-macros.html"><strong>272.</strong> 1584-macros</a></li><li><a href="1589-rustc-bug-fix-procedure.html"><strong>273.</strong> 1589-rustc-bug-fix-procedure</a></li><li><a href="1590-macro-lifetimes.html"><strong>274.</strong> 1590-macro-lifetimes</a></li><li><a href="1598-generic_associated_types.html"><strong>275.</strong> 1598-generic_associated_types</a></li><li><a href="1607-style-rfcs.html"><strong>276.</strong> 1607-style-rfcs</a></li><li><a href="1618-ergonomic-format-args.html"><strong>277.</strong> 1618-ergonomic-format-args</a></li><li><a href="1620-regex-1.0.html"><strong>278.</strong> 1620-regex-1.0</a></li><li><a href="1623-static.html"><strong>279.</strong> 1623-static</a></li><li><a href="1624-loop-break-value.html"><strong>280.</strong> 1624-loop-break-value</a></li><li><a href="1636-document_all_features.html"><strong>281.</strong> 1636-document_all_features</a></li><li><a href="1640-duration-checked-sub.html"><strong>282.</strong> 1640-duration-checked-sub</a></li><li><a href="1643-memory-model-strike-team.html"><strong>283.</strong> 1643-memory-model-strike-team</a></li><li><a href="1644-default-and-expanded-rustc-errors.html"><strong>284.</strong> 1644-default-and-expanded-rustc-errors</a></li><li><a href="1647-allow-self-in-where-clauses.html"><strong>285.</strong> 1647-allow-self-in-where-clauses</a></li><li><a href="1649-atomic-access.html"><strong>286.</strong> 1649-atomic-access</a></li><li><a href="1651-movecell.html"><strong>287.</strong> 1651-movecell</a></li><li><a href="1653-assert_ne.html"><strong>288.</strong> 1653-assert_ne</a></li><li><a href="1660-try-borrow.html"><strong>289.</strong> 1660-try-borrow</a></li><li><a href="1665-windows-subsystem.html"><strong>290.</strong> 1665-windows-subsystem</a></li><li><a href="1679-panic-safe-slicing.html"><strong>291.</strong> 1679-panic-safe-slicing</a></li><li><a href="1681-macros-1.1.html"><strong>292.</strong> 1681-macros-1.1</a></li><li><a href="1682-field-init-shorthand.html"><strong>293.</strong> 1682-field-init-shorthand</a></li><li><a href="1683-docs-team.html"><strong>294.</strong> 1683-docs-team</a></li><li><a href="1685-deprecate-anonymous-parameters.html"><strong>295.</strong> 1685-deprecate-anonymous-parameters</a></li><li><a href="1695-add-error-macro.html"><strong>296.</strong> 1695-add-error-macro</a></li><li><a href="1696-discriminant.html"><strong>297.</strong> 1696-discriminant</a></li><li><a href="1717-dllimport.html"><strong>298.</strong> 1717-dllimport</a></li><li><a href="1721-crt-static.html"><strong>299.</strong> 1721-crt-static</a></li><li><a href="1725-unaligned-access.html"><strong>300.</strong> 1725-unaligned-access</a></li><li><a href="1728-north-star.html"><strong>301.</strong> 1728-north-star</a></li><li><a href="1733-trait-alias.html"><strong>302.</strong> 1733-trait-alias</a></li><li><a href="1758-repr-transparent.html"><strong>303.</strong> 1758-repr-transparent</a></li><li><a href="1774-roadmap-2017.html"><strong>304.</strong> 1774-roadmap-2017</a></li><li><a href="1789-as-cell.html"><strong>305.</strong> 1789-as-cell</a></li><li><a href="1824-crates.io-default-ranking.html"><strong>306.</strong> 1824-crates.io-default-ranking</a></li><li><a href="1826-change-doc-default-urls.html"><strong>307.</strong> 1826-change-doc-default-urls</a></li><li><a href="1828-rust-bookshelf.html"><strong>308.</strong> 1828-rust-bookshelf</a></li><li><a href="1845-shared-from-slice.html"><strong>309.</strong> 1845-shared-from-slice</a></li><li><a href="1849-non-static-type-id.html"><strong>310.</strong> 1849-non-static-type-id</a></li><li><a href="1857-stabilize-drop-order.html"><strong>311.</strong> 1857-stabilize-drop-order</a></li><li><a href="1859-try-trait.html"><strong>312.</strong> 1859-try-trait</a></li><li><a href="1860-manually-drop.html"><strong>313.</strong> 1860-manually-drop</a></li><li><a href="1861-extern-types.html"><strong>314.</strong> 1861-extern-types</a></li><li><a href="1866-more-readable-assert-eq.html"><strong>315.</strong> 1866-more-readable-assert-eq</a></li><li><a href="1868-portability-lint.html"><strong>316.</strong> 1868-portability-lint</a></li><li><a href="1869-eprintln.html"><strong>317.</strong> 1869-eprintln</a></li><li><a href="1884-unstable-sort.html"><strong>318.</strong> 1884-unstable-sort</a></li><li><a href="1925-optional-match-vert.html"><strong>319.</strong> 1925-optional-match-vert</a></li><li><a href="1937-ques-in-main.html"><strong>320.</strong> 1937-ques-in-main</a></li><li><a href="1940-must-use-functions.html"><strong>321.</strong> 1940-must-use-functions</a></li><li><a href="1946-intra-rustdoc-links.html"><strong>322.</strong> 1946-intra-rustdoc-links</a></li><li><a href="1951-expand-impl-trait.html"><strong>323.</strong> 1951-expand-impl-trait</a></li><li><a href="1961-clamp.html"><strong>324.</strong> 1961-clamp</a></li><li><a href="1966-unsafe-pointer-reform.html"><strong>325.</strong> 1966-unsafe-pointer-reform</a></li><li><a href="1969-cargo-prepublish.html"><strong>326.</strong> 1969-cargo-prepublish</a></li><li><a href="1974-global-allocators.html"><strong>327.</strong> 1974-global-allocators</a></li><li><a href="1977-public-private-dependencies.html"><strong>328.</strong> 1977-public-private-dependencies</a></li><li><a href="1983-nursery-deprecation.html"><strong>329.</strong> 1983-nursery-deprecation</a></li><li><a href="1985-tiered-browser-support.html"><strong>330.</strong> 1985-tiered-browser-support</a></li><li><a href="1990-external-doc-attribute.html"><strong>331.</strong> 1990-external-doc-attribute</a></li><li><a href="2000-const-generics.html"><strong>332.</strong> 2000-const-generics</a></li><li><a href="2005-match-ergonomics.html"><strong>333.</strong> 2005-match-ergonomics</a></li><li><a href="2008-non-exhaustive.html"><strong>334.</strong> 2008-non-exhaustive</a></li><li><a href="2011-generic-assert.html"><strong>335.</strong> 2011-generic-assert</a></li><li><a href="2025-nested-method-calls.html"><strong>336.</strong> 2025-nested-method-calls</a></li><li><a href="2027-object_safe_for_dispatch.html"><strong>337.</strong> 2027-object_safe_for_dispatch</a></li><li><a href="2033-experimental-coroutines.html"><strong>338.</strong> 2033-experimental-coroutines</a></li><li><a href="2043-is-aligned-intrinsic.html"><strong>339.</strong> 2043-is-aligned-intrinsic</a></li><li><a href="2044-license-rfcs.html"><strong>340.</strong> 2044-license-rfcs</a></li><li><a href="2045-target-feature.html"><strong>341.</strong> 2045-target-feature</a></li><li><a href="2052-epochs.html"><strong>342.</strong> 2052-epochs</a></li><li><a href="2057-refcell-replace.html"><strong>343.</strong> 2057-refcell-replace</a></li><li><a href="2070-panic-implementation.html"><strong>344.</strong> 2070-panic-implementation</a></li><li><a href="2071-impl-trait-type-alias.html"><strong>345.</strong> 2071-impl-trait-type-alias</a></li><li><a href="2086-allow-if-let-irrefutables.html"><strong>346.</strong> 2086-allow-if-let-irrefutables</a></li><li><a href="2089-implied-bounds.html"><strong>347.</strong> 2089-implied-bounds</a></li><li><a href="2093-infer-outlives.html"><strong>348.</strong> 2093-infer-outlives</a></li><li><a href="2094-nll.html"><strong>349.</strong> 2094-nll</a></li><li><a href="2103-tool-attributes.html"><strong>350.</strong> 2103-tool-attributes</a></li><li><a href="2113-dyn-trait-syntax.html"><strong>351.</strong> 2113-dyn-trait-syntax</a></li><li><a href="2115-argument-lifetimes.html"><strong>352.</strong> 2115-argument-lifetimes</a></li><li><a href="2124-option-filter.html"><strong>353.</strong> 2124-option-filter</a></li><li><a href="2126-path-clarity.html"><strong>354.</strong> 2126-path-clarity</a></li><li><a href="2128-use-nested-groups.html"><strong>355.</strong> 2128-use-nested-groups</a></li><li><a href="2132-copy-closures.html"><strong>356.</strong> 2132-copy-closures</a></li><li><a href="2133-all-the-clones.html"><strong>357.</strong> 2133-all-the-clones</a></li><li><a href="2137-variadic.html"><strong>358.</strong> 2137-variadic</a></li><li><a href="2141-alternative-registries.html"><strong>359.</strong> 2141-alternative-registries</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <ul>
+<li>Feature Name: item_like_imports</li>
+<li>Start Date: 2016-02-09</li>
+<li>RFC PR: https://github.com/rust-lang/rfcs/pull/1560</li>
+<li>Rust Issue: https://github.com/rust-lang/rust/issues/35120</li>
+</ul>
+<a class="header" href="1560-name-resolution.html#summary" id="summary"><h1>Summary</h1></a>
+<p>Some internal and language-level changes to name resolution.</p>
+<p>Internally, name resolution will be split into two parts - import resolution and
+name lookup. Import resolution is moved forward in time to happen in the same
+phase as parsing and macro expansion. Name lookup remains where name resolution
+currently takes place (that may change in the future, but is outside the scope
+of this RFC). However, name lookup can be done earlier if required (importantly
+it can be done during macro expansion to allow using the module system for
+macros, also outside the scope of this RFC). Import resolution will use a new
+algorithm.</p>
+<p>The observable effects of this RFC (i.e., language changes) are some increased
+flexibility in the name resolution rules, especially around globs and shadowing.</p>
+<p>There is an implementation of the language changes in
+<a href="https://github.com/rust-lang/rust/pull/32213">PR #32213</a>.</p>
+<a class="header" href="1560-name-resolution.html#motivation" id="motivation"><h1>Motivation</h1></a>
+<p>Naming and importing macros currently works very differently to naming and
+importing any other item. It would be impossible to use the same rules,
+since macro expansion happens before name resolution in the compilation process.
+Implementing this RFC means that macro expansion and name resolution can happen
+in the same phase, thus allowing macros to use the Rust module system properly.</p>
+<p>At the same time, we should be able to accept more Rust programs by tweaking the
+current rules around imports and name shadowing. This should make programming
+using imports easier.</p>
+<a class="header" href="1560-name-resolution.html#some-issues-in-rusts-name-resolution" id="some-issues-in-rusts-name-resolution"><h2>Some issues in Rust's name resolution</h2></a>
+<p>Whilst name resolution is sometimes considered a simple part of the compiler,
+there are some details in Rust which make it tricky to properly specify and
+implement. Some of these may seem obvious, but the distinctions will be
+important later.</p>
+<ul>
+<li>
+<p>Imported vs declared names - a name can be imported (e.g., <code>use foo;</code>) or
+declared (e.g., <code>fn foo ...</code>).</p>
+</li>
+<li>
+<p>Single vs glob imports - a name can be explicitly (e.g., <code>use a::foo;</code>) or
+implicitly imported (e.g., <code>use a::*;</code> where <code>foo</code> is declared in <code>a</code>).</p>
+</li>
+<li>
+<p>Public vs private names - the visibility of names is somewhat tied up with
+name resolution, for example in current Rust <code>use a::*;</code> only imports the
+public names from <code>a</code>.</p>
+</li>
+<li>
+<p>Lexical scoping - a name can be inherited from a surrounding scope, rather
+than being declared in the current one, e.g., <code>let foo = ...; { foo(); }</code>.</p>
+</li>
+<li>
+<p>There are different kinds of scopes - at the item level, names are not
+inherited from outer modules into inner modules. Items may also be declared
+inside functions and blocks within functions, with different rules from modules.
+At the expression level, blocks (<code>{...}</code>) give explicit scope, however, from
+the point of view of macro hygiene and region inference, each <code>let</code> statement
+starts a new implicit scope.</p>
+</li>
+<li>
+<p>Explicitly declared vs macro generated names - a name can be declared
+explicitly in the source text, or could be declared as the result of expanding
+a macro.</p>
+</li>
+<li>
+<p>Rust has multiple namespaces - types, values, and macros exist in separate
+namespaces (some items produce names in multiple namespaces). Imports
+refer (implictly) to one or more names in different namespaces.</p>
+<p>Note that all top-level (i.e., not parameters, etc.) path segments in a path
+other than the last must be in the type namespace, e.g., in <code>a::b::c</code>, <code>a</code> and
+<code>b</code> are assumed to be in the type namespace, and <code>c</code> may be in any namespace.</p>
+</li>
+<li>
+<p>Rust has an implicit prelude - the prelude defines a set of names which are
+always (unless explicitly opted-out) nameable. The prelude includes macros.
+Names in the prelude can be shadowed by any other names.</p>
+</li>
+</ul>
+<a class="header" href="1560-name-resolution.html#detailed-design" id="detailed-design"><h1>Detailed design</h1></a>
+<a class="header" href="1560-name-resolution.html#guiding-principles" id="guiding-principles"><h2>Guiding principles</h2></a>
+<p>We would like the following principles to hold. There may be edge cases where
+they do not, but we would like these to be as small as possible (and prefer they
+don't exist at all).</p>
+<a class="header" href="1560-name-resolution.html#avoid-time-travel-ambiguities-or-different-results-of-resolution-if-names" id="avoid-time-travel-ambiguities-or-different-results-of-resolution-if-names"><h4>Avoid 'time-travel' ambiguities, or different results of resolution if names</h4></a>
+<p>are resolved in different orders.</p>
+<p>Due to macro expansion, it is possible for a name to be resolved and then to
+become ambiguous, or (with rules formulated in a certain way) for a name to be
+resolved, then to be amiguous, then to be resolvable again (possibly to
+different bindings).</p>
+<p>Furthermore, there is some flexibility in the order in which macros can be
+expanded. How a name resolves should be consistent under any ordering.</p>
+<p>The strongest form of this principle, I believe, is that at any stage of
+macro expansion, and under any ordering of expansions, if a name resolves to a
+binding then it should always (i.e., at any other stage of any other expansion
+series) resolve to that binding, and if resolving a name produces an error
+(n.b., distinct from not being able to resolve), it should always produce an
+error.</p>
+<a class="header" href="1560-name-resolution.html#avoid-errors-due-to-the-resolver-being-stuck" id="avoid-errors-due-to-the-resolver-being-stuck"><h4>Avoid errors due to the resolver being stuck.</h4></a>
+<p>Errors with concrete causes and explanations are easier for the user to
+understand and to correct. If an error is caused by name resolution getting
+stuck, rather than by a concrete problem, this is hard to explain or correct.</p>
+<p>For example, if we support a rule that means that a certain glob can't be
+expanded before a macro is, but the macro can only be named via that glob
+import, then there is an obvious resolution that can't be reached due to our
+ordering constraints.</p>
+<a class="header" href="1560-name-resolution.html#the-order-of-declarations-of-items-should-be-irrelevant" id="the-order-of-declarations-of-items-should-be-irrelevant"><h4>The order of declarations of items should be irrelevant.</h4></a>
+<p>I.e., names should be able to be used before they are declared. Note that this
+clearly does not hold for declarations of variables in statements inside
+function bodies.</p>
+<a class="header" href="1560-name-resolution.html#macros-should-be-manually-expandable" id="macros-should-be-manually-expandable"><h4>Macros should be manually expandable.</h4></a>
+<p>Compiling a program should have the same result before and after expanding a
+macro 'by hand', so long as hygiene is accounted for.</p>
+<a class="header" href="1560-name-resolution.html#glob-imports-should-be-manually-expandable" id="glob-imports-should-be-manually-expandable"><h4>Glob imports should be manually expandable.</h4></a>
+<p>A programmer should be able to replace a glob import with a list import that
+imports any names imported by the glob and used in the current scope, without
+changing name resolution behaviour.</p>
+<a class="header" href="1560-name-resolution.html#visibility-should-not-affect-name-resolution" id="visibility-should-not-affect-name-resolution"><h4>Visibility should not affect name resolution.</h4></a>
+<p>Clearly, visibility affects whether a name can be used or not. However, it
+should not affect the mechanics of name resolution. I.e., changing a name from
+public to private (or vice versa), should not cause more or fewer name
+resolution errors (it may of course cause more or fewer accessibility errors).</p>
+<a class="header" href="1560-name-resolution.html#changes-to-name-resolution-rules" id="changes-to-name-resolution-rules"><h2>Changes to name resolution rules</h2></a>
+<a class="header" href="1560-name-resolution.html#multiple-unused-imports" id="multiple-unused-imports"><h3>Multiple unused imports</h3></a>
+<p>A name may be imported multiple times, it is only a name resolution error if
+that name is used. E.g.,</p>
+<pre><code>mod foo {
+    pub struct Qux;
+}
+
+mod bar {
+    pub struct Qux;
+}
+
+mod baz {
+    use foo::*;
+    use bar::*; // Ok, no name conflict.
+}
+</code></pre>
+<p>In this example, adding a use of <code>Qux</code> in <code>baz</code> would cause a name resolution
+error.</p>
+<a class="header" href="1560-name-resolution.html#multiple-imports-of-the-same-binding" id="multiple-imports-of-the-same-binding"><h3>Multiple imports of the same binding</h3></a>
+<p>A name may be imported multiple times and used if both names bind to the same
+item. E.g.,</p>
+<pre><code>mod foo {
+    pub struct Qux;
+}
+
+mod bar {
+    pub use foo::Qux;
+}
+
+mod baz {
+    use foo::*;
+    use bar::*;
+
+    fn f(q: Qux) {}
+}
+</code></pre>
+<a class="header" href="1560-name-resolution.html#non-public-imports" id="non-public-imports"><h3>non-public imports</h3></a>
+<p>Currently <code>use</code> and <code>pub use</code> items are treated differently. Non-public imports
+will be treated in the same way as public imports, so they may be referenced
+from modules which have access to them. E.g.,</p>
+<pre><code>mod foo {
+    pub struct Qux;
+}
+
+mod bar {
+    use foo::Qux;
+
+    mod baz {
+        use bar::Qux; // Ok
+    }
+}
+</code></pre>
+<a class="header" href="1560-name-resolution.html#glob-imports-of-accessible-but-not-public-names" id="glob-imports-of-accessible-but-not-public-names"><h3>Glob imports of accessible but not public names</h3></a>
+<p>Glob imports will import all accessible names, not just public ones. E.g.,</p>
+<pre><code>struct Qux;
+
+mod foo {
+    use super::*;
+
+    fn f(q: Qux) {} // Ok
+}
+</code></pre>
+<p>This change is backwards incompatible. However, the second rule above should
+address most cases, e.g.,</p>
+<pre><code>struct Qux;
+
+mod foo {
+    use super::*;
+    use super::Qux; // Legal due to the second rule above.
+
+    fn f(q: Qux) {} // Ok
+}
+</code></pre>
+<p>The below rule (though more controversial) should make this change entirely
+backwards compatible.</p>
+<p>Note that in combination with the above rule, this means non-public imports are
+imported by globs where they are private but accessible.</p>
+<a class="header" href="1560-name-resolution.html#explicit-names-may-shadow-implicit-names" id="explicit-names-may-shadow-implicit-names"><h3>Explicit names may shadow implicit names</h3></a>
+<p>Here, an implicit name means a name imported via a glob or inherited from an
+outer scope (as opposed to being declared or imported directly in an inner scope).</p>
+<p>An explicit name may shadow an implicit name without causing a name
+resolution error. E.g.,</p>
+<pre><code>mod foo {
+    pub struct Qux;
+}
+
+mod bar {
+    pub struct Qux;
+}
+
+mod baz {
+    use foo::*;
+
+    struct Qux; // Shadows foo::Qux.
+}
+
+mod boz {
+    use foo::*;
+    use bar::Qux; // Shadows foo::Qux; note, ordering is not important.
+}
+</code></pre>
+<p>or</p>
+<pre><code>fn main() {
+    struct Foo; // 1.
+    {
+        struct Foo; // 2.
+
+        let x = Foo; // Ok and refers to declaration 2.
+    }
+}
+</code></pre>
+<p>Note that shadowing is namespace specific. I believe this is consistent with our
+general approach to name spaces. E.g.,</p>
+<pre><code>mod foo {
+    pub struct Qux;
+}
+
+mod bar {
+    pub trait Qux;
+}
+
+mod boz {
+    use foo::*;
+    use bar::Qux; // Shadows only in the type name space.
+
+    fn f(x: &amp;Qux) {   // bound to bar::Qux.
+        let _ = Qux;  // bound to foo::Qux.
+    }
+}
+</code></pre>
+<p>Caveat: an explicit name which is defined by the expansion of a macro does <strong>not</strong>
+shadow implicit names. Example:</p>
+<pre><code>macro_rules! foo {
+    () =&gt; {
+        fn foo() {}
+    }
+}
+
+mod a {
+    fn foo() {}
+}
+
+mod b {
+    use a::*;
+
+    foo!(); // Expands to `fn foo() {}`, this `foo` does not shadow the `foo`
+            // imported from `a` and therefore there is a duplicate name error.
+}
+</code></pre>
+<p>The rationale for this caveat is so that during import resolution, if we have a
+glob import (or other implicit name) we can be sure that any imported names will
+not be shadowed, either the name will continue to be valid, or there will be an
+error. Without this caveat, a name could be valid, and then after further
+expansion, become shadowed by a higher priority name.</p>
+<p>An error is reported if there is an ambiguity between names due to the lack of
+shadowing, e.g., (this example assumes modularised macros),</p>
+<pre><code>macro_rules! foo {
+    () =&gt; {
+        macro! bar { ... }
+    }
+}
+
+mod a {
+    macro! bar { ... }
+}
+
+mod b {
+    use a::*;
+
+    foo!(); // Expands to `macro! bar { ... }`.
+
+    bar!(); // ERROR: bar is ambiguous.
+}
+</code></pre>
+<p>Note on the caveat: there will only be an error emitted if an ambiguous name is
+used directly or indirectly in a macro use. I.e., is the name of a macro that is
+used, or is the name of a module that is used to name a macro either in a macro
+use or in an import.</p>
+<p>Alternatives: we could emit an error even if the ambiguous name is not used, or
+as a compromise between these two, we could emit an error if the name is in the
+type or macro namespace (a name in the value namespace can never cause problems).</p>
+<p>This change is discussed in <a href="https://github.com/rust-lang/rust/issues/31337">issue 31337</a>
+and on this RFC PR's comment thread.</p>
+<a class="header" href="1560-name-resolution.html#re-exports-namespaces-and-visibility" id="re-exports-namespaces-and-visibility"><h3>Re-exports, namespaces, and visibility.</h3></a>
+<p>(This is something of a clarification point, rather than explicitly new behaviour.
+See also discussion on <a href="https://github.com/rust-lang/rust/issues/31783">issue 31783</a>).</p>
+<p>An import (<code>use</code>) or re-export (<code>pub use</code>) imports a name in all available
+namespaces. E.g., <code>use a::foo;</code> will import <code>foo</code> in the type and value
+namespaces if it is declared in those namespaces in <code>a</code>.</p>
+<p>For a name to be re-exported, it must be public, e.g, <code>pub use a::foo;</code> requires
+that <code>foo</code> is declared publicly in <code>a</code>. This is complicated by namespaces. The
+following behaviour should be followed for a re-export of <code>foo</code>:</p>
+<ul>
+<li><code>foo</code> is private in all namespaces in which it is declared - emit an error.</li>
+<li><code>foo</code> is public in all namespaces in which it is declared - <code>foo</code> is
+re-exported in all namespaces.</li>
+<li><code>foo</code> is mixed public/private - <code>foo</code> is re-exported in the namespaces in which
+it is declared publicly and imported but not re-exported in namespaces in which
+it is declared privately.</li>
+</ul>
+<p>For a glob re-export, there is an error if there are no public items in any
+namespace. Otherwise private names are imported and public names are re-exported
+on a per-namespace basis (i.e., following the above rules).</p>
+<a class="header" href="1560-name-resolution.html#changes-to-the-implementation" id="changes-to-the-implementation"><h2>Changes to the implementation</h2></a>
+<p>Note: below I talk about &quot;the binding table&quot;, this is sort of hand-waving. I'm
+envisaging a sets-of-scopes system where there is effectively a single, global
+binding table. However, the details of that are beyond the scope of this RFC.
+One can imagine &quot;the binding table&quot; means one binding table per scope, as in the
+current system.</p>
+<p>Currently, parsing and macro expansion happen in the same phase. With this
+proposal, we add import resolution to that mix too. Binding tables as well as
+the AST will be produced by libsyntax. Name lookup will continue to be done
+where name resolution currently takes place.</p>
+<p>To resolve imports, the algorithm proceeds as follows: we start by parsing as
+much of the program as we can; like today we don't parse macros. When we find
+items which bind a name, we add the name to the binding table. When we find an
+import which can't be resolved, we add it to a work list. When we find a glob
+import, we have to record a 'back link', so that when a public name is added for
+the supplying module, we can add it for the importing module.</p>
+<p>We then loop over the work list and try to lookup names. If a name has exactly
+one best binding then we use it (and record the binding on a list of resolved
+names). If there are zero then we put it back on the work list. If there is more
+than one binding, then we record an ambiguity error. When we reach a fixed
+point, i.e., the work list no longer changes, then we are done. If the work list
+is empty, then expansion/import resolution succeeded, otherwise there are names
+not found, or ambiguous names, and we failed.</p>
+<p>As we are looking up names, we record the resolutions in the binding table. If
+the name we are looking up is for a glob import, we add bindings for every
+accessible name currently known.</p>
+<p>To expand a macro use, we try to resolve the macro's name. If that fails, we put
+it on the work list. Otherwise, we expand that macro by parsing the arguments,
+pattern matching, and doing hygienic expansion. We then parse the generated code
+in the same way as we parsed the original program. We add new names to the
+binding table, and expand any new macro uses.</p>
+<p>If we add names for a module which has back links, we must follow them and add
+these names to the importing module (if they are accessible).</p>
+<p>In pseudo-code:</p>
+<pre><code>// Assumes parsing is already done, but the two things could be done in the same
+// pass.
+fn parse_expand_and_resolve() {
+    loop until fixed point {
+        process_names()
+        loop until fixed point {
+            process_work_list()
+        }
+        expand_macros()
+    }
+
+    for item in work_list {
+        report_error()
+    } else {
+        success!()
+    }
+}
+
+fn process_names() {
+    // 'module' includes `mod`s, top level of the crate, function bodies
+    for each unseen item in any module {
+        if item is a definition {
+            // struct, trait, type, local variable def, etc.
+            bindings.insert(item.name, module, item)
+            populate_back_links(module, item)
+        } else {
+            try_to_resolve_import(module, item)
+        }
+        record_macro_uses()
+    }
+}
+
+fn try_to_resolve_import(module, item) {
+    if item is an explicit use {
+        // item is use a::b::c as d;
+        match try_to_resolve(item) {
+            Ok(r) =&gt; {
+                add(bindings.insert(d, module, r, Priority::Explicit))
+                populate_back_links(module, item)
+            }
+            Err() =&gt; work_list.push(module, item)
+        }
+    } else if item is a glob {
+        // use a::b::*;
+        match try_to_resolve(a::b) {
+            Ok(n) =&gt; 
+                for binding in n {
+                    bindings.insert_if_no_higher_priority_binding(binding.name, module, binding, Priority::Glob)
+                    populate_back_links(module, binding)
+                }
+                add_back_link(n to module)
+                work_list.remove()
+            Err(_) =&gt; work_list.push(module, item)
+        }
+    }    
+}
+
+fn process_work_list() {
+    for each (module, item) in work_list {
+        work_list.remove()
+        try_to_resolve_import(module, item)
+    }
+}
+</code></pre>
+<p>Note that this pseudo-code elides some details: that names are imported into
+distinct namespaces (the type and value namespaces, and with changes to macro
+naming, also the macro namespace), and that we must record whether a name is due
+to macro expansion or not to abide by the caveat to the 'explicit names shadow
+glob names' rule.</p>
+<p>If Rust had a single namespace (or had some other properties), we would not have
+to distinguish between failed and unresolved imports. However, it does and we
+must. This is not clear from the pseudo-code because it elides namespaces, but
+consider the following small example:</p>
+<pre><code>use a::foo; // foo exists in the value namespace of a.
+use b::*;   // foo exists in the type namespace of b.
+</code></pre>
+<p>Can we resolve a use of <code>foo</code> in type position to the import from <code>b</code>? That
+depends on whether <code>foo</code> exists in the type namespace in <code>a</code>. If we can prove
+that it does not (i.e., resolution fails) then we can use the glob import. If we
+cannot (i.e., the name is unresolved but we can't prove it will not resolve
+later), then it is not safe to use the glob import because it may be shadowed by
+the explicit import. (Note, since <code>foo</code> exists in at least the value namespace
+in <code>a</code>, there will be no error due to a bad import).</p>
+<p>In order to keep macro expansion comprehensible to programmers, we must enforce
+that all macro uses resolve to the same binding at the end of resolution as they
+do when they were resolved.</p>
+<p>We rely on a monotonicity property in macro expansion - once an item exists in a
+certain place, it will always exist in that place. It will never disappear and
+never change. Note that for the purposes of this property, I do not consider
+code annotated with a macro to exist until it has been fully expanded.</p>
+<p>A consequence of this is that if the compiler resolves a name, then does some
+expansion and resolves it again, the first resolution will still be valid.
+However, another resolution may appear, so the resolution of a name may change
+as we expand. It can also change from a good resolution to an ambiguity. It is
+also possible to change from good to ambiguous to good again. There is even an
+edge case where we go from good to ambiguous to the same good resolution (but
+via a different route).</p>
+<p>If import resolution succeeds, then we check our record of name resolutions. We
+re-resolve and check we get the same result. We can also check for un-used
+macros at this point.</p>
+<p>Note that the rules in the previous section have been carefully formulated to
+ensure that this check is sufficient to prevent temporal ambiguities. There are
+many slight variations for which this check would not be enough.</p>
+<a class="header" href="1560-name-resolution.html#privacy" id="privacy"><h3>Privacy</h3></a>
+<p>In order to resolve imports (and in the future for macro privacy), we must be
+able to decide if names are accessible. This requires doing privacy checking as
+required during parsing/expansion/import resolution. We can keep the current
+algorithm, but check accessibility on demand, rather than as a separate pass.</p>
+<p>During macro expansion, once a name is resolvable, then we can safely perform
+privacy checking, because parsing and macro expansion will never remove items,
+nor change the module structure of an item once it has been expanded.</p>
+<a class="header" href="1560-name-resolution.html#metadata" id="metadata"><h3>Metadata</h3></a>
+<p>When a crate is packed into metadata, we must also include the binding table. We
+must include private entries due to macros that the crate might export. We don't
+need data for function bodies. For functions which are serialised for
+inlining/monomorphisation, we should include local data (although it's probably
+better to serialise the HIR or MIR, then the local bindings are unnecessary).</p>
+<a class="header" href="1560-name-resolution.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
+<p>It's a lot of work and name resolution is complex, therefore there is scope for
+introducing bugs.</p>
+<p>The macro changes are not backwards compatible, which means having a macro
+system 2.0. If users are reluctant to use that, we will have two macro systems
+forever.</p>
+<a class="header" href="1560-name-resolution.html#alternatives" id="alternatives"><h1>Alternatives</h1></a>
+<a class="header" href="1560-name-resolution.html#naming-rules" id="naming-rules"><h2>Naming rules</h2></a>
+<p>We could take a subset of the shadowing changes (or none at all), whilst still
+changing the implementation of name resolution. In particular, we might want to
+discard the explicit/glob shadowing rule change, or only allow items, not
+imported names to shadow.</p>
+<p>We could also consider different shadowing rules around namespacing. In the
+'globs and explicit names' rule change, we could consider an explicit name to
+shadow both name spaces and emit a custom error. The example becomes:</p>
+<pre><code>mod foo {
+    pub struct Qux;
+}
+
+mod bar {
+    pub trait Qux;
+}
+
+mod boz {
+    use foo::*;
+    use bar::Qux; // Shadows both name spaces.
+
+    fn f(x: &amp;Qux) {   // bound to bar::Qux.
+        let _ = Qux;  // ERROR, unresolved name Qux; the compiler would emit a
+                      // note about shadowing and namespaces.
+    }
+}
+</code></pre>
+<a class="header" href="1560-name-resolution.html#import-resolution-algorithm" id="import-resolution-algorithm"><h2>Import resolution algorithm</h2></a>
+<p>Rather than lookup names for imports during the fixpoint iteration, one could
+save links between imports and definitions. When lookup is required (for macros,
+or later in the compiler), these links are followed to find a name, rather than
+having the name being immediately available.</p>
+<a class="header" href="1560-name-resolution.html#unresolved-questions" id="unresolved-questions"><h1>Unresolved questions</h1></a>
+<a class="header" href="1560-name-resolution.html#name-lookup" id="name-lookup"><h2>Name lookup</h2></a>
+<p>The name resolution phase would be replaced by a cut-down name lookup phase,
+where the binding tables generated during expansion are used to lookup names in
+the AST.</p>
+<p>We could go further, two appealing possibilities are merging name lookup with
+the lowering from AST to HIR, so the HIR is a name-resolved data structure. Or,
+name lookup could be done lazily (probably with some caching) so no tables
+binding names to definitions are kept. I prefer the first option, but this is
+not really in scope for this RFC.</p>
+<a class="header" href="1560-name-resolution.html#pubrestricted" id="pubrestricted"><h2><code>pub(restricted)</code></h2></a>
+<p>Where this RFC touches on the privacy system there are some edge cases involving
+the <code>pub(path)</code> form of restricted visibility. I expect the precise solutions
+will be settled during implementation and this RFC should be amended to reflect
+those choices.</p>
+<a class="header" href="1560-name-resolution.html#references" id="references"><h1>References</h1></a>
+<ul>
+<li><a href="https://github.com/nikomatsakis/rust-name-resolution-algorithm">Niko's prototype</a></li>
+<li><a href="http://ncameron.org/blog/name-resolution/">Blog post</a>, includes details about
+how the name resolution algorithm interacts with sets of scopes hygiene.</li>
+</ul>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="1559-attributes-with-literals.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="1561-macro-naming.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="1559-attributes-with-literals.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="1561-macro-naming.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>0550-macro-future-proofing - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="0001-private-fields.html"><strong>1.</strong> 0001-private-fields</a></li><li><a href="0002-rfc-process.html"><strong>2.</strong> 0002-rfc-process</a></li><li><a href="0003-attribute-usage.html"><strong>3.</strong> 0003-attribute-usage</a></li><li><a href="0008-new-intrinsics.html"><strong>4.</strong> 0008-new-intrinsics</a></li><li><a href="0016-more-attributes.html"><strong>5.</strong> 0016-more-attributes</a></li><li><a href="0019-opt-in-builtin-traits.html"><strong>6.</strong> 0019-opt-in-builtin-traits</a></li><li><a href="0026-remove-priv.html"><strong>7.</strong> 0026-remove-priv</a></li><li><a href="0034-bounded-type-parameters.html"><strong>8.</strong> 0034-bounded-type-parameters</a></li><li><a href="0040-libstd-facade.html"><strong>9.</strong> 0040-libstd-facade</a></li><li><a href="0042-regexps.html"><strong>10.</strong> 0042-regexps</a></li><li><a href="0048-traits.html"><strong>11.</strong> 0048-traits</a></li><li><a href="0049-match-arm-attributes.html"><strong>12.</strong> 0049-match-arm-attributes</a></li><li><a href="0050-assert.html"><strong>13.</strong> 0050-assert</a></li><li><a href="0059-remove-tilde.html"><strong>14.</strong> 0059-remove-tilde</a></li><li><a href="0060-rename-strbuf.html"><strong>15.</strong> 0060-rename-strbuf</a></li><li><a href="0063-module-file-system-hierarchy.html"><strong>16.</strong> 0063-module-file-system-hierarchy</a></li><li><a href="0066-better-temporary-lifetimes.html"><strong>17.</strong> 0066-better-temporary-lifetimes</a></li><li><a href="0068-const-unsafe-pointers.html"><strong>18.</strong> 0068-const-unsafe-pointers</a></li><li><a href="0069-ascii-literals.html"><strong>19.</strong> 0069-ascii-literals</a></li><li><a href="0071-const-block-expr.html"><strong>20.</strong> 0071-const-block-expr</a></li><li><a href="0079-undefined-struct-layout.html"><strong>21.</strong> 0079-undefined-struct-layout</a></li><li><a href="0085-pattern-macros.html"><strong>22.</strong> 0085-pattern-macros</a></li><li><a href="0086-plugin-registrar.html"><strong>23.</strong> 0086-plugin-registrar</a></li><li><a href="0087-trait-bounds-with-plus.html"><strong>24.</strong> 0087-trait-bounds-with-plus</a></li><li><a href="0089-loadable-lints.html"><strong>25.</strong> 0089-loadable-lints</a></li><li><a href="0090-lexical-syntax-simplification.html"><strong>26.</strong> 0090-lexical-syntax-simplification</a></li><li><a href="0092-struct-grammar.html"><strong>27.</strong> 0092-struct-grammar</a></li><li><a href="0093-remove-format-intl.html"><strong>28.</strong> 0093-remove-format-intl</a></li><li><a href="0100-partial-cmp.html"><strong>29.</strong> 0100-partial-cmp</a></li><li><a href="0107-pattern-guards-with-bind-by-move.html"><strong>30.</strong> 0107-pattern-guards-with-bind-by-move</a></li><li><a href="0109-remove-crate-id.html"><strong>31.</strong> 0109-remove-crate-id</a></li><li><a href="0111-index-traits.html"><strong>32.</strong> 0111-index-traits</a></li><li><a href="0112-remove-cross-borrowing.html"><strong>33.</strong> 0112-remove-cross-borrowing</a></li><li><a href="0114-closures.html"><strong>34.</strong> 0114-closures</a></li><li><a href="0115-rm-integer-fallback.html"><strong>35.</strong> 0115-rm-integer-fallback</a></li><li><a href="0116-no-module-shadowing.html"><strong>36.</strong> 0116-no-module-shadowing</a></li><li><a href="0123-share-to-threadsafe.html"><strong>37.</strong> 0123-share-to-threadsafe</a></li><li><a href="0130-box-not-special.html"><strong>38.</strong> 0130-box-not-special</a></li><li><a href="0131-target-specification.html"><strong>39.</strong> 0131-target-specification</a></li><li><a href="0132-ufcs.html"><strong>40.</strong> 0132-ufcs</a></li><li><a href="0135-where.html"><strong>41.</strong> 0135-where</a></li><li><a href="0136-no-privates-in-public.html"><strong>42.</strong> 0136-no-privates-in-public</a></li><li><a href="0139-remove-cross-borrowing-entirely.html"><strong>43.</strong> 0139-remove-cross-borrowing-entirely</a></li><li><a href="0141-lifetime-elision.html"><strong>44.</strong> 0141-lifetime-elision</a></li><li><a href="0151-capture-by-value.html"><strong>45.</strong> 0151-capture-by-value</a></li><li><a href="0155-anonymous-impl-only-in-same-module.html"><strong>46.</strong> 0155-anonymous-impl-only-in-same-module</a></li><li><a href="0160-if-let.html"><strong>47.</strong> 0160-if-let</a></li><li><a href="0164-feature-gate-slice-pats.html"><strong>48.</strong> 0164-feature-gate-slice-pats</a></li><li><a href="0168-mod.html"><strong>49.</strong> 0168-mod</a></li><li><a href="0169-use-path-as-id.html"><strong>50.</strong> 0169-use-path-as-id</a></li><li><a href="0179-and-mut-patterns.html"><strong>51.</strong> 0179-and-mut-patterns</a></li><li><a href="0184-tuple-accessors.html"><strong>52.</strong> 0184-tuple-accessors</a></li><li><a href="0192-bounds-on-object-and-generic-types.html"><strong>53.</strong> 0192-bounds-on-object-and-generic-types</a></li><li><a href="0194-cfg-syntax.html"><strong>54.</strong> 0194-cfg-syntax</a></li><li><a href="0195-associated-items.html"><strong>55.</strong> 0195-associated-items</a></li><li><a href="0198-slice-notation.html"><strong>56.</strong> 0198-slice-notation</a></li><li><a href="0199-ownership-variants.html"><strong>57.</strong> 0199-ownership-variants</a></li><li><a href="0201-error-chaining.html"><strong>58.</strong> 0201-error-chaining</a></li><li><a href="0202-subslice-syntax-change.html"><strong>59.</strong> 0202-subslice-syntax-change</a></li><li><a href="0212-restore-int-fallback.html"><strong>60.</strong> 0212-restore-int-fallback</a></li><li><a href="0213-defaulted-type-params.html"><strong>61.</strong> 0213-defaulted-type-params</a></li><li><a href="0214-while-let.html"><strong>62.</strong> 0214-while-let</a></li><li><a href="0216-collection-views.html"><strong>63.</strong> 0216-collection-views</a></li><li><a href="0218-empty-struct-with-braces.html"><strong>64.</strong> 0218-empty-struct-with-braces</a></li><li><a href="0221-panic.html"><strong>65.</strong> 0221-panic</a></li><li><a href="0230-remove-runtime.html"><strong>66.</strong> 0230-remove-runtime</a></li><li><a href="0231-upvar-capture-inference.html"><strong>67.</strong> 0231-upvar-capture-inference</a></li><li><a href="0234-variants-namespace.html"><strong>68.</strong> 0234-variants-namespace</a></li><li><a href="0235-collections-conventions.html"><strong>69.</strong> 0235-collections-conventions</a></li><li><a href="0236-error-conventions.html"><strong>70.</strong> 0236-error-conventions</a></li><li><a href="0240-unsafe-api-location.html"><strong>71.</strong> 0240-unsafe-api-location</a></li><li><a href="0241-deref-conversions.html"><strong>72.</strong> 0241-deref-conversions</a></li><li><a href="0243-trait-based-exception-handling.html"><strong>73.</strong> 0243-trait-based-exception-handling</a></li><li><a href="0246-const-vs-static.html"><strong>74.</strong> 0246-const-vs-static</a></li><li><a href="0255-object-safety.html"><strong>75.</strong> 0255-object-safety</a></li><li><a href="0256-remove-refcounting-gc-of-t.html"><strong>76.</strong> 0256-remove-refcounting-gc-of-t</a></li><li><a href="0320-nonzeroing-dynamic-drop.html"><strong>77.</strong> 0320-nonzeroing-dynamic-drop</a></li><li><a href="0326-restrict-xXX-to-ascii.html"><strong>78.</strong> 0326-restrict-xXX-to-ascii</a></li><li><a href="0339-statically-sized-literals.html"><strong>79.</strong> 0339-statically-sized-literals</a></li><li><a href="0341-remove-virtual-structs.html"><strong>80.</strong> 0341-remove-virtual-structs</a></li><li><a href="0342-keywords.html"><strong>81.</strong> 0342-keywords</a></li><li><a href="0344-conventions-galore.html"><strong>82.</strong> 0344-conventions-galore</a></li><li><a href="0356-no-module-prefixes.html"><strong>83.</strong> 0356-no-module-prefixes</a></li><li><a href="0369-num-reform.html"><strong>84.</strong> 0369-num-reform</a></li><li><a href="0378-expr-macros.html"><strong>85.</strong> 0378-expr-macros</a></li><li><a href="0379-remove-reflection.html"><strong>86.</strong> 0379-remove-reflection</a></li><li><a href="0380-stabilize-std-fmt.html"><strong>87.</strong> 0380-stabilize-std-fmt</a></li><li><a href="0385-module-system-cleanup.html"><strong>88.</strong> 0385-module-system-cleanup</a></li><li><a href="0387-higher-ranked-trait-bounds.html"><strong>89.</strong> 0387-higher-ranked-trait-bounds</a></li><li><a href="0390-enum-namespacing.html"><strong>90.</strong> 0390-enum-namespacing</a></li><li><a href="0401-coercions.html"><strong>91.</strong> 0401-coercions</a></li><li><a href="0403-cargo-build-command.html"><strong>92.</strong> 0403-cargo-build-command</a></li><li><a href="0404-change-prefer-dynamic.html"><strong>93.</strong> 0404-change-prefer-dynamic</a></li><li><a href="0418-struct-variants.html"><strong>94.</strong> 0418-struct-variants</a></li><li><a href="0430-finalizing-naming-conventions.html"><strong>95.</strong> 0430-finalizing-naming-conventions</a></li><li><a href="0438-precedence-of-plus.html"><strong>96.</strong> 0438-precedence-of-plus</a></li><li><a href="0439-cmp-ops-reform.html"><strong>97.</strong> 0439-cmp-ops-reform</a></li><li><a href="0445-extension-trait-conventions.html"><strong>98.</strong> 0445-extension-trait-conventions</a></li><li><a href="0446-es6-unicode-escapes.html"><strong>99.</strong> 0446-es6-unicode-escapes</a></li><li><a href="0447-no-unused-impl-parameters.html"><strong>100.</strong> 0447-no-unused-impl-parameters</a></li><li><a href="0450-un-feature-gate-some-more-gates.html"><strong>101.</strong> 0450-un-feature-gate-some-more-gates</a></li><li><a href="0453-macro-reform.html"><strong>102.</strong> 0453-macro-reform</a></li><li><a href="0458-send-improvements.html"><strong>103.</strong> 0458-send-improvements</a></li><li><a href="0459-disallow-shadowing.html"><strong>104.</strong> 0459-disallow-shadowing</a></li><li><a href="0461-tls-overhaul.html"><strong>105.</strong> 0461-tls-overhaul</a></li><li><a href="0463-future-proof-literal-suffixes.html"><strong>106.</strong> 0463-future-proof-literal-suffixes</a></li><li><a href="0469-feature-gate-box-patterns.html"><strong>107.</strong> 0469-feature-gate-box-patterns</a></li><li><a href="0474-path-reform.html"><strong>108.</strong> 0474-path-reform</a></li><li><a href="0486-std-ascii-reform.html"><strong>109.</strong> 0486-std-ascii-reform</a></li><li><a href="0490-dst-syntax.html"><strong>110.</strong> 0490-dst-syntax</a></li><li><a href="0494-c_str-and-c_vec-stability.html"><strong>111.</strong> 0494-c_str-and-c_vec-stability</a></li><li><a href="0495-array-pattern-changes.html"><strong>112.</strong> 0495-array-pattern-changes</a></li><li><a href="0501-consistent_no_prelude_attributes.html"><strong>113.</strong> 0501-consistent_no_prelude_attributes</a></li><li><a href="0503-prelude-stabilization.html"><strong>114.</strong> 0503-prelude-stabilization</a></li><li><a href="0504-show-stabilization.html"><strong>115.</strong> 0504-show-stabilization</a></li><li><a href="0505-api-comment-conventions.html"><strong>116.</strong> 0505-api-comment-conventions</a></li><li><a href="0507-release-channels.html"><strong>117.</strong> 0507-release-channels</a></li><li><a href="0509-collections-reform-part-2.html"><strong>118.</strong> 0509-collections-reform-part-2</a></li><li><a href="0517-io-os-reform.html"><strong>119.</strong> 0517-io-os-reform</a></li><li><a href="0520-new-array-repeat-syntax.html"><strong>120.</strong> 0520-new-array-repeat-syntax</a></li><li><a href="0522-self-impl.html"><strong>121.</strong> 0522-self-impl</a></li><li><a href="0526-fmt-text-writer.html"><strong>122.</strong> 0526-fmt-text-writer</a></li><li><a href="0528-string-patterns.html"><strong>123.</strong> 0528-string-patterns</a></li><li><a href="0529-conversion-traits.html"><strong>124.</strong> 0529-conversion-traits</a></li><li><a href="0531-define-rfc-scope.html"><strong>125.</strong> 0531-define-rfc-scope</a></li><li><a href="0532-self-in-use.html"><strong>126.</strong> 0532-self-in-use</a></li><li><a href="0533-no-array-elem-moves.html"><strong>127.</strong> 0533-no-array-elem-moves</a></li><li><a href="0534-deriving2derive.html"><strong>128.</strong> 0534-deriving2derive</a></li><li><a href="0544-rename-int-uint.html"><strong>129.</strong> 0544-rename-int-uint</a></li><li><a href="0546-Self-not-sized-by-default.html"><strong>130.</strong> 0546-Self-not-sized-by-default</a></li><li><a href="0550-macro-future-proofing.html" class="active"><strong>131.</strong> 0550-macro-future-proofing</a></li><li><a href="0556-raw-lifetime.html"><strong>132.</strong> 0556-raw-lifetime</a></li><li><a href="0558-require-parentheses-for-chained-comparisons.html"><strong>133.</strong> 0558-require-parentheses-for-chained-comparisons</a></li><li><a href="0560-integer-overflow.html"><strong>134.</strong> 0560-integer-overflow</a></li><li><a href="0563-remove-ndebug.html"><strong>135.</strong> 0563-remove-ndebug</a></li><li><a href="0565-show-string-guidelines.html"><strong>136.</strong> 0565-show-string-guidelines</a></li><li><a href="0572-rustc-attribute.html"><strong>137.</strong> 0572-rustc-attribute</a></li><li><a href="0574-drain-range.html"><strong>138.</strong> 0574-drain-range</a></li><li><a href="0580-rename-collections.html"><strong>139.</strong> 0580-rename-collections</a></li><li><a href="0587-fn-return-should-be-an-associated-type.html"><strong>140.</strong> 0587-fn-return-should-be-an-associated-type</a></li><li><a href="0592-c-str-deref.html"><strong>141.</strong> 0592-c-str-deref</a></li><li><a href="0593-forbid-Self-definitions.html"><strong>142.</strong> 0593-forbid-Self-definitions</a></li><li><a href="0599-default-object-bound.html"><strong>143.</strong> 0599-default-object-bound</a></li><li><a href="0601-replace-be-with-become.html"><strong>144.</strong> 0601-replace-be-with-become</a></li><li><a href="0639-discriminant-intrinsic.html"><strong>145.</strong> 0639-discriminant-intrinsic</a></li><li><a href="0640-debug-improvements.html"><strong>146.</strong> 0640-debug-improvements</a></li><li><a href="0702-rangefull-expression.html"><strong>147.</strong> 0702-rangefull-expression</a></li><li><a href="0735-allow-inherent-impls-anywhere.html"><strong>148.</strong> 0735-allow-inherent-impls-anywhere</a></li><li><a href="0736-privacy-respecting-fru.html"><strong>149.</strong> 0736-privacy-respecting-fru</a></li><li><a href="0738-variance.html"><strong>150.</strong> 0738-variance</a></li><li><a href="0769-sound-generic-drop.html"><strong>151.</strong> 0769-sound-generic-drop</a></li><li><a href="0771-std-iter-once.html"><strong>152.</strong> 0771-std-iter-once</a></li><li><a href="0803-type-ascription.html"><strong>153.</strong> 0803-type-ascription</a></li><li><a href="0809-box-and-in-for-stdlib.html"><strong>154.</strong> 0809-box-and-in-for-stdlib</a></li><li><a href="0823-hash-simplification.html"><strong>155.</strong> 0823-hash-simplification</a></li><li><a href="0832-from-elem-with-love.html"><strong>156.</strong> 0832-from-elem-with-love</a></li><li><a href="0839-embrace-extend-extinguish.html"><strong>157.</strong> 0839-embrace-extend-extinguish</a></li><li><a href="0840-no-panic-in-c-string.html"><strong>158.</strong> 0840-no-panic-in-c-string</a></li><li><a href="0873-type-macros.html"><strong>159.</strong> 0873-type-macros</a></li><li><a href="0879-small-base-lexing.html"><strong>160.</strong> 0879-small-base-lexing</a></li><li><a href="0888-compiler-fence-intrinsics.html"><strong>161.</strong> 0888-compiler-fence-intrinsics</a></li><li><a href="0909-move-thread-local-to-std-thread.html"><strong>162.</strong> 0909-move-thread-local-to-std-thread</a></li><li><a href="0911-const-fn.html"><strong>163.</strong> 0911-const-fn</a></li><li><a href="0921-entry_v3.html"><strong>164.</strong> 0921-entry_v3</a></li><li><a href="0940-hyphens-considered-harmful.html"><strong>165.</strong> 0940-hyphens-considered-harmful</a></li><li><a href="0953-op-assign.html"><strong>166.</strong> 0953-op-assign</a></li><li><a href="0968-closure-return-type-syntax.html"><strong>167.</strong> 0968-closure-return-type-syntax</a></li><li><a href="0979-align-splitn-with-other-languages.html"><strong>168.</strong> 0979-align-splitn-with-other-languages</a></li><li><a href="0980-read-exact.html"><strong>169.</strong> 0980-read-exact</a></li><li><a href="0982-dst-coercion.html"><strong>170.</strong> 0982-dst-coercion</a></li><li><a href="1011-process.exit.html"><strong>171.</strong> 1011-process.exit</a></li><li><a href="1014-stdout-existential-crisis.html"><strong>172.</strong> 1014-stdout-existential-crisis</a></li><li><a href="1023-rebalancing-coherence.html"><strong>173.</strong> 1023-rebalancing-coherence</a></li><li><a href="1030-prelude-additions.html"><strong>174.</strong> 1030-prelude-additions</a></li><li><a href="1040-duration-reform.html"><strong>175.</strong> 1040-duration-reform</a></li><li><a href="1044-io-fs-2.1.html"><strong>176.</strong> 1044-io-fs-2.1</a></li><li><a href="1047-socket-timeouts.html"><strong>177.</strong> 1047-socket-timeouts</a></li><li><a href="1048-rename-soft-link-to-symlink.html"><strong>178.</strong> 1048-rename-soft-link-to-symlink</a></li><li><a href="1054-str-words.html"><strong>179.</strong> 1054-str-words</a></li><li><a href="1057-io-error-sync.html"><strong>180.</strong> 1057-io-error-sync</a></li><li><a href="1058-slice-tail-redesign.html"><strong>181.</strong> 1058-slice-tail-redesign</a></li><li><a href="1066-safe-mem-forget.html"><strong>182.</strong> 1066-safe-mem-forget</a></li><li><a href="1068-rust-governance.html"><strong>183.</strong> 1068-rust-governance</a></li><li><a href="1096-remove-static-assert.html"><strong>184.</strong> 1096-remove-static-assert</a></li><li><a href="1102-rename-connect-to-join.html"><strong>185.</strong> 1102-rename-connect-to-join</a></li><li><a href="1105-api-evolution.html"><strong>186.</strong> 1105-api-evolution</a></li><li><a href="1119-result-expect.html"><strong>187.</strong> 1119-result-expect</a></li><li><a href="1122-language-semver.html"><strong>188.</strong> 1122-language-semver</a></li><li><a href="1123-str-split-at.html"><strong>189.</strong> 1123-str-split-at</a></li><li><a href="1131-likely-intrinsic.html"><strong>190.</strong> 1131-likely-intrinsic</a></li><li><a href="1135-raw-pointer-comparisons.html"><strong>191.</strong> 1135-raw-pointer-comparisons</a></li><li><a href="1152-slice-string-symmetry.html"><strong>192.</strong> 1152-slice-string-symmetry</a></li><li><a href="1156-adjust-default-object-bounds.html"><strong>193.</strong> 1156-adjust-default-object-bounds</a></li><li><a href="1174-into-raw-fd-socket-handle-traits.html"><strong>194.</strong> 1174-into-raw-fd-socket-handle-traits</a></li><li><a href="1183-swap-out-jemalloc.html"><strong>195.</strong> 1183-swap-out-jemalloc</a></li><li><a href="1184-stabilize-no_std.html"><strong>196.</strong> 1184-stabilize-no_std</a></li><li><a href="1191-hir.html"><strong>197.</strong> 1191-hir</a></li><li><a href="1192-inclusive-ranges.html"><strong>198.</strong> 1192-inclusive-ranges</a></li><li><a href="1193-cap-lints.html"><strong>199.</strong> 1193-cap-lints</a></li><li><a href="1194-set-recovery.html"><strong>200.</strong> 1194-set-recovery</a></li><li><a href="1199-simd-infrastructure.html"><strong>201.</strong> 1199-simd-infrastructure</a></li><li><a href="1200-cargo-install.html"><strong>202.</strong> 1200-cargo-install</a></li><li><a href="1201-naked-fns.html"><strong>203.</strong> 1201-naked-fns</a></li><li><a href="1210-impl-specialization.html"><strong>204.</strong> 1210-impl-specialization</a></li><li><a href="1211-mir.html"><strong>205.</strong> 1211-mir</a></li><li><a href="1212-line-endings.html"><strong>206.</strong> 1212-line-endings</a></li><li><a href="1214-projections-lifetimes-and-wf.html"><strong>207.</strong> 1214-projections-lifetimes-and-wf</a></li><li><a href="1216-bang-type.html"><strong>208.</strong> 1216-bang-type</a></li><li><a href="1219-use-group-as.html"><strong>209.</strong> 1219-use-group-as</a></li><li><a href="1228-placement-left-arrow.html"><strong>210.</strong> 1228-placement-left-arrow</a></li><li><a href="1229-compile-time-asserts.html"><strong>211.</strong> 1229-compile-time-asserts</a></li><li><a href="1236-stabilize-catch-panic.html"><strong>212.</strong> 1236-stabilize-catch-panic</a></li><li><a href="1238-nonparametric-dropck.html"><strong>213.</strong> 1238-nonparametric-dropck</a></li><li><a href="1240-repr-packed-unsafe-ref.html"><strong>214.</strong> 1240-repr-packed-unsafe-ref</a></li><li><a href="1241-no-wildcard-deps.html"><strong>215.</strong> 1241-no-wildcard-deps</a></li><li><a href="1242-rust-lang-crates.html"><strong>216.</strong> 1242-rust-lang-crates</a></li><li><a href="1252-open-options.html"><strong>217.</strong> 1252-open-options</a></li><li><a href="1257-drain-range-2.html"><strong>218.</strong> 1257-drain-range-2</a></li><li><a href="1260-main-reexport.html"><strong>219.</strong> 1260-main-reexport</a></li><li><a href="1268-allow-overlapping-impls-on-marker-traits.html"><strong>220.</strong> 1268-allow-overlapping-impls-on-marker-traits</a></li><li><a href="1270-deprecation.html"><strong>221.</strong> 1270-deprecation</a></li><li><a href="1288-time-improvements.html"><strong>222.</strong> 1288-time-improvements</a></li><li><a href="1291-promote-libc.html"><strong>223.</strong> 1291-promote-libc</a></li><li><a href="1298-incremental-compilation.html"><strong>224.</strong> 1298-incremental-compilation</a></li><li><a href="1300-intrinsic-semantics.html"><strong>225.</strong> 1300-intrinsic-semantics</a></li><li><a href="1307-osstring-methods.html"><strong>226.</strong> 1307-osstring-methods</a></li><li><a href="1317-ide.html"><strong>227.</strong> 1317-ide</a></li><li><a href="1327-dropck-param-eyepatch.html"><strong>228.</strong> 1327-dropck-param-eyepatch</a></li><li><a href="1328-global-panic-handler.html"><strong>229.</strong> 1328-global-panic-handler</a></li><li><a href="1331-grammar-is-canonical.html"><strong>230.</strong> 1331-grammar-is-canonical</a></li><li><a href="1358-repr-align.html"><strong>231.</strong> 1358-repr-align</a></li><li><a href="1359-process-ext-unix.html"><strong>232.</strong> 1359-process-ext-unix</a></li><li><a href="1361-cargo-cfg-dependencies.html"><strong>233.</strong> 1361-cargo-cfg-dependencies</a></li><li><a href="1398-kinds-of-allocators.html"><strong>234.</strong> 1398-kinds-of-allocators</a></li><li><a href="1399-repr-pack.html"><strong>235.</strong> 1399-repr-pack</a></li><li><a href="1414-rvalue_static_promotion.html"><strong>236.</strong> 1414-rvalue_static_promotion</a></li><li><a href="1415-trim-std-os.html"><strong>237.</strong> 1415-trim-std-os</a></li><li><a href="1419-slice-copy.html"><strong>238.</strong> 1419-slice-copy</a></li><li><a href="1422-pub-restricted.html"><strong>239.</strong> 1422-pub-restricted</a></li><li><a href="1432-replace-slice.html"><strong>240.</strong> 1432-replace-slice</a></li><li><a href="1434-contains-method-for-ranges.html"><strong>241.</strong> 1434-contains-method-for-ranges</a></li><li><a href="1440-drop-types-in-const.html"><strong>242.</strong> 1440-drop-types-in-const</a></li><li><a href="1443-extended-compare-and-swap.html"><strong>243.</strong> 1443-extended-compare-and-swap</a></li><li><a href="1444-union.html"><strong>244.</strong> 1444-union</a></li><li><a href="1445-restrict-constants-in-patterns.html"><strong>245.</strong> 1445-restrict-constants-in-patterns</a></li><li><a href="1461-net2-mutators.html"><strong>246.</strong> 1461-net2-mutators</a></li><li><a href="1467-volatile.html"><strong>247.</strong> 1467-volatile</a></li><li><a href="1479-unix-socket.html"><strong>248.</strong> 1479-unix-socket</a></li><li><a href="1492-dotdot-in-patterns.html"><strong>249.</strong> 1492-dotdot-in-patterns</a></li><li><a href="1498-ipv6addr-octets.html"><strong>250.</strong> 1498-ipv6addr-octets</a></li><li><a href="1504-int128.html"><strong>251.</strong> 1504-int128</a></li><li><a href="1506-adt-kinds.html"><strong>252.</strong> 1506-adt-kinds</a></li><li><a href="1510-cdylib.html"><strong>253.</strong> 1510-cdylib</a></li><li><a href="1513-less-unwinding.html"><strong>254.</strong> 1513-less-unwinding</a></li><li><a href="1521-copy-clone-semantics.html"><strong>255.</strong> 1521-copy-clone-semantics</a></li><li><a href="1522-conservative-impl-trait.html"><strong>256.</strong> 1522-conservative-impl-trait</a></li><li><a href="1525-cargo-workspace.html"><strong>257.</strong> 1525-cargo-workspace</a></li><li><a href="1535-stable-overflow-checks.html"><strong>258.</strong> 1535-stable-overflow-checks</a></li><li><a href="1542-try-from.html"><strong>259.</strong> 1542-try-from</a></li><li><a href="1543-integer_atomics.html"><strong>260.</strong> 1543-integer_atomics</a></li><li><a href="1548-global-asm.html"><strong>261.</strong> 1548-global-asm</a></li><li><a href="1552-contains-method-for-various-collections.html"><strong>262.</strong> 1552-contains-method-for-various-collections</a></li><li><a href="1558-closure-to-fn-coercion.html"><strong>263.</strong> 1558-closure-to-fn-coercion</a></li><li><a href="1559-attributes-with-literals.html"><strong>264.</strong> 1559-attributes-with-literals</a></li><li><a href="1560-name-resolution.html"><strong>265.</strong> 1560-name-resolution</a></li><li><a href="1561-macro-naming.html"><strong>266.</strong> 1561-macro-naming</a></li><li><a href="1566-proc-macros.html"><strong>267.</strong> 1566-proc-macros</a></li><li><a href="1567-long-error-codes-explanation-normalization.html"><strong>268.</strong> 1567-long-error-codes-explanation-normalization</a></li><li><a href="1574-more-api-documentation-conventions.html"><strong>269.</strong> 1574-more-api-documentation-conventions</a></li><li><a href="1576-macros-literal-matcher.html"><strong>270.</strong> 1576-macros-literal-matcher</a></li><li><a href="1581-fused-iterator.html"><strong>271.</strong> 1581-fused-iterator</a></li><li><a href="1584-macros.html"><strong>272.</strong> 1584-macros</a></li><li><a href="1589-rustc-bug-fix-procedure.html"><strong>273.</strong> 1589-rustc-bug-fix-procedure</a></li><li><a href="1590-macro-lifetimes.html"><strong>274.</strong> 1590-macro-lifetimes</a></li><li><a href="1598-generic_associated_types.html"><strong>275.</strong> 1598-generic_associated_types</a></li><li><a href="1607-style-rfcs.html"><strong>276.</strong> 1607-style-rfcs</a></li><li><a href="1618-ergonomic-format-args.html"><strong>277.</strong> 1618-ergonomic-format-args</a></li><li><a href="1620-regex-1.0.html"><strong>278.</strong> 1620-regex-1.0</a></li><li><a href="1623-static.html"><strong>279.</strong> 1623-static</a></li><li><a href="1624-loop-break-value.html"><strong>280.</strong> 1624-loop-break-value</a></li><li><a href="1636-document_all_features.html"><strong>281.</strong> 1636-document_all_features</a></li><li><a href="1640-duration-checked-sub.html"><strong>282.</strong> 1640-duration-checked-sub</a></li><li><a href="1643-memory-model-strike-team.html"><strong>283.</strong> 1643-memory-model-strike-team</a></li><li><a href="1644-default-and-expanded-rustc-errors.html"><strong>284.</strong> 1644-default-and-expanded-rustc-errors</a></li><li><a href="1647-allow-self-in-where-clauses.html"><strong>285.</strong> 1647-allow-self-in-where-clauses</a></li><li><a href="1649-atomic-access.html"><strong>286.</strong> 1649-atomic-access</a></li><li><a href="1651-movecell.html"><strong>287.</strong> 1651-movecell</a></li><li><a href="1653-assert_ne.html"><strong>288.</strong> 1653-assert_ne</a></li><li><a href="1660-try-borrow.html"><strong>289.</strong> 1660-try-borrow</a></li><li><a href="1665-windows-subsystem.html"><strong>290.</strong> 1665-windows-subsystem</a></li><li><a href="1679-panic-safe-slicing.html"><strong>291.</strong> 1679-panic-safe-slicing</a></li><li><a href="1681-macros-1.1.html"><strong>292.</strong> 1681-macros-1.1</a></li><li><a href="1682-field-init-shorthand.html"><strong>293.</strong> 1682-field-init-shorthand</a></li><li><a href="1683-docs-team.html"><strong>294.</strong> 1683-docs-team</a></li><li><a href="1685-deprecate-anonymous-parameters.html"><strong>295.</strong> 1685-deprecate-anonymous-parameters</a></li><li><a href="1695-add-error-macro.html"><strong>296.</strong> 1695-add-error-macro</a></li><li><a href="1696-discriminant.html"><strong>297.</strong> 1696-discriminant</a></li><li><a href="1717-dllimport.html"><strong>298.</strong> 1717-dllimport</a></li><li><a href="1721-crt-static.html"><strong>299.</strong> 1721-crt-static</a></li><li><a href="1725-unaligned-access.html"><strong>300.</strong> 1725-unaligned-access</a></li><li><a href="1728-north-star.html"><strong>301.</strong> 1728-north-star</a></li><li><a href="1733-trait-alias.html"><strong>302.</strong> 1733-trait-alias</a></li><li><a href="1758-repr-transparent.html"><strong>303.</strong> 1758-repr-transparent</a></li><li><a href="1774-roadmap-2017.html"><strong>304.</strong> 1774-roadmap-2017</a></li><li><a href="1789-as-cell.html"><strong>305.</strong> 1789-as-cell</a></li><li><a href="1824-crates.io-default-ranking.html"><strong>306.</strong> 1824-crates.io-default-ranking</a></li><li><a href="1826-change-doc-default-urls.html"><strong>307.</strong> 1826-change-doc-default-urls</a></li><li><a href="1828-rust-bookshelf.html"><strong>308.</strong> 1828-rust-bookshelf</a></li><li><a href="1845-shared-from-slice.html"><strong>309.</strong> 1845-shared-from-slice</a></li><li><a href="1849-non-static-type-id.html"><strong>310.</strong> 1849-non-static-type-id</a></li><li><a href="1857-stabilize-drop-order.html"><strong>311.</strong> 1857-stabilize-drop-order</a></li><li><a href="1859-try-trait.html"><strong>312.</strong> 1859-try-trait</a></li><li><a href="1860-manually-drop.html"><strong>313.</strong> 1860-manually-drop</a></li><li><a href="1861-extern-types.html"><strong>314.</strong> 1861-extern-types</a></li><li><a href="1866-more-readable-assert-eq.html"><strong>315.</strong> 1866-more-readable-assert-eq</a></li><li><a href="1868-portability-lint.html"><strong>316.</strong> 1868-portability-lint</a></li><li><a href="1869-eprintln.html"><strong>317.</strong> 1869-eprintln</a></li><li><a href="1884-unstable-sort.html"><strong>318.</strong> 1884-unstable-sort</a></li><li><a href="1925-optional-match-vert.html"><strong>319.</strong> 1925-optional-match-vert</a></li><li><a href="1937-ques-in-main.html"><strong>320.</strong> 1937-ques-in-main</a></li><li><a href="1940-must-use-functions.html"><strong>321.</strong> 1940-must-use-functions</a></li><li><a href="1946-intra-rustdoc-links.html"><strong>322.</strong> 1946-intra-rustdoc-links</a></li><li><a href="1951-expand-impl-trait.html"><strong>323.</strong> 1951-expand-impl-trait</a></li><li><a href="1961-clamp.html"><strong>324.</strong> 1961-clamp</a></li><li><a href="1966-unsafe-pointer-reform.html"><strong>325.</strong> 1966-unsafe-pointer-reform</a></li><li><a href="1969-cargo-prepublish.html"><strong>326.</strong> 1969-cargo-prepublish</a></li><li><a href="1974-global-allocators.html"><strong>327.</strong> 1974-global-allocators</a></li><li><a href="1977-public-private-dependencies.html"><strong>328.</strong> 1977-public-private-dependencies</a></li><li><a href="1983-nursery-deprecation.html"><strong>329.</strong> 1983-nursery-deprecation</a></li><li><a href="1985-tiered-browser-support.html"><strong>330.</strong> 1985-tiered-browser-support</a></li><li><a href="1990-external-doc-attribute.html"><strong>331.</strong> 1990-external-doc-attribute</a></li><li><a href="2000-const-generics.html"><strong>332.</strong> 2000-const-generics</a></li><li><a href="2005-match-ergonomics.html"><strong>333.</strong> 2005-match-ergonomics</a></li><li><a href="2008-non-exhaustive.html"><strong>334.</strong> 2008-non-exhaustive</a></li><li><a href="2011-generic-assert.html"><strong>335.</strong> 2011-generic-assert</a></li><li><a href="2025-nested-method-calls.html"><strong>336.</strong> 2025-nested-method-calls</a></li><li><a href="2027-object_safe_for_dispatch.html"><strong>337.</strong> 2027-object_safe_for_dispatch</a></li><li><a href="2033-experimental-coroutines.html"><strong>338.</strong> 2033-experimental-coroutines</a></li><li><a href="2043-is-aligned-intrinsic.html"><strong>339.</strong> 2043-is-aligned-intrinsic</a></li><li><a href="2044-license-rfcs.html"><strong>340.</strong> 2044-license-rfcs</a></li><li><a href="2045-target-feature.html"><strong>341.</strong> 2045-target-feature</a></li><li><a href="2052-epochs.html"><strong>342.</strong> 2052-epochs</a></li><li><a href="2057-refcell-replace.html"><strong>343.</strong> 2057-refcell-replace</a></li><li><a href="2070-panic-implementation.html"><strong>344.</strong> 2070-panic-implementation</a></li><li><a href="2071-impl-trait-type-alias.html"><strong>345.</strong> 2071-impl-trait-type-alias</a></li><li><a href="2086-allow-if-let-irrefutables.html"><strong>346.</strong> 2086-allow-if-let-irrefutables</a></li><li><a href="2089-implied-bounds.html"><strong>347.</strong> 2089-implied-bounds</a></li><li><a href="2093-infer-outlives.html"><strong>348.</strong> 2093-infer-outlives</a></li><li><a href="2094-nll.html"><strong>349.</strong> 2094-nll</a></li><li><a href="2103-tool-attributes.html"><strong>350.</strong> 2103-tool-attributes</a></li><li><a href="2113-dyn-trait-syntax.html"><strong>351.</strong> 2113-dyn-trait-syntax</a></li><li><a href="2115-argument-lifetimes.html"><strong>352.</strong> 2115-argument-lifetimes</a></li><li><a href="2124-option-filter.html"><strong>353.</strong> 2124-option-filter</a></li><li><a href="2126-path-clarity.html"><strong>354.</strong> 2126-path-clarity</a></li><li><a href="2128-use-nested-groups.html"><strong>355.</strong> 2128-use-nested-groups</a></li><li><a href="2132-copy-closures.html"><strong>356.</strong> 2132-copy-closures</a></li><li><a href="2133-all-the-clones.html"><strong>357.</strong> 2133-all-the-clones</a></li><li><a href="2137-variadic.html"><strong>358.</strong> 2137-variadic</a></li><li><a href="2141-alternative-registries.html"><strong>359.</strong> 2141-alternative-registries</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <ul>
+<li>Start Date: 2014-12-21</li>
+<li>RFC PR: <a href="https://github.com/rust-lang/rfcs/pull/550">550</a></li>
+<li>Rust Issues:
+<ul>
+<li><a href="https://github.com/rust-lang/rust/pull/20563">20563</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/31135">31135</a></li>
+</ul>
+</li>
+</ul>
+<a class="header" href="0550-macro-future-proofing.html#summary" id="summary"><h1>Summary</h1></a>
+<p>Future-proof the allowed forms that input to an MBE can take by requiring
+certain delimiters following NTs in a matcher. In the future, it will be
+possible to lift these restrictions backwards compatibly if desired.</p>
+<a class="header" href="0550-macro-future-proofing.html#key-terminology" id="key-terminology"><h1>Key Terminology</h1></a>
+<ul>
+<li><code>macro</code>: anything invokable as <code>foo!(...)</code> in source code.</li>
+<li><code>MBE</code>: macro-by-example, a macro defined by <code>macro_rules</code>.</li>
+<li><code>matcher</code>: the left-hand-side of a rule in a <code>macro_rules</code> invocation, or a subportion thereof.</li>
+<li><code>macro parser</code>: the bit of code in the Rust parser that will parse the input using a grammar derived from all of the matchers.</li>
+<li><code>fragment</code>: The class of Rust syntax that a given matcher will accept (or &quot;match&quot;).</li>
+<li><code>repetition</code> : a fragment that follows a regular repeating pattern</li>
+<li><code>NT</code>: non-terminal, the various &quot;meta-variables&quot; or repetition matchers that can appear in a matcher, specified in MBE syntax with a leading <code>$</code> character.</li>
+<li><code>simple NT</code>: a &quot;meta-variable&quot; non-terminal (further discussion below).</li>
+<li><code>complex NT</code>: a repetition matching non-terminal, specified via Kleene closure operators (<code>*</code>, <code>+</code>).</li>
+<li><code>token</code>: an atomic element of a matcher; i.e. identifiers, operators, open/close delimiters, <em>and</em> simple NT's.</li>
+<li><code>token tree</code>: a tree structure formed from tokens (the leaves), complex NT's, and finite sequences of token trees.</li>
+<li><code>delimiter token</code>: a token that is meant to divide the end of one fragment and the start of the next fragment.</li>
+<li><code>separator token</code>: an optional delimiter token in an complex NT that separates each pair of elements in the matched repetition.</li>
+<li><code>separated complex NT</code>: a complex NT that has its own separator token.</li>
+<li><code>delimited sequence</code>: a sequence of token trees with appropriate open- and close-delimiters at the start and end of the sequence.</li>
+<li><code>empty fragment</code>: The class of invisible Rust syntax that separates tokens, i.e. whitespace, or (in some lexical contexts), the empty token sequence.</li>
+<li><code>fragment specifier</code>: The identifier in a simple NT that specifies which fragment the NT accepts.</li>
+<li><code>language</code>: a context-free language.</li>
+</ul>
+<p>Example:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+macro_rules! i_am_an_mbe {
+    (start $foo:expr $($i:ident),* end) =&gt; ($foo)
+}
+#}</code></pre></pre>
+<p><code>(start $foo:expr $($i:ident),* end)</code> is a matcher. The whole matcher
+is a delimited sequence (with open- and close-delimiters <code>(</code> and <code>)</code>),
+and <code>$foo</code> and <code>$i</code> are simple NT's with <code>expr</code> and <code>ident</code> as their
+respective fragment specifiers.</p>
+<p><code>$(i:ident),*</code> is <em>also</em> an NT; it is a complex NT that matches a
+comma-seprated repetition of identifiers. The <code>,</code> is the separator
+token for the complex NT; it occurs in between each pair of elements
+(if any) of the matched fragment.</p>
+<p>Another example of a complex NT is <code>$(hi $e:expr ;)+</code>, which matches
+any fragment of the form <code>hi &lt;expr&gt;; hi &lt;expr&gt;; ...</code> where <code>hi &lt;expr&gt;;</code> occurs at least once. Note that this complex NT does not
+have a dedicated separator token.</p>
+<p>(Note that Rust's parser ensures that delimited sequences always occur
+with proper nesting of token tree structure and correct matching of open-
+and close-delimiters.)</p>
+<a class="header" href="0550-macro-future-proofing.html#motivation" id="motivation"><h1>Motivation</h1></a>
+<p>In current Rust (version 0.12; i.e. pre 1.0), the <code>macro_rules</code> parser is very liberal in what it accepts
+in a matcher. This can cause problems, because it is possible to write an
+MBE which corresponds to an ambiguous grammar. When an MBE is invoked, if the
+macro parser encounters an ambiguity while parsing, it will bail out with a
+&quot;local ambiguity&quot; error. As an example for this, take the following MBE:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+macro_rules! foo {
+    ($($foo:expr)* $bar:block) =&gt; (/*...*/)
+};
+#}</code></pre></pre>
+<p>Attempts to invoke this MBE will never succeed, because the macro parser
+will always emit an ambiguity error rather than make a choice when presented
+an ambiguity. In particular, it needs to decide when to stop accepting
+expressions for <code>foo</code> and look for a block for <code>bar</code> (noting that blocks are
+valid expressions). Situations like this are inherent to the macro system. On
+the other hand, it's possible to write an unambiguous matcher that becomes
+ambiguous due to changes in the syntax for the various fragments. As a
+concrete example:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+macro_rules! bar {
+    ($in:ty ( $($arg:ident)*, ) -&gt; $out:ty;) =&gt; (/*...*/)
+};
+#}</code></pre></pre>
+<p>When the type syntax was extended to include the unboxed closure traits,
+an input such as <code>FnMut(i8, u8) -&gt; i8;</code> became ambiguous. The goal of this
+proposal is to prevent such scenarios in the future by requiring certain
+&quot;delimiter tokens&quot; after an NT. When extending Rust's syntax in the future,
+ambiguity need only be considered when combined with these sets of delimiters,
+rather than any possible arbitrary matcher.</p>
+<hr />
+<p>Another example of a potential extension to the language that
+motivates a restricted set of &quot;delimiter tokens&quot; is
+(<a href="https://github.com/rust-lang/rfcs/issues/961">postponed</a>) <a href="https://github.com/rust-lang/rfcs/pull/352">RFC 352</a>, &quot;Allow loops to return
+values other than <code>()</code>&quot;, where the <code>break</code> expression would now accept
+an optional input expression: <code>break &lt;expr&gt;</code>.</p>
+<ul>
+<li>
+<p>This proposed extension to the language, combined with the facts that
+<code>break</code> and <code>{ &lt;stmt&gt; ... &lt;expr&gt;? }</code> are Rust expressions, implies that
+<code>{</code> should not be in the follow set for the <code>expr</code> fragment specifier.</p>
+</li>
+<li>
+<p>Thus in a slightly more ideal world the following program would not be
+accepted, because the interpretation of the macro could change if we
+were to accept RFC 352:</p>
+<pre><pre class="playpen"><code class="language-rust">macro_rules! foo {
+    ($e:expr { stuff }) =&gt; { println!(&quot;{:?}&quot;, $e) }
+}
+
+fn main() {
+    loop { foo!(break { stuff }); }
+}
+</code></pre></pre>
+<p>(in our non-ideal world, the program is legal in Rust versions 1.0
+through at least 1.4)</p>
+</li>
+</ul>
+<a class="header" href="0550-macro-future-proofing.html#detailed-design" id="detailed-design"><h1>Detailed design</h1></a>
+<p>We will tend to use the variable &quot;M&quot; to stand for a matcher,
+variables &quot;t&quot; and &quot;u&quot; for arbitrary individual tokens,
+and the variables &quot;tt&quot; and &quot;uu&quot; for arbitrary token trees.
+(The use of &quot;tt&quot; does present potential ambiguity with its
+additional role as a fragment specifier; but it will be clear
+from context which interpretation is meant.)</p>
+<p>&quot;SEP&quot; will range over separator tokens,
+&quot;OP&quot; over the Kleene operators <code>*</code> and <code>+</code>, and
+&quot;OPEN&quot;/&quot;CLOSE&quot; over matching token pairs surrounding a delimited sequence (e.g. <code>[</code> and <code>]</code>).</p>
+<p>We also use Greek letters &quot;α&quot; &quot;β&quot; &quot;γ&quot; &quot;δ&quot; to stand for potentially empty
+token-tree sequences. (However, the
+Greek letter &quot;ε&quot; (epsilon) has a special role in the presentation and
+does not stand for a token-tree sequence.)</p>
+<ul>
+<li>This Greek letter convention is usually just employed when the
+presence of a sequence is a technical detail; in particular, when I
+wish to <em>emphasize</em> that we are operating on a sequence of
+token-trees, I will use the notation &quot;tt ...&quot; for the sequence, not
+a Greek letter</li>
+</ul>
+<p>Note that a matcher is merely a token tree. A &quot;simple NT&quot;, as
+mentioned above, is an meta-variable NT; thus it is a
+non-repetition. For example, <code>$foo:ty</code> is a simple NT but
+<code>$($foo:ty)+</code> is a complex NT.</p>
+<p>Note also that in the context of this RFC, the term &quot;token&quot; generally
+<em>includes</em> simple NTs.</p>
+<p>Finally, it is useful for the reader to keep in mind that according to
+the definitions of this RFC, no simple NT matches
+the empty fragment, and likewise no token matches
+the empty fragment of Rust syntax. (Thus, the <em>only</em> NT that can match
+the empty fragment is a complex NT.)</p>
+<a class="header" href="0550-macro-future-proofing.html#the-matcher-invariant" id="the-matcher-invariant"><h2>The Matcher Invariant</h2></a>
+<p>This RFC establishes the following two-part invariant for valid matchers</p>
+<ol>
+<li>
+<p>For any two successive token tree sequences in a matcher <code>M</code>
+(i.e. <code>M = ... tt uu ...</code>), we must have
+FOLLOW(<code>... tt</code>) ⊇ FIRST(<code>uu ...</code>)</p>
+</li>
+<li>
+<p>For any separated complex NT in a matcher, <code>M = ... $(tt ...) SEP OP ...</code>,
+we must have
+<code>SEP</code> ∈ FOLLOW(<code>tt ...</code>).</p>
+</li>
+</ol>
+<p>The first part says that whatever actual token that comes after a
+matcher must be somewhere in the predetermined follow set.  This
+ensures that a legal macro definition will continue to assign the same
+determination as to where <code>... tt</code> ends and <code>uu ...</code> begins, even as
+new syntactic forms are added to the language.</p>
+<p>The second part says that a separated complex NT must use a seperator
+token that is part of the predetermined follow set for the internal
+contents of the NT. This ensures that a legal macro definition will
+continue to parse an input fragment into the same delimited sequence
+of <code>tt ...</code>'s, even as new syntactic forms are added to the language.</p>
+<p>(This is assuming that all such changes are appropriately restricted,
+by the definition of FOLLOW below, of course.)</p>
+<p>The above invariant is only formally meaningful if one knows what
+FIRST and FOLLOW denote. We address this in the following sections.</p>
+<a class="header" href="0550-macro-future-proofing.html#first-and-follow-informally" id="first-and-follow-informally"><h2>FIRST and FOLLOW, informally</h2></a>
+<p>FIRST and FOLLOW are defined as follows.</p>
+<p>A given matcher M maps to three sets: FIRST(M), LAST(M) and FOLLOW(M).</p>
+<p>Each of the three sets is made up of tokens. FIRST(M) and LAST(M) may
+also contain a distinguished non-token element ε (&quot;epsilon&quot;), which
+indicates that M can match the empty fragment. (But FOLLOW(M) is
+always just a set of tokens.)</p>
+<p>Informally:</p>
+<ul>
+<li>
+<p>FIRST(M): collects the tokens potentially used first when matching a fragment to M.</p>
+</li>
+<li>
+<p>LAST(M): collects the tokens potentially used last when matching a fragment to M.</p>
+</li>
+<li>
+<p>FOLLOW(M): the set of tokens allowed to follow immediately after some fragment
+matched by M.</p>
+<p>In other words: t ∈ FOLLOW(M) if and only if there exists (potentially empty) token sequences α, β, γ, δ where:</p>
+<ul>
+<li>M matches β,</li>
+<li>t matches γ, and</li>
+<li>The concatenation α β γ δ is a parseable Rust program.</li>
+</ul>
+</li>
+</ul>
+<p>We use the shorthand ANYTOKEN to denote the set of all tokens (including simple NTs).</p>
+<ul>
+<li>(For example, if any token is legal after a matcher M, then FOLLOW(M) = ANYTOKEN.)</li>
+</ul>
+<p>(To review one's understanding of the above informal descriptions, the
+reader at this point may want to jump ahead to the
+<a href="0550-macro-future-proofing.html#examples-of-first-and-last">examples of FIRST/LAST</a> before reading
+their formal definitions.)</p>
+<a class="header" href="0550-macro-future-proofing.html#first-last" id="first-last"><h2>FIRST, LAST</h2></a>
+<p>Below are formal inductive definitions for FIRST and LAST.</p>
+<p>&quot;A ∪ B&quot; denotes set union, &quot;A ∩ B&quot; denotes set intersection, and
+&quot;A \ B&quot; denotes set difference (i.e. all elements of A that are not present
+in B).</p>
+<p>FIRST(M), defined by case analysis on the sequence M and the structure
+of its first token-tree (if any):</p>
+<ul>
+<li>
+<p>if M is the empty sequence, then FIRST(M) = { ε },</p>
+</li>
+<li>
+<p>if M starts with a token t, then FIRST(M) = { t },</p>
+<p>(Note: this covers the case where M starts with a delimited
+token-tree sequence, <code>M = OPEN tt ... CLOSE ...</code>, in which case <code>t = OPEN</code> and
+thus FIRST(M) = { <code>OPEN</code> }.)</p>
+<p>(Note: this critically relies on the property that no simple NT matches the
+empty fragment.)</p>
+</li>
+<li>
+<p>Otherwise, M is a token-tree sequence starting with a complex NT:
+<code>M = $( tt ... ) OP α</code>, or <code>M = $( tt ... ) SEP OP α</code>,
+(where <code>α</code> is the (potentially empty) sequence of token trees for the rest of the matcher).</p>
+<ul>
+<li>
+<p>Let sep_set = { SEP } if SEP present; otherwise sep_set = {}.</p>
+</li>
+<li>
+<p>If ε ∈ FIRST(<code>tt ...</code>), then FIRST(M) = (FIRST(<code>tt ...</code>) \ { ε }) ∪ sep_set ∪ FIRST(<code>α</code>)</p>
+</li>
+<li>
+<p>Else if OP = <code>*</code>, then FIRST(M) = FIRST(<code>tt ...</code>) ∪ FIRST(<code>α</code>)</p>
+</li>
+<li>
+<p>Otherwise (OP = <code>+</code>), FIRST(M) = FIRST(<code>tt ...</code>)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Note: The ε-case above,</p>
+<blockquote>
+<p>FIRST(M) = (FIRST(<code>tt ...</code>) \ { ε }) ∪ sep_set ∪ FIRST(<code>α</code>)</p>
+</blockquote>
+<p>may seem complicated, so lets take a moment to break it down. In the
+ε case, the sequence <code>tt ...</code> may be empty. Therefore our first
+token may be <code>SEP</code> itself (if it is present), or it may be the first
+token of <code>α</code>); that's why the result is including &quot;sep_set ∪
+FIRST(<code>α</code>)&quot;. Note also that if <code>α</code> itself may match the empty
+fragment, then FIRST(<code>α</code>) will ensure that ε is included in our
+result, and conversely, if <code>α</code> cannot match the empty fragment, then
+we must <em>ensure</em> that ε is <em>not</em> included in our result; these two
+facts together are why we can and should unconditionally remove ε
+from FIRST(<code>tt ...</code>).</p>
+<hr />
+<p>LAST(M), defined by case analysis on M itself (a sequence of token-trees):</p>
+<ul>
+<li>
+<p>if M is the empty sequence, then LAST(M) = { ε }</p>
+</li>
+<li>
+<p>if M is a singleton token t, then LAST(M) = { t }</p>
+</li>
+<li>
+<p>if M is the singleton complex NT repeating zero or more times,
+<code>M = $( tt ... ) *</code>, or <code>M = $( tt ... ) SEP *</code></p>
+<ul>
+<li>
+<p>Let sep_set = { SEP } if SEP present; otherwise sep_set = {}.</p>
+</li>
+<li>
+<p>if ε ∈ LAST(<code>tt ...</code>) then LAST(M) = LAST(<code>tt ...</code>) ∪ sep_set</p>
+</li>
+<li>
+<p>otherwise, the sequence <code>tt ...</code> must be non-empty; LAST(M) = LAST(<code>tt ...</code>) ∪ { ε }</p>
+</li>
+</ul>
+</li>
+<li>
+<p>if M is the singleton complex NT repeating one or more times,
+<code>M = $( tt ... ) +</code>, or <code>M = $( tt ... ) SEP +</code></p>
+<ul>
+<li>
+<p>Let sep_set = { SEP } if SEP present; otherwise sep_set = {}.</p>
+</li>
+<li>
+<p>if ε ∈ LAST(<code>tt ...</code>) then LAST(M) = LAST(<code>tt ...</code>) ∪ sep_set</p>
+</li>
+<li>
+<p>otherwise, the sequence <code>tt ...</code> must be non-empty; LAST(M) = LAST(<code>tt ...</code>)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>if M is a delimited token-tree sequence <code>OPEN tt ... CLOSE</code>, then LAST(M) = { <code>CLOSE</code> }</p>
+</li>
+<li>
+<p>if M is a non-empty sequence of token-trees <code>tt uu ...</code>,</p>
+<ul>
+<li>
+<p>If ε ∈ LAST(<code>uu ...</code>), then LAST(M) = LAST(<code>tt</code>) ∪ (LAST(<code>uu ...</code>) \ { ε }).</p>
+</li>
+<li>
+<p>Otherwise, the sequence <code>uu ...</code> must be non-empty; then LAST(M) = LAST(<code>uu ...</code>)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>NOTE: The presence or absence of SEP <em>is</em> relevant to the above
+definitions, but solely in the case where the interior of the complex
+NT could be empty (i.e. ε ∈ FIRST(interior)). (I overlooked this fact
+in my first round of prototyping.)</p>
+<p>NOTE: The above definition for LAST assumes that we keep our
+pre-existing rule that the seperator token in a complex NT is <em>solely</em> for
+separating elements; i.e. that such NT's do not match fragments that
+<em>end with</em> the seperator token. If we choose to lift this restriction
+in the future, the above definition will need to be revised
+accordingly.</p>
+<a class="header" href="0550-macro-future-proofing.html#examples-of-first-and-last" id="examples-of-first-and-last"><h2>Examples of FIRST and LAST</h2></a>
+<p>Below are some examples of FIRST and LAST.
+(Note in particular how the special ε element is introduced and
+eliminated based on the interation between the pieces of the input.)</p>
+<p>Our first example is presented in a tree structure to elaborate on how
+the analysis of the matcher composes. (Some of the simpler subtrees
+have been elided.)</p>
+<pre><code>INPUT:  $(  $d:ident   $e:expr   );*    $( $( h )* );*    $( f ; )+   g
+            ~~~~~~~~   ~~~~~~~                ~
+                |         |                   |
+FIRST:   { $d:ident }  { $e:expr }          { h }
+
+
+INPUT:  $(  $d:ident   $e:expr   );*    $( $( h )* );*    $( f ; )+
+            ~~~~~~~~~~~~~~~~~~             ~~~~~~~           ~~~
+                       |                      |               |
+FIRST:          { $d:ident }               { h, ε }         { f }
+
+INPUT:  $(  $d:ident   $e:expr   );*    $( $( h )* );*    $( f ; )+   g
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~    ~~~~~~~~~~~~~~    ~~~~~~~~~   ~
+                       |                       |              |       |
+FIRST:        { $d:ident, ε }            {  h, ε, ;  }      { f }   { g }
+
+
+INPUT:  $(  $d:ident   $e:expr   );*    $( $( h )* );*    $( f ; )+   g
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                        |
+FIRST:                       { $d:ident, h, ;,  f }
+</code></pre>
+<p>Thus:</p>
+<ul>
+<li>FIRST(<code>$($d:ident $e:expr );* $( $(h)* );* $( f ;)+ g</code>) = { <code>$d:ident</code>, <code>h</code>, <code>;</code>, <code>f</code> }</li>
+</ul>
+<p>Note however that:</p>
+<ul>
+<li>FIRST(<code>$($d:ident $e:expr );* $( $(h)* );* $($( f ;)+ g)*</code>) = { <code>$d:ident</code>, <code>h</code>, <code>;</code>, <code>f</code>, ε }</li>
+</ul>
+<p>Here are similar examples but now for LAST.</p>
+<ul>
+<li>LAST(<code>$d:ident $e:expr</code>) = { <code>$e:expr</code> }</li>
+<li>LAST(<code>$( $d:ident $e:expr );*</code>) = { <code>$e:expr</code>, ε }</li>
+<li>LAST(<code>$( $d:ident $e:expr );* $(h)*</code>) = { <code>$e:expr</code>, ε, <code>h</code> }</li>
+<li>LAST(<code>$( $d:ident $e:expr );* $(h)* $( f ;)+</code>) = { <code>;</code> }</li>
+<li>LAST(<code>$( $d:ident $e:expr );* $(h)* $( f ;)+ g</code>) = { <code>g</code> }</li>
+</ul>
+<p>and again, changing the end part of matcher changes its last set considerably:</p>
+<ul>
+<li>LAST(<code>$( $d:ident $e:expr );* $(h)* $($( f ;)+ g)*</code>) = { <code>$e:expr</code>, ε, <code>h</code>, <code>g</code> }</li>
+</ul>
+<a class="header" href="0550-macro-future-proofing.html#followm" id="followm"><h2>FOLLOW(M)</h2></a>
+<p>Finally, the definition for <code>FOLLOW(M)</code> is built up incrementally atop
+more primitive functions.</p>
+<p>We first assume a primitive mapping, <code>FOLLOW(NT)</code> (defined
+<a href="0550-macro-future-proofing.html#follownt">below</a>) from a simple NT to the set of allowed tokens for
+the fragment specifier for that NT.</p>
+<p>Second, we generalize FOLLOW to tokens: FOLLOW(t) = FOLLOW(NT) if t is (a simple) NT.
+Otherwise, t must be some other (non NT) token; in this case FOLLOW(t) = ANYTOKEN.</p>
+<p>Finally, we generalize FOLLOW to arbitrary matchers by composing the primitive
+functions above:</p>
+<pre><code>FOLLOW(M) = FOLLOW(t1) ∩ FOLLOW(t2) ∩ ... ∩ FOLLOW(tN)
+            where { t1, t2, ..., tN } = (LAST(M) \ { ε })
+</code></pre>
+<p>Examples of FOLLOW (expressed as equality relations between sets, to avoid
+incorporating details of FOLLOW(NT) in these examples):</p>
+<ul>
+<li>FOLLOW(<code>$( $d:ident $e:expr )*</code>) = FOLLOW(<code>$e:expr</code>)</li>
+<li>FOLLOW(<code>$( $d:ident $e:expr )* $(;)*</code>) = FOLLOW(<code>$e:expr</code>) ∩ ANYTOKEN = FOLLOW(<code>$e:expr</code>)</li>
+<li>FOLLOW(<code>$( $d:ident $e:expr )* $(;)* $( f |)+</code>) = ANYTOKEN</li>
+</ul>
+<a class="header" href="0550-macro-future-proofing.html#follownt" id="follownt"><h2>FOLLOW(NT)</h2></a>
+<p>Here is the definition for FOLLOW(NT), which maps every simple NT to
+the set of tokens that are allowed to follow it, based on the fragment
+specifier for the NT.</p>
+<p>The current legal fragment specifiers are: <code>item</code>, <code>block</code>, <code>stmt</code>, <code>pat</code>,
+<code>expr</code>, <code>ty</code>, <code>ident</code>, <code>path</code>, <code>meta</code>, and <code>tt</code>.</p>
+<ul>
+<li><code>FOLLOW(pat)</code> = <code>{FatArrow, Comma, Eq, Or, Ident(if), Ident(in)}</code></li>
+<li><code>FOLLOW(expr)</code> = <code>{FatArrow, Comma, Semicolon}</code></li>
+<li><code>FOLLOW(ty)</code> = <code>{OpenDelim(Brace), Comma, FatArrow, Colon, Eq, Gt, Semi, Or, Ident(as), Ident(where), OpenDelim(Bracket), Nonterminal(Block)}</code></li>
+<li><code>FOLLOW(stmt)</code> = <code>FOLLOW(expr)</code></li>
+<li><code>FOLLOW(path)</code> = <code>FOLLOW(ty)</code></li>
+<li><code>FOLLOW(block)</code> = any token</li>
+<li><code>FOLLOW(ident)</code> = any token</li>
+<li><code>FOLLOW(tt)</code> = any token</li>
+<li><code>FOLLOW(item)</code> = any token</li>
+<li><code>FOLLOW(meta)</code> = any token</li>
+</ul>
+<p>(Note that close delimiters are valid following any NT.)</p>
+<a class="header" href="0550-macro-future-proofing.html#examples-of-valid-and-invalid-matchers" id="examples-of-valid-and-invalid-matchers"><h2>Examples of valid and invalid matchers</h2></a>
+<p>With the above specification in hand, we can present arguments for
+why particular matchers are legal and others are not.</p>
+<ul>
+<li>
+<p><code>($ty:ty &lt; foo ,)</code> : illegal, because FIRST(<code>&lt; foo ,</code>) = { <code>&lt;</code> } ⊈ FOLLOW(<code>ty</code>)</p>
+</li>
+<li>
+<p><code>($ty:ty , foo &lt;)</code> :   legal, because FIRST(<code>, foo &lt;</code>) = { <code>,</code> }  is ⊆ FOLLOW(<code>ty</code>).</p>
+</li>
+<li>
+<p><code>($pa:pat $pb:pat $ty:ty ,)</code> : illegal, because FIRST(<code>$pb:pat $ty:ty ,</code>) = { <code>$pb:pat</code> } ⊈ FOLLOW(<code>pat</code>), and also FIRST(<code>$ty:ty ,</code>) = { <code>$ty:ty</code> } ⊈ FOLLOW(<code>pat</code>).</p>
+</li>
+<li>
+<p><code>( $($a:tt $b:tt)* ; )</code> : legal, because FIRST(<code>$b:tt</code>) = { <code>$b:tt</code> } is ⊆ FOLLOW(<code>tt</code>) = ANYTOKEN, as is FIRST(<code>;</code>) = { <code>;</code> }.</p>
+</li>
+<li>
+<p><code>( $($t:tt),* , $(t:tt),* )</code> : legal (though any attempt to actually use this macro will signal a local ambguity error during expansion).</p>
+</li>
+<li>
+<p><code>($ty:ty $(; not sep)* -)</code> : illegal, because FIRST(<code>$(; not sep)* -</code>) = { <code>;</code>, <code>-</code> } is not in FOLLOW(<code>ty</code>).</p>
+</li>
+<li>
+<p><code>($($ty:ty)-+)</code> : illegal, because separator <code>-</code> is not in FOLLOW(<code>ty</code>).</p>
+</li>
+</ul>
+<a class="header" href="0550-macro-future-proofing.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
+<p>It does restrict the input to a MBE, but the choice of delimiters provides
+reasonable freedom and can be extended in the future.</p>
+<a class="header" href="0550-macro-future-proofing.html#alternatives" id="alternatives"><h1>Alternatives</h1></a>
+<ol>
+<li>Fix the syntax that a fragment can parse. This would create a situation
+where a future MBE might not be able to accept certain inputs because the
+input uses newer features than the fragment that was fixed at 1.0. For
+example, in the <code>bar</code> MBE above, if the <code>ty</code> fragment was fixed before the
+unboxed closure sugar was introduced, the MBE would not be able to accept
+such a type. While this approach is feasible, it would cause unnecessary
+confusion for future users of MBEs when they can't put certain perfectly
+valid Rust code in the input to an MBE. Versioned fragments could avoid
+this problem but only for new code.</li>
+<li>Keep <code>macro_rules</code> unstable. Given the great syntactical abstraction that
+<code>macro_rules</code> provides, it would be a shame for it to be unusable in a
+release version of Rust. If ever <code>macro_rules</code> were to be stabilized, this
+same issue would come up.</li>
+<li>Do nothing. This is very dangerous, and has the potential to essentially
+freeze Rust's syntax for fear of accidentally breaking a macro.</li>
+</ol>
+<a class="header" href="0550-macro-future-proofing.html#edit-history" id="edit-history"><h1>Edit History</h1></a>
+<ul>
+<li>
+<p>Updated by https://github.com/rust-lang/rfcs/pull/1209, which added
+semicolons into the follow set for types.</p>
+</li>
+<li>
+<p>Updated by https://github.com/rust-lang/rfcs/pull/1384:</p>
+<ul>
+<li>replaced detailed design with a specification-oriented presentation rather than an implementation-oriented algorithm.</li>
+<li>fixed some oversights in the specification that led to matchers like <code>$e:expr { stuff }</code> being accepted (which match fragments like <code>break { stuff }</code>, significantly limiting future language extensions),</li>
+<li>expanded the follows sets for <code>ty</code> to include <code>OpenDelim(Brace), Ident(where), Or</code> (since Rust's grammar already requires all of <code>|foo:TY| {}</code>, <code>fn foo() -&gt; TY {}</code> and <code>fn foo() -&gt; TY where {}</code> to work).</li>
+<li>expanded the follow set for <code>pat</code> to include <code>Or</code> (since Rust's grammar already requires <code>match (true,false) { PAT | PAT =&gt; {} }</code> and <code>|PAT| {}</code> to work); see also <a href="https://github.com/rust-lang/rfcs/issues/1336">RFC issue 1336</a>. Also added <code>If</code> and <code>In</code> to follow set for <code>pat</code> (to make the specifiation match the old implementation).</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>Updated by https://github.com/rust-lang/rfcs/pull/1462, which added
+open square bracket into the follow set for types.</p>
+</li>
+<li>
+<p>Updated by https://github.com/rust-lang/rfcs/pull/1494, which adjusted
+the follow set for types to include block nonterminals.</p>
+</li>
+</ul>
+<a class="header" href="0550-macro-future-proofing.html#appendices" id="appendices"><h1>Appendices</h1></a>
+<a class="header" href="0550-macro-future-proofing.html#appendix-a-algorithm-for-recognizing-valid-matchers" id="appendix-a-algorithm-for-recognizing-valid-matchers"><h2>Appendix A: Algorithm for recognizing valid matchers.</h2></a>
+<p>The detailed design above only sought to provide a <em>specification</em> for
+what a correct matcher is (by defining FIRST, LAST, and FOLLOW, and
+specifying the invariant relating FIRST and FOLLOW for all valid
+matchers.</p>
+<p>The above specification can be implemented efficiently; we here give
+one example algorithm for recognizing valid matchers.</p>
+<ul>
+<li>
+<p>This is not the only possible algorithm; for example, one could
+precompute a table mapping every suffix of every token-tree
+sequence to its FIRST set, by augmenting <code>FirstSet</code> below
+accordingly.</p>
+<p>Or one could store a subset of such information during the
+precomputation, such as just the FIRST sets for complex NT's, and
+then use that table to inform a <em>forward scan</em> of the input.</p>
+<p>The latter is in fact what my prototype implementation does; I must
+emphasize the point that the algorithm here is not prescriptive.</p>
+</li>
+<li>
+<p>The intent of this RFC is that the specifications of FIRST
+and FOLLOW above will take precedence over this algorithm if the two
+are found to be producing inconsistent results.</p>
+</li>
+</ul>
+<p>The algorithm for recognizing valid matchers <code>M</code> is named ValidMatcher.</p>
+<p>To define it, we will need a mapping from submatchers of M to the
+FIRST set for that submatcher; that is handled by <code>FirstSet</code>.</p>
+<a class="header" href="0550-macro-future-proofing.html#procedure-firstsetm" id="procedure-firstsetm"><h3>Procedure FirstSet(M)</h3></a>
+<p><em>input</em>: a token tree <code>M</code> representing a matcher</p>
+<p><em>output</em>: <code>FIRST(M)</code></p>
+<pre><code>Let M = tts[1] tts[2] ... tts[n].
+Let curr_first = { ε }.
+
+For i in n down to 1 (inclusive):
+  Let tt = tts[i].
+
+  1. If tt is a token, curr_first := { tt }
+
+  2. Else if tt is a delimited sequence `OPEN uu ... ClOSE`,
+     curr_first := { OPEN }
+
+  3. Else tt is a complex NT `$(uu ...) SEP OP`
+
+     Let inner_first = FirstSet(`uu ...`) i.e. recursive call
+
+     if OP == `*` or ε ∈ inner_first then
+         curr_first := curr_first ∪ inner_first
+     else
+         curr_first := inner_first
+
+return curr_first
+</code></pre>
+<p>(Note: If we were precomputing a full table in this procedure, we would need
+a recursive invocation on (uu ...) in step 2 of the for-loop.)</p>
+<a class="header" href="0550-macro-future-proofing.html#predicate-validmatcherm" id="predicate-validmatcherm"><h3>Predicate ValidMatcher(M)</h3></a>
+<p>To simplify the specification, we assume in this presentation that all
+simple NT's have a valid fragment specifier (i.e., one that has an
+entry in the FOLLOW(NT) table above.</p>
+<p>This algorithm works by scanning forward across the matcher M = α β,
+(where α is the prefix we have scanned so far, and β is the suffix
+that remains to be scanned). We maintain LAST(α) as we scan, and use
+it to compute FOLLOW(α) and compare that to FIRST(β).</p>
+<p><em>input</em>: a token tree, <code>M</code>, and a set of tokens that could follow it, <code>F</code>.</p>
+<p><em>output</em>: LAST(M) (and also signals failure whenever M is invalid)</p>
+<pre><code>Let last_of_prefix = { ε }
+
+Let M = tts[1] tts[2] ... tts[n].
+
+For i in 1 up to n (inclusive):
+  // For reference:
+  // α = tts[1] .. tts[i]
+  // β = tts[i+1] .. tts[n]
+  // γ is some outer token sequence; the input F represents FIRST(γ)
+
+  1. Let tt = tts[i].
+
+  2. Let first_of_suffix; // aka FIRST(β γ)
+
+  3. let S = FirstSet(tts[i+1] .. tts[n]);
+
+  4. if ε ∈ S then
+     // (include the follow information if necessary)
+
+     first_of_suffix := S ∪ F
+
+  5. else
+
+     first_of_suffix := S
+
+  6. Update last_of_prefix via case analysis on tt:
+
+     a. If tt is a token:
+        last_of_prefix := { tt }
+
+     b. Else if tt is a delimited sequence `OPEN uu ... CLOSE`:
+
+        i.  run ValidMatcher( M = `uu ...`, F = { `CLOSE` })
+
+       ii. last_of_prefix := { `CLOSE` }
+
+     c. Else, tt must be a complex NT,
+        in other words, `NT = $( uu .. ) SEP OP` or `NT = $( uu .. ) OP`:
+
+        i. If SEP present,
+          let sublast = ValidMatcher( M = `uu ...`, F = first_of_suffix ∪ { `SEP` })
+
+       ii. else:
+          let sublast = ValidMatcher( M = `uu ...`, F = first_of_suffix)
+
+      iii. If ε in sublast then:
+           last_of_prefix := last_of_prefix ∪ (sublast \ ε)
+
+       iv. Else:
+           last_of_prefix := sublast
+
+  7. At this point, last_of_prefix == LAST(α) and first_of_suffix == FIRST(β γ).
+
+     For each simple NT token t in last_of_prefix:
+
+     a. If first_of_suffix ⊆ FOLLOW(t), then we are okay so far. &lt;/li&gt;
+
+     b. Otherwise, we have found a token t whose follow set is not compatible
+        with the FIRST(β γ), and must signal failure.
+
+// After running the above for loop on all of `M`, last_of_prefix == LAST(M)
+
+Return last_of_prefix
+</code></pre>
+<p>This algorithm should be run on every matcher in every <code>macro_rules</code>
+invocation, with <code>F</code> = { <code>EOF</code> }. If it rejects a matcher, an error
+should be emitted and compilation should not complete.</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="0546-Self-not-sized-by-default.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="0556-raw-lifetime.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="0546-Self-not-sized-by-default.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="0556-raw-lifetime.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>
