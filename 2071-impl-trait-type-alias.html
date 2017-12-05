@@ -328,7 +328,7 @@ fn foo() -&gt; Foo {
 #}</code></pre></pre>
 <p>In the example above, <code>Foo</code> refers to <code>i32</code>, similar to a type alias.
 However, unlike a normal type alias, the concrete type of <code>Foo</code> is
-hidden outside of the module. Outside the module, the only think that
+hidden outside of the module. Outside the module, the only thing that
 is known about <code>Foo</code> is that it implements the traits that appear in
 its declaration (e.g. <code>Debug</code> in <code>existential type Foo: Debug;</code>).
 If a user outside the module tries to use a <code>Foo</code> as an <code>i32</code>, they
