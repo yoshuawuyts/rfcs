@@ -246,132 +246,97 @@ and newlines after the opening brace and before the closing brace). The former
 approach should be used for short struct literals, the latter for longer struct
 literals. For tools, the first approach should be used when the width of the
 fields (excluding commas and braces) is 16 characters. E.g.,</p>
-</blockquote>
-<blockquote>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
+let x = Foo { a: 42, b: 34 };
+let y = Foo {
+    a: 42,
+    b: 34,
+    c: 1000
+};
 #}</code></pre></pre>
 </blockquote>
-<p>let x = Foo { a: 42, b: 34 };
-let y = Foo {
-a: 42,
-b: 34,
-c: 1000
-};</p>
-<pre><code>
-(Note this is just an example, not a proposed guideline).
-
-The repository in embryonic form lives at [nrc/fmt-rfcs](https://github.com/nrc/fmt-rfcs).
-It illustrates what [issues](https://github.com/nrc/fmt-rfcs/issues/1) and
-[PRs](https://github.com/nrc/fmt-rfcs/pull/2) might look like, as well as
+<p>(Note this is just an example, not a proposed guideline).</p>
+<p>The repository in embryonic form lives at <a href="https://github.com/nrc/fmt-rfcs">nrc/fmt-rfcs</a>.
+It illustrates what <a href="https://github.com/nrc/fmt-rfcs/issues/1">issues</a> and
+<a href="https://github.com/nrc/fmt-rfcs/pull/2">PRs</a> might look like, as well as
 including the RFC template. Note that typically there should be more discussion
-on an issue before submitting an RFC PR.
-
-The repository should be updated as this RFC develops, and moved to the rust-lang
-GitHub organisation if this RFC is accepted.
-
-
-## The style team
-
-The style [sub-team](https://github.com/rust-lang/rfcs/blob/master/text/1068-rust-governance.md#subteams)
+on an issue before submitting an RFC PR.</p>
+<p>The repository should be updated as this RFC develops, and moved to the rust-lang
+GitHub organisation if this RFC is accepted.</p>
+<a class="header" href="1607-style-rfcs.html#the-style-team" id="the-style-team"><h2>The style team</h2></a>
+<p>The style <a href="https://github.com/rust-lang/rfcs/blob/master/text/1068-rust-governance.md#subteams">sub-team</a>
 will be responsible for handling style RFCs and making decisions related to
-code style and formatting.
-
-Per the [governance RFC](https://github.com/rust-lang/rfcs/blob/master/text/1068-rust-governance.md),
+code style and formatting.</p>
+<p>Per the <a href="https://github.com/rust-lang/rfcs/blob/master/text/1068-rust-governance.md">governance RFC</a>,
 the core team would pick a leader who would then pick the rest of the team. I
 propose that the team should include members representative of the following
-areas:
-
-* Rustfmt,
-* the language, tools, and libraries sub-teams (since each has a stake in code style),
-* large Rust projects.
-
-Because activity such as this hasn't been done before in the RUst community, it
+areas:</p>
+<ul>
+<li>Rustfmt,</li>
+<li>the language, tools, and libraries sub-teams (since each has a stake in code style),</li>
+<li>large Rust projects.</li>
+</ul>
+<p>Because activity such as this hasn't been done before in the RUst community, it
 is hard to identify suitable candidates for the team ahead of time. The team
 will probably start small and consist of core members of the Rust community. I
 expect that once the process gets underway the team can be rapidly expanded with
 community members who are active in the fmt-rfcs repository (i.e., submitting
-and constructively commenting on RFCs).
-
-There will be a dedicated irc channel for discussion on formatting issues:
-`#rust-style`.
-
-
-## Style guide
-
-The [existing style guide](https://github.com/rust-lang/rust/tree/master/src/doc/style)
+and constructively commenting on RFCs).</p>
+<p>There will be a dedicated irc channel for discussion on formatting issues:
+<code>#rust-style</code>.</p>
+<a class="header" href="1607-style-rfcs.html#style-guide" id="style-guide"><h2>Style guide</h2></a>
+<p>The <a href="https://github.com/rust-lang/rust/tree/master/src/doc/style">existing style guide</a>
 will be split into two guides: one dealing with API design and similar issues
 which will be managed by the libs team, and one dealing with formatting issues
 which will be managed by the style team. Note that the formatting part of the
 guide may include guidelines which are not enforced by Rustfmt. Those are outside
 the scope of the process defined in this RFC, but still belong in that part of
-the style guide.
-
-When RFCs are accepted the style guide may need to be updated. Towards the end
+the style guide.</p>
+<p>When RFCs are accepted the style guide may need to be updated. Towards the end
 of the process, the style team should audit and edit the guide to ensure it is a
-coherent document.
-
-
-## Material goals
-
-Hopefully, the style guideline process will have limited duration, one year
+coherent document.</p>
+<a class="header" href="1607-style-rfcs.html#material-goals" id="material-goals"><h2>Material goals</h2></a>
+<p>Hopefully, the style guideline process will have limited duration, one year
 seems reasonable. After that time, style guidelines for new syntax could be
 included with regular RFCs, or the fmt-rfcs repository could be maintained in a
-less active fashion.
-
-At the end of the process, the fmt-rfcs repository should be a fairly complete
+less active fashion.</p>
+<p>At the end of the process, the fmt-rfcs repository should be a fairly complete
 guide for formatting Rust code, and useful as a specification for Rustfmt and
 tools with similar goals, such as IDEs. In particular, there should be a
 decision made on how configurable Rustfmt should be, and an agreed set of
 default options. The formatting style guide in the Rust repository should be a
 more human-friendly source of formatting guidelines, and should be in sync with
-the fmt-rfcs repo.
-
-
-# Drawbacks
-[drawbacks]: #drawbacks
-
-This RFC introduces more process and bureaucracy, and requires more meetings for
+the fmt-rfcs repo.</p>
+<a class="header" href="1607-style-rfcs.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
+<p>This RFC introduces more process and bureaucracy, and requires more meetings for
 some core Rust contributors. Precious time and energy will need to be devoted to
-discussions.
-
-
-# Alternatives
-[alternatives]: #alternatives
-
-Benevolent dictator - a single person dictates style rules which will be
+discussions.</p>
+<a class="header" href="1607-style-rfcs.html#alternatives" id="alternatives"><h1>Alternatives</h1></a>
+<p>Benevolent dictator - a single person dictates style rules which will be
 followed without question by the community. This seems to work for Go, I suspect
-it will not work for Rust.
-
-Parliamentary 'democracy' - the community 'elects' a style team (via the usual
+it will not work for Rust.</p>
+<p>Parliamentary 'democracy' - the community 'elects' a style team (via the usual
 RFC consensus process, rather than actual voting). The style team decides on
 style issues without an open process. This would be more efficient, but doesn't
-fit very well with the open ethos of the Rust community.
-
-Use the RFCs repo, rather than a new repo. This would have the benefit that
+fit very well with the open ethos of the Rust community.</p>
+<p>Use the RFCs repo, rather than a new repo. This would have the benefit that
 style RFCs would get more visibility, and it is one less place to keep track of
 for Rust community members. However, it risks overwhelming the RFC repo with
-style debate.
-
-Use issues on Rustfmt. I feel that the discussions would not have enough
+style debate.</p>
+<p>Use issues on Rustfmt. I feel that the discussions would not have enough
 visibility in this fashion, but perhaps that can be addressed by wide and
-regular announcement.
-
-Use a book format for the style repo, rather than a collection of RFCs. This
+regular announcement.</p>
+<p>Use a book format for the style repo, rather than a collection of RFCs. This
 would make it easier to see how the 'final product' style guide would look.
 However, I expect there will be many issues that are important to be aware of
-while discussing an RFC, that are not important to include in a final guide.
-
-Have an existing team handle the process, rather than create a new style team.
+while discussing an RFC, that are not important to include in a final guide.</p>
+<p>Have an existing team handle the process, rather than create a new style team.
 Saves on a little bureaucracy. Candidate teams would be language and tools.
 However, the language team has very little free bandwidth, and the tools team is
-probably not broad enough to effectively handle the style decisions.
-
-
-# Unresolved questions
-[unresolved]: #unresolved-questions
-</code></pre>
+probably not broad enough to effectively handle the style decisions.</p>
+<a class="header" href="1607-style-rfcs.html#unresolved-questions" id="unresolved-questions"><h1>Unresolved questions</h1></a>
 
                 </div>
 
