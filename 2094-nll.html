@@ -286,9 +286,9 @@ not exist):</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn get_default&lt;'r,K,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
-                               key: K)
-                               -&gt; &amp;'r mut V {
+fn get_default&lt;'r,K:Hash+Eq,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                       key: K)
+                                       -&gt; &amp;'r mut V {
     match map.get_mut(&amp;key) { // -------------+ 'r
         Some(value) =&gt; value,              // |
         None =&gt; {                          // |
@@ -334,9 +334,9 @@ in the previous example, we will find that it does not work:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn get_default1&lt;'r,K,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
-                                key: K)
-                                -&gt; &amp;'r mut V {
+fn get_default1&lt;'r,K:Hash+Eq,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                        key: K)
+                                        -&gt; &amp;'r mut V {
     match map.get_mut(&amp;key) { // -------------+ 'r
         Some(value) =&gt; return value,       // |
         None =&gt; { }                        // |
@@ -356,9 +356,9 @@ function to determine which borrows are in scope.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn get_default2&lt;'r,K,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
-                                key: K)
-                                -&gt; &amp;'r mut V {
+fn get_default2&lt;'r,K:Hash+Eq,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                        key: K)
+                                        -&gt; &amp;'r mut V {
     if map.contains(&amp;key) {
     // ^~~~~~~~~~~~~~~~~~ 'n
         return match map.get_mut(&amp;key) { // + 'r
@@ -391,9 +391,9 @@ since it avoids extra lookups on the &quot;not present&quot; path as well:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn get_default3&lt;'r,K,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
-                                key: K)
-                                -&gt; &amp;'r mut V {
+fn get_default3&lt;'r,K:Hash+Eq,V:Default&gt;(map: &amp;'r mut HashMap&lt;K,V&gt;,
+                                        key: K)
+                                        -&gt; &amp;'r mut V {
     map.entry(key)
        .or_insert_with(|| V::default())
 }
@@ -423,7 +423,7 @@ fn to_refs&lt;T&gt;(mut list: &amp;mut List&lt;T&gt;) -&gt; Vec&lt;&amp;mut T&gt
     loop {
         result.push(&amp;mut list.value);
         if let Some(n) = list.next.as_mut() {
-            list = &amp;mut n;
+            list = n;
         } else {
             return result;
         }
@@ -467,7 +467,7 @@ fn to_refs&lt;T&gt;(mut list: &amp;mut List&lt;T&gt;) -&gt; Vec&lt;&amp;mut T&gt
         let list1 = list;
         result.push(&amp;mut list1.value);
         if let Some(n) = list1.next.as_mut() {
-            list = &amp;mut n;
+            list = n;
         } else {
             return result;
         }
