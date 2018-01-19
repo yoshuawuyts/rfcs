@@ -223,13 +223,14 @@ updates to the index.</p>
 <p>There will be a file at the top level named <code>config.json</code>. This file will be a valid JSON object
 with the following keys:</p>
 <pre><code class="language-json">{
-  &quot;dl&quot;: &quot;https://my-crates-server.com/api/v1/crates&quot;,
+  &quot;dl&quot;: &quot;https://my-crates-server.com/api/v1/crates/{crate}/{version}/download&quot;,
   &quot;api&quot;: &quot;https://my-crates-server.com/&quot;,
   &quot;allowed-registries&quot;: [&quot;https://github.com/rust-lang/crates.io-index&quot;, &quot;https://my-intranet:8080/index&quot;]
 }
 </code></pre>
-<p>The <code>dl</code> key is required specifies where Cargo can download the tarballs containing the source
-files of the crates listed in the registry.</p>
+<p>The <code>dl</code> key is required and specifies where Cargo can download the tarballs containing the source
+files of the crates listed in the registry. It is templated by the strings <code>{crate}</code> and
+<code>{version}</code> which are replaced with the name and version of the crate to download, respectively.</p>
 <p>The <code>api</code> key is optional and specifies where Cargo can find the API server that provides the
 same API functionality that crates.io does today, such as publishing and searching. Without the
 <code>api</code> key, these features will not be available. This RFC is not attempting to standardize
@@ -245,7 +246,9 @@ will probably want to add crates.io to this list.</p>
 <ul>
 <li><code>1/</code> - holds files for all crates whose names have one letter.</li>
 <li><code>2/</code> - holds files for all crates whose names have two letters.</li>
-<li><code>3/</code> - holds files for all crates whose names have three letters.</li>
+<li><code>3/a</code> etc - for all crates whose names have three letters, their files will
+be in a directory named <code>3</code>, then a subdirectory named with the first letter
+of their name.</li>
 <li><code>aa/aa/</code> etc - for all crates whose names have four or more letters, their
 files will be in a directory named with the first and second letters of
 their name, then in a subdirectory named with the third and fourth letters
@@ -309,7 +312,9 @@ following keys:</p>
 <li><code>default_features</code>: whether the parent uses the default features of this dependency or not</li>
 <li><code>target</code>: on which target this dependency is needed</li>
 <li><code>kind</code>: can be <code>normal</code>, <code>build</code>, or <code>dev</code> to be a regular dependency, a build-time
-dependency, or a development dependency</li>
+dependency, or a development dependency. Note: this is a required field, but a small number of
+entries exist in the crates.io index with either a missing or null <code>kind</code> field due to
+implementation bugs.</li>
 </ul>
 </li>
 </ul>
