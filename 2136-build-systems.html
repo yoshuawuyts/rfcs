@@ -1,0 +1,592 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>2136-build-systems - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch JQuery from CDN but have a local fallback -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='jquery.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+        <!-- Fetch store.js from local - TODO add CDN when 2.x.x is available on cdnjs -->
+        <script src="store.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </head>
+    <body class="light">
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme = store.get('mdbook-theme');
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            $('body').removeClass().addClass(theme);
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = store.get('mdbook-sidebar');
+            if (sidebar === "hidden") { $("html").addClass("sidebar-hidden") }
+            else if (sidebar === "visible") { $("html").addClass("sidebar-visible") }
+        </script>
+
+        <div id="sidebar" class="sidebar">
+            <ul class="chapter"><li class="affix"><a href="introduction.html">Introduction</a></li><li><a href="0001-private-fields.html"><strong>1.</strong> 0001-private-fields</a></li><li><a href="0002-rfc-process.html"><strong>2.</strong> 0002-rfc-process</a></li><li><a href="0003-attribute-usage.html"><strong>3.</strong> 0003-attribute-usage</a></li><li><a href="0008-new-intrinsics.html"><strong>4.</strong> 0008-new-intrinsics</a></li><li><a href="0016-more-attributes.html"><strong>5.</strong> 0016-more-attributes</a></li><li><a href="0019-opt-in-builtin-traits.html"><strong>6.</strong> 0019-opt-in-builtin-traits</a></li><li><a href="0026-remove-priv.html"><strong>7.</strong> 0026-remove-priv</a></li><li><a href="0034-bounded-type-parameters.html"><strong>8.</strong> 0034-bounded-type-parameters</a></li><li><a href="0040-libstd-facade.html"><strong>9.</strong> 0040-libstd-facade</a></li><li><a href="0042-regexps.html"><strong>10.</strong> 0042-regexps</a></li><li><a href="0048-traits.html"><strong>11.</strong> 0048-traits</a></li><li><a href="0049-match-arm-attributes.html"><strong>12.</strong> 0049-match-arm-attributes</a></li><li><a href="0050-assert.html"><strong>13.</strong> 0050-assert</a></li><li><a href="0059-remove-tilde.html"><strong>14.</strong> 0059-remove-tilde</a></li><li><a href="0060-rename-strbuf.html"><strong>15.</strong> 0060-rename-strbuf</a></li><li><a href="0063-module-file-system-hierarchy.html"><strong>16.</strong> 0063-module-file-system-hierarchy</a></li><li><a href="0066-better-temporary-lifetimes.html"><strong>17.</strong> 0066-better-temporary-lifetimes</a></li><li><a href="0068-const-unsafe-pointers.html"><strong>18.</strong> 0068-const-unsafe-pointers</a></li><li><a href="0069-ascii-literals.html"><strong>19.</strong> 0069-ascii-literals</a></li><li><a href="0071-const-block-expr.html"><strong>20.</strong> 0071-const-block-expr</a></li><li><a href="0079-undefined-struct-layout.html"><strong>21.</strong> 0079-undefined-struct-layout</a></li><li><a href="0085-pattern-macros.html"><strong>22.</strong> 0085-pattern-macros</a></li><li><a href="0086-plugin-registrar.html"><strong>23.</strong> 0086-plugin-registrar</a></li><li><a href="0087-trait-bounds-with-plus.html"><strong>24.</strong> 0087-trait-bounds-with-plus</a></li><li><a href="0089-loadable-lints.html"><strong>25.</strong> 0089-loadable-lints</a></li><li><a href="0090-lexical-syntax-simplification.html"><strong>26.</strong> 0090-lexical-syntax-simplification</a></li><li><a href="0092-struct-grammar.html"><strong>27.</strong> 0092-struct-grammar</a></li><li><a href="0093-remove-format-intl.html"><strong>28.</strong> 0093-remove-format-intl</a></li><li><a href="0100-partial-cmp.html"><strong>29.</strong> 0100-partial-cmp</a></li><li><a href="0107-pattern-guards-with-bind-by-move.html"><strong>30.</strong> 0107-pattern-guards-with-bind-by-move</a></li><li><a href="0109-remove-crate-id.html"><strong>31.</strong> 0109-remove-crate-id</a></li><li><a href="0111-index-traits.html"><strong>32.</strong> 0111-index-traits</a></li><li><a href="0112-remove-cross-borrowing.html"><strong>33.</strong> 0112-remove-cross-borrowing</a></li><li><a href="0114-closures.html"><strong>34.</strong> 0114-closures</a></li><li><a href="0115-rm-integer-fallback.html"><strong>35.</strong> 0115-rm-integer-fallback</a></li><li><a href="0116-no-module-shadowing.html"><strong>36.</strong> 0116-no-module-shadowing</a></li><li><a href="0123-share-to-threadsafe.html"><strong>37.</strong> 0123-share-to-threadsafe</a></li><li><a href="0130-box-not-special.html"><strong>38.</strong> 0130-box-not-special</a></li><li><a href="0131-target-specification.html"><strong>39.</strong> 0131-target-specification</a></li><li><a href="0132-ufcs.html"><strong>40.</strong> 0132-ufcs</a></li><li><a href="0135-where.html"><strong>41.</strong> 0135-where</a></li><li><a href="0136-no-privates-in-public.html"><strong>42.</strong> 0136-no-privates-in-public</a></li><li><a href="0139-remove-cross-borrowing-entirely.html"><strong>43.</strong> 0139-remove-cross-borrowing-entirely</a></li><li><a href="0141-lifetime-elision.html"><strong>44.</strong> 0141-lifetime-elision</a></li><li><a href="0151-capture-by-value.html"><strong>45.</strong> 0151-capture-by-value</a></li><li><a href="0155-anonymous-impl-only-in-same-module.html"><strong>46.</strong> 0155-anonymous-impl-only-in-same-module</a></li><li><a href="0160-if-let.html"><strong>47.</strong> 0160-if-let</a></li><li><a href="0164-feature-gate-slice-pats.html"><strong>48.</strong> 0164-feature-gate-slice-pats</a></li><li><a href="0168-mod.html"><strong>49.</strong> 0168-mod</a></li><li><a href="0169-use-path-as-id.html"><strong>50.</strong> 0169-use-path-as-id</a></li><li><a href="0179-and-mut-patterns.html"><strong>51.</strong> 0179-and-mut-patterns</a></li><li><a href="0184-tuple-accessors.html"><strong>52.</strong> 0184-tuple-accessors</a></li><li><a href="0192-bounds-on-object-and-generic-types.html"><strong>53.</strong> 0192-bounds-on-object-and-generic-types</a></li><li><a href="0194-cfg-syntax.html"><strong>54.</strong> 0194-cfg-syntax</a></li><li><a href="0195-associated-items.html"><strong>55.</strong> 0195-associated-items</a></li><li><a href="0198-slice-notation.html"><strong>56.</strong> 0198-slice-notation</a></li><li><a href="0199-ownership-variants.html"><strong>57.</strong> 0199-ownership-variants</a></li><li><a href="0201-error-chaining.html"><strong>58.</strong> 0201-error-chaining</a></li><li><a href="0202-subslice-syntax-change.html"><strong>59.</strong> 0202-subslice-syntax-change</a></li><li><a href="0212-restore-int-fallback.html"><strong>60.</strong> 0212-restore-int-fallback</a></li><li><a href="0213-defaulted-type-params.html"><strong>61.</strong> 0213-defaulted-type-params</a></li><li><a href="0214-while-let.html"><strong>62.</strong> 0214-while-let</a></li><li><a href="0216-collection-views.html"><strong>63.</strong> 0216-collection-views</a></li><li><a href="0218-empty-struct-with-braces.html"><strong>64.</strong> 0218-empty-struct-with-braces</a></li><li><a href="0221-panic.html"><strong>65.</strong> 0221-panic</a></li><li><a href="0230-remove-runtime.html"><strong>66.</strong> 0230-remove-runtime</a></li><li><a href="0231-upvar-capture-inference.html"><strong>67.</strong> 0231-upvar-capture-inference</a></li><li><a href="0234-variants-namespace.html"><strong>68.</strong> 0234-variants-namespace</a></li><li><a href="0235-collections-conventions.html"><strong>69.</strong> 0235-collections-conventions</a></li><li><a href="0236-error-conventions.html"><strong>70.</strong> 0236-error-conventions</a></li><li><a href="0240-unsafe-api-location.html"><strong>71.</strong> 0240-unsafe-api-location</a></li><li><a href="0241-deref-conversions.html"><strong>72.</strong> 0241-deref-conversions</a></li><li><a href="0243-trait-based-exception-handling.html"><strong>73.</strong> 0243-trait-based-exception-handling</a></li><li><a href="0246-const-vs-static.html"><strong>74.</strong> 0246-const-vs-static</a></li><li><a href="0255-object-safety.html"><strong>75.</strong> 0255-object-safety</a></li><li><a href="0256-remove-refcounting-gc-of-t.html"><strong>76.</strong> 0256-remove-refcounting-gc-of-t</a></li><li><a href="0320-nonzeroing-dynamic-drop.html"><strong>77.</strong> 0320-nonzeroing-dynamic-drop</a></li><li><a href="0326-restrict-xXX-to-ascii.html"><strong>78.</strong> 0326-restrict-xXX-to-ascii</a></li><li><a href="0339-statically-sized-literals.html"><strong>79.</strong> 0339-statically-sized-literals</a></li><li><a href="0341-remove-virtual-structs.html"><strong>80.</strong> 0341-remove-virtual-structs</a></li><li><a href="0342-keywords.html"><strong>81.</strong> 0342-keywords</a></li><li><a href="0344-conventions-galore.html"><strong>82.</strong> 0344-conventions-galore</a></li><li><a href="0356-no-module-prefixes.html"><strong>83.</strong> 0356-no-module-prefixes</a></li><li><a href="0369-num-reform.html"><strong>84.</strong> 0369-num-reform</a></li><li><a href="0378-expr-macros.html"><strong>85.</strong> 0378-expr-macros</a></li><li><a href="0379-remove-reflection.html"><strong>86.</strong> 0379-remove-reflection</a></li><li><a href="0380-stabilize-std-fmt.html"><strong>87.</strong> 0380-stabilize-std-fmt</a></li><li><a href="0385-module-system-cleanup.html"><strong>88.</strong> 0385-module-system-cleanup</a></li><li><a href="0387-higher-ranked-trait-bounds.html"><strong>89.</strong> 0387-higher-ranked-trait-bounds</a></li><li><a href="0390-enum-namespacing.html"><strong>90.</strong> 0390-enum-namespacing</a></li><li><a href="0401-coercions.html"><strong>91.</strong> 0401-coercions</a></li><li><a href="0403-cargo-build-command.html"><strong>92.</strong> 0403-cargo-build-command</a></li><li><a href="0404-change-prefer-dynamic.html"><strong>93.</strong> 0404-change-prefer-dynamic</a></li><li><a href="0418-struct-variants.html"><strong>94.</strong> 0418-struct-variants</a></li><li><a href="0430-finalizing-naming-conventions.html"><strong>95.</strong> 0430-finalizing-naming-conventions</a></li><li><a href="0438-precedence-of-plus.html"><strong>96.</strong> 0438-precedence-of-plus</a></li><li><a href="0439-cmp-ops-reform.html"><strong>97.</strong> 0439-cmp-ops-reform</a></li><li><a href="0445-extension-trait-conventions.html"><strong>98.</strong> 0445-extension-trait-conventions</a></li><li><a href="0446-es6-unicode-escapes.html"><strong>99.</strong> 0446-es6-unicode-escapes</a></li><li><a href="0447-no-unused-impl-parameters.html"><strong>100.</strong> 0447-no-unused-impl-parameters</a></li><li><a href="0450-un-feature-gate-some-more-gates.html"><strong>101.</strong> 0450-un-feature-gate-some-more-gates</a></li><li><a href="0453-macro-reform.html"><strong>102.</strong> 0453-macro-reform</a></li><li><a href="0458-send-improvements.html"><strong>103.</strong> 0458-send-improvements</a></li><li><a href="0459-disallow-shadowing.html"><strong>104.</strong> 0459-disallow-shadowing</a></li><li><a href="0461-tls-overhaul.html"><strong>105.</strong> 0461-tls-overhaul</a></li><li><a href="0463-future-proof-literal-suffixes.html"><strong>106.</strong> 0463-future-proof-literal-suffixes</a></li><li><a href="0469-feature-gate-box-patterns.html"><strong>107.</strong> 0469-feature-gate-box-patterns</a></li><li><a href="0474-path-reform.html"><strong>108.</strong> 0474-path-reform</a></li><li><a href="0486-std-ascii-reform.html"><strong>109.</strong> 0486-std-ascii-reform</a></li><li><a href="0490-dst-syntax.html"><strong>110.</strong> 0490-dst-syntax</a></li><li><a href="0494-c_str-and-c_vec-stability.html"><strong>111.</strong> 0494-c_str-and-c_vec-stability</a></li><li><a href="0495-array-pattern-changes.html"><strong>112.</strong> 0495-array-pattern-changes</a></li><li><a href="0501-consistent_no_prelude_attributes.html"><strong>113.</strong> 0501-consistent_no_prelude_attributes</a></li><li><a href="0503-prelude-stabilization.html"><strong>114.</strong> 0503-prelude-stabilization</a></li><li><a href="0504-show-stabilization.html"><strong>115.</strong> 0504-show-stabilization</a></li><li><a href="0505-api-comment-conventions.html"><strong>116.</strong> 0505-api-comment-conventions</a></li><li><a href="0507-release-channels.html"><strong>117.</strong> 0507-release-channels</a></li><li><a href="0509-collections-reform-part-2.html"><strong>118.</strong> 0509-collections-reform-part-2</a></li><li><a href="0517-io-os-reform.html"><strong>119.</strong> 0517-io-os-reform</a></li><li><a href="0520-new-array-repeat-syntax.html"><strong>120.</strong> 0520-new-array-repeat-syntax</a></li><li><a href="0522-self-impl.html"><strong>121.</strong> 0522-self-impl</a></li><li><a href="0526-fmt-text-writer.html"><strong>122.</strong> 0526-fmt-text-writer</a></li><li><a href="0528-string-patterns.html"><strong>123.</strong> 0528-string-patterns</a></li><li><a href="0529-conversion-traits.html"><strong>124.</strong> 0529-conversion-traits</a></li><li><a href="0531-define-rfc-scope.html"><strong>125.</strong> 0531-define-rfc-scope</a></li><li><a href="0532-self-in-use.html"><strong>126.</strong> 0532-self-in-use</a></li><li><a href="0533-no-array-elem-moves.html"><strong>127.</strong> 0533-no-array-elem-moves</a></li><li><a href="0534-deriving2derive.html"><strong>128.</strong> 0534-deriving2derive</a></li><li><a href="0544-rename-int-uint.html"><strong>129.</strong> 0544-rename-int-uint</a></li><li><a href="0546-Self-not-sized-by-default.html"><strong>130.</strong> 0546-Self-not-sized-by-default</a></li><li><a href="0550-macro-future-proofing.html"><strong>131.</strong> 0550-macro-future-proofing</a></li><li><a href="0556-raw-lifetime.html"><strong>132.</strong> 0556-raw-lifetime</a></li><li><a href="0558-require-parentheses-for-chained-comparisons.html"><strong>133.</strong> 0558-require-parentheses-for-chained-comparisons</a></li><li><a href="0560-integer-overflow.html"><strong>134.</strong> 0560-integer-overflow</a></li><li><a href="0563-remove-ndebug.html"><strong>135.</strong> 0563-remove-ndebug</a></li><li><a href="0565-show-string-guidelines.html"><strong>136.</strong> 0565-show-string-guidelines</a></li><li><a href="0572-rustc-attribute.html"><strong>137.</strong> 0572-rustc-attribute</a></li><li><a href="0574-drain-range.html"><strong>138.</strong> 0574-drain-range</a></li><li><a href="0580-rename-collections.html"><strong>139.</strong> 0580-rename-collections</a></li><li><a href="0587-fn-return-should-be-an-associated-type.html"><strong>140.</strong> 0587-fn-return-should-be-an-associated-type</a></li><li><a href="0592-c-str-deref.html"><strong>141.</strong> 0592-c-str-deref</a></li><li><a href="0593-forbid-Self-definitions.html"><strong>142.</strong> 0593-forbid-Self-definitions</a></li><li><a href="0599-default-object-bound.html"><strong>143.</strong> 0599-default-object-bound</a></li><li><a href="0601-replace-be-with-become.html"><strong>144.</strong> 0601-replace-be-with-become</a></li><li><a href="0639-discriminant-intrinsic.html"><strong>145.</strong> 0639-discriminant-intrinsic</a></li><li><a href="0640-debug-improvements.html"><strong>146.</strong> 0640-debug-improvements</a></li><li><a href="0702-rangefull-expression.html"><strong>147.</strong> 0702-rangefull-expression</a></li><li><a href="0735-allow-inherent-impls-anywhere.html"><strong>148.</strong> 0735-allow-inherent-impls-anywhere</a></li><li><a href="0736-privacy-respecting-fru.html"><strong>149.</strong> 0736-privacy-respecting-fru</a></li><li><a href="0738-variance.html"><strong>150.</strong> 0738-variance</a></li><li><a href="0769-sound-generic-drop.html"><strong>151.</strong> 0769-sound-generic-drop</a></li><li><a href="0771-std-iter-once.html"><strong>152.</strong> 0771-std-iter-once</a></li><li><a href="0803-type-ascription.html"><strong>153.</strong> 0803-type-ascription</a></li><li><a href="0809-box-and-in-for-stdlib.html"><strong>154.</strong> 0809-box-and-in-for-stdlib</a></li><li><a href="0823-hash-simplification.html"><strong>155.</strong> 0823-hash-simplification</a></li><li><a href="0832-from-elem-with-love.html"><strong>156.</strong> 0832-from-elem-with-love</a></li><li><a href="0839-embrace-extend-extinguish.html"><strong>157.</strong> 0839-embrace-extend-extinguish</a></li><li><a href="0840-no-panic-in-c-string.html"><strong>158.</strong> 0840-no-panic-in-c-string</a></li><li><a href="0873-type-macros.html"><strong>159.</strong> 0873-type-macros</a></li><li><a href="0879-small-base-lexing.html"><strong>160.</strong> 0879-small-base-lexing</a></li><li><a href="0888-compiler-fence-intrinsics.html"><strong>161.</strong> 0888-compiler-fence-intrinsics</a></li><li><a href="0909-move-thread-local-to-std-thread.html"><strong>162.</strong> 0909-move-thread-local-to-std-thread</a></li><li><a href="0911-const-fn.html"><strong>163.</strong> 0911-const-fn</a></li><li><a href="0921-entry_v3.html"><strong>164.</strong> 0921-entry_v3</a></li><li><a href="0940-hyphens-considered-harmful.html"><strong>165.</strong> 0940-hyphens-considered-harmful</a></li><li><a href="0953-op-assign.html"><strong>166.</strong> 0953-op-assign</a></li><li><a href="0968-closure-return-type-syntax.html"><strong>167.</strong> 0968-closure-return-type-syntax</a></li><li><a href="0979-align-splitn-with-other-languages.html"><strong>168.</strong> 0979-align-splitn-with-other-languages</a></li><li><a href="0980-read-exact.html"><strong>169.</strong> 0980-read-exact</a></li><li><a href="0982-dst-coercion.html"><strong>170.</strong> 0982-dst-coercion</a></li><li><a href="1011-process.exit.html"><strong>171.</strong> 1011-process.exit</a></li><li><a href="1014-stdout-existential-crisis.html"><strong>172.</strong> 1014-stdout-existential-crisis</a></li><li><a href="1023-rebalancing-coherence.html"><strong>173.</strong> 1023-rebalancing-coherence</a></li><li><a href="1030-prelude-additions.html"><strong>174.</strong> 1030-prelude-additions</a></li><li><a href="1040-duration-reform.html"><strong>175.</strong> 1040-duration-reform</a></li><li><a href="1044-io-fs-2.1.html"><strong>176.</strong> 1044-io-fs-2.1</a></li><li><a href="1047-socket-timeouts.html"><strong>177.</strong> 1047-socket-timeouts</a></li><li><a href="1048-rename-soft-link-to-symlink.html"><strong>178.</strong> 1048-rename-soft-link-to-symlink</a></li><li><a href="1054-str-words.html"><strong>179.</strong> 1054-str-words</a></li><li><a href="1057-io-error-sync.html"><strong>180.</strong> 1057-io-error-sync</a></li><li><a href="1058-slice-tail-redesign.html"><strong>181.</strong> 1058-slice-tail-redesign</a></li><li><a href="1066-safe-mem-forget.html"><strong>182.</strong> 1066-safe-mem-forget</a></li><li><a href="1068-rust-governance.html"><strong>183.</strong> 1068-rust-governance</a></li><li><a href="1096-remove-static-assert.html"><strong>184.</strong> 1096-remove-static-assert</a></li><li><a href="1102-rename-connect-to-join.html"><strong>185.</strong> 1102-rename-connect-to-join</a></li><li><a href="1105-api-evolution.html"><strong>186.</strong> 1105-api-evolution</a></li><li><a href="1119-result-expect.html"><strong>187.</strong> 1119-result-expect</a></li><li><a href="1122-language-semver.html"><strong>188.</strong> 1122-language-semver</a></li><li><a href="1123-str-split-at.html"><strong>189.</strong> 1123-str-split-at</a></li><li><a href="1131-likely-intrinsic.html"><strong>190.</strong> 1131-likely-intrinsic</a></li><li><a href="1135-raw-pointer-comparisons.html"><strong>191.</strong> 1135-raw-pointer-comparisons</a></li><li><a href="1152-slice-string-symmetry.html"><strong>192.</strong> 1152-slice-string-symmetry</a></li><li><a href="1156-adjust-default-object-bounds.html"><strong>193.</strong> 1156-adjust-default-object-bounds</a></li><li><a href="1174-into-raw-fd-socket-handle-traits.html"><strong>194.</strong> 1174-into-raw-fd-socket-handle-traits</a></li><li><a href="1183-swap-out-jemalloc.html"><strong>195.</strong> 1183-swap-out-jemalloc</a></li><li><a href="1184-stabilize-no_std.html"><strong>196.</strong> 1184-stabilize-no_std</a></li><li><a href="1191-hir.html"><strong>197.</strong> 1191-hir</a></li><li><a href="1192-inclusive-ranges.html"><strong>198.</strong> 1192-inclusive-ranges</a></li><li><a href="1193-cap-lints.html"><strong>199.</strong> 1193-cap-lints</a></li><li><a href="1194-set-recovery.html"><strong>200.</strong> 1194-set-recovery</a></li><li><a href="1199-simd-infrastructure.html"><strong>201.</strong> 1199-simd-infrastructure</a></li><li><a href="1200-cargo-install.html"><strong>202.</strong> 1200-cargo-install</a></li><li><a href="1201-naked-fns.html"><strong>203.</strong> 1201-naked-fns</a></li><li><a href="1210-impl-specialization.html"><strong>204.</strong> 1210-impl-specialization</a></li><li><a href="1211-mir.html"><strong>205.</strong> 1211-mir</a></li><li><a href="1212-line-endings.html"><strong>206.</strong> 1212-line-endings</a></li><li><a href="1214-projections-lifetimes-and-wf.html"><strong>207.</strong> 1214-projections-lifetimes-and-wf</a></li><li><a href="1216-bang-type.html"><strong>208.</strong> 1216-bang-type</a></li><li><a href="1219-use-group-as.html"><strong>209.</strong> 1219-use-group-as</a></li><li><a href="1228-placement-left-arrow.html"><strong>210.</strong> 1228-placement-left-arrow</a></li><li><a href="1229-compile-time-asserts.html"><strong>211.</strong> 1229-compile-time-asserts</a></li><li><a href="1236-stabilize-catch-panic.html"><strong>212.</strong> 1236-stabilize-catch-panic</a></li><li><a href="1238-nonparametric-dropck.html"><strong>213.</strong> 1238-nonparametric-dropck</a></li><li><a href="1240-repr-packed-unsafe-ref.html"><strong>214.</strong> 1240-repr-packed-unsafe-ref</a></li><li><a href="1241-no-wildcard-deps.html"><strong>215.</strong> 1241-no-wildcard-deps</a></li><li><a href="1242-rust-lang-crates.html"><strong>216.</strong> 1242-rust-lang-crates</a></li><li><a href="1252-open-options.html"><strong>217.</strong> 1252-open-options</a></li><li><a href="1257-drain-range-2.html"><strong>218.</strong> 1257-drain-range-2</a></li><li><a href="1260-main-reexport.html"><strong>219.</strong> 1260-main-reexport</a></li><li><a href="1268-allow-overlapping-impls-on-marker-traits.html"><strong>220.</strong> 1268-allow-overlapping-impls-on-marker-traits</a></li><li><a href="1270-deprecation.html"><strong>221.</strong> 1270-deprecation</a></li><li><a href="1288-time-improvements.html"><strong>222.</strong> 1288-time-improvements</a></li><li><a href="1291-promote-libc.html"><strong>223.</strong> 1291-promote-libc</a></li><li><a href="1298-incremental-compilation.html"><strong>224.</strong> 1298-incremental-compilation</a></li><li><a href="1300-intrinsic-semantics.html"><strong>225.</strong> 1300-intrinsic-semantics</a></li><li><a href="1307-osstring-methods.html"><strong>226.</strong> 1307-osstring-methods</a></li><li><a href="1317-ide.html"><strong>227.</strong> 1317-ide</a></li><li><a href="1327-dropck-param-eyepatch.html"><strong>228.</strong> 1327-dropck-param-eyepatch</a></li><li><a href="1328-global-panic-handler.html"><strong>229.</strong> 1328-global-panic-handler</a></li><li><a href="1331-grammar-is-canonical.html"><strong>230.</strong> 1331-grammar-is-canonical</a></li><li><a href="1358-repr-align.html"><strong>231.</strong> 1358-repr-align</a></li><li><a href="1359-process-ext-unix.html"><strong>232.</strong> 1359-process-ext-unix</a></li><li><a href="1361-cargo-cfg-dependencies.html"><strong>233.</strong> 1361-cargo-cfg-dependencies</a></li><li><a href="1398-kinds-of-allocators.html"><strong>234.</strong> 1398-kinds-of-allocators</a></li><li><a href="1399-repr-pack.html"><strong>235.</strong> 1399-repr-pack</a></li><li><a href="1414-rvalue_static_promotion.html"><strong>236.</strong> 1414-rvalue_static_promotion</a></li><li><a href="1415-trim-std-os.html"><strong>237.</strong> 1415-trim-std-os</a></li><li><a href="1419-slice-copy.html"><strong>238.</strong> 1419-slice-copy</a></li><li><a href="1422-pub-restricted.html"><strong>239.</strong> 1422-pub-restricted</a></li><li><a href="1432-replace-slice.html"><strong>240.</strong> 1432-replace-slice</a></li><li><a href="1434-contains-method-for-ranges.html"><strong>241.</strong> 1434-contains-method-for-ranges</a></li><li><a href="1440-drop-types-in-const.html"><strong>242.</strong> 1440-drop-types-in-const</a></li><li><a href="1443-extended-compare-and-swap.html"><strong>243.</strong> 1443-extended-compare-and-swap</a></li><li><a href="1444-union.html"><strong>244.</strong> 1444-union</a></li><li><a href="1445-restrict-constants-in-patterns.html"><strong>245.</strong> 1445-restrict-constants-in-patterns</a></li><li><a href="1461-net2-mutators.html"><strong>246.</strong> 1461-net2-mutators</a></li><li><a href="1467-volatile.html"><strong>247.</strong> 1467-volatile</a></li><li><a href="1479-unix-socket.html"><strong>248.</strong> 1479-unix-socket</a></li><li><a href="1492-dotdot-in-patterns.html"><strong>249.</strong> 1492-dotdot-in-patterns</a></li><li><a href="1498-ipv6addr-octets.html"><strong>250.</strong> 1498-ipv6addr-octets</a></li><li><a href="1504-int128.html"><strong>251.</strong> 1504-int128</a></li><li><a href="1506-adt-kinds.html"><strong>252.</strong> 1506-adt-kinds</a></li><li><a href="1510-cdylib.html"><strong>253.</strong> 1510-cdylib</a></li><li><a href="1513-less-unwinding.html"><strong>254.</strong> 1513-less-unwinding</a></li><li><a href="1521-copy-clone-semantics.html"><strong>255.</strong> 1521-copy-clone-semantics</a></li><li><a href="1522-conservative-impl-trait.html"><strong>256.</strong> 1522-conservative-impl-trait</a></li><li><a href="1525-cargo-workspace.html"><strong>257.</strong> 1525-cargo-workspace</a></li><li><a href="1535-stable-overflow-checks.html"><strong>258.</strong> 1535-stable-overflow-checks</a></li><li><a href="1542-try-from.html"><strong>259.</strong> 1542-try-from</a></li><li><a href="1543-integer_atomics.html"><strong>260.</strong> 1543-integer_atomics</a></li><li><a href="1548-global-asm.html"><strong>261.</strong> 1548-global-asm</a></li><li><a href="1552-contains-method-for-various-collections.html"><strong>262.</strong> 1552-contains-method-for-various-collections</a></li><li><a href="1558-closure-to-fn-coercion.html"><strong>263.</strong> 1558-closure-to-fn-coercion</a></li><li><a href="1559-attributes-with-literals.html"><strong>264.</strong> 1559-attributes-with-literals</a></li><li><a href="1560-name-resolution.html"><strong>265.</strong> 1560-name-resolution</a></li><li><a href="1561-macro-naming.html"><strong>266.</strong> 1561-macro-naming</a></li><li><a href="1566-proc-macros.html"><strong>267.</strong> 1566-proc-macros</a></li><li><a href="1567-long-error-codes-explanation-normalization.html"><strong>268.</strong> 1567-long-error-codes-explanation-normalization</a></li><li><a href="1574-more-api-documentation-conventions.html"><strong>269.</strong> 1574-more-api-documentation-conventions</a></li><li><a href="1576-macros-literal-matcher.html"><strong>270.</strong> 1576-macros-literal-matcher</a></li><li><a href="1581-fused-iterator.html"><strong>271.</strong> 1581-fused-iterator</a></li><li><a href="1584-macros.html"><strong>272.</strong> 1584-macros</a></li><li><a href="1589-rustc-bug-fix-procedure.html"><strong>273.</strong> 1589-rustc-bug-fix-procedure</a></li><li><a href="1590-macro-lifetimes.html"><strong>274.</strong> 1590-macro-lifetimes</a></li><li><a href="1598-generic_associated_types.html"><strong>275.</strong> 1598-generic_associated_types</a></li><li><a href="1607-style-rfcs.html"><strong>276.</strong> 1607-style-rfcs</a></li><li><a href="1618-ergonomic-format-args.html"><strong>277.</strong> 1618-ergonomic-format-args</a></li><li><a href="1620-regex-1.0.html"><strong>278.</strong> 1620-regex-1.0</a></li><li><a href="1623-static.html"><strong>279.</strong> 1623-static</a></li><li><a href="1624-loop-break-value.html"><strong>280.</strong> 1624-loop-break-value</a></li><li><a href="1636-document_all_features.html"><strong>281.</strong> 1636-document_all_features</a></li><li><a href="1640-duration-checked-sub.html"><strong>282.</strong> 1640-duration-checked-sub</a></li><li><a href="1643-memory-model-strike-team.html"><strong>283.</strong> 1643-memory-model-strike-team</a></li><li><a href="1644-default-and-expanded-rustc-errors.html"><strong>284.</strong> 1644-default-and-expanded-rustc-errors</a></li><li><a href="1647-allow-self-in-where-clauses.html"><strong>285.</strong> 1647-allow-self-in-where-clauses</a></li><li><a href="1649-atomic-access.html"><strong>286.</strong> 1649-atomic-access</a></li><li><a href="1651-movecell.html"><strong>287.</strong> 1651-movecell</a></li><li><a href="1653-assert_ne.html"><strong>288.</strong> 1653-assert_ne</a></li><li><a href="1660-try-borrow.html"><strong>289.</strong> 1660-try-borrow</a></li><li><a href="1665-windows-subsystem.html"><strong>290.</strong> 1665-windows-subsystem</a></li><li><a href="1679-panic-safe-slicing.html"><strong>291.</strong> 1679-panic-safe-slicing</a></li><li><a href="1681-macros-1.1.html"><strong>292.</strong> 1681-macros-1.1</a></li><li><a href="1682-field-init-shorthand.html"><strong>293.</strong> 1682-field-init-shorthand</a></li><li><a href="1683-docs-team.html"><strong>294.</strong> 1683-docs-team</a></li><li><a href="1685-deprecate-anonymous-parameters.html"><strong>295.</strong> 1685-deprecate-anonymous-parameters</a></li><li><a href="1695-add-error-macro.html"><strong>296.</strong> 1695-add-error-macro</a></li><li><a href="1696-discriminant.html"><strong>297.</strong> 1696-discriminant</a></li><li><a href="1717-dllimport.html"><strong>298.</strong> 1717-dllimport</a></li><li><a href="1721-crt-static.html"><strong>299.</strong> 1721-crt-static</a></li><li><a href="1725-unaligned-access.html"><strong>300.</strong> 1725-unaligned-access</a></li><li><a href="1728-north-star.html"><strong>301.</strong> 1728-north-star</a></li><li><a href="1733-trait-alias.html"><strong>302.</strong> 1733-trait-alias</a></li><li><a href="1758-repr-transparent.html"><strong>303.</strong> 1758-repr-transparent</a></li><li><a href="1774-roadmap-2017.html"><strong>304.</strong> 1774-roadmap-2017</a></li><li><a href="1789-as-cell.html"><strong>305.</strong> 1789-as-cell</a></li><li><a href="1824-crates.io-default-ranking.html"><strong>306.</strong> 1824-crates.io-default-ranking</a></li><li><a href="1826-change-doc-default-urls.html"><strong>307.</strong> 1826-change-doc-default-urls</a></li><li><a href="1828-rust-bookshelf.html"><strong>308.</strong> 1828-rust-bookshelf</a></li><li><a href="1845-shared-from-slice.html"><strong>309.</strong> 1845-shared-from-slice</a></li><li><a href="1849-non-static-type-id.html"><strong>310.</strong> 1849-non-static-type-id</a></li><li><a href="1857-stabilize-drop-order.html"><strong>311.</strong> 1857-stabilize-drop-order</a></li><li><a href="1859-try-trait.html"><strong>312.</strong> 1859-try-trait</a></li><li><a href="1860-manually-drop.html"><strong>313.</strong> 1860-manually-drop</a></li><li><a href="1861-extern-types.html"><strong>314.</strong> 1861-extern-types</a></li><li><a href="1866-more-readable-assert-eq.html"><strong>315.</strong> 1866-more-readable-assert-eq</a></li><li><a href="1868-portability-lint.html"><strong>316.</strong> 1868-portability-lint</a></li><li><a href="1869-eprintln.html"><strong>317.</strong> 1869-eprintln</a></li><li><a href="1884-unstable-sort.html"><strong>318.</strong> 1884-unstable-sort</a></li><li><a href="1925-optional-match-vert.html"><strong>319.</strong> 1925-optional-match-vert</a></li><li><a href="1937-ques-in-main.html"><strong>320.</strong> 1937-ques-in-main</a></li><li><a href="1940-must-use-functions.html"><strong>321.</strong> 1940-must-use-functions</a></li><li><a href="1946-intra-rustdoc-links.html"><strong>322.</strong> 1946-intra-rustdoc-links</a></li><li><a href="1951-expand-impl-trait.html"><strong>323.</strong> 1951-expand-impl-trait</a></li><li><a href="1961-clamp.html"><strong>324.</strong> 1961-clamp</a></li><li><a href="1966-unsafe-pointer-reform.html"><strong>325.</strong> 1966-unsafe-pointer-reform</a></li><li><a href="1969-cargo-prepublish.html"><strong>326.</strong> 1969-cargo-prepublish</a></li><li><a href="1974-global-allocators.html"><strong>327.</strong> 1974-global-allocators</a></li><li><a href="1977-public-private-dependencies.html"><strong>328.</strong> 1977-public-private-dependencies</a></li><li><a href="1983-nursery-deprecation.html"><strong>329.</strong> 1983-nursery-deprecation</a></li><li><a href="1985-tiered-browser-support.html"><strong>330.</strong> 1985-tiered-browser-support</a></li><li><a href="1990-external-doc-attribute.html"><strong>331.</strong> 1990-external-doc-attribute</a></li><li><a href="2000-const-generics.html"><strong>332.</strong> 2000-const-generics</a></li><li><a href="2005-match-ergonomics.html"><strong>333.</strong> 2005-match-ergonomics</a></li><li><a href="2008-non-exhaustive.html"><strong>334.</strong> 2008-non-exhaustive</a></li><li><a href="2011-generic-assert.html"><strong>335.</strong> 2011-generic-assert</a></li><li><a href="2025-nested-method-calls.html"><strong>336.</strong> 2025-nested-method-calls</a></li><li><a href="2027-object_safe_for_dispatch.html"><strong>337.</strong> 2027-object_safe_for_dispatch</a></li><li><a href="2033-experimental-coroutines.html"><strong>338.</strong> 2033-experimental-coroutines</a></li><li><a href="2043-is-aligned-intrinsic.html"><strong>339.</strong> 2043-is-aligned-intrinsic</a></li><li><a href="2044-license-rfcs.html"><strong>340.</strong> 2044-license-rfcs</a></li><li><a href="2045-target-feature.html"><strong>341.</strong> 2045-target-feature</a></li><li><a href="2052-epochs.html"><strong>342.</strong> 2052-epochs</a></li><li><a href="2057-refcell-replace.html"><strong>343.</strong> 2057-refcell-replace</a></li><li><a href="2070-panic-implementation.html"><strong>344.</strong> 2070-panic-implementation</a></li><li><a href="2071-impl-trait-type-alias.html"><strong>345.</strong> 2071-impl-trait-type-alias</a></li><li><a href="2086-allow-if-let-irrefutables.html"><strong>346.</strong> 2086-allow-if-let-irrefutables</a></li><li><a href="2089-implied-bounds.html"><strong>347.</strong> 2089-implied-bounds</a></li><li><a href="2091-inline-semantic.html"><strong>348.</strong> 2091-inline-semantic</a></li><li><a href="2093-infer-outlives.html"><strong>349.</strong> 2093-infer-outlives</a></li><li><a href="2094-nll.html"><strong>350.</strong> 2094-nll</a></li><li><a href="2103-tool-attributes.html"><strong>351.</strong> 2103-tool-attributes</a></li><li><a href="2113-dyn-trait-syntax.html"><strong>352.</strong> 2113-dyn-trait-syntax</a></li><li><a href="2115-argument-lifetimes.html"><strong>353.</strong> 2115-argument-lifetimes</a></li><li><a href="2124-option-filter.html"><strong>354.</strong> 2124-option-filter</a></li><li><a href="2126-path-clarity.html"><strong>355.</strong> 2126-path-clarity</a></li><li><a href="2128-use-nested-groups.html"><strong>356.</strong> 2128-use-nested-groups</a></li><li><a href="2132-copy-closures.html"><strong>357.</strong> 2132-copy-closures</a></li><li><a href="2133-all-the-clones.html"><strong>358.</strong> 2133-all-the-clones</a></li><li><a href="2136-build-systems.html" class="active"><strong>359.</strong> 2136-build-systems</a></li><li><a href="2137-variadic.html"><strong>360.</strong> 2137-variadic</a></li><li><a href="2141-alternative-registries.html"><strong>361.</strong> 2141-alternative-registries</a></li></ul>
+        </div>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page" tabindex="-1">
+                <div id="menu-bar" class="menu-bar">
+                    <div class="left-buttons">
+                        <i id="sidebar-toggle" class="fa fa-bars"></i>
+                        <i id="theme-toggle" class="fa fa-paint-brush"></i>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html">
+                            <i id="print-button" class="fa fa-print" title="Print this book"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="content" class="content">
+                    <ul>
+<li>Feature Name: N/A</li>
+<li>Start Date: 2017-09-01</li>
+<li>RFC PR: https://github.com/rust-lang/rfcs/pull/2136</li>
+<li>Rust Issue: N/A</li>
+</ul>
+<a class="header" href="2136-build-systems.html#summary" id="summary"><h1>Summary</h1></a>
+<p>This <strong>experimental RFC</strong> lays out a high-level plan for improving Cargo's
+ability to integrate with other build systems and environments. As an
+experimental RFC, it opens the door to landing <a href="https://github.com/rust-lang/cargo/pull/4433/">unstable features</a> in Cargo to
+try out ideas, but <em>not</em> to stabilizing those features, which will require
+follow-up RFCs. It proposes a variety of features which, in total, permit a wide
+spectrum of integration cases -- from customizing a single aspect of Cargo to
+letting an external build system run almost the entire show.</p>
+<a class="header" href="2136-build-systems.html#motivation" id="motivation"><h1>Motivation</h1></a>
+<p>One of the first hurdles for using Rust in production is integrating it into
+your organization's build system. The level of challenge depends on the level of
+integration required: it's relatively painless to invoke Cargo from a makefile
+and let it fully manage building Rust code, but gets harder as you want the
+external build system to exert finer-grained control over how Rust code is built.
+The goal of this RFC is to lay out a vision for making integration at <em>any</em> scale
+much easier than it is today.</p>
+<p>After extensive discussion with stakeholders, there appear to be two distinct
+kinds of use-cases (or &quot;customers&quot;) involved here:</p>
+<ul>
+<li>
+<p><strong>Mixed build systems</strong>, where building already involves a variety of
+language- or project-specific build systems. For this use case, the desire is
+to use Cargo as-is, except for some specific concerns. Those concerns take a
+variety of shapes: customizing caching, having a local crate registry, custom
+handling for native dependencies, and so on. Addressing these concerns well
+means adding new points of extensibility or control to Cargo.</p>
+</li>
+<li>
+<p><strong>Homogeneous build systems</strong> like <a href="https://bazel.build/">Bazel</a>, where there is a single prevailing
+build system and methodology that works across languages and projects and is
+expected to drive all aspects of the build. In such cases the goal of Cargo
+integration is largely <em>interoperability</em>, including easy use of the crates.io
+ecosystem and Rust-centric tooling, both of which expect Cargo-driven build
+management.</p>
+</li>
+</ul>
+<p>The interoperability constraints are, in actuality, hard constraints around
+<em>any</em> kind of integration.</p>
+<p>In more detail, a build system integration <em>must</em>:</p>
+<ul>
+<li>Make it easy for the outer build system to control the aspects of building
+that are under its purview (e.g. artifact management, caching, network access).</li>
+<li>Make it easy to depend on arbitrary crates in the crates.io ecosystem.</li>
+<li>Make it easy to use Rust tooling like <code>rustfmt</code> or the RLS with projects that
+depend on the external build system.</li>
+</ul>
+<p>A build system integration <em>should</em>:</p>
+<ul>
+<li>Provide Cargo-based or Cargo-like workflows when developing Rust projects, so
+that documentation and guidance from the Rust community applies even when
+working within a different build system.</li>
+<li>To the extent possible, support Cargo concepts in a smooth, first-class way in
+the external build system (e.g. Cargo features, profiles, etc)</li>
+</ul>
+<p>This RFC does not attempt to provide a detailed solution for all of the needed
+extensibility points in Cargo, but rather to outline a general plan for how to
+get there over time. Individual components that add significant features to
+Cargo will need follow-up RFCs before stabilization.</p>
+<a class="header" href="2136-build-systems.html#guide-level-explanation" id="guide-level-explanation"><h1>Guide-level explanation</h1></a>
+<p>The plan proposed in this RFC is to address the two use-cases from the
+<a href="2136-build-systems.html#motivation">motivation</a> section in parallel:</p>
+<ul>
+<li>
+<p><strong>For the mixed build system case</strong>, we will triage feature requests and work on
+adding further points of extensibility to Cargo based on expected impact. Each
+added point of extensibility should ease build system integration for another
+round of customers.</p>
+</li>
+<li>
+<p><strong>For the homoegenous build system case</strong>, we will immediately pursue
+extensibility points that will enable the external build system to perform
+many of the tasks that Cargo does today--but while still meeting our
+interoperability constraints. We will then work on smoothing remaining rough
+edges, which have a high degree of overlap with the work on mixed build
+systems.</p>
+</li>
+</ul>
+<p>In the long run, these two parallel lines of work will converge, such that we
+offer a complete spectrum of options (in terms of what Cargo controls versus an
+external system). But they start at critically different points, and working on
+those in parallel is the key to delivering value quickly and incrementally.</p>
+<a class="header" href="2136-build-systems.html#a-high-level-model-of-what-cargo-does" id="a-high-level-model-of-what-cargo-does"><h2>A high-level model of what Cargo does</h2></a>
+<p>Before delving into the details of the plan, it's helpful to lay out a mental
+model of the work that Cargo does today, broken into several stages:</p>
+<table><thead><tr><th> <strong>Step</strong>              </th><th> <strong>Conceptual output</strong>                                                                                                                                    </th><th> <strong>Related concerns</strong>             </th></tr></thead><tbody>
+<tr><td> Dependency resolution </td><td> Lock file                                                                                                                                                </td><td> Custom registries, mirrors, offline/local, native deps, ... </td></tr>
+<tr><td> Build configuration   </td><td> Cargo settings per crate in graph                                                                                                                        </td><td> Profiles                            </td></tr>
+<tr><td> Build lowering        </td><td> A build plan: a series of steps that must be run in sequence, including rustc and binary invocations </td><td> Build scripts, plugins              </td></tr>
+<tr><td> Build execution       </td><td> Compiled artifacts                                                                                                                                       </td><td> Caching                             </td></tr>
+</tbody></table>
+<p>The first stage, dependency resolution, is the most complex; it's where our
+model of semver comes into play, as well as a huge list of related
+concerns.</p>
+<p>Dependency resolution produces a lockfile, which records what crates are
+included in the dependency graph, coming from what sources and at what versions,
+as well as interdependencies. It operates independently of the requested Cargo
+workflow.</p>
+<p>The next stage is build <em>configuration</em>, which conceptually is where things like
+profiles come into play: of the crates we're going to build, we need to decide,
+at a high level, &quot;how&quot; we're going to build them. This configuration is at the
+&quot;Cargo level of abstraction&quot;, i.e. in terms of things like profiles rather than
+low-level rustc flags. There's strong desire to make this system more
+expressive, for example by allowing you to always optimize certain dependencies
+even when otherwise in the debug profile.</p>
+<p>After configuration, we know at the Cargo level exactly what we want to build,
+but we need to <em>lower</em> the level of abstraction into concrete, individual
+steps. This is where, for example, profile information is transformed into
+specific rustc flags. Lowering is done independently for each crate, and results
+in a sequence of process invocations, interleaving calls to <code>rustc</code> with
+e.g. running the binary for a build script. You can think of these sequences as
+expanding what was previously a &quot;compile this crate with this configuration&quot;
+node in the dependency graph into a finer-grained set of nodes for running rustc
+etc.</p>
+<p>Finally, there's the actual build <em>execution</em>, which is conceptually
+straightforward: we analyze the dependency graph and existing, cached artifacts,
+and then actually perform any un-cached build steps (in parallel when
+possible). Of course, this is the bread-and-butter of many external build
+systems, so we want to make it easy for them to tweak or entirely control this
+part of the process.</p>
+<p>The first two steps -- dependency resolution and build configuration -- need to
+operate on an entire dependency graph at once. Build lowering, by contrast, can
+be performed for any crate in isolation.</p>
+<a class="header" href="2136-build-systems.html#customizing-cargo" id="customizing-cargo"><h3>Customizing Cargo</h3></a>
+<p><strong>A key point is that, in principle, each of these steps is separable from the
+others</strong>. That is, we should be able to rearchitect Cargo so that each of these
+steps is managed by a distinct component, and the components have a stable --
+and public! -- way of communicating with one another. That in turn will enable
+replacing any particular component while keeping the others. (To be clear, the
+breakdown above is just a high-level sketch; in reality, we'll need a more
+nuanced and layered picture of Cargo's activities).</p>
+<p>This RFC proposes to provide <em>some</em> means of customizing Cargo's activities at
+various layers and stages. The details here are <em>very much</em> up for grabs, and
+are part of the experimentation we need to do.</p>
+<a class="header" href="2136-build-systems.html#likely-design-constraints" id="likely-design-constraints"><h4>Likely design constraints</h4></a>
+<p>Some likely constraints for a Cargo customization/plugin system are:</p>
+<ul>
+<li>
+<p>It should be possible for Rust tools (like <code>rustfmt</code>, IDEs, linters) to &quot;call
+Cargo&quot; to get information or artifacts in a standardized way, while remaining
+oblivious to any customizations. Ideally, <code>Cargo</code> workflows (including custom
+commands) would also work transparently.</p>
+</li>
+<li>
+<p>It should be possible to customize or swap out a <em>small part</em> of Cargo's
+behavior without understanding or reimplementing other parts.</p>
+</li>
+<li>
+<p>The interface for customization should be <em>forward-compatible</em>: existing
+plugins should continue to work with new versions of Cargo.</p>
+</li>
+<li>
+<p>It should be difficult or impossible to introduce customizations that are
+&quot;incoherent&quot;, for example that result in unexpected differences in the way
+that <code>rustc</code> is invoked in different workflows (because, say, the testing
+workflow was customized but the normal build workflow wasn't). In other words,
+customizations are subject to <em>cross-cutting concerns</em>, which need to be
+identified and factored out.</p>
+</li>
+</ul>
+<p>We will iterate on the constraints to form core design principles as we
+experiment.</p>
+<a class="header" href="2136-build-systems.html#a-concrete-example" id="a-concrete-example"><h4>A concrete example</h4></a>
+<p>Since the above is quite hand-wavy, it's helpful to see a very simple, concrete
+example of what a customization might look like. You could imagine something
+like the following for supplying manifest information from an external build
+system, rather than through <code>Cargo.toml</code>:</p>
+<p><strong>Cargo.toml</strong></p>
+<pre><code class="language-toml">[plugins.bazel]
+generate-manifest = true
+</code></pre>
+<p><strong>$root/.cargo/meta.toml</strong></p>
+<pre><code class="language-toml">[plugins]
+
+# These dependencies cannot themselves use plugins.
+# This file is &quot;staged&quot; earlier than Cargo.toml
+
+bazel = &quot;1.0&quot; # a regular crates.io dependency
+</code></pre>
+<p><strong>Semantics</strong></p>
+<p>If any <code>plugins</code> entry in <code>Cargo.toml</code> defines a <code>generate-manifest</code> key,
+whenever Cargo would be about to return the parsed results of <code>Cargo.toml</code> ,
+instead:</p>
+<ul>
+<li>look for the associated plugin in <code>.cargo/meta.toml</code>, and ask it to generate the manifest</li>
+<li>return that instead</li>
+</ul>
+<a class="header" href="2136-build-systems.html#specifics-for-the-homogeneous-build-system-case" id="specifics-for-the-homogeneous-build-system-case"><h2>Specifics for the homogeneous build system case</h2></a>
+<p>For homogeneous build systems, there are two kinds of code that must be dealt
+with: code originally written using vanilla Cargo and a crate registry, and code
+written &quot;natively&quot; in the context of the external build system. Any integration
+has to handle the first case to have access to crates.io or a vendored mirror
+thereof.</p>
+<a class="header" href="2136-build-systems.html#using-crates-vendored-from-or-managed-by-a-crate-registry" id="using-crates-vendored-from-or-managed-by-a-crate-registry"><h3>Using crates vendored from or managed by a crate registry</h3></a>
+<p>Whether using a registry server or a vendored copy, if you're building Rust code
+that is written using vanilla Cargo, you will at some level need to use Cargo's
+dependency resolution and <code>Cargo.toml</code> files. In this case, the external build
+system should invoke Cargo for <em>at least</em> the dependency resolution and build
+configuration steps, and likely the build lowering step as well. In such a
+world, Cargo is responsible for <em>planning</em> the build (which involves largely
+Rust-specific concerns), but the external build system is responsible for
+<em>executing</em> it.</p>
+<p>A typical pattern of usage is to have a whitelist of &quot;root dependencies&quot; from an
+external registry which will be permitted as dependencies within the
+organization, often pinning to a specific version and set of Cargo
+features. This whitelist can be described as a single <code>Cargo.toml</code> file, which
+can then drive Cargo's dependency resolution just once for the entire registry.
+The resulting lockfile can be used to guide vendoring and construction of a
+build plan for consumption by the external build system.</p>
+<p>One important concern is: how do you depend on code from other languages, which
+is being managed by the external build system? That's a narrow version of a more
+general question around <em>native dependencies</em>, which will be addressed
+separately in a later section.</p>
+<a class="header" href="2136-build-systems.html#workflow-and-interop-story" id="workflow-and-interop-story"><h4>Workflow and interop story</h4></a>
+<p>On the external build system side, a rule or plugin will need to be written that
+knows how to invoke Cargo to produce a build plan corresponding to a whitelisted
+(and potentially vendored) registry, then translate that build plan back into
+appropriate rules for the build system. Thus, when doing normal builds, the
+external build system drives the entire process, but invokes Cargo for guidance
+during the planning stage.</p>
+<a class="header" href="2136-build-systems.html#using-crates-managed-by-the-build-system" id="using-crates-managed-by-the-build-system"><h3>Using crates managed by the build system</h3></a>
+<p>Many organization want to employ their own strategy for maintaining and
+versioning code and for resolving dependencies, <em>in addition</em> to build
+execution.</p>
+<p>In this case, the big question is: how can we arrange things such that the Rust
+tooling ecosystem can understand what the external build system is doing, to
+gather the information needed for the tools to operate.</p>
+<p>The possibility we'll examine here is using Cargo <strong>purely as a conduit for
+information from the external build system to Rust tools</strong> (see Alternatives for
+more discussion). That is, tools will be able to call into Cargo in a uniform
+way, with Cargo subsequently just forwarding those calls along to custom user
+code hooking into an external build system. In this approach, Cargo.toml will
+generally consist of a single entry forwarding to a plugin (as in the example
+plugin above). The description of dependencies is then written in the external
+build system's rule format. Thus, Cargo acts primarily as a <em>workflow and tool
+orchestrator</em>, since it is not involved in either planning or executing the
+build. Let's dig into it.</p>
+<a class="header" href="2136-build-systems.html#workflow-and-interop-story-1" id="workflow-and-interop-story-1"><h4>Workflow and interop story</h4></a>
+<p>Even though the external build system is entirely handling both dependency
+resolution and build execution for the crates under its management, it may still
+use Cargo for <em>lowering</em>, i.e. to produce the actual <code>rustc</code> invocations from a
+higher-level configuration. Cargo will provide a way to do this.</p>
+<p>When <em>developing</em> a crate, it should be possible to invoke Cargo commands as
+usual. We do this via a plugin. When invoking, for example, <code>cargo build</code>, the
+plugin will translate that to a request to the external build system, which will
+then execute the build (possibly re-invoking Cargo for lowering). For <code>cargo run</code>, the same steps are followed by putting the resulting build artifact in an
+appropriate location, and then following Cargo's usual logic. And so on.</p>
+<p>A similar story plays out when using, for example, the RLS or <code>rustfmt</code>. Ideally,
+these tools will have no idea that a Cargo plugin is in play; the information
+and artifacts they need can be obtained by using Cargo's in a standard way,
+transparently -- but the underlying information will be coming from the external
+build system, via the plugin. Thus the plugin for the external build system must
+be able to translate its dependencies back into something equivalent to a
+lockfile, at least.</p>
+<a class="header" href="2136-build-systems.html#the-complete-picture" id="the-complete-picture"><h3>The complete picture</h3></a>
+<p>In general, any integration with a homogeneous build system needs to be able to
+handle (vendored) crate registries, because access to crates.io is a hard constraint.</p>
+<p>Usually, you'll want to combine the handling of these external registries with
+crates managed purely by the external build system, meaning that there are
+effectively <em>two</em> modes of building crates at play overall. All that's needed to
+do this is a distinction within the external build system between these two
+kinds of dependencies, which then drives the plugin interactions accordingly.</p>
+<a class="header" href="2136-build-systems.html#cross-cutting-concern-native-dependencies" id="cross-cutting-concern-native-dependencies"><h2>Cross-cutting concern: native dependencies</h2></a>
+<p>One important point left out of the above explanation is the story for
+dependencies on non-Rust code. These dependencies should be built and managed by
+the external build system. But there's a catch: existing &quot;sys&quot; crates on
+crates.io that provide core native dependencies use custom build scripts to
+build or discover those dependencies. We want to <em>reroute</em> those crates to
+instead use the dependencies provided by the build system.</p>
+<p>Here, there's a short-term story and a long-term story.</p>
+<a class="header" href="2136-build-systems.html#short-term-white-lists-with-build-script-overrides" id="short-term-white-lists-with-build-script-overrides"><h3>Short term: white lists with build script overrides</h3></a>
+<p>Cargo today offers the ability to <a href="http://doc.crates.io/build-script.html#overriding-build-scripts">override the build script</a> for any crate
+using the <code>links</code> key (which is generally how you signal <em>what</em> native
+dependency you're providing), and instead provide the library location
+directly. This feature can be used to instead point at the output provided by
+the external build system. Together with whitelisting crates that use build
+scripts, it's possible to use the existing crates.io ecosystem while managing
+native dependencies via the external build system.</p>
+<p>There are some downsides, though. If the sys crates change in any way -- for
+example, altering the way they build the native dependency, or the version they
+use -- there's no clear heads-up that something may need to be adjusted within
+the external build system. It might be possible, however, to use
+version-specific whitelisting to side-step this issue.</p>
+<p>Even so, whitelisting itself is a laborious process, and in the long run there
+are advantages to offering a higher-level way of specifying native dependencies
+in the first place.</p>
+<a class="header" href="2136-build-systems.html#long-term-declarative-native-dependencies" id="long-term-declarative-native-dependencies"><h3>Long term: declarative native dependencies</h3></a>
+<p>Reliably building native dependencies in a cross-platform way
+is... challenging. Today, Rust offers some help with this through crates like
+<a href="https://docs.rs/gcc"><code>gcc</code></a> and <a href="https://docs.rs/pkg-config"><code>pkgconfig</code></a>, which provide building blocks for writing build
+scripts that discover or build native dependencies. But still, today, each build
+script is a bespoke affair, customizing the use of these crates in arbitrary
+ways. It's difficult, error-prone work.</p>
+<p>This RFC proposes to start a <em>long term</em> effort to provide a more first-class
+way of specifying native dependencies. The hope is that we can get coverage of,
+say, 80% of native dependencies using a simple, high-level specification, and
+only in the remaining 20% have to write arbitrary code. And, in any case, such a
+system can provide richer information about dependencies to help avoid the
+downsides of the whitelisting approach.</p>
+<p>The likely approach here is to provide <a href="https://internals.rust-lang.org/t/pre-rfc-cargo-build-and-native-dependency-integration-via-crate-based-build-scripts/5708">some mechanism</a> for using a dependency
+<em>as</em> a build script, so that you could specify high-level native dependency
+information directly in <code>Cargo.toml</code> attributes, and have a general tool
+translate that into the appropriate build script.</p>
+<p>Needless to say, this approach will need significant experimentation. But if
+successful, it would have benefits not just for build system integration, but
+for using external dependencies <em>anywhere</em>.</p>
+<a class="header" href="2136-build-systems.html#the-story-for-externally-managed-native-dependencies" id="the-story-for-externally-managed-native-dependencies"><h3>The story for externally-managed native dependencies</h3></a>
+<p>Finally, in the case where the external build system is the one specifying and
+providing a native dependency, all we need is for that to result in the
+appropriate flags to the lowered <code>rustc</code> invocations. If the external build
+system is producing those lowered calls itself, it can completely manage this
+concern. Otherwise, we will need for the plugin interface to provide a way to
+plumb this information through to Cargo.</p>
+<a class="header" href="2136-build-systems.html#specifics-for-the-mixed-build-system-case" id="specifics-for-the-mixed-build-system-case"><h2>Specifics for the mixed build system case</h2></a>
+<p>Switching gears, let's look at mixed build systems. Here, we may address the
+need for customization with a mixture of plugins and new core Cargo
+features. The primary ones on the radar right now are as follows.</p>
+<ul>
+<li>
+<p><strong>Multiple/custom registries</strong>. There is a longstanding desire to support
+registries other than crates.io, e.g. for private code, and to allow them to
+be used <em>in conjunction</em> with crates.io. In particular, this is a key pain
+point for customers who are otherwise happy to use Cargo as-is, but want a
+crates.io-like experience for their own code. There's
+an <a href="https://github.com/rust-lang/rfcs/pull/2141">RFC</a> on this topic, and more
+work here is planned soon. Note: here, we address the needs via a
+straightforward enhancement to Cargo's features, rather than via a plugin
+system.</p>
+</li>
+<li>
+<p><strong>Network and source control</strong>. We've already put significant work into
+providing control over where sources live (though vendoring) and tools for
+preventing network access. However, we could do more to make the experience
+here first class, and to give people a greater sense of control and assurance
+when using Cargo on their build farm. Here again, this is probably more about
+flags and configuration than plugins per se.</p>
+</li>
+<li>
+<p><strong>Caching and artifact control</strong>. Many organizations would like to provide a
+shared build cache for the entire organization, across all of its
+projects. Here we'd likely need some kind of plugin.</p>
+</li>
+</ul>
+<p>These bullets are quite vague, and that's because, while we know there are needs
+here, the precise problem -- let alone the solution -- it not yet clear. The
+point, though, is that these are the most important problems we want to get our
+head around in the foreseeable future.</p>
+<a class="header" href="2136-build-systems.html#additional-areas-where-revisions-are-expected" id="additional-areas-where-revisions-are-expected"><h2>Additional areas where revisions are expected</h2></a>
+<p>Beyond all of the above, it seems very likely that some existing features of
+Cargo will need to be revisited to fit with the build system integration
+work. For example:</p>
+<ul>
+<li>
+<p><strong>Profiles</strong>. Putting the idea of the &quot;build configuration&quot; step on firmer
+footing will require clarifying the precise role of profiles, which today blur
+the line somewhat between <em>workflows</em> (e.g. <code>test</code> vs <code>bench</code>) and flags
+(e.g. <code>--release</code>). Moreover, integration with a homogeneous build system
+effectively requires that we can translate profiles on the Cargo side back and
+forth to <em>something</em> meaningful to the external build system, so that for
+example we can make <code>cargo test</code> invoke the external build system in a
+sensible way. Additional clarity here might help pave the way for <a href="https://github.com/rust-lang/cargo/issues/2007">custom
+profiles</a> and other enhancements. On a very different note, it's not currently
+possible to control enough about the <code>rustc</code> invocation for at least some
+integration cases, and the answer may in part lie in improvements to profiles.</p>
+</li>
+<li>
+<p><strong>Build scripts</strong>. Especially for homogeneous build systems, build scripts can
+pose some serious pain, because in general they may depend on numerous
+environmental factors invisibly. It may be useful to grow some ways of telling
+Cargo the precise inputs and outputs of the build script, declaratively.</p>
+</li>
+<li>
+<p><strong>Vendoring</strong>. While we have <a href="https://github.com/alexcrichton/cargo-vendor/">support for vendoring</a> dependencies today, it is
+not treated uniformly as a mirror. We may want to tighten up Cargo's
+understanding, possibly by treating vendoring in a more first-class way.</p>
+</li>
+</ul>
+<p>There are undoubtedly other aspects of Cargo that will need to be touched to
+achieve better build system integration; the plan as a whole is predicated on
+making Cargo much more modular, which is bound to reveal concerns that should be
+separated. As with everything else in this RFC, user-facing changes will require
+a full RFC prior to stabilization.</p>
+<a class="header" href="2136-build-systems.html#reference-level-explanation" id="reference-level-explanation"><h1>Reference-level explanation</h1></a>
+<p>This is an experimental RFC. Reference-level details will be presented in
+follow-up RFCs after experimentation has concluded.</p>
+<a class="header" href="2136-build-systems.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
+<p>It's somewhat difficult to state drawbacks for such a high-level plan; they're
+more likely to arise through the particulars.</p>
+<p>That said, it's plausible that following the plan in this RFC will result
+in greater overall complexity for Cargo. The key to managing this complexity
+will be ensuring that it's surfaced only on an as-needed basis. That is, uses of
+Cargo in the pure crates.io ecosystem should not become more complex -- if
+anything, they should become more streamlined, through improvements to features
+like profiles, build scripts, and the handling of native dependencies.</p>
+<a class="header" href="2136-build-systems.html#rationale-and-alternatives" id="rationale-and-alternatives"><h1>Rationale and Alternatives</h1></a>
+<p>Numerous organizations we've talked to who are considering, or already are,
+running Rust in production complain about difficulties with build system
+integration. There's often a sense that Cargo &quot;does too much&quot; or is &quot;too
+opinionated&quot;, in a way that works fine for the crates.io ecosystem but is &quot;not
+realistic&quot; when integrating into larger build systems.</p>
+<p>It's thus critical to take steps to smooth integration, both to remove obstacles
+to Rust adoption, but also to establish that Cargo has an important role to play
+even within opinionated external build systems: coordinating with Rust tooling
+and workflows.</p>
+<p>This RFC is essentially a <em>strategic vision</em>, and so the alternatives are
+different strategies for tackling the problem of integration. Some options
+include:</p>
+<ul>
+<li>
+<p>Focusing entirely on one of the use-cases mentioned. For example:</p>
+<ul>
+<li>We could decide that it's not worthwhile to have Cargo play a role within a
+build system like <a href="https://bazel.build/">Bazel</a>, and instead focus on users who just need to
+customize a particular aspect of Cargo. However, this would be giving up on
+the hope of providing strong integration with Rust tooling and workflows.</li>
+<li>We could decide to focus solely on the <a href="https://bazel.build/">Bazel</a>-style use-cases. But that
+would likely push people who would otherwise be happy to use Cargo to manage
+most of their build (but need to customize some aspect) to instead try to
+manage more of the concerns themselves.</li>
+</ul>
+</li>
+<li>
+<p>Attempting to impose more control when integrating with hommogenous build
+systems. In the most extreme case presented above, for internal crates Cargo
+is little more than a middleman between Rust tooling and the external build
+system. We could instead support only using custom registries to manage
+crates, and hence always use Cargo's dependency resolution and so on. This
+would, however, be a non-starter for many organizations who want a
+single-version, mono-repo world internally, and it's not clear what the gains
+would be.</p>
+</li>
+</ul>
+<p>One key open question is: what, exactly, do Rust tools need to do their work?
+Tool interop is a major goal for this effort, but ideally we'd support it with a
+minimum of fuss. It may be that the needs are simple enough that we can get away
+with a separate interchange format, which both Cargo and other build tools can
+create. As part of the &quot;experimental&quot; part of this RFC, the Cargo team will work
+with the Dev Tools team to fully enumerate their needs.</p>
+<a class="header" href="2136-build-systems.html#unresolved-questions" id="unresolved-questions"><h1>Unresolved questions</h1></a>
+<p>Since this is an experimental RFC, there are more questions here than
+answers. However, one question that would be good to tackle prior to acceptance
+is: how should we prioritize various aspects of this work? Should we have any
+specific customers in mind that we're trying to target (or who, better yet, are
+working directly with us and plan to test and use the results)?</p>
+
+                </div>
+
+                <!-- Mobile navigation buttons -->
+                
+                    <a rel="prev" href="2133-all-the-clones.html" class="mobile-nav-chapters previous">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="2137-variadic.html" class="mobile-nav-chapters next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+
+            </div>
+
+            
+                <a href="2133-all-the-clones.html" class="nav-chapters previous" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            
+
+            
+                <a href="2137-variadic.html" class="nav-chapters next" title="You can navigate through the chapters using the arrow keys">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if ($(".fa").css("font-family") !== "FontAwesome") {
+                $('<link rel="stylesheet" type="text/css" href="_FontAwesome/css/font-awesome.css">').prependTo('head');
+            }
+        </script>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+    </body>
+</html>
