@@ -89,12 +89,12 @@
                             <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                                 <i class="fa fa-paint-brush"></i>
                             </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="submenu">
-                                <li><button class="theme" id="light">Light <span class="default">(default)</span></button></li>
-                                <li><button class="theme" id="rust">Rust</button></li>
-                                <li><button class="theme" id="coal">Coal</button></li>
-                                <li><button class="theme" id="navy">Navy</button></li>
-                                <li><button class="theme" id="ayu">Ayu</button></li>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                             </ul>
                         </div>
 
@@ -187,9 +187,9 @@ generally a good idea to pursue feedback from other project developers
 beforehand, to ascertain that the RFC may be desirable; having a consistent
 impact on the project requires concerted effort toward consensus-building.</p>
 <p>The most common preparations for writing and submitting an RFC include talking
-the idea over on #rust-internals, filing and discussing ideas on the
-<a href="https://github.com/rust-lang/rfcs/issues">RFC issue tracker</a>, and occasionally posting &quot;pre-RFCs&quot; on the
-<a href="http://internals.rust-lang.org/">developer discussion forum</a> for early review.</p>
+the idea over on #rust-internals, discussing the topic on our <a href="http://internals.rust-lang.org/">developer discussion forum</a>,
+and occasionally posting &quot;pre-RFCs&quot; on the developer forum. You may file issues
+on this repo for discussion, but these are not actively looked at by the teams.</p>
 <p>As a rule of thumb, receiving encouraging feedback from long-standing project
 developers, and particularly members of the relevant <a href="http://www.rust-lang.org/team.html">sub-team</a> is a good
 indication that the RFC is worth pursuing.</p>
