@@ -337,36 +337,57 @@ macro_rules! FOO { () =&gt; () }
 we'll need a way to disambiguate the namespaces.
 Our proposal is this:</p>
 <ul>
-<li>Links to types are written as described earlier,
-with no pre- or suffix,
-e.g., <code>Look at the [FOO] trait</code>.
-For consistency,
-it is also possible to prefix the type with the concrete item type:
+<li>In unambiguous cases paths can be written as described earlier,
+with no pre- or suffix, e.g., <code>Look at the [FOO] trait</code>. This also
+applies to modules and tuple structs which exist in both namespaces.
+Rustdoc will throw an error if you use a non-disambiguated path in
+the case of there being a value in both the type and value namespace.</li>
+<li>Links to types can be disambiguated by prefixing them with the concrete
+item type:
 <ul>
-<li>Links to <code>struct</code>s can be prefixed with <code>struct</code>,
-e.g., <code>See [struct Foo]</code>.</li>
-<li>Links to <code>enum</code>s can be prefixed with <code>enum</code>,
-e.g., <code>See [enum foo]</code>.</li>
-<li>Links to type aliases can be prefixed with <code>type</code>,
-e.g., <code>See [type foo]</code>.</li>
-<li>Links to modules can be prefixed with <code>mod</code>,
-e.g., <code>See [mod foo]</code>.</li>
+<li>Links to any type-namespace object can be prefixed with <code>type@</code>,
+e.g., <code>See [type@foo]</code>. This will work for structs, enums, mods, traits,
+and unions.</li>
+<li>Links to <code>struct</code>s can be prefixed with <code>struct@</code>,
+e.g., <code>See [struct@Foo]</code>.</li>
+<li>Links to <code>enum</code>s can be prefixed with <code>enum@</code>,
+e.g., <code>See [enum@foo]</code>.</li>
+<li>Links to modules can be prefixed with <code>mod@</code>,
+e.g., <code>See [mod@foo]</code>.</li>
+<li>Links to traits can be prefixed with <code>trait@</code>,
+e.g., <code>See [trait@foo]</code>.</li>
+<li>Links to unions can be prefixed with <code>union@</code>,
+e.g., <code>See [union@foo]</code>.</li>
+<li>It is possible that disambiguators for one kind of type-namespace object
+will work for the other (i.e. you can use <code>struct@</code> to refer to an enum),
+but do not rely on this.</li>
 </ul>
 </li>
+<li>Modules exist in both the type and value namespace and can be disambiguated
+with a <code>mod@</code> or <code>module@</code>, e.g. <code>[module@foo]</code></li>
 <li>In links to macros,
-the link label must end with a <code>!</code>,
-e.g., <code>Look at the [FOO!] macro</code>.</li>
-<li>For links to values, we differentiate three cases:
+the link label can end with a <code>!</code>,
+e.g., <code>Look at the [FOO!] macro</code>. You can alternatively use a <code>macro@</code> prefix,
+e.g. <code>[macro@foo]</code></li>
+<li>For disambiguating links to values, we differentiate three cases:
 <ul>
-<li>Links to functions are written with a <code>()</code> suffix,
-e.g., <code>Also see the [foo()] function</code>.</li>
-<li>Links to constants are prefixed with <code>const</code>,
-e.g., <code>As defined in [const FOO].</code></li>
-<li>Links to statics are prefixed with <code>static</code>,
-e.g., <code>See [static FOO]</code>.</li>
+<li>Links to any kind of value (function, const, static) can be prefixed with <code>value@</code>,
+e.g., <code>See [value@foo]</code>.</li>
+<li>Links to functions and methods can be written with a <code>()</code> suffix,
+e.g., <code>Also see the [foo()] function</code>. You can also use <code>function@</code>, <code>fn@</code>,
+or <code>method@</code>.</li>
+<li>Links to constants are prefixed with <code>const@</code>,
+e.g., <code>As defined in [const@FOO].</code></li>
+<li>Links to statics are prefixed with <code>static@</code>,
+e.g., <code>See [static@FOO]</code>.</li>
+<li>It is possible that disambiguators for one kind of type-namespace object
+will work for the other (i.e. you can use <code>static@</code> to refer to a const),</li>
 </ul>
 </li>
 </ul>
+<p>For disambiguation markers using an <code>@</code>, in implied shortcut links
+you can use a space instead of the <code>@</code>. In other words, <code>[struct Foo]</code>
+is fine (and preferred).</p>
 <p>It should be noted that in the RFC discussion it was determined
 that exact knowledge of the item type
 should not be necessary; only knowing the namespace should suffice.
