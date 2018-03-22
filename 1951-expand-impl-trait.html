@@ -353,7 +353,7 @@ fn foo&lt;T, U&gt;(t: T, u: U) where
 
 fn foo(
     t: impl Whatever + SomethingElse,
-    u: impl,
+    u: impl Whatever,
 )
 #}</code></pre></pre>
 <p>It seems plausible that <code>impl Trait</code> syntax should simply <em>always</em> be used
