@@ -179,7 +179,7 @@ self-references to exist.</p>
 </li>
 </ul>
 <p>At the same time, we want to support futures (and iterators, etc.) that <em>can</em> move. While it's possible to do so by providing two distinct <code>Future</code> (or <code>Iterator</code>, etc) traits, such designs incur unacceptable ergonomic costs.</p>
-<p>The key insight of this RFC is that we can create a new library type, <code>Pin&lt;'a, T&gt;</code>, which encompasses <em>both</em> moveable and immobile referents. The type is paired with a new auto trait, <code>Unpin</code>, which determines the meaning of <code>Pin&lt;'a, T&gt;</code>:</p>
+<p>The key insight of this RFC is that we can create a new library type, <code>Pin&lt;'a, T&gt;</code>, which encompasses <em>both</em> movable and immobile referents. The type is paired with a new auto trait, <code>Unpin</code>, which determines the meaning of <code>Pin&lt;'a, T&gt;</code>:</p>
 <ul>
 <li>If <code>T: Unpin</code> (which is the default), then <code>Pin&lt;'a, T&gt;</code> is entirely equivalent to <code>&amp;'a mut T</code>.</li>
 <li>If <code>T: !Unpin</code>, then <code>Pin&lt;'a, T&gt;</code> provides a unique reference to a <code>T</code> with lifetime <code>'a</code>, but only provides <code>&amp;'a T</code> access safely. It also guarantees that the referent will <em>never</em> be moved. However, getting <code>&amp;'a mut T</code> access is unsafe, because operations like <code>mem::replace</code> mean that <code>&amp;mut</code> access is enough to move data out of the referent; you must promise not to do so.</li>
@@ -197,7 +197,7 @@ trait Future {
 }
 #}</code></pre></pre>
 <p>By default when implementing <code>Future</code> for a struct, this definition is equivalent to today's, which takes <code>&amp;mut self</code>. But if you want to allow self-referencing in your future, you just opt out of <code>Unpin</code>, and <code>Pin</code> takes care of the rest.</p>
-<p>This RFC also provides a pinned analogiy to <code>Box</code> called <code>PinBox&lt;T&gt;</code>. It work alongs the same lines as the <code>Pin</code> type discussed here - if the type implements <code>Unpin</code>, it functions the same as the unpinned <code>Box</code>; if the type has opted out of <code>Unpin</code>, it guarantees that they type behind the reference will not be moved again.</p>
+<p>This RFC also provides a pinned analogy to <code>Box</code> called <code>PinBox&lt;T&gt;</code>. It works along the same lines as the <code>Pin</code> type discussed here - if the type implements <code>Unpin</code>, it functions the same as the unpinned <code>Box</code>; if the type has opted out of <code>Unpin</code>, it guarantees that they type behind the reference will not be moved again.</p>
 <a class="header" href="2349-pin.html#reference-level-explanation" id="reference-level-explanation"><h1>Reference-level explanation</h1></a>
 <a class="header" href="2349-pin.html#the-unpin-auto-trait" id="the-unpin-auto-trait"><h2>The <code>Unpin</code> auto trait</h2></a>
 <p>This new auto trait is added to the <code>core::marker</code> and <code>std::marker</code> modules:</p>
@@ -427,7 +427,7 @@ trait Generator {
 #}</code></pre></pre>
 <p>This would require no extensions to the standard library, but would place the
 burden on every user who wants to call resume to guarantee (at the risk of
-memory insafety) that their types were not moved, or that they were moveable.
+memory unsafety) that their types were not moved, or that they were movable.
 This seemed like a worse trade off than adding these APIs.</p>
 <a class="header" href="2349-pin.html#anchor-as-a-wrapper-type-and-stablederef" id="anchor-as-a-wrapper-type-and-stablederef"><h2>Anchor as a wrapper type and <code>StableDeref</code></h2></a>
 <p>In a previous iteration of this RFC, there was a wrapper type called <code>Anchor</code>
@@ -437,7 +437,7 @@ been replaced with <code>PinBox</code>.</p>
 <p>The primary benefit of this approach was that it was partially integrated with
 crates like owning-ref and rental, which also use a hierarchy of stability
 traits. However, because of differences in the requirements, the traits used by
-owning-ref et al ended up being a non-overlapping subset of the traits proposed
+owning-ref et al. ended up being a non-overlapping subset of the traits proposed
 by this RFC from the traits used by the Anchor type. Merging these into a
 single hierarchy provided relatively little benefit.</p>
 <p>And the only types that implemented all of the necessary traits to be put into
