@@ -264,7 +264,7 @@ const fn foo(x: u32, y: u32) -&gt; u32 {
         y - x
     }
 }
-const AB: u32 = foo(x, y);
+const AB: u32 = foo(X, Y);
 #}</code></pre></pre>
 <p>Since the const fn's <code>x</code> and <code>y</code> arguments are unknown, they cannot be const
 evaluated. When the const fn is evaluated with given arguments, only the taken
