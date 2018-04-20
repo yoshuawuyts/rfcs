@@ -361,7 +361,7 @@ impl&lt;T: ?Sized&gt; PinBox&lt;T&gt; {
 }
 #}</code></pre></pre>
 <p>These APIs make <code>PinBox</code> a reasonable way of handling data which does not
-implement <code>!Unpin</code>. Once you heap allocate that data inside of a <code>PinBox</code>, you
+implement <code>Unpin</code>. Once you heap allocate that data inside of a <code>PinBox</code>, you
 know that it will never change address again, and you can hand out <code>Pin</code>
 references to that data.</p>
 <a class="header" href="2349-pin.html#unsafe-api" id="unsafe-api"><h3>Unsafe API</h3></a>
