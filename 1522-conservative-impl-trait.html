@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible">
+<html lang="en" class="sidebar-visible no-js">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -18,32 +18,16 @@
         <link rel="shortcut icon" href="favicon.png">
 
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
 
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
-        <!-- Custom theme -->
+        <!-- Custom theme stylesheets -->
         
 
         
-
-        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
-        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
-        <script>
-            if (typeof Clipboard == 'undefined') {
-                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
-            }
-        </script>
-
-        <noscript>
-            <style type="text/css">
-                .javascript-only {
-                    display: none;
-                }
-            </style>
-        </noscript>
 
     </head>
     <body class="light">
@@ -69,7 +53,7 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
             if (theme === null || theme === undefined) { theme = 'light'; }
             document.body.className = theme;
-            document.querySelector('html').className = theme;
+            document.querySelector('html').className = theme + ' js';
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -94,7 +78,7 @@
                 
                 <div id="menu-bar" class="menu-bar">
                     <div id="menu-bar-sticky-container">
-                        <div class="left-buttons javascript-only">
+                        <div class="left-buttons">
                             <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                                 <i class="fa fa-bars"></i>
                             </button>
@@ -126,13 +110,15 @@
                 </div>
 
                 
-                <div id="searchbar-outer" class="searchbar-outer">
-                    <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                </div>
-                <div id="searchresults-outer" class="searchresults-outer">
-                    <div class="searchresults-header" id="searchresults-header"></div>
-                    <ul id="searchresults">
-                    </ul>
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
                 </div>
                 
 
@@ -168,7 +154,7 @@ abstract return types would be used roughly like this:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn foo(n: u32) -&gt; impl Iterator&lt;Item=u32&gt; {
+fn foo(n: u32) -&gt; impl Iterator&lt;Item = u32&gt; {
     (0..n).map(|x| x * 100)
 }
 // ^ behaves as if it had return type Map&lt;Range&lt;u32&gt;, Closure&gt;
@@ -177,7 +163,6 @@ fn foo(n: u32) -&gt; impl Iterator&lt;Item=u32&gt; {
 for x in foo(10) {
     // x = 0, 100, 200, ...
 }
-
 #}</code></pre></pre>
 <a class="header" href="1522-conservative-impl-trait.html#background" id="background"><h1>Background</h1></a>
 <p>There has been much discussion around the <code>impl Trait</code> feature already, with
@@ -205,8 +190,8 @@ its motivation and some other parts of its text below.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn consume_iter_static&lt;I: Iterator&lt;u8&gt;&gt;(iter: I)
-fn consume_iter_dynamic(iter: Box&lt;Iterator&lt;u8&gt;&gt;)
+fn consume_iter_static&lt;I: Iterator&lt;Item = u8&gt;&gt;(iter: I)
+fn consume_iter_dynamic(iter: Box&lt;Iterator&lt;Item = u8&gt;&gt;)
 #}</code></pre></pre>
 <p>In both cases, the function does not depend on the exact type of the argument.
 The type is held &quot;abstract&quot;, and is assumed only to satisfy a trait bound.</p>
@@ -225,13 +210,13 @@ only known at runtime using a vtable.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn produce_iter_dynamic() -&gt; Box&lt;Iterator&lt;u8&gt;&gt;
+fn produce_iter_dynamic() -&gt; Box&lt;Iterator&lt;Item = u8&gt;&gt;
 #}</code></pre></pre>
 <p>you <em>cannot</em> write something like</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn produce_iter_static() -&gt; Iterator&lt;u8&gt;
+fn produce_iter_static() -&gt; Iterator&lt;Item = u8&gt;
 #}</code></pre></pre>
 <p>That is, in today's Rust, abstract return types can only be written using trait
 objects, which can be a significant performance penalty. This RFC proposes
@@ -243,7 +228,7 @@ dispatch and inline data layout.</p>
 <li>
 <p><em>Returning unboxed closures</em>. Closure syntax generates an anonymous type
 implementing a closure trait. Without unboxed abstract types, there is no way
-to use this syntax while returning the resulting closure unboxed, because there
+to use this syntax while returning the resulting closure unboxed because there
 is no way to write the name of the generated type.</p>
 </li>
 <li>
@@ -251,7 +236,7 @@ is no way to write the name of the generated type.</p>
 type, when the API should really only promise a trait bound. For example, a
 function returning <code>Rev&lt;Splits&lt;'a, u8&gt;&gt;</code> is revealing exactly how the iterator
 is constructed, when the function should only promise that it returns <em>some</em>
-type implementing <code>Iterator&lt;u8&gt;</code>. Using newtypes/structs with private fields
+type implementing <code>Iterator&lt;Item = u8&gt;</code>. Using newtypes/structs with private fields
 helps, but is extra work. Unboxed abstract types make it as easy to promise only
 a trait bound as it is to return a concrete type.</p>
 </li>
@@ -260,7 +245,7 @@ a trait bound as it is to return a concrete type.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-Chain&lt;Map&lt;'a, (int, u8), u16, Enumerate&lt;Filter&lt;'a, u8, vec::MoveItems&lt;u8&gt;&gt;&gt;&gt;, SkipWhile&lt;'a, u16, Map&lt;'a, &amp;u16, u16, slice::Items&lt;u16&gt;&gt;&gt;&gt;
+Chain&lt;Map&lt;'a, (i32, u8), u16, Enumerate&lt;Filter&lt;'a, u8, vec::MoveItems&lt;u8&gt;&gt;&gt;&gt;, SkipWhile&lt;'a, u16, Map&lt;'a, &amp;u16, u16, slice::Items&lt;u16&gt;&gt;&gt;&gt;
 #}</code></pre></pre>
 <p>Even when using newtypes to hide the details, the type still has to be written
 out, which can be very painful. Unboxed abstract types only require writing the
@@ -286,7 +271,7 @@ complexities that come along with allowing the feature in other locations or
 with other extensions.</p>
 <a class="header" href="1522-conservative-impl-trait.html#syntax" id="syntax"><h2>Syntax</h2></a>
 <p>Let's start with the bikeshed: The proposed syntax is <code>impl Trait</code> in return type
-position, composing like trait objects to forms like <code>impl Foo+Send+'a</code>.</p>
+position, composing like trait objects to forms like <code>impl Foo + Send + 'a</code>.</p>
 <p>It can be explained as &quot;a type that implements <code>Trait</code>&quot;,
 and has been used in that form in most earlier discussions and proposals.</p>
 <p>Initial versions of this RFC proposed <code>@Trait</code> for brevity reasons,
@@ -301,7 +286,7 @@ a possible follow-up RFC to address syntax changes if needed.</p>
 <p>The core semantics of the feature is described below.</p>
 <p>Note that the sections after this one go into more detail on some of the design
 decisions, and that <strong>it is likely for many of the mentioned limitations to be
-lifted at some point in the future</strong>. For clarity, we'll separately categories the <em>core
+lifted at some point in the future</strong>. For clarity, we'll separately categorize the <em>core
 semantics</em> of the feature (aspects that would stay unchanged with future extensions)
 and the <em>initial limitations</em> (which are likely to be lifted later).</p>
 <p><strong>Core semantics</strong>:</p>
@@ -321,7 +306,7 @@ being an <em>output</em> rather than an <em>input</em> of the function.</p>
 <li>The type would not be known to implement any other trait, with
 the exception of OIBITS (aka &quot;auto traits&quot;) and default traits like <code>Sized</code>.</li>
 <li>The type would not be considered equal to the actual underlying type.</li>
-<li>The type would not be allowed to appear as the Self type for an <code>impl</code> block.</li>
+<li>The type would not be allowed to appear as the <code>Self</code> type for an <code>impl</code> block.</li>
 </ul>
 </li>
 <li>
@@ -375,7 +360,7 @@ in the return type of closure traits or function pointers,
 unless these are themselves part of a legal return type.</p>
 <ul>
 <li>Eventually, we will want to allow the feature to be used within traits, and
-like in argument position as well (as an ergonomic improvement over today's generics).</li>
+likely in argument position as well (as an ergonomic improvement over today's generics).</li>
 <li>Using <code>impl Trait</code> multiple times in the same return type would be valid,
 like for example in <code>-&gt; (impl Foo, impl Bar)</code>.</li>
 </ul>
@@ -410,7 +395,7 @@ fn sum_to(n: u32) -&gt; impl Display {
 </li>
 </ul>
 <a class="header" href="1522-conservative-impl-trait.html#rationale" id="rationale"><h2>Rationale</h2></a>
-<a class="header" href="1522-conservative-impl-trait.html#why-this-semantics-for-the-return-type" id="why-this-semantics-for-the-return-type"><h3>Why this semantics for the return type?</h3></a>
+<a class="header" href="1522-conservative-impl-trait.html#why-these-semantics-for-the-return-type" id="why-these-semantics-for-the-return-type"><h3>Why these semantics for the return type?</h3></a>
 <p>There has been a lot of discussion about what the semantics of the return type
 should be, with the theoretical extremes being &quot;full return type inference&quot; and
 &quot;fully abstract type that behaves like a autogenerated newtype wrapper&quot;. (This
@@ -543,10 +528,10 @@ fn sum_to(n: u32) -&gt; impl Display {
 it does not make much sense to talk about it separately in a function signature,
 so the syntax is forbidden there.</p>
 <a class="header" href="1522-conservative-impl-trait.html#compatibility-with-conditional-trait-bounds" id="compatibility-with-conditional-trait-bounds"><h3>Compatibility with conditional trait bounds</h3></a>
-<p>On valid critique for the existing <code>impl Trait</code> proposal is that it does not
-cover more complex scenarios, where the return type would implement
+<p>One valid critique for the existing <code>impl Trait</code> proposal is that it does not
+cover more complex scenarios where the return type would implement
 one or more traits depending on whether a type parameter does so with another.</p>
-<p>For example, a iterator adapter might want to implement <code>Iterator</code> and
+<p>For example, an iterator adapter might want to implement <code>Iterator</code> and
 <code>DoubleEndedIterator</code>, depending on whether the adapted one does:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -557,15 +542,15 @@ impl&lt;I: Iterator&gt; Iterator for SkipOne&lt;I&gt; { ... }
 impl&lt;I: DoubleEndedIterator&gt; DoubleEndedIterator for SkipOne&lt;I&gt; { ... }
 #}</code></pre></pre>
 <p>Using just <code>-&gt; impl Iterator</code>, this would not be possible to reproduce.</p>
-<p>Since there has been no proposals so far that would address this in a way
+<p>Since there have been no proposals so far that would address this in a way
 that would conflict with the fixed-trait-set case, this RFC punts on that issue as well.</p>
 <a class="header" href="1522-conservative-impl-trait.html#limitation-to-freeinherent-functions" id="limitation-to-freeinherent-functions"><h3>Limitation to free/inherent functions</h3></a>
 <p>One important usecase of abstract return types is to use them in trait methods.</p>
 <p>However, there is an issue with this, namely that in combinations with generic
 trait methods, they are effectively equivalent to higher kinded types.
-Which is an issue because Rust HKT story is not yet figured out, so
+Which is an issue because Rust's HKT story is not yet figured out, so
 any &quot;accidental implementation&quot; might cause unintended fallout.</p>
-<p>HKT allows you to be generic over a type constructor, aka a
+<p>HKT allows you to be generic over a type constructor, a.k.a. a
 &quot;thing with type parameters&quot;, and then instantiate them at some later point to
 get the actual type.
 For example, given a HK type <code>T</code> that takes one type as parameter, you could
@@ -584,7 +569,7 @@ and could get arbitrary different return types of <code>bar</code> instantiated
 with a <code>u32</code> or <code>bool</code>,
 just like <code>T&lt;u32&gt;</code> and <code>T&lt;bool&gt;</code> might give us <code>Vec&lt;u32&gt;</code> or <code>Box&lt;bool&gt;</code>
 in the example above.</p>
-<p>The problem does not exists with trait method return types today because
+<p>The problem does not exist with trait method return types today because
 they are concrete:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -596,7 +581,7 @@ trait Foo {
 <p>Given the above code, there is no way for <code>bar</code> to choose a return type <code>X</code>
 that could fundamentally differ between instantiations of <code>Self</code>
 while still being instantiable with an arbitrary <code>U</code>.</p>
-<p>At most you could return a associated type, but then you'd loose the generics
+<p>At most you could return a associated type, but then you'd lose the generics
 from <code>bar</code></p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -606,7 +591,7 @@ trait Foo {
     fn bar&lt;U&gt;() -&gt; Self::X // No way to apply U
 }
 #}</code></pre></pre>
-<p>So, in conclusion, since Rusts HKT story is not yet fleshed out,
+<p>So, in conclusion, since Rust's HKT story is not yet fleshed out,
 and the compatibility of the current compiler with it is unknown,
 it is not yet possible to reach a concrete solution here.</p>
 <p>In addition to that, there are also different proposals as to whether
@@ -692,17 +677,7 @@ have to typecheck the function body to determine which OIBITs apply).</p>
 
         </div>
 
-
-        <!-- Local fallback for Font Awesome -->
-        <script>
-            if (getComputedStyle(document.querySelector(".fa")).fontFamily !== "FontAwesome") {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = '_FontAwesome/css/font-awesome.css';
-                document.head.insertBefore(link, document.head.firstChild)
-            }
-        </script>
+        
 
         
 
@@ -719,12 +694,11 @@ have to typecheck the function body to determine which OIBITs apply).</p>
         <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
-
-        <!-- Custom JS script -->
+        <!-- Custom JS scripts -->
         
 
     </body>
