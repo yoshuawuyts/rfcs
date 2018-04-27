@@ -188,8 +188,9 @@ e'     ::= x
          | ...
 block  ::=  `{` (e;)* e? `}`
 </code></pre>
-<p><code>e' is just e without struct literal expressions. We use e' instead of e</code>wherever e is followed directly by block or any other non-terminal which may
-`have block as its first terminal (after any possible expansions).</p>
+<p><code>e'</code> is just e without struct literal expressions. We use <code>e'</code> instead of <code>e</code>
+wherever <code>e</code> is followed directly by block or any other non-terminal which may
+have block as its first terminal (after any possible expansions).</p>
 <p>For any expressions where a sub-expression is the final lexical element
 (closures in the subset above, but also unary and binary operations), we require
 two versions of the meta-expression - the normal one in <code>e</code> and a version with
