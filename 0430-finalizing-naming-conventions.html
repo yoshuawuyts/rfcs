@@ -149,15 +149,15 @@ but this RFC seeks to nail down a few final details and make them
 official.</p>
 <a class="header" href="0430-finalizing-naming-conventions.html#detailed-design" id="detailed-design"><h1>Detailed design</h1></a>
 <a class="header" href="0430-finalizing-naming-conventions.html#general-naming-conventions" id="general-naming-conventions"><h2>General naming conventions</h2></a>
-<p>In general, Rust tends to use <code>CamelCase</code> for &quot;type-level&quot; constructs
+<p>In general, Rust tends to use <code>UpperCamelCase</code> for &quot;type-level&quot; constructs
 (types and traits) and <code>snake_case</code> for &quot;value-level&quot; constructs. More
 precisely, the proposed (and mostly followed) conventions are:</p>
 <table><thead><tr><th> Item </th><th> Convention </th></tr></thead><tbody>
 <tr><td> Crates </td><td> <code>snake_case</code> (but prefer single word) </td></tr>
 <tr><td> Modules </td><td> <code>snake_case</code> </td></tr>
-<tr><td> Types </td><td> <code>CamelCase</code> </td></tr>
-<tr><td> Traits </td><td> <code>CamelCase</code> </td></tr>
-<tr><td> Enum variants </td><td> <code>CamelCase</code> </td></tr>
+<tr><td> Types </td><td> <code>UpperCamelCase</code> </td></tr>
+<tr><td> Traits </td><td> <code>UpperCamelCase</code> </td></tr>
+<tr><td> Enum variants </td><td> <code>UpperCamelCase</code> </td></tr>
 <tr><td> Functions </td><td> <code>snake_case</code> </td></tr>
 <tr><td> Methods </td><td> <code>snake_case</code> </td></tr>
 <tr><td> General constructors </td><td> <code>new</code> or <code>with_more_details</code> </td></tr>
@@ -165,11 +165,11 @@ precisely, the proposed (and mostly followed) conventions are:</p>
 <tr><td> Local variables </td><td> <code>snake_case</code> </td></tr>
 <tr><td> Static variables </td><td> <code>SCREAMING_SNAKE_CASE</code> </td></tr>
 <tr><td> Constant variables </td><td> <code>SCREAMING_SNAKE_CASE</code> </td></tr>
-<tr><td> Type parameters </td><td> concise <code>CamelCase</code>, usually single uppercase letter: <code>T</code> </td></tr>
+<tr><td> Type parameters </td><td> concise <code>UpperCamelCase</code>, usually single uppercase letter: <code>T</code> </td></tr>
 <tr><td> Lifetimes </td><td> short, lowercase: <code>'a</code> </td></tr>
 </tbody></table>
 <a class="header" href="0430-finalizing-naming-conventions.html#fine-points" id="fine-points"><h3>Fine points</h3></a>
-<p>In <code>CamelCase</code>, acronyms count as one word: use <code>Uuid</code> rather than
+<p>In <code>UpperCamelCase</code>, acronyms count as one word: use <code>Uuid</code> rather than
 <code>UUID</code>.  In <code>snake_case</code>, acronyms are lower-cased: <code>is_xid_start</code>.</p>
 <p>In <code>snake_case</code> or <code>SCREAMING_SNAKE_CASE</code>, a &quot;word&quot; should never
 consist of a single letter unless it is the last &quot;word&quot;. So, we have
