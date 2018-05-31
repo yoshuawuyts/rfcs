@@ -153,6 +153,9 @@ features that can help mitigate pain for non-breaking changes.</p>
 <p>The RFC covers only API issues; other issues related to language features,
 lints, type inference, command line arguments, Cargo, and so on are considered
 out of scope.</p>
+<p>The stability promise specifically does <em>not</em> apply to unstable features,
+even if they are accidentally usable on the Stable release channel
+under certain conditions such as because of bugs in the compiler.</p>
 <a class="header" href="1105-api-evolution.html#motivation" id="motivation"><h1>Motivation</h1></a>
 <p>Both Rust and its library ecosystem have adopted <a href="http://semver.org/">semver</a>, a
 technique for versioning platforms/libraries partly in terms of the effect on
