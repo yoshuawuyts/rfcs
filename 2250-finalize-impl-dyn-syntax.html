@@ -144,7 +144,7 @@
 stabilization of these features.</p>
 <a class="header" href="2250-finalize-impl-dyn-syntax.html#motivation" id="motivation"><h1>Motivation</h1></a>
 <p>Current priority of <code>+</code> in <code>impl Trait1 + Trait2</code> / <code>dyn Trait1 + Trait2</code> brings
-inconsistency in the type grammar.<br />
+inconsistency in the type grammar.
 This RFC outlines possible syntactic
 alternatives and suggests one of them for stabilization.</p>
 <a class="header" href="2250-finalize-impl-dyn-syntax.html#guide-level-explanation" id="guide-level-explanation"><h1>Guide-level explanation</h1></a>
@@ -154,7 +154,7 @@ contexts where they are used inside of unary operators <code>&amp;(impl Trait1 +
 / <code>&amp;(dyn Trait1 + Trait2)</code>, similarly to trait object types without
 prefix, e.g. <code>&amp;(Trait1 + Trait2)</code>.</p>
 <p>Additionally, parentheses are required in all cases where <code>+</code> in <code>impl</code> or <code>dyn</code>
-is ambiguous.<br />
+is ambiguous.
 For example, <code>Fn() -&gt; impl A + B</code> can be interpreted as both
 <code>(Fn() -&gt; impl A) + B</code> (low priority plus) or <code>Fn() -&gt; (impl A + B)</code> (high
 priority plus), so we are refusing to disambiguate and require explicit
@@ -190,8 +190,8 @@ bring inconsistency and may break intuition.</p>
 <p>Pros:</p>
 <ul>
 <li>The greedy parsing with high priority of <code>+</code> after <code>impl</code> / <code>dyn</code>
-has one benefit - it requires the least amout of parentheses from all the
-alternatives.<br />
+has one benefit - it requires the least amount of parentheses from all the
+alternatives.
 Parentheses are needed only when the greedy behaviour needs to be prevented,
 e.g. <code>Fn() -&gt; &amp;(dyn Write) + Send</code>, this doesn't happen often.</li>
 </ul>
@@ -208,7 +208,7 @@ work, as if <code>impl</code> were an unary operator.</li>
 <a class="header" href="2250-finalize-impl-dyn-syntax.html#alternative-2-low-priority-" id="alternative-2-low-priority-"><h2>Alternative 2: low priority <code>+</code></h2></a>
 <p>Basically, <code>impl A + B</code> is parsed using same rules as <code>A + B</code>.</p>
 <p>If <code>impl A + B</code> is located inside a higher priority operator like <code>&amp;</code> it has
-to be parenthesized.<br />
+to be parenthesized.
 If it is located at intersection of type and expressions
 grammars like <code>expr1 as Type + expr2</code>, it has to be parenthesized as well.</p>
 <p><code>&amp;dyn A + B</code> / <code>Fn() -&gt; impl A + B</code> / <code>x as &amp;dyn A + y</code> has to be rewritten as
@@ -218,25 +218,23 @@ type:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn f() -&gt; impl A + B
-{
+fn f() -&gt; impl A + B {
     // Do things
 }
 #}</code></pre></pre>
 <p>This is probably the most common location for <code>impl Trait</code> types.
 In theory, it doesn't require parentheses in any way - it's not inside of an
-unary operator and it doesn't cross expression boundaries.<br />
-However, it creates a bit of percieved inconsistency with function-like traits
+unary operator and it doesn't cross expression boundaries.
+However, it creates a bit of perceived inconsistency with function-like traits
 and function pointers that do require parentheses for <code>impl Trait</code> in return
 types (<code>Fn() -&gt; (impl A + B)</code> / <code>fn() -&gt; (impl A + B)</code>) because they, in their
-turn, can appear inside of unary operators and casts.<br />
+turn, can appear inside of unary operators and casts.
 So, if avoiding this is considered more important than ergonomics, then
 we can require parentheses in function definitions as well.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn f() -&gt; (impl A + B)
-{
+fn f() -&gt; (impl A + B) {
     // Do things
 }
 #}</code></pre></pre>
@@ -254,7 +252,7 @@ is not a valid syntax.</li>
 </ul>
 <a class="header" href="2250-finalize-impl-dyn-syntax.html#alternative-3-unary-operator" id="alternative-3-unary-operator"><h2>Alternative 3: Unary operator</h2></a>
 <p><code>impl</code> and <code>dyn</code> can become usual unary operators in type grammar like <code>&amp;</code> or
-<code>*const</code>.<br />
+<code>*const</code>.
 Their application to any other types except for (possibly parenthesized) paths
 (single <code>A</code>) or &quot;legacy trait objects&quot; (<code>A + B</code>) becomes an error, but this
 could be changed in the future if some other use is found.</p>
@@ -264,8 +262,7 @@ could be changed in the future if some other use is found.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-fn f() -&gt; impl(A + B)
-{
+fn f() -&gt; impl(A + B) {
     // Do things
 }
 #}</code></pre></pre>
@@ -276,7 +273,7 @@ fn f() -&gt; impl(A + B)
 </ul>
 <p>Cons:</p>
 <ul>
-<li>The largest amount of parentheses, parentheses are always required.<br />
+<li>The largest amount of parentheses, parentheses are always required.
 Parentheses are noise, there may be even less desire to use <code>dyn</code> in trait
 objects now, if something like <code>Box&lt;Write + Send&gt;</code> turns into
 <code>Box&lt;dyn(Write + Send)&gt;</code>.</li>
@@ -295,14 +292,14 @@ Switching from 3 to 2/1 requires keeping around the syntax with parentheses
 after <code>impl</code> / <code>dyn</code>.</p>
 <p>Alternative 2 can be backward-compatibly extended to &quot;relaxed 3&quot; in which
 parentheses like <code>dyn (A + B)</code> are permitted, but technically unnecessary.
-Such parens may keep people expecting <code>dyn (A + B)</code> to work happy, but
+Such parenthesis may keep people expecting <code>dyn (A + B)</code> to work happy, but
 complicate parsing by introducing more ambiguities to the grammar.</p>
 <p>While unary operators like <code>&amp;</code> &quot;obviously&quot; have higher priority than <code>+</code>,
-cases like <code>Fn() -&gt; impl A + B</code> are not so obvious.<br />
+cases like <code>Fn() -&gt; impl A + B</code> are not so obvious.
 The Alternative 2 considers &quot;low priority plus&quot; to have lower priority than <code>Fn</code>
 , so <code>Fn() -&gt; impl A + B</code> can be treated as <code>(Fn() -&gt; impl A) + B</code>, however
 it may be more intuitive and consistent with <code>fn</code> items to make <code>+</code> have higher
-priority than <code>Fn</code> (but still lower priority than <code>&amp;</code>).<br />
+priority than <code>Fn</code> (but still lower priority than <code>&amp;</code>).
 As an immediate solution we refuse to disambiguate this case and treat
 <code>Fn() -&gt; impl A + B</code> as an error, so we can change the rules in the future and
 interpret <code>Fn() -&gt; impl A + B</code> (and maybe even <code>Fn() -&gt; A + B</code> after long
@@ -315,9 +312,9 @@ The first commit is the baseline (Alternative 1) and the next commits show
 changes required to move to Alternatives 2 and 3. Alternative 2 requires fewer
 changes compared to Alternative 3.</p>
 <p>As the RFC author interprets it, the Alternative 3 turns out to be impractical
-due to common use of <code>Box</code>es and other contexts where the parens are technically
-unnecessary, but required by Alternative 3.<br />
-The number of parens required by Alternative 2 is limited and they seem
+due to common use of <code>Box</code>es and other contexts where the parenthesis are technically
+unnecessary, but required by Alternative 3.
+The number of parenthesis required by Alternative 2 is limited and they seem
 appropriate because they follow &quot;normal&quot; priorities for unary and binary
 operators.</p>
 <a class="header" href="2250-finalize-impl-dyn-syntax.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
