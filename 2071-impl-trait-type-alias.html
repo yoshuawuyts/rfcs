@@ -488,7 +488,7 @@ trait Foo&lt;T&gt; {
 }
 
 impl&lt;T&gt; Foo&lt;T&gt; for MyStruct {
-    existentail type Bar: Trait;
+    existential type Bar: Trait;
     fn bar() -&gt; Self::Bar {
         ...
         // Returns some type MyBar&lt;T&gt;
@@ -602,7 +602,7 @@ should be &quot;no&quot; since doing so would give away the underlying type bein
 hidden beneath the impl. Still, some version of this feature could be
 used eventually to implement traits or functions for closures, or
 to express conditional bounds in existential type signatures
-(e.g. <code>existentail type Foo&lt;T&gt; = impl Debug; impl&lt;T: Clone&gt; Clone for Foo&lt;T&gt; { ... }</code>).
+(e.g. <code>existential type Foo&lt;T&gt; = impl Debug; impl&lt;T: Clone&gt; Clone for Foo&lt;T&gt; { ... }</code>).
 This is a complicated design space which has not yet been explored fully
 enough. In the future, such a feature could be added backwards-compatibly.</p>
 <a class="header" href="2071-impl-trait-type-alias.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
@@ -641,7 +641,7 @@ considered:</p>
 <li>We could omit a keyword altogether and use <code>type Foo: Trait;</code> syntax
 (outside of trait definitions).</li>
 </ul>
-<p>A more divergent alternative is not to have an &quot;existentail type&quot; feature at all,
+<p>A more divergent alternative is not to have an &quot;existential type&quot; feature at all,
 but instead just have <code>impl Trait</code> be allowed in type alias position.
 Everything written <code>existential type $NAME: $BOUND;</code> in this RFC would instead be
 written <code>type $NAME = impl $BOUND;</code>.</p>
