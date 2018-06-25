@@ -435,8 +435,8 @@ fn take_fn&lt;'a&gt;(x: &amp;'a u32, y: for&lt;'b&gt; fn(&amp;'a u32, &amp;'b u3
 # #![allow(unused_variables)]
 #fn main() {
 fn elided(&amp;self) -&gt; &amp;str
-fn two_args(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg2 Baz
-fn two_lifetimes(arg1: &amp;Foo, arg2: &amp;Bar) -&gt; &amp;'arg1 Quux&lt;'arg2&gt;
+fn two_args(arg1: &amp;Foo, arg2: &amp;'arg2 Bar) -&gt; &amp;'arg2 Baz
+fn two_lifetimes(arg1: &amp;'arg1 Foo, arg2: &amp;'arg2 Bar) -&gt; &amp;'arg1 Quux&lt;'arg2&gt;
 
 impl MyStruct&lt;'A&gt; {
     fn foo(&amp;self) -&gt; &amp;'A str
