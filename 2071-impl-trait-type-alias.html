@@ -517,7 +517,7 @@ determine that the concrete type of <code>Foo</code> is <code>i32</code>:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-existential type Foo = impl Debug;
+existential type Foo: Debug;
 
 fn foo() -&gt; Foo {
     5i32
@@ -602,7 +602,7 @@ should be &quot;no&quot; since doing so would give away the underlying type bein
 hidden beneath the impl. Still, some version of this feature could be
 used eventually to implement traits or functions for closures, or
 to express conditional bounds in existential type signatures
-(e.g. <code>existential type Foo&lt;T&gt; = impl Debug; impl&lt;T: Clone&gt; Clone for Foo&lt;T&gt; { ... }</code>).
+(e.g. <code>existential type Foo&lt;T&gt;: Debug; impl&lt;T: Clone&gt; Clone for Foo&lt;T&gt; { ... }</code>).
 This is a complicated design space which has not yet been explored fully
 enough. In the future, such a feature could be added backwards-compatibly.</p>
 <a class="header" href="2071-impl-trait-type-alias.html#drawbacks" id="drawbacks"><h1>Drawbacks</h1></a>
