@@ -18,7 +18,7 @@
         <link rel="shortcut icon" href="favicon.png">
 
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
 
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
@@ -611,7 +611,8 @@ of the largest we've ever done! As a result alternate implementations of Rust
 will likely have a difficult time catching up to rustc/LLVM with all the SIMD
 intrinsics. Additionaly the semantics of &quot;packed SIMD types should work
 everywhere&quot; may be overly difficult to implement in alternate implementations.
-It is worth noting that both Cretonne and GCC support packed SIMD types.</p>
+It is worth noting that both <a href="https://github.com/CraneStation/cranelift/">Cranelift</a> and GCC support packed SIMD
+types.</p>
 <p>Due to the enormity of what's being added to the standard library it's also
 infeasible to carefully review each addition in isolation. While there are a
 number of automatic verifications in place we're likely to inevitably make a
@@ -667,10 +668,10 @@ thousands of intrinsics).</p>
 <ul>
 <li>Such raw interfaces may change over time as they simply represent LLVM as a
 current point in time rather than what LLVM wants to do in the future.</li>
-<li>Alternate implementations of rustc or alternate rustc backends like Cretonne
-may not expose the same sort of functionality that LLVM provides, or
-implementing the interfaces may be much more difficult in alternate backends
-than in LLVM's.</li>
+<li>Alternate implementations of rustc or alternate rustc backends like
+<a href="https://github.com/CraneStation/cranelift/">Cranelift</a> may not expose the same sort of functionality that
+LLVM provides, or implementing the interfaces may be much more difficult in
+alternate backends than in LLVM's.</li>
 </ul>
 <p>As a result, it's intended that instead of exposing raw building blocks (and
 allowing <code>stdsimd</code> to live on crates.io) we'll instead pull in <code>stdsimd</code> to the
@@ -760,8 +761,6 @@ always the best...</p>
         
 
         
-
-        
         <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
         
         
@@ -775,6 +774,8 @@ always the best...</p>
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        
+
         
 
     </body>
