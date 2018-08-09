@@ -173,30 +173,31 @@ struct FruitBox {
 <p>For structures with dependencies between fields it is worthwhile to have ability to explicitly
 annotate the dependencies somehow.</p>
 <a class="header" href="1860-manually-drop.html#detailed-design" id="detailed-design"><h1>Detailed design</h1></a>
-<p>This RFC proposes adding following <code>union</code> to the <code>core::mem</code> (and by extension the <code>std::mem</code>)
+<p>This RFC proposes adding the following <code>struct</code> as a new lang item to the <code>core::mem</code> (and by extension the <code>std::mem</code>)
 module. <code>mem</code> module is a most suitable place for such type, as the module already a place for
 functions very similar in purpose: <code>drop</code> and <code>forget</code>.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
 /// Inhibits compiler from automatically calling `T`’s destructor.
+#[lang = &quot;manually_drop&quot;]
 #[unstable(feature = &quot;manually_drop&quot;, reason = &quot;recently added&quot;, issue = &quot;0&quot;)]
-#[allow(unions_with_drop_fields)]
-pub union ManuallyDrop&lt;T&gt;{ value: T }
+#[derive(Copy, Clone, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct ManuallyDrop&lt;T&gt; {
+    value: T,
+}
 
 impl&lt;T&gt; ManuallyDrop&lt;T&gt; {
     /// Wraps a value to be manually dropped.
     #[unstable(feature = &quot;manually_drop&quot;, reason = &quot;recently added&quot;, issue = &quot;0&quot;)]
     pub fn new(value: T) -&gt; ManuallyDrop&lt;T&gt; {
-        ManuallyDrop { value: value }
+        ManuallyDrop { value }
     }
 
     /// Extracts the value from the ManuallyDrop container.
     #[unstable(feature = &quot;manually_drop&quot;, reason = &quot;recently added&quot;, issue = &quot;0&quot;)]
-    pub fn into_inner(self) -&gt; T {
-        unsafe {
-            self.value
-        }
+    pub fn into_inner(slot: ManuallyDrop&lt;T&gt;) -&gt; T {
+        slot.value
     }
 
     /// Manually drops the contained value.
@@ -220,10 +221,10 @@ impl&lt;T&gt; Deref for ManuallyDrop&lt;T&gt; {
 impl&lt;T&gt; DerefMut for ManuallyDrop&lt;T&gt; {
     // ...
 }
-
-// Other common impls such as `Debug for T: Debug`.
 #}</code></pre></pre>
-<p>Let us apply this union to a somewhat expanded example from the motivation:</p>
+<p>The lang item will be treated specially by the compiler to not emit any drop
+glue for this type.</p>
+<p>Let us apply <code>ManuallyDrop</code> to a somewhat expanded example from the motivation:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
