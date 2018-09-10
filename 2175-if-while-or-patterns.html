@@ -140,8 +140,9 @@
 <li>Rust Issue: <a href="https://github.com/rust-lang/rust/issues/48215">rust-lang/rust#48215</a></li>
 </ul>
 <a class="header" href="2175-if-while-or-patterns.html#summary" id="summary"><h1>Summary</h1></a>
-<p>Enables &quot;or&quot; patterns for <a href="https://github.com/rust-lang/rfcs/pull/160"><code>if let</code></a> and <a href="https://github.com/rust-lang/rfcs/pull/214"><code>while let</code></a> expressions as well as
-<code>let</code> statements. In other words, examples like the following are now possible:</p>
+<p>Enables &quot;or&quot; patterns for <a href="https://github.com/rust-lang/rfcs/pull/160"><code>if let</code></a> and <a href="https://github.com/rust-lang/rfcs/pull/214"><code>while let</code></a> expressions
+as well as <code>let</code> and <code>for</code> statements. In other words,
+examples like the following are now possible:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
@@ -160,9 +161,12 @@ while let A(x) | B(x) = source() {
 }
 
 enum ParameterKind&lt;T, L = T&gt; { Ty(T), Lifetime(L), }
+use ParameterKind::*;
 
 // Only possible when `L = T` such that `kind : ParameterKind&lt;T, T&gt;`.
 let Ty(x) | Lifetime(x) = kind;
+
+for Ty(x) | Lifetime(x) in ::std::iter::once(kind);
 #}</code></pre></pre>
 <a class="header" href="2175-if-while-or-patterns.html#motivation" id="motivation"><h1>Motivation</h1></a>
 <p>While nothing in this RFC is currently impossible in Rust, the changes the RFC
@@ -259,9 +263,9 @@ loop {
 }
 #}</code></pre></pre>
 <p>Another major motivation of the RFC is consistency with <code>match</code>.</p>
-<p>To keep <code>let</code> statements consistent with <code>if let</code>, and to enable the scenario
-exemplified by <code>ParameterKind</code> in the <a href="2175-if-while-or-patterns.html#motivation">motivation</a>, these or-patterns are
-allowed at the top level of <code>let</code> statements.</p>
+<p>To keep <code>let</code> and <code>for</code> statements consistent with <code>if let</code>,
+and to enable the scenario exemplified by <code>ParameterKind</code> in the <a href="2175-if-while-or-patterns.html#motivation">motivation</a>,
+these or-patterns are allowed at the top level of <code>let</code> and <code>for</code> statements.</p>
 <p>In addition to the <code>ParameterKind</code> example, we can also consider
 <code>slice.binary_search(&amp;x)</code>. If we are only interested in the <code>index</code> at where
 <code>x</code> is or would be, without any regard for if it was there or not, we can
@@ -280,7 +284,7 @@ words: cover all cases, be exhaustive, this is not the case (currently) with
 <code>if/while let</code>, which may have a refutable pattern.
 This RFC does not change this.</p>
 <p>The RFC only extends the use of or-patterns at the top level from <code>match</code>es
-to <code>if let</code> and <code>while let</code> expressions as well as <code>let</code> statements.</p>
+to <code>if let</code> and <code>while let</code> expressions as well as <code>let</code> and <code>for</code> statements.</p>
 <p>For examples, see <a href="2175-if-while-or-patterns.html#motivation">motivation</a>.</p>
 <a class="header" href="2175-if-while-or-patterns.html#reference-level-explanation" id="reference-level-explanation"><h1>Reference-level explanation</h1></a>
 <a class="header" href="2175-if-while-or-patterns.html#grammar" id="grammar"><h2>Grammar</h2></a>
@@ -290,7 +294,7 @@ to <code>if let</code> and <code>while let</code> expressions as well as <code>l
                else_tail ? ;
 </code></pre>
 <p>to:</p>
-<pre><code>if_let_expr : &quot;if&quot; &quot;let&quot; pat [ '|' pat ] * '=' expr '{' block '}'
+<pre><code>if_let_expr : &quot;if&quot; &quot;let&quot; '|'? pat [ '|' pat ] * '=' expr '{' block '}'
                else_tail ? ;
 </code></pre>
 <a class="header" href="2175-if-while-or-patterns.html#while-let" id="while-let"><h3><code>while let</code></h3></a>
@@ -298,7 +302,14 @@ to <code>if let</code> and <code>while let</code> expressions as well as <code>l
 <pre><code>while_let_expr : [ lifetime ':' ] ? &quot;while&quot; &quot;let&quot; pat '=' expr '{' block '}' ;
 </code></pre>
 <p>to:</p>
-<pre><code>while_let_expr : [ lifetime ':' ] ? &quot;while&quot; &quot;let&quot; pat [ '|' pat ] * '=' expr '{' block '}' ;
+<pre><code>while_let_expr : [ lifetime ':' ] ? &quot;while&quot; &quot;let&quot; '|'? pat [ '|' pat ] * '=' expr '{' block '}' ;
+</code></pre>
+<a class="header" href="2175-if-while-or-patterns.html#for" id="for"><h3><code>for</code></h3></a>
+<p>The <code>expr_for</code> grammar is changed <a href="https://github.com/rust-lang/rust/blob/master/src/grammar/parser-lalr.y">from</a>:</p>
+<pre><code>expr_for : maybe_label FOR pat IN expr_nostruct block ;
+</code></pre>
+<p>to:</p>
+<pre><code>expr_for : maybe_label FOR '|'? pat ('|' pat)* IN expr_nostruct block ;
 </code></pre>
 <a class="header" href="2175-if-while-or-patterns.html#let-statements" id="let-statements"><h3><code>let</code> statements</h3></a>
 <p>The statement <code>stmt</code> grammar is replaced with a language equivalent to:</p>
@@ -308,10 +319,10 @@ to <code>if let</code> and <code>while let</code> expressions as well as <code>l
 
 let_stmt_many ::= &quot;let&quot; pat_two_plus &quot;=&quot; expr &quot;;&quot;
 
-pat_two_plus ::= pat [ '|' pat ] + ;
+pat_two_plus ::= '|'? pat [ '|' pat ] + ;
 </code></pre>
 <a class="header" href="2175-if-while-or-patterns.html#syntax-lowering" id="syntax-lowering"><h2>Syntax lowering</h2></a>
-<p>The changes proposed in this RFC with respect to <code>if let</code> and <code>while let</code>
+<p>The changes proposed in this RFC with respect to <code>if let</code>, <code>while let</code>, and <code>for</code>
 can be implemented by transforming the <code>if/while let</code> constructs with a
 syntax-lowering pass into <code>match</code> and <code>loop</code> + <code>match</code> expressions.</p>
 <p>Meanwhile, <code>let</code> statements can be transformed into a continuation with
@@ -323,7 +334,7 @@ duplicating any details already specified there.</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-if let PAT [| PAT]* = EXPR { BODY }
+if let |? PAT [| PAT]* = EXPR { BODY }
 #}</code></pre></pre>
 <p>Result:</p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -338,7 +349,7 @@ match EXPR {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-if let PAT [| PAT]* = EXPR { BODY_IF } else { BODY_ELSE }
+if let |? PAT [| PAT]* = EXPR { BODY_IF } else { BODY_ELSE }
 #}</code></pre></pre>
 <p>Result:</p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -355,7 +366,7 @@ match EXPR {
 #fn main() {
 if COND {
     BODY_IF
-} else if let PAT [| PAT]* = EXPR {
+} else if let |? PAT [| PAT]* = EXPR {
     BODY_ELSE_IF
 } else {
     BODY_ELSE
@@ -369,7 +380,7 @@ if COND {
     BODY_IF
 } else {
     match EXPR {
-        PAT [| PAT]* =&gt; { BODY_ELSE_IF }
+        |? PAT [| PAT]* =&gt; { BODY_ELSE_IF }
         _ =&gt; { BODY_ELSE }
     }
 }
@@ -378,7 +389,7 @@ if COND {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-if let PAT [| PAT]* = EXPR {
+if let |? PAT [| PAT]* = EXPR {
     BODY_IF
 } else if COND {
     BODY_ELSE_IF_1
@@ -391,7 +402,7 @@ if let PAT [| PAT]* = EXPR {
 # #![allow(unused_variables)]
 #fn main() {
 match EXPR {
-    PAT [| PAT]* =&gt; { BODY_IF }
+    |? PAT [| PAT]* =&gt; { BODY_IF }
     _ if COND =&gt; { BODY_ELSE_IF_1 }
     _ if OTHER_COND =&gt; { BODY_ELSE_IF_2 }
     _ =&gt; {}
@@ -403,7 +414,7 @@ match EXPR {
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-['label:] while let PAT [| PAT]* = EXPR {
+['label:] while let |? PAT [| PAT]* = EXPR {
     BODY
 }
 #}</code></pre></pre>
@@ -418,6 +429,32 @@ match EXPR {
     }
 }
 #}</code></pre></pre>
+<a class="header" href="2175-if-while-or-patterns.html#examples-for" id="examples-for"><h3>Examples, <code>for</code></h3></a>
+<p>Assuming that the semantics of <code>for</code> is defined by a desugaring from:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+for PAT in EXPR_ITER {
+    BODY
+}
+#}</code></pre></pre>
+<p>into:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+match IntoIterator::into_iter(EXPR_ITER) {
+    mut iter =&gt; loop {
+        let next = match iter.next() {
+            Some(val) =&gt; val,
+            None =&gt; break,
+        };
+        let PAT = next;
+        { BODY };
+    },
+};
+#}</code></pre></pre>
+<p>then the only thing that changes is that <code>PAT</code> may include <code>|</code> at the top level
+in the <code>for</code> loop and the desugaring as per the section on grammar.</p>
 <a class="header" href="2175-if-while-or-patterns.html#desugaring-let-statements-with--in-the-top-level-pattern" id="desugaring-let-statements-with--in-the-top-level-pattern"><h2>Desugaring <code>let</code> statements with <code>|</code> in the top-level pattern</h2></a>
 <p>This is a possible desugaring that a Rust compiler may do.
 While such a compiler may elect to implement this differently,
@@ -458,7 +495,7 @@ Consistency with <code>match</code> is however on its own reason enough to do th
 <p>It could be claimed that the <code>if/while let</code> RFCs already mandate this RFC,
 this RFC does answer that question and instead simply mandates it now.</p>
 <p>Another alternative is to only deal with <code>if/while let</code> expressions but not
-<code>let</code> statements.</p>
+<code>let</code> and <code>for</code> statements.</p>
 <a class="header" href="2175-if-while-or-patterns.html#unresolved-questions" id="unresolved-questions"><h1>Unresolved questions</h1></a>
 <p>The exact syntax transformations should be deferred to the implementation.
 This RFC does not mandate exactly how the AST:s should be transformed, only
