@@ -215,7 +215,7 @@ fn bewitche() {}
 <p>Note: The <code>cfg_attr</code> can expand to another <code>cfg_attr</code>. For example,
 <code>#[cfg_attr(linux, cfg_attr(feature = &quot;multithreaded&quot;, some_other_attribute))</code>
 is valid. This example would be equivalent to
-<code>#[cfg_attr(and(linux, feaure =&quot;multithreaded&quot;), some_other_attribute)]</code>.</p>
+<code>#[cfg_attr(all(linux, feaure =&quot;multithreaded&quot;), some_other_attribute)]</code>.</p>
 <a class="header" href="2539-cfg_attr-multiple-attrs.html#warning-when-zero-attributes" id="warning-when-zero-attributes"><h2>Warning When Zero Attributes</h2></a>
 <p>This RFC allows <code>#[cfg_attr(predicate)]</code>. This is so that macros can generate
 it. Having it in the source text emits an <code>unused_attributes</code> warning.</p>
